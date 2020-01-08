@@ -1,8 +1,9 @@
 using BuildingBlocks.Domain;
+using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.Users
 {
-    public class UserId : IValueObject
+    public class UserId : ValueObject
     {
     }
 }

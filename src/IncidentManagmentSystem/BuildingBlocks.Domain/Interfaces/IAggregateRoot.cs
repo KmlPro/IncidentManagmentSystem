@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Domain
+namespace BuildingBlocks.Domain.Interfaces
 {
     public interface IAggregateRoot
     {

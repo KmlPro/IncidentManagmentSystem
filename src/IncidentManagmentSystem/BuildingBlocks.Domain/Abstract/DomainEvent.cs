@@ -1,8 +1,8 @@
 using System;
 
-namespace BuildingBlocks.Domain
+namespace BuildingBlocks.Domain.Abstract
 {
-    public class DomainEvent : IDomainEvent
+    public abstract class DomainEvent
     {
         public DateTime OccurredOn { get; }
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace BuildingBlocks.Domain
+namespace BuildingBlocks.Domain.Interfaces
 {
     public interface IClock
     {

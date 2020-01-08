@@ -1,8 +1,8 @@
-using BuildingBlocks.Domain;
+using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class ApplicationIdValue : IValueObject
+    public class ApplicationIdValue : ValueObject
     {
         public long Value { get; }
 

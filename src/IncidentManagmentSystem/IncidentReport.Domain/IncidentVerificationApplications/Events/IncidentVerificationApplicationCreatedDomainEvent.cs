@@ -1,5 +1,7 @@
 using BuildingBlocks.Domain;
+using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
+using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
@@ -8,12 +10,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public string Title { get; }
         public string Content { get; }
         public IncidentType IncidentType { get; }
+        public UserId ApplicantId { get; }
 
-        public IncidentVerificationApplicationCreated(string title, string content, IncidentType incidentType)
+        public IncidentVerificationApplicationCreated(string title, string content, IncidentType incidentType, UserId applicantId)
         {
             this.Title = title;
             this.Content = content;
             this.IncidentType = incidentType;
+            this.ApplicantId = applicantId;
         }
     }
 }
