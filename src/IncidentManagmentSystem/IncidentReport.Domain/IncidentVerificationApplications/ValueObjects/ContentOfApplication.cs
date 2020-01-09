@@ -8,7 +8,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         public string Title { get; }
         public string Content { get; }
 
-        public ContentOfApplication(string title, string content)
+        public static ContentOfApplication Create(string title, string content)
+        {
+            return new ContentOfApplication(title, content);
+        }
+
+        private ContentOfApplication(string title, string content)
         {
             this.CheckRule(new ApplicationContentLenghtRule(this.Title));
             this.CheckRule(new ApplicationContentLenghtRule(this.Content));

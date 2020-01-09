@@ -11,8 +11,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
     public class IncidentVerificationApplication : Entity, IAggregateRoot
     {
         public ApplicationIdValue Id { get; }
-        public string Title { get; }
-        public string Content { get; }
+        public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public UserId ApplicantId { get; }
 
@@ -21,24 +20,23 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 
         }
 
-        public static IncidentVerificationApplication Create(string title, string content, IncidentType incidentType, UserId applicantId)
+        public static IncidentVerificationApplication Create(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId)
         {
-            return new IncidentVerificationApplication(title, content, incidentType, applicantId);
+            return new IncidentVerificationApplication(contentOfApplication, incidentType, applicantId);
         }
 
         public PostedIncidentVerificationApplication SendToVerification()
         {
-            return PostedIncidentVerificationApplication.Create(this.Title, this.Content, this.IncidentType, this.ApplicantId);
+            return PostedIncidentVerificationApplication.Create(this.ContentOfApplication, this.IncidentType, this.ApplicantId);
         }
 
-        private IncidentVerificationApplication(string title, string content, IncidentType incidentType, UserId applicantId)
+        private IncidentVerificationApplication(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId)
         {
-            this.Title = title;
-            this.Content = content;
+            this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
 
-            this.AddDomainEvent(new IncidentVerificationApplicationCreated(title, content, incidentType, applicantId));
+            this.AddDomainEvent(new IncidentVerificationApplicationCreated(contentOfApplication, incidentType, applicantId));
         }
     }
 }

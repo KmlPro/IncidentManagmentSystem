@@ -4,6 +4,7 @@ using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
@@ -11,24 +12,22 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
     public class PostedIncidentVerificationApplication : Entity, IAggregateRoot
     {
         public ApplicationId Id { get; }
-        public string Title { get; }
-        public string Content { get; }
+        public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
 
-        public static PostedIncidentVerificationApplication Create(string title, string content, IncidentType incidentType, UserId applicantId)
+        public static PostedIncidentVerificationApplication Create(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId)
         {
-            return new PostedIncidentVerificationApplication(title, content, incidentType, SystemClock.Now, applicantId);
+            return new PostedIncidentVerificationApplication(contentOfApplication, incidentType, SystemClock.Now, applicantId);
         }
 
-        private PostedIncidentVerificationApplication(string title, string content, IncidentType incidentType, DateTime postDate, UserId applicantId)
+        private PostedIncidentVerificationApplication(ContentOfApplication contentOfApplication, IncidentType incidentType, DateTime postDate, UserId applicantId)
         {
-            this.Title = title;
-            this.Content = content;
+            this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.PostDate = postDate;
 
-            this.AddDomainEvent(new PostedIncidentVerificationApplicationDomainEvent(title, content, incidentType, postDate, applicantId));
+            this.AddDomainEvent(new PostedIncidentVerificationApplicationDomainEvent(contentOfApplication, incidentType, postDate, applicantId));
         }
     }
 }
