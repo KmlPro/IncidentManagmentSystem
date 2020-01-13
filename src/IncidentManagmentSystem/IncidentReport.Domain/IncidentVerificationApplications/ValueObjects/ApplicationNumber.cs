@@ -1,4 +1,3 @@
-using BuildingBlocks.Domain;
 using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
@@ -7,9 +6,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
     {
         public string Value { get; }
 
-        public ApplicationNumber(string value)
+        private ApplicationNumber(string value)
         {
             this.Value = value;
+        }
+
+        public static ApplicationNumber Create(string value)
+        {
+            return new ApplicationNumber(value);
         }
     }
 }

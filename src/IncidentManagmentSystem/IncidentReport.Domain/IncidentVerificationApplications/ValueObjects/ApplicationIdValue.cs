@@ -6,9 +6,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
     {
         public long Value { get; }
 
-        public ApplicationIdValue(long value)
+        private ApplicationIdValue(long value)
         {
             this.Value = value;
+        }
+
+        public static ApplicationIdValue Create(long value)
+        {
+            return new ApplicationIdValue(value);
         }
     }
 }
