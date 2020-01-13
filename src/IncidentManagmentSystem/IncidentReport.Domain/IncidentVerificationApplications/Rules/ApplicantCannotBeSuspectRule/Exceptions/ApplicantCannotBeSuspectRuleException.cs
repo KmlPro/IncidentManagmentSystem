@@ -1,7 +1,7 @@
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.SuspiciousEmployeesCannotHaveApplicantId.Exceptions
+namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule.Exceptions
 {
     internal class ApplicationCannotHaveApplicantAsSuspiciousEmployeeException : BusinessRuleValidationException
     {

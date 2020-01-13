@@ -12,7 +12,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         {
             return new ContentOfApplication(title, content);
         }
-
+        // kbytner 13.01 - TO DO - changes in exceptions (title in exception)
         private ContentOfApplication(string title, string content)
         {
             this.CheckRule(new ApplicationContentLenghtRule(this.Title));

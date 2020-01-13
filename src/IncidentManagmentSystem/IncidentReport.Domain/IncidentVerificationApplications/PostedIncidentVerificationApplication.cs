@@ -18,6 +18,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public DateTime PostDate { get; }
         public List<UserId> SuspiciousEmployees { get; }
 
+        //kbytner 13.10 -- TO DO Move SystemClock to Application Layer
         public static PostedIncidentVerificationApplication Create(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, List<UserId> suspiciousEmployees)
         {
             return new PostedIncidentVerificationApplication(contentOfApplication, incidentType, SystemClock.Now, applicantId, suspiciousEmployees);

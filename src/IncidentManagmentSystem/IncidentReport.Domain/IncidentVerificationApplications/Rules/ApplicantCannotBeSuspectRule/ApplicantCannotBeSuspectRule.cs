@@ -3,7 +3,7 @@ using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.SuspiciousEmployeesCannotHaveApplicantId.Exceptions;
 using IncidentReport.Domain.Users;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.SuspiciousEmployeesCannotHaveApplicantId
+namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule
 {
     internal class ApplicantCannotBeSuspectRule : IBusinessRule
     {
