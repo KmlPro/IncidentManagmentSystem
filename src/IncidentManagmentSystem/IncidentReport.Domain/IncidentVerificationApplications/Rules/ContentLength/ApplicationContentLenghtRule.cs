@@ -22,11 +22,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ContentLe
             }
             else if (this.Content.Length < this._minLength)
             {
-                throw new ApplicationContentCannotBeEmptyException(this, $"The Content should contain a minimum of {this._minLength} characters");
+                throw new ApplicationContentTooShortException(this, $"The Content should contain a minimum of {this._minLength} characters");
             }
             else if (this.Content.Length >= this._maxLength)
             {
-                throw new ApplicationContentCannotBeEmptyException(this, $"The Content should contain a minimum of {this._maxLength} characters");
+                throw new ApplicationContentTooLongException(this, $"The Content should contain a minimum of {this._maxLength} characters");
             }
         }
     }

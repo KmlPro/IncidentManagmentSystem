@@ -1,6 +1,6 @@
 using System;
 
-namespace IncidentReport.UseCases.User
+namespace IncidentReport.Application.User
 {
     public interface IApplicantContext
     {

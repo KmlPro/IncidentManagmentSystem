@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using BuildingBlocks.Application.Commands;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
@@ -8,6 +10,7 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
         public string Title { get; }
         public string Content { get; }
         public IncidentType IncidentType { get; }
-        public long ApplicantId { get; }
+        public Guid ApplicantId { get; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; set; }
     }
 }

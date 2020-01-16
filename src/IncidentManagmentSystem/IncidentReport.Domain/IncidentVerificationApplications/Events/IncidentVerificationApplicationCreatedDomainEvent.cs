@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -11,14 +10,16 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public UserId ApplicantId { get; }
-        public List<UserId> SuspiciousEmployees { get; }
+        public SuspiciousEmployees SuspiciousEmployees { get; }
+        public UserId CreatorId { get; }
 
-        public IncidentVerificationApplicationCreated(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, List<UserId> suspiciousEmployees)
+        public IncidentVerificationApplicationCreated(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, SuspiciousEmployees suspiciousEmployees, UserId creatorId)
         {
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
+            this.CreatorId = creatorId;
         }
     }
 }

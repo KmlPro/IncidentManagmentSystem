@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace BuildingBlocks.UseCases.Commands
+namespace BuildingBlocks.Application.Commands
 {
     public abstract class CommandBase : IRequest
     {

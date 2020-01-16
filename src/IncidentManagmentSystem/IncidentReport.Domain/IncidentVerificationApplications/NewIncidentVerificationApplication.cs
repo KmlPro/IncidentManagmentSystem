@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
@@ -9,30 +8,26 @@ using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
-    public class IncidentVerificationApplication : Entity, IAggregateRoot
+    public class NewIncidentVerificationApplication : Entity, IAggregateRoot
     {
         public ApplicationIdValue Id { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public UserId ApplicantId { get; }
-        public List<UserId> SuspiciousEmployees { get; }
+        public SuspiciousEmployees SuspiciousEmployees { get; }
+        public UserId CreatorId { get; }
 
-        private IncidentVerificationApplication()
+        public static NewIncidentVerificationApplication Create(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, SuspiciousEmployees suspiciousEmployees, UserId creatorId)
         {
-
-        }
-
-        public static IncidentVerificationApplication Create(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, List<UserId> suspiciousEmployees)
-        {
-            return new IncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
+            return new NewIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees, creatorId);
         }
 
         public PostedIncidentVerificationApplication SendToVerification()
         {
-            return PostedIncidentVerificationApplication.Create(this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees);
+            return PostedIncidentVerificationApplication.Create(this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees, this.CreatorId);
         }
 
-        private IncidentVerificationApplication(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, List<UserId> suspiciousEmployees)
+        private NewIncidentVerificationApplication(ContentOfApplication contentOfApplication, IncidentType incidentType, UserId applicantId, SuspiciousEmployees suspiciousEmployees, UserId creatorId)
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
 
@@ -40,8 +35,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
+            this.CreatorId = creatorId;
 
-            this.AddDomainEvent(new IncidentVerificationApplicationCreated(contentOfApplication, incidentType, applicantId, suspiciousEmployees));
+            this.AddDomainEvent(new IncidentVerificationApplicationCreated(contentOfApplication, incidentType, applicantId, suspiciousEmployees, creatorId));
         }
     }
 }
