@@ -14,12 +14,15 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
     public class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
     {
         private readonly IIncidentReportContext _incidentReportContext;
+        private readonly IFileStorageService _fileStorageService;
         private readonly IApplicantContext _applicantContext;
-        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportContext incidentReportContext, IApplicantContext userContext)
+        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportContext incidentReportContext, IApplicantContext userContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._applicantContext = userContext;
+            this._fileStorageService = fileStorageService;
         }
+
         public async Task<Unit> Handle(CreateIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
         {
             var incidentVerificationApplication = new DraftIncidentVerificationApplication(
@@ -28,6 +31,11 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
                 new UserId(this._applicantContext.UserId),
                 new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new UserId(x)))
                 );
+
+            if (request.Attachments.Any())
+            {
+                var
+            }
 
             await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(incidentVerificationApplication);
 

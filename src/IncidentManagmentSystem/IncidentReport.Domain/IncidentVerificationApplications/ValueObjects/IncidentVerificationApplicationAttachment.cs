@@ -4,10 +4,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
     public class IncidentVerificationApplicationAttachment : ValueObject
     {
-        public FileData FileData { get; }
+        public FileInfo FileData { get; }
         public StorageId StorageId { get; }
 
-        public IncidentVerificationApplicationAttachment(FileData fileData, StorageId storageId)
+        public IncidentVerificationApplicationAttachment(FileInfo fileData, StorageId storageId)
         {
             this.FileData = fileData;
             this.StorageId = storageId;
