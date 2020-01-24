@@ -1,12 +1,13 @@
+using System;
 using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class ApplicationNumber : ValueObject
+    public class DraftApplicationId : ValueObject
     {
-        public string Value { get; }
+        public Guid Value { get; }
 
-        public ApplicationNumber(string value)
+        public DraftApplicationId(Guid value)
         {
             this.Value = value;
         }

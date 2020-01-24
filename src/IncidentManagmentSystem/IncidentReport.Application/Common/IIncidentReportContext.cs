@@ -5,8 +5,8 @@ namespace IncidentReport.Application.Common
 {
     public interface IIncidentReportContext
     {
-        DbSet<NewIncidentVerificationApplication> IncidentVerificationApplication { get; set; }
+        DbSet<DraftIncidentVerificationApplication> DraftIncidentVerificationApplication { get; }
 
-        DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
+        DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; }
     }
 }

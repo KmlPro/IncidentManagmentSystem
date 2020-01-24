@@ -5,7 +5,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ContentLe
 {
     internal class ApplicationContentCannotBeEmptyException : BusinessRuleValidationException
     {
-        public ApplicationContentCannotBeEmptyException(IBusinessRule brokenRule, string message) : base(brokenRule, message)
+        private const string _errorMessage = "Content cannot be empty";
+        public ApplicationContentCannotBeEmptyException(IBusinessRule brokenRule) : base(brokenRule, _errorMessage)
         {
         }
     }

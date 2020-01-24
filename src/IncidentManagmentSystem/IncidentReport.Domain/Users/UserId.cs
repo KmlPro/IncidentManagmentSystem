@@ -5,16 +5,11 @@ namespace IncidentReport.Domain.Users
 {
     public class UserId : ValueObject
     {
-        public Guid Id { get; private set; }
+        public Guid Value { get; private set; }
 
-        private UserId(Guid id)
+        public UserId(Guid value)
         {
-            this.Id = id;
-        }
-
-        public static UserId Create(Guid id)
-        {
-            return new UserId(id);
+            this.Value = value;
         }
     }
 }

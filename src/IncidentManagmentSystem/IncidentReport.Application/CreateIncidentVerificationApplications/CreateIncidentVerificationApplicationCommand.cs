@@ -10,7 +10,6 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
         public string Title { get; }
         public string Content { get; }
         public IncidentType IncidentType { get; }
-        public Guid ApplicantId { get; }
         public IEnumerable<Guid> SuspiciousEmployees { get; set; }
     }
 }

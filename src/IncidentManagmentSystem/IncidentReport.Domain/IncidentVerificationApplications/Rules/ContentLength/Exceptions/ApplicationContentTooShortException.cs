@@ -5,7 +5,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ContentLe
 {
     internal class ApplicationContentTooShortException : BusinessRuleValidationException
     {
-        public ApplicationContentTooShortException(IBusinessRule brokenRule, string message) : base(brokenRule, message)
+        private const string _errorMessage = "The Content should contain a minimum of {0} characters";
+        public ApplicationContentTooShortException(IBusinessRule brokenRule, int minLength) : base(brokenRule, string.Format(_errorMessage, minLength))
         {
         }
     }

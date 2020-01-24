@@ -289,9 +289,9 @@ dotnet_naming_rule.other_public_protected_fields_disallowed_rule.severity       
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers
 ##########################################
 
-# All constant fields must be PascalCase
+# All constant (except private) fields must be PascalCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1303.md
-dotnet_naming_symbols.stylecop_constant_fields_group.applicable_accessibilities = public, internal, protected_internal, protected, private_protected, private
+dotnet_naming_symbols.stylecop_constant_fields_group.applicable_accessibilities = public, internal, protected_internal, protected, private_protected
 dotnet_naming_symbols.stylecop_constant_fields_group.required_modifiers         = const
 dotnet_naming_symbols.stylecop_constant_fields_group.applicable_kinds           = field
 dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.symbols    = stylecop_constant_fields_group

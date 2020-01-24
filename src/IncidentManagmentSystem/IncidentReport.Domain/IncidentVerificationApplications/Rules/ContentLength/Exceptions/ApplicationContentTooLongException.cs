@@ -5,8 +5,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ContentLe
 {
     internal class ApplicationContentTooLongException : BusinessRuleValidationException
     {
-        public ApplicationContentTooLongException(IBusinessRule brokenRule, string message) : base(brokenRule, message)
+        private const string _errorMessage = "The Content should contain a minimum of {0} characters";
+        public ApplicationContentTooLongException(IBusinessRule brokenRule, int maxLength) : base(brokenRule, string.Format(_errorMessage, maxLength))
         {
         }
+
     }
 }

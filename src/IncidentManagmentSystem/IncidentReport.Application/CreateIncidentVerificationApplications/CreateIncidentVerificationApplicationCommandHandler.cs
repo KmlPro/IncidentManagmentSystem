@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.Commands;
@@ -21,18 +22,14 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
         }
         public async Task<Unit> Handle(CreateIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
         {
-            var incidentVerificationApplication = NewIncidentVerificationApplication.Create(
-                ContentOfApplication.Create(request.Title, request.Content),
+            var incidentVerificationApplication = new DraftIncidentVerificationApplication(
+                new ContentOfApplication(request.Title, request.Content),
                 request.IncidentType,
-                UserId.Create(request.ApplicantId),
-                SuspiciousEmployees.Create(request.SuspiciousEmployees),
-                UserId.Create(this._applicantContext.UserId)
+                new UserId(this._applicantContext.UserId),
+                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new UserId(x)))
                 );
-            ;
 
-            var x = incidentVerificationApplication.SendToVerification();
-
-            await this._incidentReportContext.IncidentVerificationApplication.AddAsync(incidentVerificationApplication);
+            await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(incidentVerificationApplication);
 
             return Unit.Value;
         }

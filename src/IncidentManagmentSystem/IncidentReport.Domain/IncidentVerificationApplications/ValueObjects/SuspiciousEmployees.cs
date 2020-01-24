@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,16 +8,17 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
     public class SuspiciousEmployees : ValueObject
     {
-        public ReadOnlyCollection<UserId> Employees { get; }
+        private readonly List<UserId> _employees;
+        public ReadOnlyCollection<UserId> Employees => this._employees.AsReadOnly();
 
-        public static SuspiciousEmployees Create(IEnumerable<Guid> suspiciousEmployees)
+        public SuspiciousEmployees()
         {
-            return new SuspiciousEmployees(suspiciousEmployees.Select(x => UserId.Create(x)).ToList().AsReadOnly());
+            this._employees = new List<UserId>();
         }
 
-        private SuspiciousEmployees(ReadOnlyCollection<UserId> suspiciousEmployees)
+        public SuspiciousEmployees(IEnumerable<UserId> suspiciousEmployees)
         {
-            this.Employees = suspiciousEmployees;
+            this._employees = suspiciousEmployees.ToList();
         }
     }
 }

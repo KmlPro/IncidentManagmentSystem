@@ -8,12 +8,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         public string Title { get; }
         public string Content { get; }
 
-        public static ContentOfApplication Create(string title, string content)
-        {
-            return new ContentOfApplication(title, content);
-        }
-        // kbytner 13.01 - TO DO - changes in exceptions (title in exception)
-        private ContentOfApplication(string title, string content)
+        public ContentOfApplication(string title, string content)
         {
             this.CheckRule(new ApplicationContentLenghtRule(this.Title));
             this.CheckRule(new ApplicationContentLenghtRule(this.Content));
