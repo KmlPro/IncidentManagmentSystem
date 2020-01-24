@@ -7,13 +7,15 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
     public class DraftIncidentVerificationApplicationCreatedDomainEvent : DomainEvent
     {
+        public DraftApplicationId Id { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType? IncidentType { get; }
         public UserId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
 
-        public DraftIncidentVerificationApplicationCreatedDomainEvent(ContentOfApplication contentOfApplication, IncidentType? incidentType, UserId applicantId, SuspiciousEmployees suspiciousEmployees)
+        public DraftIncidentVerificationApplicationCreatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, UserId applicantId, SuspiciousEmployees suspiciousEmployees)
         {
+            this.Id = id;
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;

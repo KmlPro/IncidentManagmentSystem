@@ -24,7 +24,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
 
         public PostedIncidentVerificationApplication(
-            ApplicationNumber applicationNumber,
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             UserId applicantId,
@@ -35,16 +34,15 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
             this.CheckRule(new FieldShouldBeFilledRule(contentOfApplication, nameof(this.ContentOfApplication)));
             this.CheckRule(new FieldShouldBeFilledRule(applicantId, nameof(this.ApplicantId)));
-            this.CheckRule(new FieldShouldBeFilledRule(applicationNumber, nameof(this.ApplicationNumber)));
 
             this.Id = new PostedApplicationId(Guid.NewGuid());
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
-            this.ApplicationNumber = applicationNumber;
             this.IncidentVerificationApplicationAttachments = incidentVerificationApplicationAttachments;
             this.PostDate = SystemClock.Now;
+            this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
 
             this.AddDomainEvent(new PostedIncidentVerificationApplicationDomainEvent(this.Id, this.ApplicationNumber, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments, this.PostDate));
         }

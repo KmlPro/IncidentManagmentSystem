@@ -33,7 +33,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
 
-            this.AddDomainEvent(new DraftIncidentVerificationApplicationCreatedDomainEvent(this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
+            this.AddDomainEvent(new DraftIncidentVerificationApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
 
         public void Update(
@@ -41,6 +41,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             IncidentType? incidentType,
             SuspiciousEmployees suspiciousEmployees)
         {
+            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, this.ApplicantId));
+
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees;
