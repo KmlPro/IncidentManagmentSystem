@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using IncidentReport.Application.Common.File.Exceptions;
 
 namespace IncidentReport.Application.Common.File
 {
-    //kbytner 25.01.2020 - to do, checkExtension and Exceptions
     public class FileData
     {
         public string FileName { get; }
@@ -11,16 +12,26 @@ namespace IncidentReport.Application.Common.File
 
         public FileData(string fileName, byte[] content)
         {
+            this.CheckExtensions(fileName);
+
             this.FileName = fileName;
             this.Content = content;
         }
 
         private void CheckExtensions(string fileName)
         {
-            string extension = Path.GetExtension(fileName);
+            var extension = Path.GetExtension(fileName);
+
             if (string.IsNullOrEmpty(extension))
             {
-
+                throw new FileExtensionNotRecognizedException();
+            }
+            else if (!(this._allowedImagesExtensions.Any(x => x == extension) ||
+                this._allowedExcelExtensions.Any(x => x == extension) ||
+                this._allowedDocumentExtensions.Any(x => x == extension) ||
+                this._allowedOtherExtensions.Any(x => x == extension)))
+            {
+                throw new UnallowedFileExtensionException();
             }
         }
 

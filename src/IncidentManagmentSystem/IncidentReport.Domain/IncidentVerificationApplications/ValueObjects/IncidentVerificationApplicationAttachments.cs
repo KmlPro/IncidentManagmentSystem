@@ -36,7 +36,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
             this._attachments.AddRange(incidentVerificationApplicationAttachment);
         }
 
-        public void DeleteRange(List<StorageId> storageIds)
+        public void DeleteRange(IEnumerable<StorageId> storageIds)
         {
             //kbytner 22.01.2020 -- i should think about this... 
             //kbytner 22.01.2020 - to do, Value Object should overrite equals expresion

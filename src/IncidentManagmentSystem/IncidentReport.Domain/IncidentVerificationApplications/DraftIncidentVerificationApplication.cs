@@ -50,13 +50,13 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.AddDomainEvent(new DraftIncidentVerificationApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
         }
 
-        public void AddAttachments(List<IncidentVerificationApplicationAttachment> attachments)
+        public void AddAttachments(IEnumerable<IncidentVerificationApplicationAttachment> attachments)
         {
             this.IncidentVerificationApplicationAttachments.AddRange(attachments);
             this.AddDomainEvent(new DraftIncidentVerificationApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
         }
 
-        public void DeleteAttachments(List<StorageId> storageIds)
+        public void DeleteAttachments(IEnumerable<StorageId> storageIds)
         {
             this.IncidentVerificationApplicationAttachments.DeleteRange(storageIds);
             this.AddDomainEvent(new DraftIncidentVerificationApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));

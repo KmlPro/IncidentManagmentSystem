@@ -1,6 +1,6 @@
 namespace BuildingBlocks.Domain.Abstract
 {
-    public abstract class DomainService : WithCheckRule
+    public abstract class DomainService
     {
     }
 }

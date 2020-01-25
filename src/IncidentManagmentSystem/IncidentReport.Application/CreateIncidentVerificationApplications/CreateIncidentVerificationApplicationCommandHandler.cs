@@ -34,7 +34,9 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
 
             if (request.Attachments.Any())
             {
-                var
+                var files = this._fileStorageService.UploadFiles(request.Attachments);
+                var attachments = files.Select(x => new IncidentVerificationApplicationAttachment(new FileInfo(x.FileName), new StorageId(x.StorageId)));
+                incidentVerificationApplication.AddAttachments(attachments);
             }
 
             await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(incidentVerificationApplication);

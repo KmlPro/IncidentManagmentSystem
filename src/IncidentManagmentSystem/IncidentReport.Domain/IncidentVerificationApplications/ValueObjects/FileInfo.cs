@@ -5,12 +5,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
     public class FileInfo : ValueObject
     {
         public string FileName { get; }
-        public string Extension { get; }
-
-        public FileInfo(string fileName, string extension)
+        public FileInfo(string fileName)
         {
             this.FileName = fileName;
-            this.Extension = extension;
         }
     }
 }
