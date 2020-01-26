@@ -11,9 +11,9 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Domain.Users;
 using MediatR;
 
-namespace IncidentReport.Application.CreateIncidentVerificationApplications
+namespace IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications
 {
-    public class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
+    internal class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
     {
         private readonly IIncidentReportContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
@@ -27,11 +27,11 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
 
         public async Task<Unit> Handle(CreateIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
         {
-            var incidentVerificationApplication = this.CreateDraftIncidentVerificationApplication(request);
+            var incidentVerificationApplication = this.CreateDraft(request);
 
-            if (request.Attachments.Any())
+            if (this.IfAddedAttachmentsExists(request))
             {
-                var files = await this._fileStorageService.UploadFiles(request.Attachments);
+                var files = await this.UploadFilesToStorage(request);
                 this.AddUploadedFilesAsAttachments(incidentVerificationApplication, files);
             }
 
@@ -40,7 +40,7 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
             return Unit.Value;
         }
 
-        private DraftIncidentVerificationApplication CreateDraftIncidentVerificationApplication(CreateIncidentVerificationApplicationCommand request)
+        private DraftIncidentVerificationApplication CreateDraft(CreateIncidentVerificationApplicationCommand request)
         {
             return new DraftIncidentVerificationApplication(
                 new ContentOfApplication(request.Title, request.Content),
@@ -48,6 +48,16 @@ namespace IncidentReport.Application.CreateIncidentVerificationApplications
                 new UserId(this._applicantContext.UserId),
                 new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new UserId(x)))
                 );
+        }
+
+        private bool IfAddedAttachmentsExists(CreateIncidentVerificationApplicationCommand request)
+        {
+            return request.Attachments.Any();
+        }
+
+        private Task<List<UploadedFile>> UploadFilesToStorage(CreateIncidentVerificationApplicationCommand request)
+        {
+            return this._fileStorageService.UploadFiles(request.Attachments);
         }
 
         private void AddUploadedFilesAsAttachments(DraftIncidentVerificationApplication incidentVerificationApplication, List<UploadedFile> files)
