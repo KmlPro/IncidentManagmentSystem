@@ -5,7 +5,7 @@ namespace BuildingBlocks.Domain.Abstract
 {
     public abstract class BusinessRuleValidationException : Exception
     {
-        private IBusinessRule BrokenRule { get; }
+        public IBusinessRule BrokenRule { get; }
         private string Details { get; }
 
         public BusinessRuleValidationException(IBusinessRule brokenRule, string message) : base(message)

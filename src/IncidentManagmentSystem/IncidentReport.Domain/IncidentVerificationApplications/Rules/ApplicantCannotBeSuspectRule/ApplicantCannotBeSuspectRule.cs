@@ -19,7 +19,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicant
 
         public void CheckIsBroken()
         {
-            if (this.SuspiciousEmployees.Employees.Any(x => x == this.ApplicantId))
+            if (this.SuspiciousEmployees != null && this.SuspiciousEmployees.Employees.Any(x => x == this.ApplicantId))
             {
                 throw new ApplicantCannotBeSuspectRuleException(this);
             }
