@@ -1,7 +1,7 @@
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.FieldShouldBeFilled.Exceptions
+namespace BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled.Exceptions
 {
     internal class FieldShouldBeFilledException : BusinessRuleValidationException
     {

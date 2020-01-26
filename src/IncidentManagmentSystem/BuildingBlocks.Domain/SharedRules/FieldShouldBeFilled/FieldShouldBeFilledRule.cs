@@ -1,9 +1,9 @@
 using BuildingBlocks.Domain.Interfaces;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.FieldShouldBeFilled.Exceptions;
+using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled.Exceptions;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.FieldShouldBeFilled
+namespace BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled
 {
-    internal class FieldShouldBeFilledRule : IBusinessRule
+    public class FieldShouldBeFilledRule : IBusinessRule
     {
         private object Field { get; }
 
@@ -17,11 +17,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.FieldShou
 
         public void CheckIsBroken()
         {
-            if (this.Field.GetType() == typeof(string) && string.IsNullOrEmpty(this.Field as string))
+            if (this.Field == null)
             {
                 throw new FieldShouldBeFilledException(this, this.FieldName);
             }
-            else if (this.Field == null)
+            else if (this.Field.GetType() == typeof(string) && string.IsNullOrEmpty(this.Field as string))
             {
                 throw new FieldShouldBeFilledException(this, this.FieldName);
             }

@@ -6,7 +6,7 @@ using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule
 {
-    internal class ApplicantCannotBeSuspectRule : IBusinessRule
+    public class ApplicantCannotBeSuspectRule : IBusinessRule
     {
         public SuspiciousEmployees SuspiciousEmployees { get; }
         private UserId ApplicantId { get; }
