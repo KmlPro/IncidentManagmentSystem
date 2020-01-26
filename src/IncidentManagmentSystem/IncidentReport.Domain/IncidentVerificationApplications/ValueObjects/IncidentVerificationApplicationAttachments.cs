@@ -38,13 +38,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 
         public void DeleteRange(IEnumerable<StorageId> storageIds)
         {
-            //kbytner 22.01.2020 -- i should think about this... 
-            //kbytner 22.01.2020 - to do, Value Object should overrite equals expresion
             foreach (var storageId in storageIds)
             {
-                if (!this._deletedAttachments.Any(x => x.StorageId.Value == storageId.Value))
+                if (!this._deletedAttachments.Any(x => x.StorageId == storageId))
                 {
-                    this._deletedAttachments.Add(this._attachments.Single(x => x.StorageId.Value == storageId.Value));
+                    this._deletedAttachments.Add(this._attachments.Single(x => x.StorageId == storageId));
                     this._attachments.RemoveAll(x => x.StorageId.Value == storageId.Value);
                 }
             }

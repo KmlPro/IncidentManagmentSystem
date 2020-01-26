@@ -1,14 +1,12 @@
 using System;
+using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class StorageId
+    public class StorageId : TypedIdValueBase
     {
-        public Guid Value { get; }
-
-        public StorageId(Guid value)
+        public StorageId(Guid value) : base(value)
         {
-            this.Value = value;
         }
     }
 }

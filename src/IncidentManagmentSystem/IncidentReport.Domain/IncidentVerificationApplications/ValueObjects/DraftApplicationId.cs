@@ -3,13 +3,10 @@ using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class DraftApplicationId : ValueObject
+    public class DraftApplicationId : TypedIdValueBase
     {
-        public Guid Value { get; }
-
-        public DraftApplicationId(Guid value)
+        public DraftApplicationId(Guid value) : base(value)
         {
-            this.Value = value;
         }
     }
 }

@@ -1,14 +1,12 @@
 using System;
+using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class PostedApplicationId
+    public class PostedApplicationId : TypedIdValueBase
     {
-        public Guid Value { get; }
-
-        public PostedApplicationId(Guid value)
+        public PostedApplicationId(Guid value) : base(value)
         {
-            this.Value = value;
         }
     }
 }

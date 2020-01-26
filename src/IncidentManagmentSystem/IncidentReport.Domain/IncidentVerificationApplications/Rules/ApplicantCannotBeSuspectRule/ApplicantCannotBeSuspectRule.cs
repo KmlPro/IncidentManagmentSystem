@@ -1,3 +1,4 @@
+using System.Linq;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule.Exceptions;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -18,7 +19,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicant
 
         public void CheckIsBroken()
         {
-            if (this.SuspiciousEmployees.Employees.Contains(this.ApplicantId))
+            if (this.SuspiciousEmployees.Employees.Any(x => x == this.ApplicantId))
             {
                 throw new ApplicantCannotBeSuspectRuleException(this);
             }
