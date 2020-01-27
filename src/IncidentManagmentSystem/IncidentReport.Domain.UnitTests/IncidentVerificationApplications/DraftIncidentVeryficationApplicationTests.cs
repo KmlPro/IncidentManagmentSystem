@@ -8,6 +8,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationDescriptionLength;
+using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Domain.Users;
 using NUnit.Framework;
@@ -48,20 +49,40 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         public void CreateApplicationDraft_TitleOFApplicationIsTooShort_NotCreated()
         {
             var applicantId = new UserId(Guid.NewGuid());
-            AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
+            AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(1), Faker.StringFaker.Alpha(20));
             });
         }
 
         [Test]
-        public void CreateApplicationDraft_DescriptionOFApplicationIsTooShort_NotCreated()
+        public void CreateApplicationDraft_TitleOfApplicationIsTooLong_NotCreated()
+        {
+            var applicantId = new UserId(Guid.NewGuid());
+            AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
+            {
+                var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(101), Faker.StringFaker.Alpha(20));
+            });
+        }
+
+        [Test]
+        public void CreateApplicationDraft_DescriptionOfApplicationIsTooShort_NotCreated()
         {
             var applicantId = new UserId(Guid.NewGuid());
 
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(12), Faker.StringFaker.Alpha(1));
+            });
+        }
+
+        [Test]
+        public void CreateApplicationDraft_DescriptionOfApplicationIsTooLong_NotCreated()
+        {
+            var applicantId = new UserId(Guid.NewGuid());
+            AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
+            {
+                var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(12), Faker.StringFaker.Alpha(1001));
             });
         }
 
