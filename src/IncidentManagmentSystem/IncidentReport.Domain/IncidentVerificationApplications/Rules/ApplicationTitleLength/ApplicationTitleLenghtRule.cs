@@ -1,9 +1,9 @@
 using BuildingBlocks.Domain.Interfaces;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.TitleLength.Exceptions;
+using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength.Exceptions;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.TitleLength
+namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength
 {
-    internal class ApplicationTitleLenghtRule : IBusinessRule
+    public class ApplicationTitleLenghtRule : IBusinessRule
     {
         private readonly int _minLength = 10;
         private readonly int _maxLength = 100;

@@ -1,7 +1,7 @@
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.TitleLength.Exceptions
+namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength.Exceptions
 {
     internal class ApplicationTitleTooLongException : BusinessRuleValidationException
     {
