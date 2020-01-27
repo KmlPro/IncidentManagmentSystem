@@ -5,7 +5,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicati
 {
     internal class ApplicationTitleTooShortException : BusinessRuleValidationException
     {
-        public ApplicationTitleTooShortException(IBusinessRule brokenRule, string message) : base(brokenRule, message)
+        private const string _errorMessage = "The Title should contain a minimum of {0} characters";
+        public ApplicationTitleTooShortException(IBusinessRule brokenRule, int minLength) : base(brokenRule, string.Format(_errorMessage, minLength))
         {
         }
     }

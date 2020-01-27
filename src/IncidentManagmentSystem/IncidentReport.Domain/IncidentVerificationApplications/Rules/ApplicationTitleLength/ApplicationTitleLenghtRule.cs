@@ -18,15 +18,15 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicati
         {
             if (string.IsNullOrEmpty(this.Title))
             {
-                throw new ApplicationTitleCannotBeEmptyException(this, "Title can not be empty");
+                throw new ApplicationTitleCannotBeEmptyException(this);
             }
             else if (this.Title.Length < this._minLength)
             {
-                throw new ApplicationTitleTooShortException(this, $"The Title should contain a minimum of {this._minLength} characters");
+                throw new ApplicationTitleTooShortException(this, this._minLength);
             }
             else if (this.Title.Length >= this._maxLength)
             {
-                throw new ApplicationTitleTooLongException(this, $"The Title should contain a minimum of {this._maxLength} characters");
+                throw new ApplicationTitleTooLongException(this, this._maxLength);
             }
         }
     }

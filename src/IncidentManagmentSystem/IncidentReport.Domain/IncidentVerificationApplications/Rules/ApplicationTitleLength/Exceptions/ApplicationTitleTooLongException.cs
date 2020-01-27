@@ -5,7 +5,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicati
 {
     internal class ApplicationTitleTooLongException : BusinessRuleValidationException
     {
-        public ApplicationTitleTooLongException(IBusinessRule brokenRule, string message) : base(brokenRule, message)
+        private const string _errorMessage = "The Title should contain a minimum of {0} characters";
+        public ApplicationTitleTooLongException(IBusinessRule brokenRule, int maxLength) : base(brokenRule, string.Format(_errorMessage, maxLength))
         {
         }
     }

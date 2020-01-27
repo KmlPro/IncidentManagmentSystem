@@ -5,7 +5,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicati
 {
     internal class ApplicationTitleCannotBeEmptyException : BusinessRuleValidationException
     {
-        public ApplicationTitleCannotBeEmptyException(IBusinessRule brokenRule, string message) : base(brokenRule, message)
+        private const string _errorMessage = "Description cannot be empty";
+
+        public ApplicationTitleCannotBeEmptyException(IBusinessRule brokenRule) : base(brokenRule, _errorMessage)
         {
         }
     }
