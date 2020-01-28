@@ -2,7 +2,7 @@ using System;
 
 namespace IncidentReport.Application.User
 {
-    public interface IApplicantContext
+    public interface ICurrentUserContext
     {
         public Guid UserId { get; }
     }

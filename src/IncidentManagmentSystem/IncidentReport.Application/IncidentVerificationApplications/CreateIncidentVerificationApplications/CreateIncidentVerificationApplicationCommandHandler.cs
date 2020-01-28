@@ -17,8 +17,8 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
     {
         private readonly IIncidentReportContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
-        private readonly IApplicantContext _applicantContext;
-        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportContext incidentReportContext, IApplicantContext userContext, IFileStorageService fileStorageService)
+        private readonly ICurrentUserContext _applicantContext;
+        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._applicantContext = userContext;
