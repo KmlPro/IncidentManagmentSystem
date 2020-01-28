@@ -34,6 +34,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
+            this.IncidentVerificationApplicationAttachments = new IncidentVerificationApplicationAttachments();
 
             this.AddDomainEvent(new DraftIncidentVerificationApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
