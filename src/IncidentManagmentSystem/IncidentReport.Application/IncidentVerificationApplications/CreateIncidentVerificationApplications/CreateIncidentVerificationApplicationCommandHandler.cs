@@ -15,10 +15,10 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
 {
     internal class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
     {
-        private readonly IIncidentReportContext _incidentReportContext;
+        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly ICurrentUserContext _applicantContext;
-        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
+        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._applicantContext = userContext;

@@ -20,6 +20,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public SuspiciousEmployees SuspiciousEmployees { get; private set; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; private set; }
 
+        private DraftIncidentVerificationApplication()
+        {
+        }
+
         public DraftIncidentVerificationApplication(
             ContentOfApplication contentOfApplication,
             IncidentType? incidentType,

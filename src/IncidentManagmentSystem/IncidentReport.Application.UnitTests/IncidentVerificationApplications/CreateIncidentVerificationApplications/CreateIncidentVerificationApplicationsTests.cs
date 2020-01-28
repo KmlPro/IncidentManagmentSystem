@@ -1,6 +1,6 @@
 namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.CreateIncidentVerificationApplications
 {
-    class CreateIncidentVerificationApplicationsTests
+    public class CreateIncidentVerificationApplicationsTests : BaseTest
     {
     }
 }

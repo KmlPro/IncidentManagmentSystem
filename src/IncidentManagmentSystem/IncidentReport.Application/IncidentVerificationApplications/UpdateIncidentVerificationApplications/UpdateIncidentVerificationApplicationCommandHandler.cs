@@ -15,9 +15,9 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
 {
     internal class UpdateIncidentVerificationApplicationCommandHandler : ICommandHandler<UpdateIncidentVerificationApplicationCommand>
     {
-        private readonly IIncidentReportContext _incidentReportContext;
+        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
-        public UpdateIncidentVerificationApplicationCommandHandler(IIncidentReportContext incidentReportContext, IFileStorageService fileStorageService)
+        public UpdateIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._fileStorageService = fileStorageService;
