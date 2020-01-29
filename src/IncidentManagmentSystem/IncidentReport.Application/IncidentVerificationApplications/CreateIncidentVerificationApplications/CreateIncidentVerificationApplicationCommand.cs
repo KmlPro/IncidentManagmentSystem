@@ -9,9 +9,18 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
     public class CreateIncidentVerificationApplicationCommand : CommandBase
     {
         public string Title { get; }
-        public string Content { get; }
+        public string Description { get; }
         public IncidentType IncidentType { get; }
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<FileData> Attachments { get; }
+
+        public CreateIncidentVerificationApplicationCommand(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
+        {
+            this.Title = title;
+            this.Description = description;
+            this.IncidentType = incidentType;
+            this.SuspiciousEmployees = suspiciousEmployees;
+            this.Attachments = attachments;
+        }
     }
 }

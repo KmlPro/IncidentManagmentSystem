@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Faker" Version="1.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
@@ -15,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
+    <ProjectReference Include="..\IncidentReport.Infrastructure\IncidentReport.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

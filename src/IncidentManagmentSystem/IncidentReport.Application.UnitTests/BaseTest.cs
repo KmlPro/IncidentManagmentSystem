@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using IncidentReport.Application.Common;
+using IncidentReport.Application.Common.File;
 using IncidentReport.Application.User;
 using IncidentReport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +42,20 @@ namespace IncidentReport.Application.UnitTests
                 .Returns(Guid.NewGuid());
 
             return currentUserServiceMock.Object;
+        }
+
+        protected IFileStorageService CreateFileStorageService(int uploadedFilesCount)
+        {
+            var mockFileData = new List<UploadedFile>();
+            for (var i = 0; i < uploadedFilesCount; i++)
+            {
+                mockFileData.Add(new UploadedFile(Faker.StringFaker.Alpha(10) + ".pdf", Guid.NewGuid()));
+            }
+
+            var fileStorageServiceMock = new Mock<IFileStorageService>();
+            fileStorageServiceMock.Setup(m => m.UploadFiles(It.IsAny<List<FileData>>())).Returns(Task.FromResult(mockFileData));
+
+            return fileStorageServiceMock.Object;
         }
     }
 }

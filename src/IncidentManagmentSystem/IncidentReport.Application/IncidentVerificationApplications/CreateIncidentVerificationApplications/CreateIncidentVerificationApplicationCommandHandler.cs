@@ -13,7 +13,7 @@ using MediatR;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications
 {
-    internal class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
+    public class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
@@ -43,7 +43,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
         private DraftIncidentVerificationApplication CreateDraft(CreateIncidentVerificationApplicationCommand request)
         {
             return new DraftIncidentVerificationApplication(
-                new ContentOfApplication(request.Title, request.Content),
+                new ContentOfApplication(request.Title, request.Description),
                 request.IncidentType,
                 new UserId(this._applicantContext.UserId),
                 new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new UserId(x)))
