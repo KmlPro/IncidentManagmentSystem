@@ -9,7 +9,7 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
     public class CreateIncidentVerificationApplicationsTests : BaseTest
     {
         [Test]
-        public void CreateIncidentVerificationApplicationCommand_AllFieldsAreFilled_DraftCreatedSuccessfully()
+        public void CreateIncidentVerificationApplicationCommand_OnlyWithoutAttachments_DraftCreatedSuccessfully()
         {
             var command = new CreateIncidentVerificationApplicationCommand(
                  Faker.StringFaker.AlphaNumeric(100),
@@ -18,7 +18,10 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
                  new List<Guid> { Guid.NewGuid() },
                  null);
 
-           // var handler = new CreateIncidentVerificationApplicationCommandHandler();
+            var fileStorageService = this.CreateFileStorageService(0);
+
+            var handler = new CreateIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, fileStorageService);
+            // var handler = new CreateIncidentVerificationApplicationCommandHandler();
         }
     }
 }
