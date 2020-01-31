@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BuildingBlocks.Infrastructure;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Common.File;
 using IncidentReport.Application.User;
 using IncidentReport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Moq;
 using NUnit.Framework;
 
@@ -25,11 +27,11 @@ namespace IncidentReport.Application.UnitTests
 
         private IIncidentReportDbContext CreateDbContext()
         {
-            var options = new DbContextOptionsBuilder<IncidentReportDbContext>()
+            var dbContextOptionsBuilder = new DbContextOptionsBuilder<IncidentReportDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
+                .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
 
-            var context = new IncidentReportDbContext(options);
+            var context = new IncidentReportDbContext(dbContextOptionsBuilder.Options);
 
             context.Database.EnsureCreated();
             return context;

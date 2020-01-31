@@ -9,6 +9,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         public string Title { get; }
         public string Description { get; }
 
+        private ContentOfApplication()
+        {
+
+        }
+
         public ContentOfApplication(string title, string description)
         {
             this.CheckRule(new ApplicationTitleLenghtRule(title));

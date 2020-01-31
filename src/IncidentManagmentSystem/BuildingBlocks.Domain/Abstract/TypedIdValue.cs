@@ -6,6 +6,11 @@ namespace BuildingBlocks.Domain.Abstract
     {
         public Guid Value { get; }
 
+        protected TypedIdValueBase()
+        {
+
+        }
+
         protected TypedIdValueBase(Guid value)
         {
             this.Value = value;

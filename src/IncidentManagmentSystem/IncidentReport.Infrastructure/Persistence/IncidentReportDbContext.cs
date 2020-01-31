@@ -11,11 +11,10 @@ namespace IncidentReport.Infrastructure.Persistence
     {
         public DbSet<DraftIncidentVerificationApplication> DraftIncidentVerificationApplication { get; set; }
 
-        public DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
+        //  public DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
 
         public IncidentReportDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)

@@ -8,9 +8,9 @@ namespace BuildingBlocks.Domain.UnitTests
 {
     public class DomainEventsTestHelper
     {
-        public static List<DomainEvent> GetAllDomainEvents(Entity aggregate)
+        public static List<IDomainEvent> GetAllDomainEvents(Entity aggregate)
         {
-            var domainEvents = new List<DomainEvent>();
+            var domainEvents = new List<IDomainEvent>();
 
             if (aggregate.DomainEvents != null)
             {
