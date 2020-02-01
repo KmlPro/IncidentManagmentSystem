@@ -52,7 +52,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
 
         private bool IfAddedAttachmentsExists(CreateIncidentVerificationApplicationCommand request)
         {
-            return request.Attachments.Any();
+            return request.Attachments != null && request.Attachments.Any();
         }
 
         private Task<List<UploadedFile>> UploadFilesToStorage(CreateIncidentVerificationApplicationCommand request)

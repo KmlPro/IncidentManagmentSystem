@@ -20,7 +20,7 @@ namespace IncidentReport.Application.Common.File
 
         private void CheckExtensions(string fileName)
         {
-            var extension = Path.GetExtension(fileName);
+            var extension = Path.GetExtension(fileName).Replace(".", "");
 
             if (string.IsNullOrEmpty(extension))
             {

@@ -13,25 +13,25 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 {
     internal class DraftIncidentVerificationApplicationConfiguration : IEntityTypeConfiguration<DraftIncidentVerificationApplication>
     {
-        private readonly string _tableName = "DraftIncidentVerificationApplication";
-
         public void Configure(EntityTypeBuilder<DraftIncidentVerificationApplication> builder)
         {
             //kbytner 30.01.2020 - handle users (how ? 
-            builder.ToTable(this._tableName, SchemaName.IncidentReport);
+            builder.ToTable("DraftIncidentVerificationApplication", SchemaName.IncidentReport);
+            builder.Ignore(x => x.DomainEvents);
 
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
             builder.Property(nameof(DraftIncidentVerificationApplication.SuspiciousEmployees)).HasConversion(this.SuspiciousEmployeesConverter());
 
-            builder.HasMany(c => c.IncidentVerificationApplicationAttachments.Attachments);
-
             builder.Property(nameof(DraftIncidentVerificationApplication.IncidentVerificationApplicationAttachments)).HasConversion(this.IncidentVerificationApplicationAttachmentsConverter());
+
+            builder.Property(nameof(DraftIncidentVerificationApplication.IncidentType)).HasConversion(this.IncidentTypeConverter());
 
             builder.OwnsOne(m => m.ContentOfApplication);
 
-            builder.Property(nameof(DraftIncidentVerificationApplication.IncidentType)).HasConversion(this.IncidentTypeConverter());
+            builder.OwnsOne(m => m.IncidentVerificationApplicationAttachments);
+
         }
 
         private ValueConverter<IncidentType?, string> IncidentTypeConverter()

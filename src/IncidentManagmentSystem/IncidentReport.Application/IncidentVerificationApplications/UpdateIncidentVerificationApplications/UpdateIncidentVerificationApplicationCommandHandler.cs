@@ -54,7 +54,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
 
         private bool IfAddedAttachmentsExists(UpdateIncidentVerificationApplicationCommand request)
         {
-            return request.AddedAttachments.Any();
+            return request.DeletedAttachments != null && request.AddedAttachments.Any();
         }
 
         private void AddUploadedFilesAsAttachments(DraftIncidentVerificationApplication draftIncidentVerificationApplication, List<UploadedFile> files)
@@ -70,7 +70,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
 
         private bool IfDeletedAttachmentExists(UpdateIncidentVerificationApplicationCommand request)
         {
-            return request.DeletedAttachments.Any();
+            return request.DeletedAttachments != null && request.DeletedAttachments.Any();
         }
 
         private void DeleteAttachments(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateIncidentVerificationApplicationCommand request)

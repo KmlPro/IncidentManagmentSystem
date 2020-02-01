@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace BuildingBlocks.Domain.Abstract
 {
-    public class ValueObject : WithCheckRule, IEquatable<ValueObject>
+    //kbytner 31.01.2020 - this is for EF purposes. I'm not glad about it.
+    [Owned]
+    public abstract class ValueObject : WithCheckRule, IEquatable<ValueObject>
     {
         private List<PropertyInfo> _properties;
         private List<FieldInfo> _fields;
