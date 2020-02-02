@@ -5,7 +5,7 @@ using IncidentReport.Application.Common;
 using IncidentReport.Application.Common.File;
 using Moq;
 
-namespace IncidentReport.Application.UnitTests
+namespace IncidentReport.Application.UnitTests.Common
 {
     internal class MockFileStorageServiceFactory
     {

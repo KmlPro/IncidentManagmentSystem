@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Application.Common.File;
+using IncidentReport.Application.Common.File.Exceptions;
 using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
+using IncidentReport.Application.UnitTests.Common;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
@@ -14,10 +16,10 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
     public class CreateIncidentVerificationApplicationsTests : BaseTest
     {
         [Test]
-        public async Task CreateIncidentVerificationApplicationCommand_OnlyWithoutAttachments_DraftCreatedSuccessfullyAsync()
+        public async Task CreateIncidentVerificationApplicationCommand_OnlyWithoutAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this.CreateCommandWithRequiredFields(false);
+            var command = this.CreateCommandWithRequiredFields();
             var handler = new CreateIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService);
 
             //Act
@@ -29,10 +31,10 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
         }
 
         [Test]
-        public async Task CreateIncidentVerificationApplicationCommand_WithAttachments_DraftCreatedSuccessfullyAsync()
+        public async Task CreateIncidentVerificationApplicationCommand_WithAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this.CreateCommandWithRequiredFields(true);
+            var command = this.CreateCommandWithRequiredFields(new List<string>() { "testFile.pdf" });
             var handler = new CreateIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService);
 
             //Act
@@ -41,6 +43,18 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
             //Assert
             var draftFromContext = this.IncidentReportDbContext.DraftIncidentVerificationApplication.First();
             this.CompareDraftFromContextWithCommandData(command, draftFromContext);
+        }
+
+        [Test]
+        public void CreateIncidentVerificationApplicationCommand_AttachmentsWithUnallowedExtension_DraftNotCreated()
+        {
+            AssertApplicationLayerException<UnallowedFileExtensionException>(() => this.CreateCommandWithRequiredFields(new List<string>() { "testFile.exe" }));
+        }
+
+        [Test]
+        public void CreateIncidentVerificationApplicationCommand_AttachmentsWithoutExtension_DraftNotCreated()
+        {
+            AssertApplicationLayerException<FileExtensionNotRecognizedException>(() => this.CreateCommandWithRequiredFields(new List<string>() { "testFile" }));
         }
 
         private void CompareDraftFromContextWithCommandData(CreateIncidentVerificationApplicationCommand command, DraftIncidentVerificationApplication draftFromContext)
@@ -64,13 +78,13 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
             Assert.IsTrue(draftFromContext.SuspiciousEmployees.Employees.Any(x => command.SuspiciousEmployees.Any(z => x.Value == z)));
         }
 
-        private CreateIncidentVerificationApplicationCommand CreateCommandWithRequiredFields(bool withAttachments)
+        private CreateIncidentVerificationApplicationCommand CreateCommandWithRequiredFields(List<string> fileNames = null)
         {
             var title = Faker.StringFaker.AlphaNumeric(10);
             var description = Faker.StringFaker.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-            var attachments = withAttachments ? new List<FileData> { new FileData("dupa.pdf", new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 }) } : null;
+            var attachments = fileNames?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
 
             return new CreateIncidentVerificationApplicationCommand(
                   title,

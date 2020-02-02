@@ -1,12 +1,13 @@
 using System;
+using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.User;
 using Moq;
 using NUnit.Framework;
 
-namespace IncidentReport.Application.UnitTests
+namespace IncidentReport.Application.UnitTests.Common
 {
-    public class BaseTest
+    public class BaseTest : ApplicationLayerBaseTest
     {
         protected IIncidentReportDbContext IncidentReportDbContext { get; set; }
         protected ICurrentUserContext CurrentUserContext { get; set; }
