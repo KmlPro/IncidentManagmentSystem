@@ -3,12 +3,12 @@ using BuildingBlocks.Domain;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
@@ -19,18 +19,19 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
-        public UserId ApplicantId { get; }
+        public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
 
-        private PostedIncidentVerificationApplication()        {
+        private PostedIncidentVerificationApplication()
+        {
 
         }
 
         public PostedIncidentVerificationApplication(
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
-            UserId applicantId,
+            EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees,
             IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments)
         {

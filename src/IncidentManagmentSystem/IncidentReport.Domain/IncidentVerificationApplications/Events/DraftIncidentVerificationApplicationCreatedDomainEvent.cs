@@ -1,7 +1,7 @@
 using BuildingBlocks.Domain.Abstract;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
@@ -10,10 +10,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public DraftApplicationId Id { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType? IncidentType { get; }
-        public UserId ApplicantId { get; }
+        public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
 
-        public DraftIncidentVerificationApplicationCreatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, UserId applicantId, SuspiciousEmployees suspiciousEmployees)
+        public DraftIncidentVerificationApplicationCreatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, EmployeeId applicantId, SuspiciousEmployees suspiciousEmployees)
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;

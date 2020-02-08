@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -58,7 +58,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
         private SuspiciousEmployees ConvertToSuspiciousEmployees(string value)
         {
             var values = value.Split(';');
-            var suspiciousEmployeesValues = values.Select(x => new UserId(new Guid(x)));
+            var suspiciousEmployeesValues = values.Select(x => new EmployeeId(new Guid(x)));
             return new SuspiciousEmployees(suspiciousEmployeesValues);
         }
 

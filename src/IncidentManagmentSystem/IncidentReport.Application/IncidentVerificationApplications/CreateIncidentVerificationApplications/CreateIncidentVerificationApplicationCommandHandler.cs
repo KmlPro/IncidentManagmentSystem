@@ -6,9 +6,9 @@ using BuildingBlocks.Application.Commands;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Common.File;
 using IncidentReport.Application.User;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 using MediatR;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications
@@ -45,8 +45,8 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
             return new DraftIncidentVerificationApplication(
                 new ContentOfApplication(request.Title, request.Description),
                 request.IncidentType,
-                new UserId(this._applicantContext.UserId),
-                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new UserId(x)))
+                new EmployeeId(this._applicantContext.UserId),
+                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
                 );
         }
 

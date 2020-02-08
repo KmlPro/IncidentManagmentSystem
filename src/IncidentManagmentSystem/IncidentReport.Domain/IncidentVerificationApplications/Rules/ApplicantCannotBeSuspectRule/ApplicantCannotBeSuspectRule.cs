@@ -1,17 +1,17 @@
 using System.Linq;
 using BuildingBlocks.Domain.Interfaces;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule.Exceptions;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule
 {
     public class ApplicantCannotBeSuspectRule : IBusinessRule
     {
         public SuspiciousEmployees SuspiciousEmployees { get; }
-        private UserId ApplicantId { get; }
+        private EmployeeId ApplicantId { get; }
 
-        public ApplicantCannotBeSuspectRule(SuspiciousEmployees suspiciousEmployees, UserId applicantId)
+        public ApplicantCannotBeSuspectRule(SuspiciousEmployees suspiciousEmployees, EmployeeId applicantId)
         {
             this.SuspiciousEmployees = suspiciousEmployees;
             this.ApplicantId = applicantId;

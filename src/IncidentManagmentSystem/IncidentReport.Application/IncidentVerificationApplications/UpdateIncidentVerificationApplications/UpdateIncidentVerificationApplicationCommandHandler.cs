@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using BuildingBlocks.Application.Commands;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Common.File;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,7 +48,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
             draftIncidentVerificationApplication.Update(
                 new ContentOfApplication(request.Title, request.Content),
                 request.IncidentType,
-                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new UserId(x)))
+                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
                 );
         }
 

@@ -1,8 +1,8 @@
 using System;
 using BuildingBlocks.Domain.Abstract;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
@@ -13,7 +13,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
-        public UserId ApplicantId { get; }
+        public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
 
@@ -22,7 +22,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
             ApplicationNumber applicationNumber,
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
-            UserId applicantId,
+            EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees,
             IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments,
             DateTime postDate)

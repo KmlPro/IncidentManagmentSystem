@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
@@ -9,7 +10,6 @@ using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCann
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationDescriptionLength;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
@@ -22,8 +22,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         {
             var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(10), Faker.StringFaker.Alpha(20));
             var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var applicantId = new UserId(Guid.NewGuid());
-            var suspiciousEmployees = new SuspiciousEmployees(new List<UserId> { new UserId(Guid.NewGuid()) }.AsEnumerable());
+            var applicantId = new EmployeeId(Guid.NewGuid());
+            var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
 
             var applicationDraft = new DraftIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
 
@@ -40,8 +40,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         {
             var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(10), Faker.StringFaker.Alpha(20));
             var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var applicantId = new UserId(Guid.NewGuid());
-            var suspiciousEmployees = new SuspiciousEmployees(new List<UserId> { new UserId(Guid.NewGuid()) }.AsEnumerable());
+            var applicantId = new EmployeeId(Guid.NewGuid());
+            var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
 
             var applicationDraft = new DraftIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
 
@@ -63,8 +63,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         {
             var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(10), Faker.StringFaker.Alpha(20));
             var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var applicantId = new UserId(Guid.NewGuid());
-            var suspiciousEmployees = new SuspiciousEmployees(new List<UserId> { new UserId(Guid.NewGuid()) }.AsEnumerable());
+            var applicantId = new EmployeeId(Guid.NewGuid());
+            var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
 
             var applicationDraft = new DraftIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
 
@@ -97,7 +97,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_TitleOFApplicationIsTooShort_NotCreated()
         {
-            var applicantId = new UserId(Guid.NewGuid());
+            var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(1), Faker.StringFaker.Alpha(20));
@@ -107,7 +107,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_TitleOfApplicationIsTooLong_NotCreated()
         {
-            var applicantId = new UserId(Guid.NewGuid());
+            var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(101), Faker.StringFaker.Alpha(20));
@@ -117,7 +117,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_DescriptionOfApplicationIsTooShort_NotCreated()
         {
-            var applicantId = new UserId(Guid.NewGuid());
+            var applicantId = new EmployeeId(Guid.NewGuid());
 
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
@@ -128,7 +128,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_DescriptionOfApplicationIsTooLong_NotCreated()
         {
-            var applicantId = new UserId(Guid.NewGuid());
+            var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(12), Faker.StringFaker.Alpha(1001));
@@ -138,7 +138,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_OnlyApplicantIdFilled_CreatedSuccessfully()
         {
-            var applicantId = new UserId(Guid.NewGuid());
+            var applicantId = new EmployeeId(Guid.NewGuid());
             var applicationDraft = new DraftIncidentVerificationApplication(null, null, applicantId, null);
 
             var draftCreated = AssertPublishedDomainEvent<DraftIncidentVerificationApplicationCreatedDomainEvent>(applicationDraft);
@@ -149,8 +149,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_ApplicantIsSuspiciousEmployee_NotCreated()
         {
-            var applicantId = new UserId(Guid.NewGuid());
-            var suspiciousEmployees = new SuspiciousEmployees(new List<UserId> { applicantId }.AsEnumerable());
+            var applicantId = new EmployeeId(Guid.NewGuid());
+            var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { applicantId }.AsEnumerable());
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
             {
@@ -161,10 +161,10 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void UpdateApplicationDraft_ApplicantIsSuspiciousEmployee_NotCreated()
         {
-            var applicantId = new UserId(Guid.NewGuid());
+            var applicantId = new EmployeeId(Guid.NewGuid());
             var applicationDraft = new DraftIncidentVerificationApplication(null, null, applicantId, null);
 
-            var suspiciousEmployees = new SuspiciousEmployees(new List<UserId> { applicantId }.AsEnumerable());
+            var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { applicantId }.AsEnumerable());
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() => applicationDraft.Update(null, null, suspiciousEmployees));
         }

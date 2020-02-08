@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.Users;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
@@ -16,7 +16,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public DraftApplicationId Id { get; private set; }
         public ContentOfApplication ContentOfApplication { get; private set; }
         public IncidentType? IncidentType { get; private set; }
-        public UserId ApplicantId { get; }
+        public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; private set; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; private set; }
 
@@ -27,7 +27,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public DraftIncidentVerificationApplication(
             ContentOfApplication contentOfApplication,
             IncidentType? incidentType,
-            UserId applicantId,
+            EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees)
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
