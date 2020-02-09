@@ -1,6 +1,6 @@
 using System;
 
-namespace IncidentReport.Application.Common.File
+namespace IncidentReport.Application.Files
 {
     public class UploadedFile
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BuildingBlocks.Application.Commands;
-using IncidentReport.Application.Common.File;
+using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.UpdateIncidentVerificationApplications

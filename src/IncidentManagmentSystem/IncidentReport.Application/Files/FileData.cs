@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using IncidentReport.Application.Common.File.Exceptions;
+using IncidentReport.Application.Files.Exceptions;
 
-namespace IncidentReport.Application.Common.File
+namespace IncidentReport.Application.Files
 {
     public class FileData
     {

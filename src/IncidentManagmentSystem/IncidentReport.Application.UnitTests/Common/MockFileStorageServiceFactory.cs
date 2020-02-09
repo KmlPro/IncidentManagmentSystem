@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IncidentReport.Application.Common;
-using IncidentReport.Application.Common.File;
+using IncidentReport.Application.Files;
 using Moq;
 
 namespace IncidentReport.Application.UnitTests.Common

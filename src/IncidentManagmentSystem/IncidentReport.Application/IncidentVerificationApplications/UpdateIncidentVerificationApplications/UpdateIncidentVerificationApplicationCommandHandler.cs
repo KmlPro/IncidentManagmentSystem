@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.Commands;
 using IncidentReport.Application.Common;
-using IncidentReport.Application.Common.File;
+using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;

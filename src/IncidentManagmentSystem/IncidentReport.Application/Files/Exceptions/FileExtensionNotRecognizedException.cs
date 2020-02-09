@@ -1,6 +1,6 @@
 using BuildingBlocks.Application.Abstract;
 
-namespace IncidentReport.Application.Common.File.Exceptions
+namespace IncidentReport.Application.Files.Exceptions
 {
     public class FileExtensionNotRecognizedException : ApplicationLayerException
     {

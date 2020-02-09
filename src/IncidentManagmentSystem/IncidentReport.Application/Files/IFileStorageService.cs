@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IncidentReport.Application.Common.File;
 
-namespace IncidentReport.Application.Common
+namespace IncidentReport.Application.Files
 {
     public interface IFileStorageService
     {
