@@ -1,6 +1,14 @@
+using System;
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using IncidentManagmentSystem.Web.Users;
+using IncidentReport.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -8,13 +16,31 @@ namespace IncidentManagmentSystem.Web
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            this.InitializeModules(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        private IServiceProvider InitializeModules(IServiceCollection services)
+        {
+            var containerBuilder = new ContainerBuilder();
+
+            containerBuilder.Populate(services);
+
+            var container = containerBuilder.Build();
+
+            var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
+            var currentUserContext = new CurrentUserContext(httpContextAccessor);
+
+            IncidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
+                currentUserContext);
+
+            return new AutofacServiceProvider(container);
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -24,12 +50,14 @@ namespace IncidentManagmentSystem.Web
 
             app.UseRouting();
 
+            app.UseHealthChecks("/health");
+            app.UseHttpsRedirection();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller}/{action=Index}/{id?}");
             });
         }
     }

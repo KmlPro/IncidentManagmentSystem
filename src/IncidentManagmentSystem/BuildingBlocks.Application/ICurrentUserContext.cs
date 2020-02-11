@@ -1,6 +1,6 @@
 using System;
 
-namespace IncidentReport.Application.User
+namespace BuildingBlocks.Application
 {
     public interface ICurrentUserContext
     {

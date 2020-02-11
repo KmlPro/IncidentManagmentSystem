@@ -1,11 +1,10 @@
 using System;
-using MediatR;
 
 namespace BuildingBlocks.Application.Commands
 {
-    public abstract class CommandBase : IRequest
+    public abstract class CommandBase : ICommand
     {
-        protected Guid Id { get; }
+        public Guid Id { get; }
 
         protected CommandBase()
         {

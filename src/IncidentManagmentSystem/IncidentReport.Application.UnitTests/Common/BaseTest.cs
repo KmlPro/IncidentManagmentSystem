@@ -1,8 +1,8 @@
 using System;
+using BuildingBlocks.Application;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
-using IncidentReport.Application.User;
 using Moq;
 using NUnit.Framework;
 
