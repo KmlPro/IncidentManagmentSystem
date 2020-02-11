@@ -3,6 +3,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
+using IncidentManagmentSystem.Web.Configuration.Middlewares;
 using IncidentManagmentSystem.Web.Users;
 using IncidentReport.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
@@ -18,8 +19,10 @@ namespace IncidentManagmentSystem.Web
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddHttpContextAccessor();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddSwaggerDocumentation();
 
             this.InitializeModules(services);
         }
@@ -43,22 +46,18 @@ namespace IncidentManagmentSystem.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwaggerDocumentation();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
 
-            app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                  name: "default",
-                  pattern: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseRouting();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
