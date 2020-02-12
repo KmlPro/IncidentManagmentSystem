@@ -8,7 +8,7 @@ namespace IncidentManagmentSystem.Web.Configuration.Middlewares
     {
         internal static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Incident Managment System API", Version = "v1" }));
 
             return services;
         }
@@ -17,7 +17,12 @@ namespace IncidentManagmentSystem.Web.Configuration.Middlewares
         {
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Incident Managment System API");
+                c.RoutePrefix = string.Empty;
+            });
+
             return app;
         }
     }

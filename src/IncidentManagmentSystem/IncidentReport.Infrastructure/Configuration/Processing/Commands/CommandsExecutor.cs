@@ -4,7 +4,7 @@ using MediatR;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Commands
 {
-    internal class CommandsExecutor
+    public class CommandsExecutor
     {
         private readonly IMediator _mediator;
 

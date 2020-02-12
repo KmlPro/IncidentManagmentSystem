@@ -20,6 +20,8 @@ namespace IncidentManagmentSystem.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddControllers();
+
             services.AddHttpContextAccessor();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSwaggerDocumentation();
@@ -52,7 +54,6 @@ namespace IncidentManagmentSystem.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-
 
             app.UseHttpsRedirection();
 

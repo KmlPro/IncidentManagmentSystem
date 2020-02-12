@@ -5,7 +5,7 @@ using IncidentReport.Infrastructure.Contract;
 
 namespace IncidentReport.Infrastructure
 {
-    internal class IncidentReportModule : IIncidentReportModule
+    public class IncidentReportModule : IIncidentReportModule
     {
         private readonly CommandsExecutor _commandsExecutor;
         public IncidentReportModule(CommandsExecutor commandsExecutor)

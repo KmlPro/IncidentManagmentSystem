@@ -1,13 +1,15 @@
 using System.Threading.Tasks;
-using System.Web.Http;
 using AutoMapper;
 using IncidentManagmentSystem.Web.Controllers.RequestParameters.IncidentReport;
 using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
 using IncidentReport.Infrastructure.Contract;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.Controllers
 {
-    public class IncidentReportController : ApiController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class IncidentReportController : ControllerBase
     {
         private readonly IIncidentReportModule _incidentReportModule;
         private readonly IMapper _mapper;
