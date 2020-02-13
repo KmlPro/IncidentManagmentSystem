@@ -1,7 +1,5 @@
-using System;
 using System.Reflection;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using IncidentManagmentSystem.Web.Configuration.Middlewares;
 using IncidentManagmentSystem.Web.Users;
@@ -25,26 +23,19 @@ namespace IncidentManagmentSystem.Web
             services.AddHttpContextAccessor();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSwaggerDocumentation();
-
-            this.InitializeModules(services);
         }
 
-        private IServiceProvider InitializeModules(IServiceCollection services)
+        public void ConfigureContainer(ContainerBuilder builder)
         {
-            var containerBuilder = new ContainerBuilder();
-
-            containerBuilder.Populate(services);
-
-            var container = containerBuilder.Build();
-
-            var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
-            var currentUserContext = new CurrentUserContext(httpContextAccessor);
+            //var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
+            var currentUserContext = new CurrentUserContext(new HttpContextAccessor());
 
             IncidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
                 currentUserContext);
 
-            return new AutofacServiceProvider(container);
+            IncidentReportStartup.RegisterModuleContract(builder);
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

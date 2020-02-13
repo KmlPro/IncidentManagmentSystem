@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using IncidentManagmentSystem.Web.Controllers.RequestParameters.IncidentReport;
+using IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters.IncidentReport;
 using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
 using IncidentReport.Infrastructure.Contract;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IncidentManagmentSystem.Web.Controllers
+namespace IncidentManagmentSystem.Web.Controllers.IncidentReports
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -9,7 +9,7 @@ using IncidentReport.Application.IncidentVerificationApplications.CreateIncident
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace IncidentManagmentSystem.Web.Controllers.RequestParameters.IncidentReport
+namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters.IncidentReport
 {
     public class CreateIncidentVerificationApplicationRequest : IMapTo<CreateIncidentVerificationApplicationCommand>
     {
