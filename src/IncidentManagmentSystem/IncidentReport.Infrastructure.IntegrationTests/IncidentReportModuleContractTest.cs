@@ -16,9 +16,12 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         {
             var currentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
             var rootContainerBuilder = new ContainerBuilder();
-            IncidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
+            var incidentReportStartup = new IncidentReportStartup(typeof(IncidentReportModuleContractTest).Assembly);
+
+            incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
                 currentUserContext);
-            IncidentReportStartup.RegisterModuleContract(rootContainerBuilder);
+
+            incidentReportStartup.RegisterModuleContract(rootContainerBuilder);
 
             this._container = rootContainerBuilder.Build();
         }
@@ -32,7 +35,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         }
 
         [Test]
-        public void SendTestCommand_NonResult_CommandSentSucessfully()
+        public void SendTestCommand_TaskResultDiffrentThanFaulted_CommandSentSucessfully()
         {
             var incidentReportModule = this._container.Resolve<IIncidentReportModule>();
             var command = new TestCommand("Sample data");

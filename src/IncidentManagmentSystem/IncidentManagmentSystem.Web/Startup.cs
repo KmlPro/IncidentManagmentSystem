@@ -27,13 +27,14 @@ namespace IncidentManagmentSystem.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            var incidentReportStartup = new IncidentReportStartup();
             //var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
             var currentUserContext = new CurrentUserContext(new HttpContextAccessor());
 
-            IncidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
+            incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
                 currentUserContext);
 
-            IncidentReportStartup.RegisterModuleContract(builder);
+            incidentReportStartup.RegisterModuleContract(builder);
         }
 
 

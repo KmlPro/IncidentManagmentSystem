@@ -1,6 +1,8 @@
 using System;
+using System.Reflection;
 using Autofac;
 using BuildingBlocks.Application;
+using IncidentReport.Application.Common;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Configuration.Mediation;
 using IncidentReport.Infrastructure.Configuration.Processing;
@@ -12,24 +14,35 @@ namespace IncidentReport.Infrastructure.Configuration
 {
     public class IncidentReportStartup
     {
-        public static void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
+        private readonly Assembly _assemblyWithMediatRComponentsImplementation;
+
+        public IncidentReportStartup()
         {
-            ConfigureCompositionRoot(
+            this._assemblyWithMediatRComponentsImplementation = typeof(IncidentReportApplicationAssembly).GetTypeInfo().Assembly;
+        }
+
+        public IncidentReportStartup(Assembly assemblyWithCommandsImplementation)
+        {
+            this._assemblyWithMediatRComponentsImplementation = assemblyWithCommandsImplementation;
+        }
+        public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
+        {
+            this.ConfigureCompositionRoot(
                 dbContextOptionsBuilderAction,
                 currentUserContext);
         }
 
-        public static void RegisterModuleContract(ContainerBuilder builder)
+        public void RegisterModuleContract(ContainerBuilder builder)
         {
             builder.RegisterType<IncidentReportModule>()
               .As<IIncidentReportModule>()
               .InstancePerLifetimeScope();
         }
 
-        public static void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
+        private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
         {
             var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new MediatRModule());
+            containerBuilder.RegisterModule(new MediatRModule(this._assemblyWithMediatRComponentsImplementation));
             containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             containerBuilder.RegisterModule(new ProcessingModule());
 

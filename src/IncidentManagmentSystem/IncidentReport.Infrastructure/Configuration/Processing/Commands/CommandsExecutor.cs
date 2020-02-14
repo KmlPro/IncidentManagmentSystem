@@ -1,21 +1,21 @@
-using System.Threading.Tasks;
+using Autofac;
 using BuildingBlocks.Application.Commands;
+using IncidentReport.Infrastructure.Configuration.DIContainer;
 using MediatR;
+using System.Threading.Tasks;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Commands
 {
-    public class CommandsExecutor
+    internal class CommandsExecutor
     {
-        private readonly IMediator _mediator;
-
-        public CommandsExecutor(IMediator mediator)
+        internal async static Task Execute(ICommand command)
         {
-            this._mediator = mediator;
-        }
+            using (var scope = CompositionRoot.BeginLifetimeScope())
+            {
+                var _mediator = scope.Resolve<IMediator>();
 
-        internal async Task Execute(ICommand command)
-        {
-            await this._mediator.Send(command);
+                await _mediator.Send(command);
+            }
         }
     }
 }
