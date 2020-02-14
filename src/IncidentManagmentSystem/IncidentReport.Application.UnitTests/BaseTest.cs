@@ -1,12 +1,11 @@
-using System;
 using BuildingBlocks.Application;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
-using Moq;
+using IncidentReport.Application.UnitTests.Mocks;
 using NUnit.Framework;
 
-namespace IncidentReport.Application.UnitTests.Common
+namespace IncidentReport.Application.UnitTests
 {
     public class BaseTest : ApplicationLayerBaseTest
     {
@@ -18,17 +17,8 @@ namespace IncidentReport.Application.UnitTests.Common
         public void UnitTestBaseSetUp()
         {
             this.IncidentReportDbContext = new MockDbContextFactory().CreateDbContext();
-            this.CurrentUserContext = this.CreateUserContext();
+            this.CurrentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
             this.IFileStorageService = new MockFileStorageServiceFactory().CreateFileStorageService();
-        }
-
-        private ICurrentUserContext CreateUserContext()
-        {
-            var currentUserServiceMock = new Mock<ICurrentUserContext>();
-            currentUserServiceMock.Setup(m => m.UserId)
-                .Returns(Guid.NewGuid());
-
-            return currentUserServiceMock.Object;
         }
     }
 }

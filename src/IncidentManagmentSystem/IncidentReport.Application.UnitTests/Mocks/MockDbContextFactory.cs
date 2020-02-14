@@ -12,7 +12,7 @@ using Moq;
 // AddAsync - https://stackoverflow.com/questions/49142556/how-do-i-mock-addasync
 //</summary>
 
-namespace IncidentReport.Application.UnitTests.Common
+namespace IncidentReport.Application.UnitTests.Mocks
 {
     internal class MockDbContextFactory
     {

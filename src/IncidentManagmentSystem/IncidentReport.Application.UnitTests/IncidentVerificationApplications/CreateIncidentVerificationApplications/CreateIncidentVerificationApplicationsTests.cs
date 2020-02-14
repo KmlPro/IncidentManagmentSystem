@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.Files.Exceptions;
 using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
-using IncidentReport.Application.UnitTests.Common;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
