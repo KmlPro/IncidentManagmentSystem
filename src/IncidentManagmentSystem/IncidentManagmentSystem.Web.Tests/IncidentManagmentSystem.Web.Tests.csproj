@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Faker" Version="1.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.1" />
+    <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
@@ -16,6 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IncidentManagmentSystem.Web\IncidentManagmentSystem.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="IncidentReport\TestFiles\attachmentFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

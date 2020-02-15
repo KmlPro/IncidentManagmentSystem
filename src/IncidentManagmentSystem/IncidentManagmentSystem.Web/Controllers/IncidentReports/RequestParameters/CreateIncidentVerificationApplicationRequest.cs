@@ -13,25 +13,11 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParamet
 {
     public class CreateIncidentVerificationApplicationRequest : IMapTo<CreateIncidentVerificationApplicationCommand>
     {
-        public string Title { get; }
-        public string Description { get; }
-        public IncidentType IncidentType { get; }
-        public IEnumerable<Guid> SuspiciousEmployees { get; }
-        public List<IFormFile> Attachments { get; }
-
-        public CreateIncidentVerificationApplicationRequest()
-        {
-            //just for automapper
-        }
-
-        public CreateIncidentVerificationApplicationRequest(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<IFormFile> attachments)
-        {
-            this.Title = title;
-            this.Description = description;
-            this.IncidentType = incidentType;
-            this.SuspiciousEmployees = suspiciousEmployees;
-            this.Attachments = this.Attachments;
-        }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public IncidentType IncidentType { get; set; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; set; }
+        public List<IFormFile> Attachments { get; set; }
 
         public void Mapping(Profile profile)
         {
