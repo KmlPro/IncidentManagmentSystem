@@ -9,7 +9,7 @@ using IncidentReport.Application.IncidentVerificationApplications.CreateIncident
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters.IncidentReport
+namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters
 {
     public class CreateIncidentVerificationApplicationRequest : IMapTo<CreateIncidentVerificationApplicationCommand>
     {
@@ -18,6 +18,20 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParamet
         public IncidentType IncidentType { get; }
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<IFormFile> Attachments { get; }
+
+        public CreateIncidentVerificationApplicationRequest()
+        {
+            //just for automapper
+        }
+
+        public CreateIncidentVerificationApplicationRequest(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<IFormFile> attachments)
+        {
+            this.Title = title;
+            this.Description = description;
+            this.IncidentType = incidentType;
+            this.SuspiciousEmployees = suspiciousEmployees;
+            this.Attachments = this.Attachments;
+        }
 
         public void Mapping(Profile profile)
         {

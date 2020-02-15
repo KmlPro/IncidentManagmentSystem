@@ -7,6 +7,7 @@ using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Configuration.Mediation;
 using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
+using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,6 +46,7 @@ namespace IncidentReport.Infrastructure.Configuration
             containerBuilder.RegisterModule(new MediatRModule(this._assemblyWithMediatRComponentsImplementation));
             containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             containerBuilder.RegisterModule(new ProcessingModule());
+            containerBuilder.RegisterModule(new FileStorageModule());
 
             containerBuilder.RegisterInstance(currentUserContext);
 

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters.IncidentReport;
+using IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters;
 using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
 using IncidentReport.Infrastructure.Contract;
 using Microsoft.AspNetCore.Mvc;
