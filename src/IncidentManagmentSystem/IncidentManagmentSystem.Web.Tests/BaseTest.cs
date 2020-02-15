@@ -1,4 +1,5 @@
 using System.Net.Http;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
@@ -10,18 +11,22 @@ namespace IncidentManagmentSystem.Web.Tests
     [TestFixture]
     public class BaseTest
     {
-        private TestServer _testServer;
         protected HttpClient TestClient { get; private set; }
 
         [OneTimeSetUp]
         public void Setup()
         {
-            var builder = new WebHostBuilder()
-                .UseEnvironment(Environments.Development)
-                .UseStartup<Startup>();
+            var hostBuilder = new HostBuilder()
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHost(webHost =>
+                {
+                    webHost.UseTestServer();
+                    webHost.UseStartup<Startup>();
+                });
 
-            this._testServer = new TestServer(builder);
-            this.TestClient = this._testServer.CreateClient();
+            var host = hostBuilder.StartAsync().Result;
+
+            this.TestClient = host.GetTestClient();
         }
 
         protected string CreateRequestBody(object obj)
