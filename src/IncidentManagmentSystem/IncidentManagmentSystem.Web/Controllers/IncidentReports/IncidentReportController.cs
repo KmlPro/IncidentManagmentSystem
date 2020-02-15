@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.Controllers.IncidentReports
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class IncidentReportController : ControllerBase
     {
