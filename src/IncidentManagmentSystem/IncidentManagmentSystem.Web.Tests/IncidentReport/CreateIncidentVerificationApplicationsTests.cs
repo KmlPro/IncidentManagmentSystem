@@ -34,7 +34,7 @@ namespace IncidentManagmentSystem.Web.Tests.IncidentReport
 
             var requestBody = this.CreateRequestBody(requestObj);
 
-            var response = await this.TestClient.PostAsync(_path, new StringContent(requestBody, Encoding.UTF8, "application/json"));
+            var response = await this.TestClient.PostAsync(_path, new StringContent(requestBody, Encoding.UTF8, "multipart/form-data"));
             response.EnsureSuccessStatusCode();
         }
 

@@ -1,4 +1,5 @@
 using System.IO;
+using IncidentManagmentSystem.Web.Tests.Mocks.JsonMoq;
 using Microsoft.AspNetCore.Http;
 using Moq;
 
@@ -21,6 +22,7 @@ namespace IncidentManagmentSystem.Web.Tests.Mocks
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
             fileMock.Setup(m => m.ContentDisposition).Returns(string.Format("inline; filename={0}", fileName));
 
+            fileMock.RegisterForJsonSerialization();
             return fileMock.Object;
         }
     }
