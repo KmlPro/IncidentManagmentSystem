@@ -21,7 +21,7 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports
         }
 
         [HttpPost]
-        public async Task CreateIncidentVerificationApplication([FromBody]CreateIncidentVerificationApplicationRequest request)
+        public async Task CreateIncidentVerificationApplication([FromForm]CreateIncidentVerificationApplicationRequest request)
         {
             var command = this._mapper.Map<CreateIncidentVerificationApplicationCommand>(request);
             await this._incidentReportModule.ExecuteCommandAsync(command);

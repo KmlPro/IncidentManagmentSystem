@@ -19,10 +19,4 @@
     <ProjectReference Include="..\IncidentManagmentSystem.Web\IncidentManagmentSystem.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="IncidentReport\TestFiles\attachmentFile.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

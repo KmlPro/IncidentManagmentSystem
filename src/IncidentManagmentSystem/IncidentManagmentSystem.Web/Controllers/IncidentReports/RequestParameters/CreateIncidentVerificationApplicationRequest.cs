@@ -21,8 +21,8 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParamet
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateIncidentVerificationApplicationRequest, CreateIncidentVerificationApplicationCommand>()
-                .ForMember(d => d.Attachments, opt => opt.MapFrom(s => s.Attachments.Select(x => new FileData(x.FileName, x.GetBytes().Result))));
+            profile.CreateMap<List<IFormFile>, List<FileData>>().ConvertUsing(new IFormFileTypeConverter());
+            profile.CreateMap<CreateIncidentVerificationApplicationRequest, CreateIncidentVerificationApplicationCommand>();
         }
     }
 }

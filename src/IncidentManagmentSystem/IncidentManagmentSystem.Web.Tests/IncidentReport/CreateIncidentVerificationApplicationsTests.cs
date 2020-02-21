@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters;
-using IncidentManagmentSystem.Web.Tests.Mocks;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
@@ -19,47 +17,48 @@ namespace IncidentManagmentSystem.Web.Tests.IncidentReport
         [Test]
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_ReturnOk()
         {
-            var requestObj = this.CreateParameters();
-            var requestBody = this.CreateRequestBody(requestObj);
+            var requestParameters = this.CreateMultipartFormDataContent();
 
-            var response = await this.TestClient.PostAsync(_path, new StringContent(requestBody, Encoding.UTF8, "application/json"));
+            var response = await this.TestClient.PostAsync(_path, requestParameters);
+
             response.EnsureSuccessStatusCode();
-        }
+        } 
 
         [Test]
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_WithAttachemtns_ReturnOk()
         {
-            var requestObj = this.CreateParameters();
-            requestObj.Attachments = new List<IFormFile>() { this.CreateAttachment() };
+            var requestParameters = this.CreateMultipartFormDataContent();
+            this.AddAttachments(requestParameters, new List<string>() { "test1.txt", "test2.txt" });
 
-            var requestBody = this.CreateRequestBody(requestObj);
+            var response = await this.TestClient.PostAsync(_path, requestParameters);
 
-            var response = await this.TestClient.PostAsync(_path, new StringContent(requestBody, Encoding.UTF8, "multipart/form-data"));
             response.EnsureSuccessStatusCode();
         }
 
-        private CreateIncidentVerificationApplicationRequest CreateParameters()
+        private MultipartFormDataContent CreateMultipartFormDataContent()
         {
             var title = Faker.StringFaker.AlphaNumeric(10);
             var description = Faker.StringFaker.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
 
-            return new CreateIncidentVerificationApplicationRequest()
+            var formData = new MultipartFormDataContent
             {
-                Title = title,
-                Description = description,
-                IncidentType = incidentType,
-                SuspiciousEmployees = suspiciousEmployees,
+                { new StringContent(title), nameof(CreateIncidentVerificationApplicationRequest.Title) },
+                { new StringContent(description), nameof(CreateIncidentVerificationApplicationRequest.Description) },
+                { new StringContent(incidentType.ToString()), nameof(CreateIncidentVerificationApplicationRequest.IncidentType) },
+                { new StringContent(string.Join(", ", suspiciousEmployees)), nameof(CreateIncidentVerificationApplicationRequest.SuspiciousEmployees) }
             };
+
+            return formData;
         }
 
-        private IFormFile CreateAttachment()
+        private void AddAttachments(MultipartFormDataContent formData, List<string> fileNames)
         {
-            var physicalFile = new FileInfo(@"IncidentReport\TestFiles\attachmentFile.txt");
-            var formFile = physicalFile.AsMockIFormFile();
-
-            return formFile;
+            foreach (var fileName in fileNames)
+            {
+                formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(fileName)), "Attachments", fileName);
+            }
         }
     }
 }

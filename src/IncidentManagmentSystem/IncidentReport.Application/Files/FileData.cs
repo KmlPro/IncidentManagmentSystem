@@ -59,6 +59,7 @@ namespace IncidentReport.Application.Files
         {
           "pdf",
           "xlsx",
+          "txt"
         };
     }
 }
