@@ -3,7 +3,7 @@ using MediatR;
 
 namespace BuildingBlocks.Application.Commands
 {
-    public interface ICommand<out TResult> : IRequest<TResult> where TResult : ICommandResult
+    public interface ICommand<out TResult> : IRequest<TResult>
     {
         Guid Id { get; }
     }
