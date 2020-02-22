@@ -1,8 +1,8 @@
+using System.Threading.Tasks;
 using Autofac;
 using BuildingBlocks.Application.Commands;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using MediatR;
-using System.Threading.Tasks;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Commands
 {

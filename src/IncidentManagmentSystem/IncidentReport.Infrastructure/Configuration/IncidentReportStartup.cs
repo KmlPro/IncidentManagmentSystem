@@ -4,7 +4,6 @@ using Autofac;
 using BuildingBlocks.Application;
 using IncidentReport.Application.Common;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
-using IncidentReport.Infrastructure.Configuration.Mediation;
 using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;

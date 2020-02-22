@@ -1,8 +1,9 @@
 using System.Reflection;
 using Autofac;
+using IncidentReport.Infrastructure.Configuration.Processing.Pipeline;
 using MediatR;
 
-namespace IncidentReport.Infrastructure.Configuration.Mediation
+namespace IncidentReport.Infrastructure.Configuration.Processing
 {
     // sample configuration https://github.com/jbogard/MediatR/blob/master/samples/MediatR.Examples.Autofac/Program.cs
     internal class MediatRModule : Autofac.Module
@@ -31,6 +32,8 @@ namespace IncidentReport.Infrastructure.Configuration.Mediation
                     .AsClosedTypesOf(mediatrOpenType)
                     .AsImplementedInterfaces();
             }
+
+            builder.RegisterGeneric(typeof(UnitOfWorkPipelineBehavior<,>)).As(typeof(IPipelineBehavior<,>));
 
             builder.Register<ServiceFactory>(ctx =>
             {
