@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
-using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 
-namespace IncidentManagmentSystem.Web.Tests.IncidentReport
+namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
     public class CreateIncidentVerificationApplicationsTests : BaseTest
     {
@@ -22,7 +21,7 @@ namespace IncidentManagmentSystem.Web.Tests.IncidentReport
             var response = await this.TestClient.PostAsync(_path, requestParameters);
 
             response.EnsureSuccessStatusCode();
-        } 
+        }
 
         [Test]
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_WithAttachemtns_ReturnOk()

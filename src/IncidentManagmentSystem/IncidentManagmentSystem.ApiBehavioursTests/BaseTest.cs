@@ -1,11 +1,12 @@
 using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
+using IncidentManagmentSystem.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
 
-namespace IncidentManagmentSystem.Web.Tests
+namespace IncidentManagmentSystem.ApiBehavioursTests
 {
     [TestFixture]
     public class BaseTest
