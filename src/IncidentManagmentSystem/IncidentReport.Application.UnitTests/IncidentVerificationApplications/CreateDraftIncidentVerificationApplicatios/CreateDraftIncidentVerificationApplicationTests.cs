@@ -5,21 +5,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.Files.Exceptions;
-using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
+using IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.CreateIncidentVerificationApplications
 {
-    public class CreateIncidentVerificationApplicationsTests : BaseTest
+    public class CreateDraftIncidentVerificationApplicationTests : BaseTest
     {
         [Test]
         public async Task CreateIncidentVerificationApplicationCommand_OnlyWithoutAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
             var command = this.CreateCommandWithRequiredFields();
-            var handler = new CreateIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService);
+            var handler = new CreateDraftIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService);
 
             //Act
             await handler.Handle(command, new CancellationToken());
@@ -34,7 +34,7 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
         {
             //Arrange
             var command = this.CreateCommandWithRequiredFields(new List<string>() { "testFile.pdf" });
-            var handler = new CreateIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService);
+            var handler = new CreateDraftIncidentVerificationApplicationCommandHandler(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService);
 
             //Act
             await handler.Handle(command, new CancellationToken());
@@ -56,7 +56,7 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
             AssertApplicationLayerException<FileExtensionNotRecognizedException>(() => this.CreateCommandWithRequiredFields(new List<string>() { "testFile" }));
         }
 
-        private void CompareDraftFromContextWithCommandData(CreateIncidentVerificationApplicationCommand command, DraftIncidentVerificationApplication draftFromContext)
+        private void CompareDraftFromContextWithCommandData(CreateDraftIncidentVerificationApplicationCommand command, DraftIncidentVerificationApplication draftFromContext)
         {
             Assert.AreEqual(command.Title, draftFromContext.ContentOfApplication.Title);
             Assert.AreEqual(command.Description, draftFromContext.ContentOfApplication.Description);
@@ -77,7 +77,7 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
             Assert.IsTrue(draftFromContext.SuspiciousEmployees.Employees.Any(x => command.SuspiciousEmployees.Any(z => x.Value == z)));
         }
 
-        private CreateIncidentVerificationApplicationCommand CreateCommandWithRequiredFields(List<string> fileNames = null)
+        private CreateDraftIncidentVerificationApplicationCommand CreateCommandWithRequiredFields(List<string> fileNames = null)
         {
             var title = Faker.StringFaker.AlphaNumeric(10);
             var description = Faker.StringFaker.AlphaNumeric(99);
@@ -85,7 +85,7 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
             var attachments = fileNames?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
 
-            return new CreateIncidentVerificationApplicationCommand(
+            return new CreateDraftIncidentVerificationApplicationCommand(
                   title,
                   description,
                   incidentType,

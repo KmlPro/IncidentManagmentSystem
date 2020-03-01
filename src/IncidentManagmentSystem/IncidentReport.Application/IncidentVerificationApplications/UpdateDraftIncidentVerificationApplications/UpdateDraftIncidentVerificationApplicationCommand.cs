@@ -6,7 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.UpdateIncidentVerificationApplications
 {
-    public class UpdateIncidentVerificationApplicationCommand : CommandBase
+    public class UpdateDraftIncidentVerificationApplicationCommand : CommandBase
     {
         public Guid DraftIncidentVerificationApplicationId { get; set; }
         public string Title { get; }

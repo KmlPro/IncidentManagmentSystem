@@ -11,21 +11,21 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using MediatR;
 
-namespace IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications
+namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateIncidentVerificationApplicationCommand>
+    public class CreateDraftIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateDraftIncidentVerificationApplicationCommand>
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly ICurrentUserContext _applicantContext;
-        public CreateIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
+        public CreateDraftIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._applicantContext = userContext;
             this._fileStorageService = fileStorageService;
         }
 
-        public async Task<Unit> Handle(CreateIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateDraftIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
         {
             var incidentVerificationApplication = this.CreateDraft(request);
 
@@ -40,7 +40,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
             return Unit.Value;
         }
 
-        private DraftIncidentVerificationApplication CreateDraft(CreateIncidentVerificationApplicationCommand request)
+        private DraftIncidentVerificationApplication CreateDraft(CreateDraftIncidentVerificationApplicationCommand request)
         {
             return new DraftIncidentVerificationApplication(
                 new ContentOfApplication(request.Title, request.Description),
@@ -50,12 +50,12 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
                 );
         }
 
-        private bool IfAddedAttachmentsExists(CreateIncidentVerificationApplicationCommand request)
+        private bool IfAddedAttachmentsExists(CreateDraftIncidentVerificationApplicationCommand request)
         {
             return request.Attachments != null && request.Attachments.Any();
         }
 
-        private Task<List<UploadedFile>> UploadFilesToStorage(CreateIncidentVerificationApplicationCommand request)
+        private Task<List<UploadedFile>> UploadFilesToStorage(CreateDraftIncidentVerificationApplicationCommand request)
         {
             return this._fileStorageService.UploadFiles(request.Attachments);
         }

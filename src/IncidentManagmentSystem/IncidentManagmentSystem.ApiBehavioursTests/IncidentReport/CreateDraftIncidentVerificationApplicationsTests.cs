@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
-    public class CreateIncidentVerificationApplicationsTests : BaseTest
+    public class CreateDraftIncidentVerificationApplicationsTests : BaseTest
     {
         private const string _path = "api/IncidentReport/CreateIncidentVerificationApplication";
 
@@ -43,10 +43,10 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 
             var formData = new MultipartFormDataContent
             {
-                { new StringContent(title), nameof(CreateIncidentVerificationApplicationRequest.Title) },
-                { new StringContent(description), nameof(CreateIncidentVerificationApplicationRequest.Description) },
-                { new StringContent(incidentType.ToString()), nameof(CreateIncidentVerificationApplicationRequest.IncidentType) },
-                { new StringContent(string.Join(", ", suspiciousEmployees)), nameof(CreateIncidentVerificationApplicationRequest.SuspiciousEmployees) }
+                { new StringContent(title), nameof(CreateDraftIncidentVerificationApplicationRequest.Title) },
+                { new StringContent(description), nameof(CreateDraftIncidentVerificationApplicationRequest.Description) },
+                { new StringContent(incidentType.ToString()), nameof(CreateDraftIncidentVerificationApplicationRequest.IncidentType) },
+                { new StringContent(string.Join(", ", suspiciousEmployees)), nameof(CreateDraftIncidentVerificationApplicationRequest.SuspiciousEmployees) }
             };
 
             return formData;

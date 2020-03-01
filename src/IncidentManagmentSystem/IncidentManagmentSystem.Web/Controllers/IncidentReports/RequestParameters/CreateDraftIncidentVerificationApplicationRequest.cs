@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using IncidentManagmentSystem.Web.Configuration.Mappings;
 using IncidentManagmentSystem.Web.Files;
 using IncidentReport.Application.Files;
-using IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications;
+using IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters
 {
-    public class CreateIncidentVerificationApplicationRequest : IMapTo<CreateIncidentVerificationApplicationCommand>
+    public class CreateDraftIncidentVerificationApplicationRequest : IMapTo<CreateDraftIncidentVerificationApplicationCommand>
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -22,7 +21,7 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParamet
         public void Mapping(Profile profile)
         {
             profile.CreateMap<List<IFormFile>, List<FileData>>().ConvertUsing(new IFormFileTypeConverter());
-            profile.CreateMap<CreateIncidentVerificationApplicationRequest, CreateIncidentVerificationApplicationCommand>();
+            profile.CreateMap<CreateDraftIncidentVerificationApplicationRequest, CreateDraftIncidentVerificationApplicationCommand>();
         }
     }
 }

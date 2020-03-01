@@ -4,9 +4,9 @@ using BuildingBlocks.Application.Commands;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
-namespace IncidentReport.Application.IncidentVerificationApplications.CreateIncidentVerificationApplications
+namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateIncidentVerificationApplicationCommand : CommandBase
+    public class CreateDraftIncidentVerificationApplicationCommand : CommandBase
     {
         public string Title { get; }
         public string Description { get; }
@@ -14,7 +14,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateInci
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<FileData> Attachments { get; }
 
-        public CreateIncidentVerificationApplicationCommand(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
+        public CreateDraftIncidentVerificationApplicationCommand(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
         {
             this.Title = title;
             this.Description = description;

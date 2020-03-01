@@ -13,17 +13,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.UpdateIncidentVerificationApplications
 {
-    internal class UpdateIncidentVerificationApplicationCommandHandler : ICommandHandler<UpdateIncidentVerificationApplicationCommand>
+    internal class UpdateDraftIncidentVerificationApplicationCommandHandler : ICommandHandler<UpdateDraftIncidentVerificationApplicationCommand>
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
-        public UpdateIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
+        public UpdateDraftIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._fileStorageService = fileStorageService;
         }
 
-        public async Task<Unit> Handle(UpdateIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateDraftIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
         {
             var draftIncidentVerificationApplication = await this._incidentReportContext.DraftIncidentVerificationApplication.FirstAsync(x => x.Id == new DraftApplicationId(request.DraftIncidentVerificationApplicationId));
 
@@ -43,7 +43,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
             return Unit.Value;
         }
 
-        private void UpdateApplicationData(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateIncidentVerificationApplicationCommand request)
+        private void UpdateApplicationData(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateDraftIncidentVerificationApplicationCommand request)
         {
             draftIncidentVerificationApplication.Update(
                 new ContentOfApplication(request.Title, request.Content),
@@ -52,7 +52,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
                 );
         }
 
-        private bool IfAddedAttachmentsExists(UpdateIncidentVerificationApplicationCommand request)
+        private bool IfAddedAttachmentsExists(UpdateDraftIncidentVerificationApplicationCommand request)
         {
             return request.DeletedAttachments != null && request.AddedAttachments.Any();
         }
@@ -63,17 +63,17 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
             draftIncidentVerificationApplication.AddAttachments(attachments);
         }
 
-        private Task<List<UploadedFile>> UploadFilesToStorage(UpdateIncidentVerificationApplicationCommand request)
+        private Task<List<UploadedFile>> UploadFilesToStorage(UpdateDraftIncidentVerificationApplicationCommand request)
         {
             return this._fileStorageService.UploadFiles(request.AddedAttachments);
         }
 
-        private bool IfDeletedAttachmentExists(UpdateIncidentVerificationApplicationCommand request)
+        private bool IfDeletedAttachmentExists(UpdateDraftIncidentVerificationApplicationCommand request)
         {
             return request.DeletedAttachments != null && request.DeletedAttachments.Any();
         }
 
-        private void DeleteAttachments(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateIncidentVerificationApplicationCommand request)
+        private void DeleteAttachments(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateDraftIncidentVerificationApplicationCommand request)
         {
             draftIncidentVerificationApplication.DeleteAttachments(request.DeletedAttachments.Select(x => new StorageId(x)));
         }
