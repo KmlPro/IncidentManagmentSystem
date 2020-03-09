@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters;
+using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplication.RequestParameters;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
 
@@ -11,7 +11,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
     public class CreateDraftIncidentVerificationApplicationsTests : BaseTest
     {
-        private const string _path = "api/IncidentReport/CreateIncidentVerificationApplication";
+        private const string _path = "api/DraftIncidentVerificationApplication";
 
         [Test]
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_ReturnOk()

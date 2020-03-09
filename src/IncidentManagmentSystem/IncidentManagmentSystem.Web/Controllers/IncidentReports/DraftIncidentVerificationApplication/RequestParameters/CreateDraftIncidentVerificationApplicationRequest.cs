@@ -8,7 +8,7 @@ using IncidentReport.Application.IncidentVerificationApplications.CreateDraftInc
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.RequestParameters
+namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplication.RequestParameters
 {
     public class CreateDraftIncidentVerificationApplicationRequest : IMapTo<CreateDraftIncidentVerificationApplicationCommand>
     {
