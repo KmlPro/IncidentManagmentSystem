@@ -12,7 +12,7 @@ namespace IncidentReport.Infrastructure
             await CommandsExecutor.Execute(command);
         }
 
-        public async Task<TCommandResult> ExecuteCommandWithResultAsync<TCommandResult>(ICommand<ICommandResult> command) where TCommandResult : ICommandResult
+        public async Task<TCommandResult> ExecuteCommandWithResultAsync<TCommandResult>(ICommand<TCommandResult> command) where TCommandResult : ICommandResult
         {
             return await CommandsExecutor.ExecuteWithResult(command);
         }
