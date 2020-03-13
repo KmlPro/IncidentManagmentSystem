@@ -2,16 +2,16 @@ using System;
 
 namespace BuildingBlocks.Domain.Abstract
 {
-    public abstract class TypedIdValueBase : IEquatable<TypedIdValueBase>
+    public abstract class TypedIdValue : IEquatable<TypedIdValue>
     {
         public Guid Value { get; }
 
-        protected TypedIdValueBase()
+        protected TypedIdValue()
         {
 
         }
 
-        protected TypedIdValueBase(Guid value)
+        protected TypedIdValue(Guid value)
         {
             this.Value = value;
         }
@@ -23,7 +23,7 @@ namespace BuildingBlocks.Domain.Abstract
                 return false;
             }
 
-            return obj is TypedIdValueBase other && this.Equals(other);
+            return obj is TypedIdValue other && this.Equals(other);
         }
 
         public override int GetHashCode()
@@ -31,12 +31,12 @@ namespace BuildingBlocks.Domain.Abstract
             return this.Value.GetHashCode();
         }
 
-        public bool Equals(TypedIdValueBase other)
+        public bool Equals(TypedIdValue other)
         {
             return this.Value == other.Value;
         }
 
-        public static bool operator ==(TypedIdValueBase obj1, TypedIdValueBase obj2)
+        public static bool operator ==(TypedIdValue obj1, TypedIdValue obj2)
         {
             if (Equals(obj1, null))
             {
@@ -48,6 +48,6 @@ namespace BuildingBlocks.Domain.Abstract
             }
             return obj1.Equals(obj2);
         }
-        public static bool operator !=(TypedIdValueBase x, TypedIdValueBase y) => !(x == y);
+        public static bool operator !=(TypedIdValue x, TypedIdValue y) => !(x == y);
     }
 }

@@ -9,15 +9,16 @@ using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using MediatR;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateDraftIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateDraftIncidentVerificationApplicationCommand>
+    public class CreateDraftIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateDraftIncidentVerificationApplicationCommand, EntityCreatedCommandResult<DraftIncidentVerificationApplication>>
     {
+
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly ICurrentUserContext _applicantContext;
+
         public CreateDraftIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
@@ -25,19 +26,19 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraf
             this._fileStorageService = fileStorageService;
         }
 
-        public async Task<Unit> Handle(CreateDraftIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
+        public async Task<EntityCreatedCommandResult<DraftIncidentVerificationApplication>> Handle(CreateDraftIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
         {
-            var incidentVerificationApplication = this.CreateDraft(request);
+            var draftIncidentVerificationApplication = this.CreateDraft(request);
 
             if (this.IfAddedAttachmentsExists(request))
             {
                 var files = await this.UploadFilesToStorage(request);
-                this.AddUploadedFilesAsAttachments(incidentVerificationApplication, files);
+                this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
             }
 
-            await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(incidentVerificationApplication);
+            await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(draftIncidentVerificationApplication);
 
-            return Unit.Value;
+            return new EntityCreatedCommandResult<DraftIncidentVerificationApplication>(draftIncidentVerificationApplication.Id.Value, draftIncidentVerificationApplication);
         }
 
         private DraftIncidentVerificationApplication CreateDraft(CreateDraftIncidentVerificationApplicationCommand request)

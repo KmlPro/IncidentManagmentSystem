@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using BuildingBlocks.Application.Commands;
 using IncidentReport.Application.Files;
+using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateDraftIncidentVerificationApplicationCommand : CommandBase
+    public class CreateDraftIncidentVerificationApplicationCommand : CommandBase<EntityCreatedCommandResult<DraftIncidentVerificationApplication>>
     {
         public string Title { get; }
         public string Description { get; }

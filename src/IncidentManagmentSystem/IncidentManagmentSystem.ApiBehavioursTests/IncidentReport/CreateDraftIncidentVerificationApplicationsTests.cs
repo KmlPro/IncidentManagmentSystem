@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplication.RequestParameters;
+using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplications.RequestParameters;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
 

@@ -29,7 +29,7 @@ namespace BuildingBlocks.Infrastructure
 
             if (underlyingProviderType is null || underlyingProviderType == typeof(Guid))
             {
-                var isTypedIdValue = typeof(TypedIdValueBase).IsAssignableFrom(underlyingModelType);
+                var isTypedIdValue = typeof(TypedIdValue).IsAssignableFrom(underlyingModelType);
                 if (isTypedIdValue)
                 {
                     var converterType = typeof(TypedIdValueConverter<>).MakeGenericType(underlyingModelType);

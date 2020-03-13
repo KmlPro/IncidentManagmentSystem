@@ -3,7 +3,7 @@ using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class DraftApplicationId : TypedIdValueBase
+    public class DraftApplicationId : TypedIdValue
     {
         private DraftApplicationId()
         {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildingBlocks.Infrastructure
 {
     public class TypedIdValueConverter<TTypedIdValue> : ValueConverter<TTypedIdValue, Guid>
-        where TTypedIdValue : TypedIdValueBase
+        where TTypedIdValue : TypedIdValue
     {
         public TypedIdValueConverter(ConverterMappingHints mappingHints = null)
             : base(id => id.Value, value => Create(value), mappingHints)

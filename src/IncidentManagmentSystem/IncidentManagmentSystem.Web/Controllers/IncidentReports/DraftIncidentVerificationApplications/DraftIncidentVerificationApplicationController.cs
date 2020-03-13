@@ -1,11 +1,13 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplication.RequestParameters;
+using BuildingBlocks.Application.Commands;
+using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplications.RequestParameters;
 using IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Infrastructure.Contract;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplication
+namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplications
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +27,10 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentV
         public async Task Post([FromForm]CreateDraftIncidentVerificationApplicationRequest request)
         {
             var command = this._mapper.Map<CreateDraftIncidentVerificationApplicationCommand>(request);
-            await this._incidentReportModule.ExecuteCommandAsync(command);
+            var result = await this._incidentReportModule.ExecuteCommandWithResultAsync<EntityCreatedCommandResult<DraftIncidentVerificationApplication>>(command);
+
+            //  return Ok();
+            //     return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
     }
 }

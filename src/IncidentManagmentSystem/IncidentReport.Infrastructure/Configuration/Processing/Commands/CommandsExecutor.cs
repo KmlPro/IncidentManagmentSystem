@@ -17,5 +17,15 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.Commands
                 await _mediator.Send(command);
             }
         }
+
+        internal async static Task<ICommandResult> ExecuteWithResult(ICommand<ICommandResult> command)
+        {
+            using (var scope = CompositionRoot.BeginLifetimeScope())
+            {
+                var _mediator = scope.Resolve<IMediator>();
+
+                return await _mediator.Send(command);
+            }
+        }
     }
 }
