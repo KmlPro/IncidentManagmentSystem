@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.Files.Exceptions;
 using IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications;
@@ -79,8 +80,8 @@ namespace IncidentReport.Application.UnitTests.IncidentVerificationApplications.
 
         private CreateDraftApplicationCommand CreateCommandWithRequiredFields(List<string> fileNames = null)
         {
-            var title = Faker.StringFaker.AlphaNumeric(10);
-            var description = Faker.StringFaker.AlphaNumeric(99);
+            var title = FakeData.AlphaNumeric(10);
+            var description = FakeData.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
             var attachments = fileNames?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();

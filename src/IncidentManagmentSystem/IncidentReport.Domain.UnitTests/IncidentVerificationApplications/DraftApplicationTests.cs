@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
+using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
@@ -20,7 +21,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_AllFieldsAreFilled_CreatedSuccessfully()
         {
-            var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(10), Faker.StringFaker.Alpha(20));
+            var contentOfApplication = new ContentOfApplication(FakeData.Alpha(10), FakeData.Alpha(20));
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var applicantId = new EmployeeId(Guid.NewGuid());
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
@@ -38,7 +39,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_ThenAddAttachments_UpdatedSuccessfully()
         {
-            var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(10), Faker.StringFaker.Alpha(20));
+            var contentOfApplication = new ContentOfApplication(FakeData.Alpha(10), FakeData.Alpha(20));
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var applicantId = new EmployeeId(Guid.NewGuid());
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
@@ -61,7 +62,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_ThenAddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()
         {
-            var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(10), Faker.StringFaker.Alpha(20));
+            var contentOfApplication = new ContentOfApplication(FakeData.Alpha(10), FakeData.Alpha(20));
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var applicantId = new EmployeeId(Guid.NewGuid());
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
@@ -100,7 +101,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
             {
-                var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(1), Faker.StringFaker.Alpha(20));
+                var contentOfApplication = new ContentOfApplication(FakeData.Alpha(1), FakeData.Alpha(20));
             });
         }
 
@@ -110,7 +111,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
             {
-                var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(101), Faker.StringFaker.Alpha(20));
+                var contentOfApplication = new ContentOfApplication(FakeData.Alpha(101), FakeData.Alpha(20));
             });
         }
 
@@ -121,7 +122,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
-                var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(12), Faker.StringFaker.Alpha(1));
+                var contentOfApplication = new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(1));
             });
         }
 
@@ -131,7 +132,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
-                var contentOfApplication = new ContentOfApplication(Faker.StringFaker.Alpha(12), Faker.StringFaker.Alpha(1001));
+                var contentOfApplication = new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(1001));
             });
         }
 

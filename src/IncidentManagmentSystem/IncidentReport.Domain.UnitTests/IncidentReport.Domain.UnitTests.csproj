@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Faker" Version="1.2.0" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
@@ -15,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks.Domain.UnitTests\BuildingBlocks.Domain.UnitTests.csproj" />
+    <ProjectReference Include="..\FakeDataGenerator\FakeDataGenerator.csproj" />
     <ProjectReference Include="..\IncidentReport.Domain\IncidentReport.Domain.csproj" />
   </ItemGroup>
 

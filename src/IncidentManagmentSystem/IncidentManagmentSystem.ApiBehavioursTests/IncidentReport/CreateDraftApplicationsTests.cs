@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Domain.UnitTests;
 using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftApplications.RequestParameters;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
@@ -36,8 +37,8 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 
         private MultipartFormDataContent CreateMultipartFormDataContent()
         {
-            var title = Faker.StringFaker.AlphaNumeric(10);
-            var description = Faker.StringFaker.AlphaNumeric(99);
+            var title = FakeData.AlphaNumeric(10);
+            var description = FakeData.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
 
