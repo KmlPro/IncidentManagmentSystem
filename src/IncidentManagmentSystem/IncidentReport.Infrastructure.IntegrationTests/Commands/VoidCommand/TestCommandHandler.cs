@@ -3,10 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application;
 using BuildingBlocks.Application.Commands;
-using IncidentReport.Infrastructure.IntegrationTests.Common.Commands;
 using MediatR;
 
-namespace IncidentReport.Infrastructure.IntegrationTests.Commands
+namespace IncidentReport.Infrastructure.IntegrationTests.Commands.VoidCommand
 {
     internal class TestCommandHandler : ICommandHandler<TestCommand>
     {

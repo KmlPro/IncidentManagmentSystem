@@ -1,6 +1,6 @@
 using BuildingBlocks.Application.Commands;
 
-namespace IncidentReport.Infrastructure.IntegrationTests.Common.Commands
+namespace IncidentReport.Infrastructure.IntegrationTests.Commands.VoidCommand
 {
     internal class TestCommand : CommandBase
     {

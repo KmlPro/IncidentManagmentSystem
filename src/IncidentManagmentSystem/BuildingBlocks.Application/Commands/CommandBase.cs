@@ -12,7 +12,7 @@ namespace BuildingBlocks.Application.Commands
         }
     }
 
-    public abstract class CommandBase<TResult> : ICommand<TResult>
+    public abstract class CommandBase<TResult> : ICommand<TResult> where TResult : ICommandResult
     {
         public Guid Id { get; }
 

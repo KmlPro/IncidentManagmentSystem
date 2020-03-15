@@ -2,7 +2,8 @@ using System.Threading.Tasks;
 using Autofac;
 using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Contract;
-using IncidentReport.Infrastructure.IntegrationTests.Common.Commands;
+using IncidentReport.Infrastructure.IntegrationTests.Commands.VoidCommand;
+using IncidentReport.Infrastructure.IntegrationTests.Commands.WithResult;
 using IncidentReport.Infrastructure.IntegrationTests.Common.Mocks;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
@@ -43,6 +44,18 @@ namespace IncidentReport.Infrastructure.IntegrationTests
             var result = incidentReportModule.ExecuteCommandAsync(command);
 
             Assert.AreNotEqual(TaskStatus.Faulted, result.Status);
+        }
+
+
+        [Test]
+        public async Task SendTestCommandWithResult_TaskResultDiffrentThanFaulted_CommandSentSucessfully()
+        {
+            var incidentReportModule = this._container.Resolve<IIncidentReportModule>();
+            var command = new TestCommandWithResult("Sample data");
+
+            var result = await incidentReportModule.ExecuteCommandWithResultAsync(command);
+
+            Assert.NotNull(result);
         }
     }
 }

@@ -6,6 +6,7 @@ namespace IncidentReport.Infrastructure.Contract
     public interface IIncidentReportModule
     {
         Task ExecuteCommandAsync(ICommand command);
-        Task<TCommandResult> ExecuteCommandWithResultAsync<TCommandResult>(ICommand<TCommandResult> command) where TCommandResult : ICommandResult;
+
+        Task<TResponse> ExecuteCommandWithResultAsync<TResponse>(ICommand<TResponse> command) where TResponse : ICommandResult;
     }
 }

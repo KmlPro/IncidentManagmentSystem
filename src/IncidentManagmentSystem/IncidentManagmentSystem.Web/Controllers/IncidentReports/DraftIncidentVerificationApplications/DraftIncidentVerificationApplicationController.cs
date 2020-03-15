@@ -1,9 +1,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using BuildingBlocks.Application.Commands;
 using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplications.RequestParameters;
 using IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Infrastructure.Contract;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +25,7 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentV
         public async Task Post([FromForm]CreateDraftIncidentVerificationApplicationRequest request)
         {
             var command = this._mapper.Map<CreateDraftIncidentVerificationApplicationCommand>(request);
-            var result = await this._incidentReportModule.ExecuteCommandWithResultAsync<EntityCreatedCommandResult<DraftIncidentVerificationApplication>>(command);
+            var result = await this._incidentReportModule.ExecuteCommandWithResultAsync(command);
 
             //  return Ok();
             //     return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);

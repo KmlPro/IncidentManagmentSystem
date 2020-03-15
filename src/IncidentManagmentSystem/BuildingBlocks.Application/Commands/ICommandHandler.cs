@@ -6,8 +6,9 @@ namespace BuildingBlocks.Application.Commands
     {
     }
 
-    public interface ICommandHandler<in TCommand, TResult> : IRequestHandler<TCommand, TResult> where TCommand : CommandBase<TResult>
-                                                                                                where TResult : ICommandResult
+    public interface ICommandHandlerWithResult<in TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
+                                                                             where TCommand : ICommand<TResponse>
+                                                                             where TResponse : ICommandResult
     {
     }
 }

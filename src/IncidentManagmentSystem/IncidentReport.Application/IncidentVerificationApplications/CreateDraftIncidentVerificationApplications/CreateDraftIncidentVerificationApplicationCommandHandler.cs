@@ -12,7 +12,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateDraftIncidentVerificationApplicationCommandHandler : ICommandHandler<CreateDraftIncidentVerificationApplicationCommand, EntityCreatedCommandResult<DraftIncidentVerificationApplication>>
+    public class CreateDraftIncidentVerificationApplicationCommandHandler : ICommandHandlerWithResult<CreateDraftIncidentVerificationApplicationCommand, EntityCreatedCommandResult<DraftIncidentVerificationApplication>>
     {
 
         private readonly IIncidentReportDbContext _incidentReportContext;

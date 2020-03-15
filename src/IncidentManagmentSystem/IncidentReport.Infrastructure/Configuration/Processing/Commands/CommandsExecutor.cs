@@ -18,7 +18,7 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.Commands
             }
         }
 
-        internal async static Task<ICommandResult> ExecuteWithResult(ICommand<ICommandResult> command)
+        internal async static Task<TCommandResult> ExecuteWithResult<TCommandResult>(ICommand<TCommandResult> command) where TCommandResult : ICommandResult
         {
             using (var scope = CompositionRoot.BeginLifetimeScope())
             {
