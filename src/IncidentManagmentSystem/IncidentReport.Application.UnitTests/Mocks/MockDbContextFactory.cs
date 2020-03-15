@@ -18,11 +18,11 @@ namespace IncidentReport.Application.UnitTests.Mocks
     {
         public IIncidentReportDbContext IncidentReportDbContext { get; set; }
 
-        private readonly List<DraftIncidentVerificationApplication> _draftIncidentVerificationApplication;
+        private readonly List<DraftApplication> _draftIncidentVerificationApplication;
 
         public MockDbContextFactory()
         {
-            this._draftIncidentVerificationApplication = new List<DraftIncidentVerificationApplication>();
+            this._draftIncidentVerificationApplication = new List<DraftApplication>();
             this.IncidentReportDbContext = this.CreateDbContext();
         }
 

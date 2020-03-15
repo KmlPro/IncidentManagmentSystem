@@ -4,7 +4,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
-    public class DraftIncidentVerificationApplicationUpdatedDomainEvent : DomainEvent
+    public class DraftApplicationUpdatedDomainEvent : DomainEvent
     {
         public DraftApplicationId Id { get; set; }
         public ContentOfApplication ContentOfApplication { get; }
@@ -12,7 +12,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public SuspiciousEmployees SuspiciousEmployees { get; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
 
-        public DraftIncidentVerificationApplicationUpdatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, SuspiciousEmployees suspiciousEmployees, IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments)
+        public DraftApplicationUpdatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, SuspiciousEmployees suspiciousEmployees, IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments)
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;

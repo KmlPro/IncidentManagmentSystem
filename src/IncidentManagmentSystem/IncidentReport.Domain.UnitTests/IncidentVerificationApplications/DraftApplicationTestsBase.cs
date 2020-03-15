@@ -5,7 +5,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 {
-    public class DraftIncidentVeryficationApplicationTestsBase : TestBase
+    public class DraftApplicationTestsBase : TestBase
     {
         public IEnumerable<IncidentVerificationApplicationAttachment> CreateAttachments(int numberOfAttachments)
         {

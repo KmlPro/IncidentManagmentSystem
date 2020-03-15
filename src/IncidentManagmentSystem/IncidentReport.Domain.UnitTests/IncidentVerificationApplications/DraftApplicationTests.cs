@@ -15,7 +15,7 @@ using NUnit.Framework;
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 {
     [TestFixture]
-    public class DraftIncidentVeryficationApplicationTests : DraftIncidentVeryficationApplicationTestsBase
+    public class DraftApplicationTests : DraftApplicationTestsBase
     {
         [Test]
         public void CreateApplicationDraft_AllFieldsAreFilled_CreatedSuccessfully()
@@ -25,9 +25,9 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicantId = new EmployeeId(Guid.NewGuid());
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
 
-            var applicationDraft = new DraftIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
+            var applicationDraft = new DraftApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
 
-            var draftCreated = AssertPublishedDomainEvent<DraftIncidentVerificationApplicationCreatedDomainEvent>(applicationDraft);
+            var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreatedDomainEvent>(applicationDraft);
             Assert.AreEqual(draftCreated.Id, applicationDraft.Id);
             Assert.AreEqual(draftCreated.IncidentType, applicationDraft.IncidentType);
             Assert.AreEqual(draftCreated.ApplicantId, applicationDraft.ApplicantId);
@@ -43,10 +43,10 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicantId = new EmployeeId(Guid.NewGuid());
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
 
-            var applicationDraft = new DraftIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
+            var applicationDraft = new DraftApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
 
             applicationDraft.AddAttachments(this.CreateAttachments(2));
-            var applicationUpdated = AssertPublishedDomainEvent<DraftIncidentVerificationApplicationUpdatedDomainEvent>(applicationDraft);
+            var applicationUpdated = AssertPublishedDomainEvent<DraftApplicationUpdatedDomainEvent>(applicationDraft);
 
             Assert.AreEqual(2, applicationDraft.IncidentVerificationApplicationAttachments.Attachments.Count());
             Assert.AreEqual(0, applicationDraft.IncidentVerificationApplicationAttachments.DeletedAttachments.Count());
@@ -66,14 +66,14 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicantId = new EmployeeId(Guid.NewGuid());
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }.AsEnumerable());
 
-            var applicationDraft = new DraftIncidentVerificationApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
+            var applicationDraft = new DraftApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees);
 
             var applicationDraftAttachments = this.CreateAttachments(2);
 
             applicationDraft.AddAttachments(applicationDraftAttachments);
             applicationDraft.DeleteAttachments(new List<StorageId> { applicationDraftAttachments.First().StorageId }.AsEnumerable());
 
-            var applicationUpdated = AssertPublishedDomainEvents<DraftIncidentVerificationApplicationUpdatedDomainEvent>(applicationDraft).OrderByDescending(x => x.OccurredOn).First();
+            var applicationUpdated = AssertPublishedDomainEvents<DraftApplicationUpdatedDomainEvent>(applicationDraft).OrderByDescending(x => x.OccurredOn).First();
 
             Assert.AreEqual(1, applicationDraft.IncidentVerificationApplicationAttachments.Attachments.Count());
             Assert.AreEqual(1, applicationDraft.IncidentVerificationApplicationAttachments.DeletedAttachments.Count());
@@ -90,7 +90,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         {
             AssertBrokenRule<FieldShouldBeFilledRule>(() =>
             {
-                var applicationDraft = new DraftIncidentVerificationApplication(null, null, null, null);
+                var applicationDraft = new DraftApplication(null, null, null, null);
             });
         }
 
@@ -139,9 +139,9 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         public void CreateApplicationDraft_OnlyApplicantIdFilled_CreatedSuccessfully()
         {
             var applicantId = new EmployeeId(Guid.NewGuid());
-            var applicationDraft = new DraftIncidentVerificationApplication(null, null, applicantId, null);
+            var applicationDraft = new DraftApplication(null, null, applicantId, null);
 
-            var draftCreated = AssertPublishedDomainEvent<DraftIncidentVerificationApplicationCreatedDomainEvent>(applicationDraft);
+            var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreatedDomainEvent>(applicationDraft);
 
             Assert.AreEqual(draftCreated.Id, applicationDraft.Id);
         }
@@ -154,7 +154,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
             {
-                var applicationDraft = new DraftIncidentVerificationApplication(null, null, applicantId, suspiciousEmployees);
+                var applicationDraft = new DraftApplication(null, null, applicantId, suspiciousEmployees);
             });
         }
 
@@ -162,7 +162,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         public void UpdateApplicationDraft_ApplicantIsSuspiciousEmployee_NotCreated()
         {
             var applicantId = new EmployeeId(Guid.NewGuid());
-            var applicationDraft = new DraftIncidentVerificationApplication(null, null, applicantId, null);
+            var applicationDraft = new DraftApplication(null, null, applicantId, null);
 
             var suspiciousEmployees = new SuspiciousEmployees(new List<EmployeeId> { applicantId }.AsEnumerable());
 

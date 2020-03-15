@@ -7,7 +7,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateDraftIncidentVerificationApplicationCommand : CommandBase<EntityCreatedCommandResult<DraftIncidentVerificationApplication>>
+    public class CreateDraftApplicationCommand : CommandBase<EntityCreatedCommandResult<DraftApplication>>
     {
         public string Title { get; }
         public string Description { get; }
@@ -15,7 +15,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraf
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<FileData> Attachments { get; }
 
-        public CreateDraftIncidentVerificationApplicationCommand(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
+        public CreateDraftApplicationCommand(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
         {
             this.Title = title;
             this.Description = description;

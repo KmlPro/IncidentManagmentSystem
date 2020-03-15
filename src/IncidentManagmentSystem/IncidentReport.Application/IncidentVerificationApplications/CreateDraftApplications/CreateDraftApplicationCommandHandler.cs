@@ -12,21 +12,21 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
 {
-    public class CreateDraftIncidentVerificationApplicationCommandHandler : ICommandHandlerWithResult<CreateDraftIncidentVerificationApplicationCommand, EntityCreatedCommandResult<DraftIncidentVerificationApplication>>
+    public class CreateDraftApplicationCommandHandler : ICommandHandlerWithResult<CreateDraftApplicationCommand, EntityCreatedCommandResult<DraftApplication>>
     {
 
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly ICurrentUserContext _applicantContext;
 
-        public CreateDraftIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
+        public CreateDraftApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, ICurrentUserContext userContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._applicantContext = userContext;
             this._fileStorageService = fileStorageService;
         }
 
-        public async Task<EntityCreatedCommandResult<DraftIncidentVerificationApplication>> Handle(CreateDraftIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
+        public async Task<EntityCreatedCommandResult<DraftApplication>> Handle(CreateDraftApplicationCommand request, CancellationToken cancellationToken)
         {
             var draftIncidentVerificationApplication = this.CreateDraft(request);
 
@@ -38,12 +38,12 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraf
 
             await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(draftIncidentVerificationApplication);
 
-            return new EntityCreatedCommandResult<DraftIncidentVerificationApplication>(draftIncidentVerificationApplication.Id.Value, draftIncidentVerificationApplication);
+            return new EntityCreatedCommandResult<DraftApplication>(draftIncidentVerificationApplication.Id.Value, draftIncidentVerificationApplication);
         }
 
-        private DraftIncidentVerificationApplication CreateDraft(CreateDraftIncidentVerificationApplicationCommand request)
+        private DraftApplication CreateDraft(CreateDraftApplicationCommand request)
         {
-            return new DraftIncidentVerificationApplication(
+            return new DraftApplication(
                 new ContentOfApplication(request.Title, request.Description),
                 request.IncidentType,
                 new EmployeeId(this._applicantContext.UserId),
@@ -51,17 +51,17 @@ namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraf
                 );
         }
 
-        private bool IfAddedAttachmentsExists(CreateDraftIncidentVerificationApplicationCommand request)
+        private bool IfAddedAttachmentsExists(CreateDraftApplicationCommand request)
         {
             return request.Attachments != null && request.Attachments.Any();
         }
 
-        private Task<List<UploadedFile>> UploadFilesToStorage(CreateDraftIncidentVerificationApplicationCommand request)
+        private Task<List<UploadedFile>> UploadFilesToStorage(CreateDraftApplicationCommand request)
         {
             return this._fileStorageService.UploadFiles(request.Attachments);
         }
 
-        private void AddUploadedFilesAsAttachments(DraftIncidentVerificationApplication incidentVerificationApplication, List<UploadedFile> files)
+        private void AddUploadedFilesAsAttachments(DraftApplication incidentVerificationApplication, List<UploadedFile> files)
         {
             var attachments = files.Select(x => new IncidentVerificationApplicationAttachment(new FileInfo(x.FileName), new StorageId(x.StorageId)));
             incidentVerificationApplication.AddAttachments(attachments);

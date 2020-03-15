@@ -13,17 +13,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.IncidentVerificationApplications.UpdateIncidentVerificationApplications
 {
-    internal class UpdateDraftIncidentVerificationApplicationCommandHandler : ICommandHandler<UpdateDraftIncidentVerificationApplicationCommand>
+    internal class UpdateDraftApplicationCommandHandler : ICommandHandler<UpdateDraftApplicationCommand>
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
-        public UpdateDraftIncidentVerificationApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
+        public UpdateDraftApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._fileStorageService = fileStorageService;
         }
 
-        public async Task<Unit> Handle(UpdateDraftIncidentVerificationApplicationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateDraftApplicationCommand request, CancellationToken cancellationToken)
         {
             var draftIncidentVerificationApplication = await this._incidentReportContext.DraftIncidentVerificationApplication.FirstAsync(x => x.Id == new DraftApplicationId(request.DraftIncidentVerificationApplicationId));
 
@@ -43,7 +43,7 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
             return Unit.Value;
         }
 
-        private void UpdateApplicationData(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateDraftIncidentVerificationApplicationCommand request)
+        private void UpdateApplicationData(DraftApplication draftIncidentVerificationApplication, UpdateDraftApplicationCommand request)
         {
             draftIncidentVerificationApplication.Update(
                 new ContentOfApplication(request.Title, request.Content),
@@ -52,28 +52,28 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
                 );
         }
 
-        private bool IfAddedAttachmentsExists(UpdateDraftIncidentVerificationApplicationCommand request)
+        private bool IfAddedAttachmentsExists(UpdateDraftApplicationCommand request)
         {
             return request.DeletedAttachments != null && request.AddedAttachments.Any();
         }
 
-        private void AddUploadedFilesAsAttachments(DraftIncidentVerificationApplication draftIncidentVerificationApplication, List<UploadedFile> files)
+        private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication, List<UploadedFile> files)
         {
             var attachments = files.Select(x => new IncidentVerificationApplicationAttachment(new FileInfo(x.FileName), new StorageId(x.StorageId)));
             draftIncidentVerificationApplication.AddAttachments(attachments);
         }
 
-        private Task<List<UploadedFile>> UploadFilesToStorage(UpdateDraftIncidentVerificationApplicationCommand request)
+        private Task<List<UploadedFile>> UploadFilesToStorage(UpdateDraftApplicationCommand request)
         {
             return this._fileStorageService.UploadFiles(request.AddedAttachments);
         }
 
-        private bool IfDeletedAttachmentExists(UpdateDraftIncidentVerificationApplicationCommand request)
+        private bool IfDeletedAttachmentExists(UpdateDraftApplicationCommand request)
         {
             return request.DeletedAttachments != null && request.DeletedAttachments.Any();
         }
 
-        private void DeleteAttachments(DraftIncidentVerificationApplication draftIncidentVerificationApplication, UpdateDraftIncidentVerificationApplicationCommand request)
+        private void DeleteAttachments(DraftApplication draftIncidentVerificationApplication, UpdateDraftApplicationCommand request)
         {
             draftIncidentVerificationApplication.DeleteAttachments(request.DeletedAttachments.Select(x => new StorageId(x)));
         }

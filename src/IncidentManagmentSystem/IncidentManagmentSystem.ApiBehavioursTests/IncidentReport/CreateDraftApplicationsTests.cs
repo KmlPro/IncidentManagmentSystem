@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplications.RequestParameters;
+using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftApplications.RequestParameters;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
-    public class CreateDraftIncidentVerificationApplicationsTests : BaseTest
+    public class CreateDraftApplicationsTests : BaseTest
     {
-        private const string _path = "api/DraftIncidentVerificationApplication";
+        private const string _path = "api/DraftApplication";
 
         [Test]
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_ReturnOk()
@@ -43,10 +43,10 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 
             var formData = new MultipartFormDataContent
             {
-                { new StringContent(title), nameof(CreateDraftIncidentVerificationApplicationRequest.Title) },
-                { new StringContent(description), nameof(CreateDraftIncidentVerificationApplicationRequest.Description) },
-                { new StringContent(incidentType.ToString()), nameof(CreateDraftIncidentVerificationApplicationRequest.IncidentType) },
-                { new StringContent(string.Join(", ", suspiciousEmployees)), nameof(CreateDraftIncidentVerificationApplicationRequest.SuspiciousEmployees) }
+                { new StringContent(title), nameof(CreateDraftApplicationRequest.Title) },
+                { new StringContent(description), nameof(CreateDraftApplicationRequest.Description) },
+                { new StringContent(incidentType.ToString()), nameof(CreateDraftApplicationRequest.IncidentType) },
+                { new StringContent(string.Join(", ", suspiciousEmployees)), nameof(CreateDraftApplicationRequest.SuspiciousEmployees) }
             };
 
             return formData;

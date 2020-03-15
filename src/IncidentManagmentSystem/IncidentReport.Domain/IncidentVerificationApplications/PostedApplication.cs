@@ -12,7 +12,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
-    public class PostedIncidentVerificationApplication : Entity, IAggregateRoot
+    public class PostedApplication : Entity, IAggregateRoot
     {
         public PostedApplicationId Id { get; private set; }
         public ApplicationNumber ApplicationNumber { get; }
@@ -23,12 +23,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public SuspiciousEmployees SuspiciousEmployees { get; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
 
-        private PostedIncidentVerificationApplication()
+        private PostedApplication()
         {
 
         }
 
-        public PostedIncidentVerificationApplication(
+        public PostedApplication(
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
@@ -49,7 +49,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.PostDate = SystemClock.Now;
             this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
 
-            this.AddDomainEvent(new PostedIncidentVerificationApplicationDomainEvent(this.Id, this.ApplicationNumber, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments, this.PostDate));
+            this.AddDomainEvent(new PostedApplicationDomainEvent(this.Id, this.ApplicationNumber, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments, this.PostDate));
         }
     }
 }

@@ -9,7 +9,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
-    public class DraftIncidentVerificationApplication : Entity, IAggregateRoot
+    public class DraftApplication : Entity, IAggregateRoot
     {
         public DraftApplicationId Id { get; private set; }
         public ContentOfApplication ContentOfApplication { get; private set; }
@@ -18,11 +18,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public SuspiciousEmployees SuspiciousEmployees { get; private set; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; private set; }
 
-        private DraftIncidentVerificationApplication()
+        private DraftApplication()
         {
         }
 
-        public DraftIncidentVerificationApplication(
+        public DraftApplication(
             ContentOfApplication contentOfApplication,
             IncidentType? incidentType,
             EmployeeId applicantId,
@@ -35,7 +35,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.SuspiciousEmployees = suspiciousEmployees;
             this.IncidentVerificationApplicationAttachments = new IncidentVerificationApplicationAttachments();
 
-            this.AddDomainEvent(new DraftIncidentVerificationApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
+            this.AddDomainEvent(new DraftApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
 
         public void Update(
@@ -47,19 +47,19 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees;
 
-            this.AddDomainEvent(new DraftIncidentVerificationApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
         }
 
         public void AddAttachments(IEnumerable<IncidentVerificationApplicationAttachment> attachments)
         {
             this.IncidentVerificationApplicationAttachments.AddRange(attachments);
-            this.AddDomainEvent(new DraftIncidentVerificationApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
         }
 
         public void DeleteAttachments(IEnumerable<StorageId> storageIds)
         {
             this.IncidentVerificationApplicationAttachments.DeleteRange(storageIds);
-            this.AddDomainEvent(new DraftIncidentVerificationApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
         }
     }
 }

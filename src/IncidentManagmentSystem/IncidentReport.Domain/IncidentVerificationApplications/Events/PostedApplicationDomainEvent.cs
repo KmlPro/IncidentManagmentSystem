@@ -6,7 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
-    public class PostedIncidentVerificationApplicationDomainEvent : DomainEvent
+    public class PostedApplicationDomainEvent : DomainEvent
     {
         public PostedApplicationId Id { get; }
         public ApplicationNumber ApplicationNumber { get; }
@@ -17,7 +17,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public SuspiciousEmployees SuspiciousEmployees { get; }
         public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
 
-        public PostedIncidentVerificationApplicationDomainEvent(
+        public PostedApplicationDomainEvent(
             PostedApplicationId id,
             ApplicationNumber applicationNumber,
             ContentOfApplication contentOfApplication,

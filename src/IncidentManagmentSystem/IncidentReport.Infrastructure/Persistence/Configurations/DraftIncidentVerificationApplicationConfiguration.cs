@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations
 {
-    internal class DraftIncidentVerificationApplicationConfiguration : IEntityTypeConfiguration<DraftIncidentVerificationApplication>
+    internal class DraftIncidentVerificationApplicationConfiguration : IEntityTypeConfiguration<DraftApplication>
     {
-        public void Configure(EntityTypeBuilder<DraftIncidentVerificationApplication> builder)
+        public void Configure(EntityTypeBuilder<DraftApplication> builder)
         {
             //kbytner 30.01.2020 - handle users (how ? 
             builder.ToTable("DraftIncidentVerificationApplication", SchemaName.IncidentReport);
@@ -22,11 +22,11 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
-            builder.Property(nameof(DraftIncidentVerificationApplication.SuspiciousEmployees)).HasConversion(this.SuspiciousEmployeesConverter());
+            builder.Property(nameof(DraftApplication.SuspiciousEmployees)).HasConversion(this.SuspiciousEmployeesConverter());
 
-            builder.Property(nameof(DraftIncidentVerificationApplication.IncidentVerificationApplicationAttachments)).HasConversion(this.IncidentVerificationApplicationAttachmentsConverter());
+            builder.Property(nameof(DraftApplication.IncidentVerificationApplicationAttachments)).HasConversion(this.IncidentVerificationApplicationAttachmentsConverter());
 
-            builder.Property(nameof(DraftIncidentVerificationApplication.IncidentType)).HasConversion(this.IncidentTypeConverter());
+            builder.Property(nameof(DraftApplication.IncidentType)).HasConversion(this.IncidentTypeConverter());
 
             builder.OwnsOne(m => m.ContentOfApplication);
 

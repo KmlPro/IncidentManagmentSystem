@@ -8,9 +8,9 @@ using IncidentReport.Application.IncidentVerificationApplications.CreateDraftInc
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentVerificationApplications.RequestParameters
+namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftApplications.RequestParameters
 {
-    public class CreateDraftIncidentVerificationApplicationRequest : IMapTo<CreateDraftIncidentVerificationApplicationCommand>
+    public class CreateDraftApplicationRequest : IMapTo<CreateDraftApplicationCommand>
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -21,7 +21,7 @@ namespace IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftIncidentV
         public void Mapping(Profile profile)
         {
             profile.CreateMap<List<IFormFile>, List<FileData>>().ConvertUsing(new IFormFileTypeConverter());
-            profile.CreateMap<CreateDraftIncidentVerificationApplicationRequest, CreateDraftIncidentVerificationApplicationCommand>();
+            profile.CreateMap<CreateDraftApplicationRequest, CreateDraftApplicationCommand>();
         }
     }
 }
