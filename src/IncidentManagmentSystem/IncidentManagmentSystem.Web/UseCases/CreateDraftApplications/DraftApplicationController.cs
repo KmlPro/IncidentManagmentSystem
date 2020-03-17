@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Contract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
@@ -24,6 +25,9 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DraftApplicationResource))]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromForm]CreateDraftApplicationRequest request)
         {
             var useCase = this._mapper.Map<CreateDraftApplicationInput>(request);
