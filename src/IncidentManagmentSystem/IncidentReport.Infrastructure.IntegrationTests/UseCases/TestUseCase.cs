@@ -2,21 +2,20 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application;
-using BuildingBlocks.Application.Commands;
-using IncidentReport.Infrastructure.IntegrationTests.Commands.WithResult;
+using MediatR;
 
-namespace IncidentReport.Infrastructure.IntegrationTests.Commands.VoidCommand
+namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
 {
-    internal class TestCommandWithResultHandler : ICommandHandlerWithResult<TestCommandWithResult, TestCommandResult>
+    internal class TestUseCase : IUseCase
     {
         private readonly ICurrentUserContext _currentUserContext;
-        public TestCommandWithResultHandler(ICurrentUserContext currentUserContext)
+        public TestUseCase(ICurrentUserContext currentUserContext)
         {
             this._currentUserContext = currentUserContext;
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task<TestCommandResult> Handle(TestCommandWithResult request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(TestUseCaseInput request, CancellationToken cancellationToken)
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var userId = this._currentUserContext.UserId;
@@ -26,7 +25,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests.Commands.VoidCommand
                 throw new ArgumentNullException(nameof(userId));
             }
 
-            return new TestCommandResult();
+            return Unit.Value;
         }
     }
 }

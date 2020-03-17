@@ -2,9 +2,8 @@ using System.Threading.Tasks;
 using Autofac;
 using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Contract;
-using IncidentReport.Infrastructure.IntegrationTests.Commands.VoidCommand;
-using IncidentReport.Infrastructure.IntegrationTests.Commands.WithResult;
 using IncidentReport.Infrastructure.IntegrationTests.Common.Mocks;
+using IncidentReport.Infrastructure.IntegrationTests.UseCases;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
@@ -36,26 +35,14 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         }
 
         [Test]
-        public void SendTestCommand_TaskResultDiffrentThanFaulted_CommandSentSucessfully()
+        public void ExecuteUseCase_TaskResultDiffrentThanFaulted_CommandSentSucessfully()
         {
             var incidentReportModule = this._container.Resolve<IIncidentReportModule>();
-            var command = new TestCommand("Sample data");
+            var useCase = new TestUseCaseInput("Sample data");
 
-            var result = incidentReportModule.ExecuteCommandAsync(command);
+            var result = incidentReportModule.ExecuteUseCase(useCase);
 
             Assert.AreNotEqual(TaskStatus.Faulted, result.Status);
-        }
-
-
-        [Test]
-        public async Task SendTestCommandWithResult_TaskResultDiffrentThanFaulted_CommandSentSucessfully()
-        {
-            var incidentReportModule = this._container.Resolve<IIncidentReportModule>();
-            var command = new TestCommandWithResult("Sample data");
-
-            var result = await incidentReportModule.ExecuteCommandWithResultAsync(command);
-
-            Assert.NotNull(result);
         }
     }
 }
