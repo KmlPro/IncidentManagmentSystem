@@ -12,22 +12,24 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
     {
         private readonly IIncidentReportModule _incidentReportModule;
         private readonly IMapper _mapper;
+        private readonly CreateDraftApplicationPresenter _presenter;
 
-        public DraftApplicationController(IIncidentReportModule incidentReportModule, IMapper mapper)
+        public DraftApplicationController(IIncidentReportModule incidentReportModule,
+            IMapper mapper,
+            CreateDraftApplicationPresenter createDraftApplicationPresenter)
         {
             this._incidentReportModule = incidentReportModule;
             this._mapper = mapper;
+            this._presenter = createDraftApplicationPresenter;
         }
 
-        //to do return URI
         [HttpPost]
-        public async Task Post([FromForm]CreateDraftApplicationRequest request)
+        public async Task<IActionResult> Post([FromForm]CreateDraftApplicationRequest request)
         {
             var useCase = this._mapper.Map<CreateDraftApplicationInput>(request);
             await this._incidentReportModule.ExecuteUseCase(useCase);
 
-            //  return Ok();
-            //     return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
+            return this._presenter.ViewModel;
         }
     }
 }
