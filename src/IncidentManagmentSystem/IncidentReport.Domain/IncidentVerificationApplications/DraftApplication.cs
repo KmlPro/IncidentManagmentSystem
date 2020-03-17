@@ -5,6 +5,7 @@ using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
+using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
@@ -20,6 +21,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 
         private DraftApplication()
         {
+
         }
 
         public DraftApplication(
@@ -28,6 +30,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees)
         {
+            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
+
             this.Id = new DraftApplicationId(Guid.NewGuid());
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;

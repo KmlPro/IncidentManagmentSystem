@@ -7,5 +7,10 @@ namespace BuildingBlocks.Application.Abstract
         public ApplicationLayerException(string message) : base(message)
         {
         }
+
+        public override string ToString()
+        {
+            return $"{this.Message}";
+        }
     }
 }

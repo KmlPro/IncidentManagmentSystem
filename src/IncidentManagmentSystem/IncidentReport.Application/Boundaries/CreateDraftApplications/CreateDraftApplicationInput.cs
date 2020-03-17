@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Generic;
-using BuildingBlocks.Application.Commands;
+using BuildingBlocks.Application.Boundaries;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
-namespace IncidentReport.Application.IncidentVerificationApplications.CreateDraftIncidentVerificationApplications
+namespace IncidentReport.Application.Boundaries.CreateDraftApplications
 {
-    public class CreateDraftApplicationCommand : CommandBase<EntityCreatedCommandResult<DraftApplication>>
+    public class CreateDraftApplicationInput : IUseCaseInput
     {
         public string Title { get; }
         public string Description { get; }
-        public IncidentType? IncidentType { get; }
+        public IncidentType IncidentType { get; }
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<FileData> Attachments { get; }
 
-        public CreateDraftApplicationCommand(string title, string description, IncidentType? incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
+        public CreateDraftApplicationInput(string title, string description, IncidentType incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
         {
             this.Title = title;
             this.Description = description;
