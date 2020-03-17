@@ -1,4 +1,4 @@
-using BuildingBlocks.Application.Boundaries;
+using BuildingBlocks.Application.UseCases;
 
 namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
 {

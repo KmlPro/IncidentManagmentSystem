@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Application.Boundaries
+namespace BuildingBlocks.Application.OutputPort
 {
     /// <typeparam name="TUseCaseOutput">Any IUseCaseOutput.</typeparam>
     public interface IOutputPortStandard<in TUseCaseOutput>

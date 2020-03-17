@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Application.Boundaries
+namespace BuildingBlocks.Application.OutputPort
 {
     public interface IOutputPortBusinessError
     {

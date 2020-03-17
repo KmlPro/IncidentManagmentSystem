@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BuildingBlocks.Application.Commands;
+using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
@@ -11,48 +11,48 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace IncidentReport.Application.IncidentVerificationApplications.UpdateIncidentVerificationApplications
+namespace IncidentReport.Application.UseCases
 {
-    internal class UpdateDraftApplicationCommandHandler : ICommandHandler<UpdateDraftApplicationCommand>
+    internal class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
-        public UpdateDraftApplicationCommandHandler(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
+        public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
         {
             this._incidentReportContext = incidentReportContext;
             this._fileStorageService = fileStorageService;
         }
 
-        public async Task<Unit> Handle(UpdateDraftApplicationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateDraftApplicationInput input, CancellationToken cancellationToken)
         {
-            var draftIncidentVerificationApplication = await this._incidentReportContext.DraftIncidentVerificationApplication.FirstAsync(x => x.Id == new DraftApplicationId(request.DraftIncidentVerificationApplicationId));
+            var draftIncidentVerificationApplication = await this._incidentReportContext.DraftIncidentVerificationApplication.FirstAsync(x => x.Id == new DraftApplicationId(input.DraftApplicationId));
 
-            this.UpdateApplicationData(draftIncidentVerificationApplication, request);
+            this.UpdateApplicationData(draftIncidentVerificationApplication, input);
 
-            if (this.IfAddedAttachmentsExists(request))
+            if (this.IfAddedAttachmentsExists(input))
             {
-                var files = await this.UploadFilesToStorage(request);
+                var files = await this.UploadFilesToStorage(input);
                 this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
             }
 
-            if (this.IfDeletedAttachmentExists(request))
+            if (this.IfDeletedAttachmentExists(input))
             {
-                this.DeleteAttachments(draftIncidentVerificationApplication, request);
+                this.DeleteAttachments(draftIncidentVerificationApplication, input);
             }
 
             return Unit.Value;
         }
 
-        private void UpdateApplicationData(DraftApplication draftIncidentVerificationApplication, UpdateDraftApplicationCommand request)
+        private void UpdateApplicationData(DraftApplication draftApplication, UpdateDraftApplicationInput request)
         {
-            draftIncidentVerificationApplication.Update(
-                new ContentOfApplication(request.Title, request.Content),
+            draftApplication.Update(
+                new ContentOfApplication(request.Title, request.Description),
                 request.IncidentType,
                 new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
                 );
         }
 
-        private bool IfAddedAttachmentsExists(UpdateDraftApplicationCommand request)
+        private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)
         {
             return request.DeletedAttachments != null && request.AddedAttachments.Any();
         }
@@ -63,17 +63,17 @@ namespace IncidentReport.Application.IncidentVerificationApplications.UpdateInci
             draftIncidentVerificationApplication.AddAttachments(attachments);
         }
 
-        private Task<List<UploadedFile>> UploadFilesToStorage(UpdateDraftApplicationCommand request)
+        private Task<List<UploadedFile>> UploadFilesToStorage(UpdateDraftApplicationInput request)
         {
             return this._fileStorageService.UploadFiles(request.AddedAttachments);
         }
 
-        private bool IfDeletedAttachmentExists(UpdateDraftApplicationCommand request)
+        private bool IfDeletedAttachmentExists(UpdateDraftApplicationInput request)
         {
             return request.DeletedAttachments != null && request.DeletedAttachments.Any();
         }
 
-        private void DeleteAttachments(DraftApplication draftIncidentVerificationApplication, UpdateDraftApplicationCommand request)
+        private void DeleteAttachments(DraftApplication draftIncidentVerificationApplication, UpdateDraftApplicationInput request)
         {
             draftIncidentVerificationApplication.DeleteAttachments(request.DeletedAttachments.Select(x => new StorageId(x)));
         }

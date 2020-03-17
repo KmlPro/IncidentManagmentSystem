@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BuildingBlocks.Application.Boundaries;
+using BuildingBlocks.Application.UseCases;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 

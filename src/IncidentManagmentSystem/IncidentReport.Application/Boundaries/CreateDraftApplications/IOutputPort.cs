@@ -1,4 +1,4 @@
-using BuildingBlocks.Application.Boundaries;
+using BuildingBlocks.Application.OutputPort;
 
 namespace IncidentReport.Application.Boundaries.CreateDraftApplications
 {

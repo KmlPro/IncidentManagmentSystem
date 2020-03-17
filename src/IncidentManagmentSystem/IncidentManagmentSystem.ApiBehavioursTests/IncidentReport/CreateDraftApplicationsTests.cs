@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentManagmentSystem.Web.Controllers.IncidentReports.DraftApplications.RequestParameters;
+using IncidentManagmentSystem.Web.UseCases.CreateDraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
 

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Autofac;
-using BuildingBlocks.Application.Boundaries;
+using BuildingBlocks.Application.UseCases;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using MediatR;
 

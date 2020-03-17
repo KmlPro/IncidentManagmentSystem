@@ -15,8 +15,4 @@
     <ProjectReference Include="..\IncidentReport.Domain\IncidentReport.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Boundaries\UpdateDraftApplications\" />
-  </ItemGroup>
-
 </Project>
