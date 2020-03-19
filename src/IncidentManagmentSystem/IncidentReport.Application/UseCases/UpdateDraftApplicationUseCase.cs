@@ -8,24 +8,28 @@ using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.UseCases
 {
+    //kbytner 19.03.2020 - implementation not completed
     internal class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
-        public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext, IFileStorageService fileStorageService)
+        private readonly IOutputPort _outputPort;
+        public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
+            IFileStorageService fileStorageService,
+            IOutputPort outputPort)
         {
             this._incidentReportContext = incidentReportContext;
             this._fileStorageService = fileStorageService;
+            this._outputPort = outputPort;
         }
 
-        public async Task<Unit> Handle(UpdateDraftApplicationInput input, CancellationToken cancellationToken)
+        public async Task<IOutputPort> Handle(UpdateDraftApplicationInput input, CancellationToken cancellationToken)
         {
-            var draftIncidentVerificationApplication = await this._incidentReportContext.DraftIncidentVerificationApplication.FirstAsync(x => x.Id == new DraftApplicationId(input.DraftApplicationId));
+            var draftIncidentVerificationApplication = await this._incidentReportContext.DraftApplications.FirstAsync(x => x.Id == new DraftApplicationId(input.DraftApplicationId));
 
             this.UpdateApplicationData(draftIncidentVerificationApplication, input);
 
@@ -40,7 +44,7 @@ namespace IncidentReport.Application.UseCases
                 this.DeleteAttachments(draftIncidentVerificationApplication, input);
             }
 
-            return Unit.Value;
+            return this._outputPort;
         }
 
         private void UpdateApplicationData(DraftApplication draftApplication, UpdateDraftApplicationInput request)

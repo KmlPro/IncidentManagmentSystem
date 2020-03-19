@@ -2,12 +2,11 @@ using System.Reflection;
 using Autofac;
 using AutoMapper;
 using IncidentManagmentSystem.Web.Configuration.Middlewares;
+using IncidentManagmentSystem.Web.Configuration.Modules;
 using IncidentManagmentSystem.Web.Users;
-using IncidentReport.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -27,14 +26,10 @@ namespace IncidentManagmentSystem.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var incidentReportStartup = new IncidentReportStartup();
             //var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
             var currentUserContext = new CurrentUserContext(new HttpContextAccessor());
 
-            incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
-                currentUserContext);
-
-            incidentReportStartup.RegisterModuleContract(builder);
+            IncidentReportInitialize.Init(builder, currentUserContext);
         }
 
 

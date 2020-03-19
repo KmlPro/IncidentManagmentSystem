@@ -32,7 +32,7 @@ namespace IncidentReport.Application.UnitTests.Mocks
 
             var draftIncidentVerificationApplication = this.GetMockDbSet(this._draftIncidentVerificationApplication);
 
-            incidentReportDbContext.Setup(x => x.DraftIncidentVerificationApplication).Returns(draftIncidentVerificationApplication.Object);
+            incidentReportDbContext.Setup(x => x.DraftApplications).Returns(draftIncidentVerificationApplication.Object);
 
             return incidentReportDbContext.Object;
         }

@@ -7,9 +7,9 @@ namespace IncidentReport.Infrastructure
 {
     internal class IncidentReportModule : IIncidentReportModule
     {
-        public async Task ExecuteUseCase(IUseCaseInput useCase)
+        public async Task<TUseCaseOutput> ExecuteUseCase<TUseCaseOutput>(IUseCaseInput<TUseCaseOutput> useCase) where TUseCaseOutput : IUseCaseOutput
         {
-            await UseCaseExecutor.Execute(useCase);
+            return await UseCaseExecutor.Execute(useCase);
         }
     }
 }

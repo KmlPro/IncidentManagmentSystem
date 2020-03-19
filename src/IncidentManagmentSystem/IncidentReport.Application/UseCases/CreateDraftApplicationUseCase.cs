@@ -11,7 +11,6 @@ using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using MediatR;
 
 namespace IncidentReport.Application.UseCases
 {
@@ -32,7 +31,7 @@ namespace IncidentReport.Application.UseCases
             this._outputPort = outputPort;
         }
 
-        public async Task<Unit> Handle(CreateDraftApplicationInput input, CancellationToken cancellationToken)
+        public async Task<IOutputPort> Handle(CreateDraftApplicationInput input, CancellationToken cancellationToken)
         {
             try
             {
@@ -44,7 +43,7 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
                 }
 
-                await this._incidentReportContext.DraftIncidentVerificationApplication.AddAsync(draftIncidentVerificationApplication);
+                await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication);
 
                 this.BuildOutput(draftIncidentVerificationApplication);
             }
@@ -57,7 +56,7 @@ namespace IncidentReport.Application.UseCases
                 this._outputPort.WriteBusinessRuleError(ex.ToString());
             }
 
-            return Unit.Value;
+            return this._outputPort;
         }
 
         private DraftApplication CreateDraft(CreateDraftApplicationInput request)

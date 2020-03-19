@@ -5,6 +5,7 @@ namespace IncidentReport.Infrastructure.Contract
 {
     public interface IIncidentReportModule
     {
-        Task ExecuteUseCase(IUseCaseInput useCases);
+        Task<TIUseCaseOutput> ExecuteUseCase<TIUseCaseOutput>(IUseCaseInput<TIUseCaseOutput> useCases)
+            where TIUseCaseOutput : IUseCaseOutput;
     }
 }

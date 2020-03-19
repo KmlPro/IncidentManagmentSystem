@@ -15,10 +15,12 @@ namespace IncidentReport.Infrastructure.Configuration
     public class IncidentReportStartup
     {
         private readonly Assembly _assemblyWithMediatRComponentsImplementation;
+        private readonly ContainerBuilder _containerBuilder;
 
         public IncidentReportStartup()
         {
             this._assemblyWithMediatRComponentsImplementation = typeof(IncidentReportApplicationAssembly).GetTypeInfo().Assembly;
+            this._containerBuilder = new ContainerBuilder();
         }
 
         public IncidentReportStartup(Assembly assemblyWithCommandsImplementation)
@@ -27,6 +29,13 @@ namespace IncidentReport.Infrastructure.Configuration
         }
         public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
         {
+            this.Initialize(dbContextOptionsBuilderAction, currentUserContext, (ContainerBuilder container) => { });
+        }
+
+        public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext, Action<ContainerBuilder> externalInstancesConfiguration)
+        {
+            externalInstancesConfiguration(this._containerBuilder);
+
             this.ConfigureCompositionRoot(
                 dbContextOptionsBuilderAction,
                 currentUserContext);
@@ -41,15 +50,14 @@ namespace IncidentReport.Infrastructure.Configuration
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
         {
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule(new MediatRModule(this._assemblyWithMediatRComponentsImplementation));
-            containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
-            containerBuilder.RegisterModule(new ProcessingModule());
-            containerBuilder.RegisterModule(new FileStorageModule());
+            this._containerBuilder.RegisterModule(new MediatRModule(this._assemblyWithMediatRComponentsImplementation));
+            this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
+            this._containerBuilder.RegisterModule(new ProcessingModule());
+            this._containerBuilder.RegisterModule(new FileStorageModule());
 
-            containerBuilder.RegisterInstance(currentUserContext);
+            this._containerBuilder.RegisterInstance(currentUserContext);
 
-            var container = containerBuilder.Build();
+            var container = this._containerBuilder.Build();
 
             CompositionRoot.SetContainer(container);
         }

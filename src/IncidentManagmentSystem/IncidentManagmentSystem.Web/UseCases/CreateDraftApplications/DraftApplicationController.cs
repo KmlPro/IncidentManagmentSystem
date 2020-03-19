@@ -13,15 +13,12 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
     {
         private readonly IIncidentReportModule _incidentReportModule;
         private readonly IMapper _mapper;
-        private readonly CreateDraftApplicationPresenter _presenter;
 
         public DraftApplicationController(IIncidentReportModule incidentReportModule,
-            IMapper mapper,
-            CreateDraftApplicationPresenter createDraftApplicationPresenter)
+            IMapper mapper)
         {
             this._incidentReportModule = incidentReportModule;
             this._mapper = mapper;
-            this._presenter = createDraftApplicationPresenter;
         }
 
         [HttpPost]
@@ -31,9 +28,10 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
         public async Task<IActionResult> Post([FromForm]CreateDraftApplicationRequest request)
         {
             var useCase = this._mapper.Map<CreateDraftApplicationInput>(request);
-            await this._incidentReportModule.ExecuteUseCase(useCase);
+            var result = await this._incidentReportModule.ExecuteUseCase(useCase);
+            var presenter = (CreateDraftApplicationPresenter)result;
 
-            return this._presenter.ViewModel;
+            return presenter.ViewModel;
         }
     }
 }

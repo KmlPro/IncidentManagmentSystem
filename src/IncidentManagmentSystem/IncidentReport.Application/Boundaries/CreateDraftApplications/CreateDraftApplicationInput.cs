@@ -6,7 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Application.Boundaries.CreateDraftApplications
 {
-    public class CreateDraftApplicationInput : IUseCaseInput
+    public class CreateDraftApplicationInput : IUseCaseInput<IOutputPort>
     {
         public string Title { get; }
         public string Description { get; }

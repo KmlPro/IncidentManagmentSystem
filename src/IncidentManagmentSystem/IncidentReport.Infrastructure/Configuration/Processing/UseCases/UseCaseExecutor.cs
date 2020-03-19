@@ -8,13 +8,13 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.UseCases
 {
     internal class UseCaseExecutor
     {
-        internal async static Task Execute(IUseCaseInput useCase)
+        internal async static Task<TUseCaseOutput> Execute<TUseCaseOutput>(IUseCaseInput<TUseCaseOutput> useCase) where TUseCaseOutput : IUseCaseOutput
         {
             using (var scope = CompositionRoot.BeginLifetimeScope())
             {
                 var _mediator = scope.Resolve<IMediator>();
 
-                await _mediator.Send(useCase);
+                return await _mediator.Send(useCase);
             }
         }
     }

@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application;
-using MediatR;
 
 namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
 {
@@ -14,9 +13,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
             this._currentUserContext = currentUserContext;
         }
 
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task<Unit> Handle(TestUseCaseInput request, CancellationToken cancellationToken)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<TestUseCaseOutput> Handle(TestUseCaseInput request, CancellationToken cancellationToken)
         {
             var userId = this._currentUserContext.UserId;
 
@@ -25,7 +22,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
                 throw new ArgumentNullException(nameof(userId));
             }
 
-            return Unit.Value;
+            return new TestUseCaseOutput();
         }
     }
 }

@@ -2,7 +2,7 @@ using BuildingBlocks.Application.UseCases;
 
 namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
 {
-    public class TestUseCaseInput : IUseCaseInput
+    internal class TestUseCaseInput : IUseCaseInput<TestUseCaseOutput>
     {
         public string TestProperty { get; }
 
