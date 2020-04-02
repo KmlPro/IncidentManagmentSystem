@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -13,7 +14,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         private IncidentType? _incidentType;
         private EmployeeId _applicantId;
         private SuspiciousEmployees _suspiciousEmployees;
-        private AttachmentsToApplication _attachments;
+        private IEnumerable<Attachment> _attachments;
 
         private Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> _contentOfApplicationDelegate;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
@@ -57,9 +58,9 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return new DraftApplication(this._contentOfApplication, this._incidentType, this._applicantId, this._suspiciousEmployees);
         }
 
-        private AttachmentsToApplication TryBuildAttachments()
+        private IEnumerable<Attachment> TryBuildAttachments()
         {
-            return this._attachments != null ? this._attachmentsDelegate.Select(x => x(new AttachmentBuilder()).Build()).ToList();
+            return this._attachments != null ? this._attachmentsDelegate.Select(x => x(new AttachmentBuilder()).Build()).ToList() : null;
         }
 
         private SuspiciousEmployees TryBuildSuspiciousEmployees()
