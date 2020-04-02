@@ -15,7 +15,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
-        public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
+        public AttachmentsToApplication IncidentVerificationApplicationAttachments { get; }
 
         public PostedApplicationDomainEvent(
             PostedApplicationId id,
@@ -24,7 +24,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
             IncidentType incidentType,
             EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees,
-            IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments,
+            AttachmentsToApplication incidentVerificationApplicationAttachments,
             DateTime postDate)
         {
             this.Id = id;

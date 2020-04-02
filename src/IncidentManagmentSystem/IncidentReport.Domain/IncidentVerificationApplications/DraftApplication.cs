@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
+using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
@@ -26,6 +27,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             SuspiciousEmployees suspiciousEmployees)
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
+            this.CheckRule(new FieldShouldBeFilledRule(applicantId, nameof(this.ApplicantId)));
 
             this.Id = new DraftApplicationId(Guid.NewGuid());
             this.ContentOfApplication = contentOfApplication;
@@ -42,6 +44,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             IncidentType? incidentType,
             SuspiciousEmployees suspiciousEmployees)
         {
+            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, this.ApplicantId));
+
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees;

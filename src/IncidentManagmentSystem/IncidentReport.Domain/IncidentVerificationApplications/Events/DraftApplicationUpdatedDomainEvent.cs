@@ -10,15 +10,15 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType? IncidentType { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
-        public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
+        public AttachmentsToApplication Attachemnts { get; }
 
-        public DraftApplicationUpdatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, SuspiciousEmployees suspiciousEmployees, IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments)
+        public DraftApplicationUpdatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, SuspiciousEmployees suspiciousEmployees, AttachmentsToApplication attachments)
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees;
-            this.IncidentVerificationApplicationAttachments = incidentVerificationApplicationAttachments;
+            this.Attachemnts = attachments;
         }
     }
 }

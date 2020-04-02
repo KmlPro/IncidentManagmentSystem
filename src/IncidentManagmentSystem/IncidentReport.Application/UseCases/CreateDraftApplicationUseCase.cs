@@ -81,7 +81,7 @@ namespace IncidentReport.Application.UseCases
 
         private void AddUploadedFilesAsAttachments(DraftApplication draftApplication, List<UploadedFile> files)
         {
-            var attachments = files.Select(x => new IncidentVerificationApplicationAttachment(new FileInfo(x.FileName), new StorageId(x.StorageId)));
+            var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)));
             draftApplication.AddAttachments(attachments);
         }
 

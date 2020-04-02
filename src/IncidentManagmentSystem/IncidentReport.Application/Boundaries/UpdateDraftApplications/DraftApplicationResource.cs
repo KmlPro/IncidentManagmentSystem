@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
@@ -14,9 +15,9 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
         public IncidentType? IncidentType { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
         public EmployeeId ApplicantId { get; }
-        public List<IncidentVerificationApplicationAttachment> Attachments { get; }
+        public List<Attachment> Attachments { get; }
 
-        public DraftApplicationResource(DraftApplicationId id, string title, string description, IncidentType? incidentType, SuspiciousEmployees suspiciousEmployees, EmployeeId applicantId, List<IncidentVerificationApplicationAttachment> attachments)
+        public DraftApplicationResource(DraftApplicationId id, string title, string description, IncidentType? incidentType, SuspiciousEmployees suspiciousEmployees, EmployeeId applicantId, List<Attachment> attachments)
         {
             this.Id = id;
             this.Title = title;
