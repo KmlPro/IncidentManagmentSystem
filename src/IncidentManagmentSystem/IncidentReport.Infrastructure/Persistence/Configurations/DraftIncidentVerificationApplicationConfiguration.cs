@@ -41,11 +41,11 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
                 v => (IncidentType)Enum.Parse(typeof(IncidentType), v));
         }
 
-        private ValueConverter<IncidentVerificationApplicationAttachments, List<IncidentVerificationApplicationAttachment>> IncidentVerificationApplicationAttachmentsConverter()
+        private ValueConverter<AttachmentsToApplication, List<Attachment>> IncidentVerificationApplicationAttachmentsConverter()
         {
-            return new ValueConverter<IncidentVerificationApplicationAttachments, List<IncidentVerificationApplicationAttachment>>(
+            return new ValueConverter<AttachmentsToApplication, List<Attachment>>(
             v => v.Attachments.ToList(),
-            v => new IncidentVerificationApplicationAttachments(v));
+            v => new AttachmentsToApplication(v));
         }
 
         private ValueConverter<SuspiciousEmployees, string> SuspiciousEmployeesConverter()

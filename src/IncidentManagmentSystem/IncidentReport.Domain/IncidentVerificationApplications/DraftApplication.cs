@@ -17,12 +17,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public IncidentType? IncidentType { get; private set; }
         public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; private set; }
-        public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; private set; }
-
-        private DraftApplication()
-        {
-
-        }
+        public AttachmentsToApplication IncidentVerificationApplicationAttachments { get; private set; }
 
         public DraftApplication(
             ContentOfApplication contentOfApplication,
@@ -37,7 +32,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
-            this.IncidentVerificationApplicationAttachments = new IncidentVerificationApplicationAttachments();
+            this.IncidentVerificationApplicationAttachments = new AttachmentsToApplication();
 
             this.AddDomainEvent(new DraftApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
@@ -54,7 +49,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
         }
 
-        public void AddAttachments(IEnumerable<IncidentVerificationApplicationAttachment> attachments)
+        public void AddAttachments(IEnumerable<Attachment> attachments)
         {
             this.IncidentVerificationApplicationAttachments.AddRange(attachments);
             this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
@@ -64,6 +59,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         {
             this.IncidentVerificationApplicationAttachments.DeleteRange(storageIds);
             this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+        }
+
+        private DraftApplication()
+        {
+
         }
     }
 }

@@ -21,19 +21,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
-        public IncidentVerificationApplicationAttachments IncidentVerificationApplicationAttachments { get; }
-
-        private PostedApplication()
-        {
-
-        }
+        public AttachmentsToApplication IncidentVerificationApplicationAttachments { get; }
 
         public PostedApplication(
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees,
-            IncidentVerificationApplicationAttachments incidentVerificationApplicationAttachments)
+            AttachmentsToApplication incidentVerificationApplicationAttachments)
         {
             this.CheckRule(new IndicateAtLeastOneSuspectRule(suspiciousEmployees));
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
@@ -50,6 +45,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
 
             this.AddDomainEvent(new PostedApplicationDomainEvent(this.Id, this.ApplicationNumber, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments, this.PostDate));
+        }
+
+
+        private PostedApplication()
+        {
+
         }
     }
 }

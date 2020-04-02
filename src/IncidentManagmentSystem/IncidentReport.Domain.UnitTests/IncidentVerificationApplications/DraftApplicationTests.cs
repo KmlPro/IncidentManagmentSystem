@@ -98,7 +98,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_TitleOFApplicationIsTooShort_NotCreated()
         {
-            var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(FakeData.Alpha(1), FakeData.Alpha(20));
@@ -118,8 +117,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_DescriptionOfApplicationIsTooShort_NotCreated()
         {
-            var applicantId = new EmployeeId(Guid.NewGuid());
-
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(1));
@@ -129,7 +126,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         [Test]
         public void CreateApplicationDraft_DescriptionOfApplicationIsTooLong_NotCreated()
         {
-            var applicantId = new EmployeeId(Guid.NewGuid());
             AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
             {
                 var contentOfApplication = new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(1001));
