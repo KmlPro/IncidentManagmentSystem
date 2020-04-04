@@ -14,22 +14,13 @@ namespace IncidentReport.Infrastructure.Configuration
 {
     public class IncidentReportStartup
     {
-        private readonly Assembly _assemblyWithMediatRComponentsImplementation;
+        protected Assembly AssemblyWithMediatRComponentsImplementation { get; set; }
         private readonly ContainerBuilder _containerBuilder;
 
         public IncidentReportStartup()
         {
-            this._assemblyWithMediatRComponentsImplementation = typeof(IncidentReportApplicationAssembly).GetTypeInfo().Assembly;
+            this.AssemblyWithMediatRComponentsImplementation = typeof(IncidentReportApplicationAssembly).GetTypeInfo().Assembly;
             this._containerBuilder = new ContainerBuilder();
-        }
-
-        public IncidentReportStartup(Assembly assemblyWithCommandsImplementation)
-        {
-            this._assemblyWithMediatRComponentsImplementation = assemblyWithCommandsImplementation;
-        }
-        public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
-        {
-            this.Initialize(dbContextOptionsBuilderAction, currentUserContext, (ContainerBuilder container) => { });
         }
 
         public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext, Action<ContainerBuilder> externalInstancesConfiguration)
@@ -50,7 +41,7 @@ namespace IncidentReport.Infrastructure.Configuration
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
         {
-            this._containerBuilder.RegisterModule(new MediatRModule(this._assemblyWithMediatRComponentsImplementation));
+            this._containerBuilder.RegisterModule(new MediatRModule(this.AssemblyWithMediatRComponentsImplementation));
             this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             this._containerBuilder.RegisterModule(new ProcessingModule());
             this._containerBuilder.RegisterModule(new FileStorageModule());

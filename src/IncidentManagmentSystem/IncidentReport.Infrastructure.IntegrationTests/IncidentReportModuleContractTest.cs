@@ -16,7 +16,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         {
             var currentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
             var rootContainerBuilder = new ContainerBuilder();
-            var incidentReportStartup = new IncidentReportStartup(typeof(IncidentReportModuleContractTest).Assembly);
+            var incidentReportStartup = new IncidentReportStartupForTests(typeof(IncidentReportModuleContractTest).Assembly);
 
             incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
                 currentUserContext);
