@@ -15,7 +15,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
     public class DraftApplicationTests : DraftApplicationTestsBase
     {
         [Test]
-        public void CreateApplicationDraft_AllFieldsAreFilled_CreatedSuccessfully()
+        public void AllFieldsAreFilled_CreatedSuccessfully()
         {
             var applicationDraft = this.CreateValidApplicationDraft();
 
@@ -24,7 +24,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void CreateApplicationDraft_ThenAddAttachments_UpdatedSuccessfully()
+        public void AddAttachments_UpdatedSuccessfully()
         {
             var applicationDraft = this.CreateValidApplicationDraft();
 
@@ -37,7 +37,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void CreateApplicationDraft_ThenAddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()
+        public void AddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()
         {
             var applicationDraft = this.CreateValidApplicationDraft();
 
@@ -54,7 +54,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void CreateApplicationDraft_ApplicantIdShouldBeFilled_NotCreated()
+        public void ApplicantIdShouldBeFilled_NotCreated()
         {
             var draftApplicationBuilder = new DraftApplicationBuilder();
 
@@ -65,7 +65,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void CreateApplicationDraft_ApplicantIsSuspiciousEmployee_NotCreated()
+        public void ApplicantIsSuspiciousEmployee_NotCreated()
         {
             var employeeId = new EmployeeId(Guid.NewGuid());
 
@@ -80,7 +80,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void UpdateApplicationDraft_ApplicantIsSuspiciousEmployee_NotCreated()
+        public void ApplicantIsSuspiciousEmployee_NotUpdated()
         {
             var employeeId = new EmployeeId(Guid.NewGuid());
 

@@ -10,7 +10,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
     public class ContentOfApplicationTests : TestBase
     {
         [Test]
-        public void TryCreate_AllFieldsAreValid_CreatedSuccessfully()
+        public void AllFieldsAreValid_CreatedSuccessfully()
         {
             var contentOfApplicationBuilder = new ContentOfApplicationBuilder()
                 .SetTitle(FakeData.Alpha(11))
@@ -22,7 +22,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 
         [TestCase(1)]
         [TestCase(101)]
-        public void TryCreate_TitleRuleViolated_NotCreated(int titleLength)
+        public void TitleRuleViolated_NotCreated(int titleLength)
         {
             var contentOfApplicationBuilder = new ContentOfApplicationBuilder()
                 .SetTitle(FakeData.Alpha(titleLength))
@@ -36,7 +36,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 
         [TestCase(1)]
         [TestCase(1001)]
-        public void TryCreate_DescriptionRuleViolated_NotCreated(int descriptionLength)
+        public void DescriptionRuleViolated_NotCreated(int descriptionLength)
         {
             var contentOfApplicationBuilder = new ContentOfApplicationBuilder()
                 .SetTitle(FakeData.Alpha(11))
