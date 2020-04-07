@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -17,20 +16,15 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
         {
             builder.ToTable(nameof(DraftApplication), SchemaName.IncidentReport);
             builder.Ignore(x => x.DomainEvents);
-            builder.Ignore(x => x.Attachments);
 
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
             builder.Property(nameof(DraftApplication.SuspiciousEmployees)).HasConversion(this.SuspiciousEmployeesConverter());
-
-            builder.Property(nameof(DraftApplication.Attachments)).HasConversion(this.AttachmentsConverter());
-
             builder.Property(nameof(DraftApplication.IncidentType)).HasConversion(this.IncidentTypeConverter());
 
             builder.OwnsOne(m => m.ContentOfApplication);
-
-            //    builder.OwnsOne(m => m.Attachments);
+            builder.OwnsMany(m => m.Attachments);
         }
 
         private ValueConverter<IncidentType?, string> IncidentTypeConverter()
@@ -38,13 +32,6 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             return new ValueConverter<IncidentType?, string>(
                 v => v.ToString(),
                 v => (IncidentType)Enum.Parse(typeof(IncidentType), v));
-        }
-
-        private ValueConverter<AttachmentsToApplication, List<Attachment>> AttachmentsConverter()
-        {
-            return new ValueConverter<AttachmentsToApplication, List<Attachment>>(
-            v => v.Attachments.ToList(),
-            v => new AttachmentsToApplication(v));
         }
 
         private ValueConverter<SuspiciousEmployees, string> SuspiciousEmployeesConverter()

@@ -18,6 +18,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests
 
             var context = new IncidentReportDbContext(options);
 
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
     }
