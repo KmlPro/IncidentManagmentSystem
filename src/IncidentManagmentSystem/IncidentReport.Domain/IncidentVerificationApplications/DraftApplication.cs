@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
@@ -16,9 +17,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public DraftApplicationId Id { get; private set; }
         public ContentOfApplication ContentOfApplication { get; private set; }
         public IncidentType? IncidentType { get; private set; }
-        public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; private set; }
-        public AttachmentsToApplication IncidentVerificationApplicationAttachments { get; private set; }
+        public List<Attachment> Attachments { get; private set; }
+        public EmployeeId ApplicantId { get; }
 
         public DraftApplication(
             ContentOfApplication contentOfApplication,
@@ -34,7 +35,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.IncidentType = incidentType;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
-            this.IncidentVerificationApplicationAttachments = new AttachmentsToApplication();
+            this.Attachments = new List<Attachment>();
 
             this.AddDomainEvent(new DraftApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
@@ -50,19 +51,21 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees;
 
-            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees));
         }
 
-        public void AddAttachments(IEnumerable<Attachment> attachments)
+        public void AddAttachments(List<Attachment> attachments)
         {
-            this.IncidentVerificationApplicationAttachments.AddRange(attachments);
-            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+            this.Attachments.AddRange(attachments);
+            this.AddDomainEvent(new DraftApplicationAttachmentsAdded(this.Id, attachments));
         }
 
         public void DeleteAttachments(IEnumerable<StorageId> storageIds)
         {
-            this.IncidentVerificationApplicationAttachments.DeleteRange(storageIds);
-            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication, this.IncidentType, this.SuspiciousEmployees, this.IncidentVerificationApplicationAttachments));
+            var attachmentsToRemove = this.Attachments.Where(x => storageIds.Contains(x.StorageId)).ToList();
+            this.Attachments.RemoveAll(x => attachmentsToRemove.Contains(x));
+
+            this.AddDomainEvent(new DraftApplicationAttachmentsDeleted(this.Id, attachmentsToRemove));
         }
 
         private DraftApplication()

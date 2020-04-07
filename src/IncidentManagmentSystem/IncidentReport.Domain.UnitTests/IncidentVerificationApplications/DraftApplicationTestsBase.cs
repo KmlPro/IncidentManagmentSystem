@@ -11,7 +11,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 {
     public class DraftApplicationTestsBase : TestBase
     {
-        public IEnumerable<Attachment> CreateAttachments(int numberOfAttachments)
+        public List<Attachment> CreateAttachments(int numberOfAttachments)
         {
             var attachments = new List<Attachment>();
 

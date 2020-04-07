@@ -29,11 +29,10 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicationDraft = this.CreateValidApplicationDraft();
 
             applicationDraft.AddAttachments(this.CreateAttachments(2));
-            var applicationUpdated = AssertPublishedDomainEvent<DraftApplicationUpdatedDomainEvent>(applicationDraft);
+            var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
 
-            Assert.AreEqual(2, applicationDraft.IncidentVerificationApplicationAttachments.Attachments.Count());
-            Assert.AreEqual(0, applicationDraft.IncidentVerificationApplicationAttachments.DeletedAttachments.Count());
-            Assert.NotNull(applicationUpdated);
+            Assert.NotNull(attachmentsAddedEvent);
+            Assert.AreEqual(2, applicationDraft.Attachments.Count());
         }
 
         [Test]
@@ -46,11 +45,15 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             applicationDraft.AddAttachments(applicationDraftAttachments);
             applicationDraft.DeleteAttachments(new List<StorageId> { applicationDraftAttachments.First().StorageId }.AsEnumerable());
 
-            var applicationUpdated = AssertPublishedDomainEvents<DraftApplicationUpdatedDomainEvent>(applicationDraft).OrderByDescending(x => x.OccurredOn).First();
+            var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
+            var attachmentsDeletedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsDeleted>(applicationDraft);
 
-            Assert.AreEqual(1, applicationDraft.IncidentVerificationApplicationAttachments.Attachments.Count());
-            Assert.AreEqual(1, applicationDraft.IncidentVerificationApplicationAttachments.DeletedAttachments.Count());
-            Assert.NotNull(applicationUpdated);
+            Assert.NotNull(attachmentsAddedEvent);
+            Assert.NotNull(attachmentsDeletedEvent);
+
+            Assert.AreEqual(2, attachmentsAddedEvent.Attachments.Count());
+            Assert.AreEqual(1, attachmentsDeletedEvent.Attachments.Count());
+            Assert.AreEqual(1, applicationDraft.Attachments.Count());
         }
 
         [Test]

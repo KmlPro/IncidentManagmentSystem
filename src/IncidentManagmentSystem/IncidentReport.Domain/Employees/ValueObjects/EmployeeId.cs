@@ -3,13 +3,10 @@ using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.Employees.ValueObjects
 {
-    public class EmployeeId : ValueObject
+    public class EmployeeId : TypedIdValue
     {
-        public Guid Value { get; private set; }
-
-        public EmployeeId(Guid value)
+        public EmployeeId(Guid value) : base(value)
         {
-            this.Value = value;
         }
     }
 }

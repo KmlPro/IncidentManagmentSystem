@@ -9,29 +9,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace IncidentReport.Infrastructure.Persistence.Configurations
+namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 {
-    internal class DraftIncidentVerificationApplicationConfiguration : IEntityTypeConfiguration<DraftApplication>
+    internal class DraftApplicationConfiguration : IEntityTypeConfiguration<DraftApplication>
     {
         public void Configure(EntityTypeBuilder<DraftApplication> builder)
         {
-            //kbytner 30.01.2020 - handle users (how ? 
-            builder.ToTable("DraftIncidentVerificationApplication", SchemaName.IncidentReport);
+            builder.ToTable(nameof(DraftApplication), SchemaName.IncidentReport);
             builder.Ignore(x => x.DomainEvents);
+            builder.Ignore(x => x.Attachments);
 
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
             builder.Property(nameof(DraftApplication.SuspiciousEmployees)).HasConversion(this.SuspiciousEmployeesConverter());
 
-            builder.Property(nameof(DraftApplication.IncidentVerificationApplicationAttachments)).HasConversion(this.IncidentVerificationApplicationAttachmentsConverter());
+            builder.Property(nameof(DraftApplication.Attachments)).HasConversion(this.AttachmentsConverter());
 
             builder.Property(nameof(DraftApplication.IncidentType)).HasConversion(this.IncidentTypeConverter());
 
             builder.OwnsOne(m => m.ContentOfApplication);
 
-            builder.OwnsOne(m => m.IncidentVerificationApplicationAttachments);
-
+            //    builder.OwnsOne(m => m.Attachments);
         }
 
         private ValueConverter<IncidentType?, string> IncidentTypeConverter()
@@ -41,7 +40,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
                 v => (IncidentType)Enum.Parse(typeof(IncidentType), v));
         }
 
-        private ValueConverter<AttachmentsToApplication, List<Attachment>> IncidentVerificationApplicationAttachmentsConverter()
+        private ValueConverter<AttachmentsToApplication, List<Attachment>> AttachmentsConverter()
         {
             return new ValueConverter<AttachmentsToApplication, List<Attachment>>(
             v => v.Attachments.ToList(),
