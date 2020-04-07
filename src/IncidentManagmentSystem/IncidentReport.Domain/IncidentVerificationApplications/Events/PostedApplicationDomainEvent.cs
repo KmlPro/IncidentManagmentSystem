@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
@@ -15,7 +16,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }
         public SuspiciousEmployees SuspiciousEmployees { get; }
-        public AttachmentsToApplication IncidentVerificationApplicationAttachments { get; }
+        public List<Attachment> Attachments { get; }
 
         public PostedApplicationDomainEvent(
             PostedApplicationId id,
@@ -24,7 +25,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
             IncidentType incidentType,
             EmployeeId applicantId,
             SuspiciousEmployees suspiciousEmployees,
-            AttachmentsToApplication incidentVerificationApplicationAttachments,
+            List<Attachment> attachments,
             DateTime postDate)
         {
             this.Id = id;
@@ -33,7 +34,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
             this.ApplicationNumber = applicationNumber;
-            this.IncidentVerificationApplicationAttachments = incidentVerificationApplicationAttachments;
+            this.Attachments = attachments;
             this.PostDate = postDate;
         }
     }

@@ -15,7 +15,7 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
                 draftApplication.IncidentType,
                 draftApplication.SuspiciousEmployees,
                 draftApplication.ApplicantId,
-                draftApplication.Attachments.Attachments.ToList());
+                draftApplication.Attachments.ToList());
         }
     }
 }
