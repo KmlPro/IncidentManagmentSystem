@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Application.Common;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Infrastructure.Persistence.Configurations.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Persistence
@@ -15,6 +16,11 @@ namespace IncidentReport.Infrastructure.Persistence
 
         public IncidentReportDbContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new DraftApplicationConfiguration());
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
