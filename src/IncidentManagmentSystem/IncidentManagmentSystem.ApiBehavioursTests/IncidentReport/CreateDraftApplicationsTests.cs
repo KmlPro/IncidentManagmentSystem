@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,8 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 
             var response = await this.TestClient.PostAsync(_path, requestParameters);
 
-            response.EnsureSuccessStatusCode();
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            Assert.NotNull(response.Headers.Location);
         }
 
         [Test]
@@ -32,7 +34,8 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 
             var response = await this.TestClient.PostAsync(_path, requestParameters);
 
-            response.EnsureSuccessStatusCode();
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            Assert.NotNull(response.Headers.Location);
         }
 
         private MultipartFormDataContent CreateMultipartFormDataContent()

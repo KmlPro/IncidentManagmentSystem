@@ -16,7 +16,7 @@ namespace IncidentReport.Infrastructure.Configuration
 
         public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext)
         {
-            this.AssemblyWithMediatRComponentsImplementation = _assemblyWithMediatRComponentsImplementationForTest;
+            this.AssemblyWithMediatRComponentsImplementation = this._assemblyWithMediatRComponentsImplementationForTest;
             this.Initialize(dbContextOptionsBuilderAction, currentUserContext, (ContainerBuilder container) => { });
         }
     }

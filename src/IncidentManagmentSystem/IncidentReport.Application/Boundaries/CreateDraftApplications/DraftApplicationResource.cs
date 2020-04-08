@@ -26,5 +26,11 @@ namespace IncidentReport.Application.Boundaries.CreateDraftApplications
             this.ApplicantId = applicantId;
             this.Attachments = attachments;
         }
+
+        //kbytner 08.04.2020 - temporarty ctor, remove after testing
+        public DraftApplicationResource()
+        {
+
+        }
     }
 }

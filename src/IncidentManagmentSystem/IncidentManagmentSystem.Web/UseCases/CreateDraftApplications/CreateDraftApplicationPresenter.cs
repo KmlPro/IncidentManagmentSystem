@@ -9,9 +9,8 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
 
         public void Standard(CreateDraftApplicationOutput output)
         {
-            this.ViewModel = new CreatedAtActionResult(ApiResources.DraftApplication.ToString(),
-                nameof(DraftApplicationController),
-                new { id = output.DraftApplication.Id },
+            this.ViewModel = new CreatedAtRouteResult(
+                new { id = output.DraftApplication.Id.Value },
                 output.DraftApplication);
         }
 
