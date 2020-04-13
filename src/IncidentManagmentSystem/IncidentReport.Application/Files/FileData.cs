@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace IncidentReport.Application.Files
 
         private void CheckExtensions(string fileName)
         {
-            var extension = Path.GetExtension(fileName).Replace(".", "");
+            var extension = Path.GetExtension(fileName).Replace(".", "", StringComparison.Ordinal);
 
             if (string.IsNullOrEmpty(extension))
             {

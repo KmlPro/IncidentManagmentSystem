@@ -1,7 +1,7 @@
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspectRule.Exceptions
+namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect.Exceptions
 {
     internal class ApplicantCannotBeSuspectRuleException : BusinessRuleValidationException
     {

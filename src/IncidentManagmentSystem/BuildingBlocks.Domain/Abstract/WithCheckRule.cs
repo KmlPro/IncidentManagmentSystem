@@ -6,7 +6,10 @@ namespace BuildingBlocks.Domain.Abstract
     {
         protected void CheckRule(IBusinessRule rule)
         {
-            rule.CheckIsBroken();
+            if (rule != null)
+            {
+                rule.CheckIsBroken();
+            }
         }
     }
 }

@@ -33,7 +33,14 @@ namespace BuildingBlocks.Domain.Abstract
 
         public bool Equals(TypedIdValue other)
         {
-            return this.Value == other.Value;
+            if (other != null)
+            {
+                return this.Value == other.Value;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static bool operator ==(TypedIdValue obj1, TypedIdValue obj2)

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using IncidentReport.Domain.IncidentVerificationApplications;
 
@@ -9,6 +10,11 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
 
         public UpdateDraftApplicationOutput(DraftApplication draftApplication)
         {
+            if (draftApplication == null)
+            {
+                throw new ArgumentNullException(nameof(draftApplication));
+            }
+
             this.DraftApplication = new DraftApplicationResource(draftApplication.Id,
                 draftApplication.ContentOfApplication.Title,
                 draftApplication.ContentOfApplication.Description,

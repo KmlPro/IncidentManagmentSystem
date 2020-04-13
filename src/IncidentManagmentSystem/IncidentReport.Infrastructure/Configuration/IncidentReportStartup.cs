@@ -25,6 +25,11 @@ namespace IncidentReport.Infrastructure.Configuration
 
         public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext, Action<ContainerBuilder> externalInstancesConfiguration)
         {
+            if (externalInstancesConfiguration == null)
+            {
+                throw new ArgumentNullException(nameof(externalInstancesConfiguration));
+            }
+
             externalInstancesConfiguration(this._containerBuilder);
 
             this.ConfigureCompositionRoot(
