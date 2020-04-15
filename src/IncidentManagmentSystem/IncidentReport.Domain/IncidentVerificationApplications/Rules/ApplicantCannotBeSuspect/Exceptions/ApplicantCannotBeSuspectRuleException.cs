@@ -5,7 +5,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicant
 {
     internal class ApplicantCannotBeSuspectRuleException : BusinessRuleValidationException
     {
-        private const string _errorMessage = "The applicant cannot be a suspect";
+        private readonly static string _errorMessage = Resources.ApplicantCannotBeSuspectRuleException;
+
         public ApplicantCannotBeSuspectRuleException(IBusinessRule brokenRule) : base(brokenRule, _errorMessage)
         {
         }

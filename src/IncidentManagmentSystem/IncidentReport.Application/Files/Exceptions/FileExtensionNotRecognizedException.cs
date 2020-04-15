@@ -4,7 +4,7 @@ namespace IncidentReport.Application.Files.Exceptions
 {
     public class FileExtensionNotRecognizedException : ApplicationLayerException
     {
-        private const string _errorMessage = "Extension not recognized";
+        private readonly static string _errorMessage = Resources.FileExtensionNotRecognizedException;
 
         public FileExtensionNotRecognizedException() : base(_errorMessage)
         {

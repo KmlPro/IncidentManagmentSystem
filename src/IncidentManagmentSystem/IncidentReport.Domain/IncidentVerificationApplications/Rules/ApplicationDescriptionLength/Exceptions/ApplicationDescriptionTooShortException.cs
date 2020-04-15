@@ -5,8 +5,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicati
 {
     internal class ApplicationDescriptionTooShortException : BusinessRuleValidationException
     {
-        private const string _errorMessage = "The Description should contain a minimum of {0} characters";
-        public ApplicationDescriptionTooShortException(IBusinessRule brokenRule, int minLength) : base(brokenRule, string.Format(_errorMessage, minLength))
+        private readonly static string _errorMessage = Resources.ApplicationDescriptionTooShortException;
+
+        public ApplicationDescriptionTooShortException(IBusinessRule brokenRule, int minLength) : base(brokenRule, string.Format( _errorMessage, minLength))
         {
         }
     }

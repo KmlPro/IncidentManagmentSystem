@@ -5,7 +5,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicati
 {
     internal class ApplicationDescriptionTooLongException : BusinessRuleValidationException
     {
-        private const string _errorMessage = "The Description should contain a maximum of {0} characters";
+        private readonly static string _errorMessage = Resources.ApplicationDescriptionTooLongException;
+
         public ApplicationDescriptionTooLongException(IBusinessRule brokenRule, int maxLength) : base(brokenRule, string.Format(_errorMessage, maxLength))
         {
         }

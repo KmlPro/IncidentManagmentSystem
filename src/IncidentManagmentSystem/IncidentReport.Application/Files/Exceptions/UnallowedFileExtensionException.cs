@@ -4,7 +4,7 @@ namespace IncidentReport.Application.Files.Exceptions
 {
     public class UnallowedFileExtensionException : ApplicationLayerException
     {
-        private const string _errorMessage = "Unallowed file extension.";
+        private readonly static string _errorMessage = Resources.UnallowedFileExtensionException;
 
         public UnallowedFileExtensionException() : base(_errorMessage)
         {
