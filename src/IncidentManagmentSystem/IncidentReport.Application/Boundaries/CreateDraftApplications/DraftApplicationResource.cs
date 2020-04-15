@@ -27,7 +27,9 @@ namespace IncidentReport.Application.Boundaries.CreateDraftApplications
             this.Attachments = attachments;
         }
 
+        //<summary>
         //kbytner 08.04.2020 - temporarty ctor, remove after testing
+        //</summary>
         public DraftApplicationResource()
         {
 

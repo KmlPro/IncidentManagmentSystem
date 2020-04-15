@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IncidentReport.Application.UseCases
 {
     //kbytner 19.03.2020 - implementation not completed
-    internal class UpdateDraftApplicationUseCase : IUseCase
+    public class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;

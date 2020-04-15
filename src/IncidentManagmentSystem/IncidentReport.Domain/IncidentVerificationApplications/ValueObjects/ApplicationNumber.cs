@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
@@ -17,7 +18,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         private string Build(DateTime dateCreated, IncidentType incidentType)
         {
             var sb = new StringBuilder();
-            sb.Append(dateCreated.ToString("yyyy-MM-dd"));
+            sb.Append(dateCreated.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo));
             sb.Append("_");
             sb.Append(incidentType.ToString());
             sb.Append("_");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -20,6 +21,7 @@ namespace IncidentReport.Application.UseCases
         private readonly IFileStorageService _fileStorageService;
         private readonly ICurrentUserContext _applicantContext;
         private readonly IOutputPort _outputPort;
+
         public CreateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
             ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
@@ -43,7 +45,7 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
                 }
 
-                await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication);
+                await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication, cancellationToken);
 
                 this.BuildOutput(draftIncidentVerificationApplication);
             }
