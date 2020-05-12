@@ -24,11 +24,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public DraftApplication(
             ContentOfApplication contentOfApplication,
             IncidentType? incidentType,
-            EmployeeId applicantId,
+            EmployeeId applicantId, // 12.05.2020 - change to NOT NULL attribute from Jet brains lib
             SuspiciousEmployees suspiciousEmployees)
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
-            this.CheckRule(new FieldShouldBeFilledRule(applicantId, nameof(this.ApplicantId)));
+            this.CheckRule(new FieldShouldBeFilledRule(applicantId, nameof(this.ApplicantId))); // 12.05.2020 - reomove unesesary rule
 
             this.Id = new DraftApplicationId(Guid.NewGuid());
             this.ContentOfApplication = contentOfApplication;

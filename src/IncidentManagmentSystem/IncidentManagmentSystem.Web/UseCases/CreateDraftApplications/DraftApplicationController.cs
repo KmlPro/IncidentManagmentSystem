@@ -25,7 +25,7 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DraftApplicationResource))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromForm]CreateDraftApplicationRequest request)
+        public async Task<IActionResult> CreateDraftApplication([FromForm]CreateDraftApplicationRequest request)
         {
             var useCase = this._mapper.Map<CreateDraftApplicationInput>(request);
             var result = await this._incidentReportModule.ExecuteUseCase(useCase);

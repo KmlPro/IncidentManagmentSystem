@@ -1,13 +1,7 @@
-using System;
-using System.Linq;
-using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.Persistence.Configurations.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 {

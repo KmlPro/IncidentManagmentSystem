@@ -6,6 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.Boundaries.CreateDraftApplications
 {
+    // kbytner 12.05.2020 - delete
     public class DraftApplicationResource
     {
         public DraftApplicationId Id { get; }

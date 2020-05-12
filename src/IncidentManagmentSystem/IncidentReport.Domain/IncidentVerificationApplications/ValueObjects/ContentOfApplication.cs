@@ -16,8 +16,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 
         public ContentOfApplication(string title, string description)
         {
-            this.CheckRule(new ApplicationTitleLenghtRule(title));
-            this.CheckRule(new ApplicationDescriptionLengthRule(description));
+            this.CheckRule(new ApplicationTitleLenghtRule(title)); //12.05.2020 - remove overkill :) remove checkrule from value objects!
+            this.CheckRule(new ApplicationDescriptionLengthRule(description)); //12.05.2020 - remove overkill :) overkill
 
             this.Title = title;
             this.Description = description;

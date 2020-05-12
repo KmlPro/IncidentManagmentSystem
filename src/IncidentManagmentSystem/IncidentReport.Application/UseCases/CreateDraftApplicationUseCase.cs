@@ -45,6 +45,8 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
                 }
 
+
+                //kbytner 12.05.2020 - change to repository, implementation like IOutputPort 
                 await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication, cancellationToken);
 
                 this.BuildOutput(draftIncidentVerificationApplication);
