@@ -1,6 +1,5 @@
+using System;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationDescriptionLength;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 
@@ -28,7 +27,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
                 .SetTitle(FakeData.Alpha(titleLength))
                 .SetDescription(FakeData.Alpha(20));
 
-            AssertBrokenRule<ApplicationTitleLenghtRule>(() =>
+            AssertException<ArgumentOutOfRangeException>(() =>
             {
                 var contentOfApplication = contentOfApplicationBuilder.Build();
             });
@@ -42,7 +41,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
                 .SetTitle(FakeData.Alpha(11))
                 .SetDescription(FakeData.Alpha(descriptionLength));
 
-            AssertBrokenRule<ApplicationDescriptionLengthRule>(() =>
+            AssertException<ArgumentOutOfRangeException>(() =>
             {
                 var contentOfApplication = contentOfApplicationBuilder.Build();
             });

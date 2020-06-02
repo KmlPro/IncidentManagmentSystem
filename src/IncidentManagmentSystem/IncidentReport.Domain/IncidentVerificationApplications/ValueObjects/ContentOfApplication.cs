@@ -1,11 +1,17 @@
+using System;
 using BuildingBlocks.Domain.Abstract;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationDescriptionLength;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicationTitleLength;
+using JetBrains.Annotations;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
     public class ContentOfApplication : ValueObject
     {
+        private readonly int _minTitleLength = 10;
+        private readonly int _maxTitleLength = 100;
+
+        private readonly int _minDescriptionLength = 10;
+        private readonly int _maxDescriptionLength = 1000;
+
         public string Title { get; }
         public string Description { get; }
 
@@ -14,13 +20,37 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 
         }
 
-        public ContentOfApplication(string title, string description)
+        public ContentOfApplication([NotNull] string title, [NotNull] string description)
         {
-            this.CheckRule(new ApplicationTitleLenghtRule(title)); //12.05.2020 - remove overkill :) remove checkrule from value objects!
-            this.CheckRule(new ApplicationDescriptionLengthRule(description)); //12.05.2020 - remove overkill :) overkill
+            this.CheckTitleLength(title);
+            this.CheckDescriptionLength(description);
 
             this.Title = title;
             this.Description = description;
+        }
+
+        private void CheckDescriptionLength(string description)
+        {
+            if (description.Length < this._minDescriptionLength)
+            {
+                throw new ArgumentOutOfRangeException(nameof(description), string.Format(Resources.ApplicationDescriptionTooShortException, this._minTitleLength));
+            }
+            else if (description.Length >= this._maxDescriptionLength)
+            {
+                throw new ArgumentOutOfRangeException(nameof(description), string.Format(Resources.ApplicationDescriptionTooLongException, this._minTitleLength));
+            }
+        }
+
+        private void CheckTitleLength(string title)
+        {      
+            if (title.Length < this._minTitleLength)
+            {
+                throw new ArgumentOutOfRangeException(nameof(title), string.Format(Resources.ApplicationTitleTooShortException, this._minTitleLength));
+            }
+            else if (this.Title.Length >= this._maxTitleLength)
+            {
+                throw new ArgumentOutOfRangeException(nameof(title), string.Format(Resources.ApplicationTitleTooLongException, this._maxTitleLength));
+            }
         }
     }
 }

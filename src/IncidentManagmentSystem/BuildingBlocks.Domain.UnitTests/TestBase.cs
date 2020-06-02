@@ -42,5 +42,15 @@ namespace BuildingBlocks.Domain.UnitTests
                 Assert.That(businessRuleValidationException.BrokenRule, Is.TypeOf<TRule>(), message);
             }
         }
+
+        public static void AssertException<TException>(TestDelegate testDelegate) where TException : Exception
+        {
+            var message = $"Expected {nameof(TException)} exception";
+            var businessRuleValidationException = Assert.Catch<BusinessRuleValidationException>(testDelegate, message);
+            if (businessRuleValidationException != null)
+            {
+                Assert.That(businessRuleValidationException.BrokenRule, Is.TypeOf<TException>(), message);
+            }
+        }
     }
 }

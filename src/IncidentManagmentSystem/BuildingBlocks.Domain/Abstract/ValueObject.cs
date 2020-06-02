@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace BuildingBlocks.Domain.Abstract
 {
-    public abstract class ValueObject : WithCheckRule, IEquatable<ValueObject>
+    public abstract class ValueObject : IEquatable<ValueObject>
     {
         private List<PropertyInfo> _properties;
         private List<FieldInfo> _fields;
