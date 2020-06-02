@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
@@ -61,7 +60,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         {
             var draftApplicationBuilder = new DraftApplicationBuilder();
 
-            AssertBrokenRule<FieldShouldBeFilledRule>(() =>
+            AssertException<Exception>(() =>
             {
                 var applicationDraft = draftApplicationBuilder.Build();
             });

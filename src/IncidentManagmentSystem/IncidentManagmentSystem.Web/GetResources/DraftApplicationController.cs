@@ -15,11 +15,10 @@ namespace IncidentManagmentSystem.Web.GetResources
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationResource))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
         public async Task<IActionResult> Get(Guid guid)
         {
-            var draft =  new DraftApplicationResource();
-            return this.Ok(draft);
+            return this.Ok(Guid.NewGuid());
         }
     }
 }

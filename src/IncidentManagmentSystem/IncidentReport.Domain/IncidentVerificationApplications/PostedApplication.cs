@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using BuildingBlocks.Domain;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
-using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using JetBrains.Annotations;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
@@ -26,16 +26,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public List<Attachment> Attachments { get; private set; }
 
         public PostedApplication(
-            ContentOfApplication contentOfApplication,
+            [NotNull] ContentOfApplication contentOfApplication,
             IncidentType incidentType,
-            EmployeeId applicantId,
-            SuspiciousEmployees suspiciousEmployees,
+            [NotNull] EmployeeId applicantId,
+            [NotNull] SuspiciousEmployees suspiciousEmployees,
             List<Attachment> attachemnts)
         {
             this.CheckRule(new IndicateAtLeastOneSuspectRule(suspiciousEmployees));
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
-            this.CheckRule(new FieldShouldBeFilledRule(contentOfApplication, nameof(this.ContentOfApplication)));
-            this.CheckRule(new FieldShouldBeFilledRule(applicantId, nameof(this.ApplicantId)));
 
             this.Id = new PostedApplicationId(Guid.NewGuid());
             this.ContentOfApplication = contentOfApplication;

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
@@ -22,7 +23,7 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DraftApplicationResource))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Guid))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateDraftApplication([FromForm]CreateDraftApplicationRequest request)

@@ -46,10 +46,10 @@ namespace BuildingBlocks.Domain.UnitTests
         public static void AssertException<TException>(TestDelegate testDelegate) where TException : Exception
         {
             var message = $"Expected {nameof(TException)} exception";
-            var businessRuleValidationException = Assert.Catch<BusinessRuleValidationException>(testDelegate, message);
-            if (businessRuleValidationException != null)
+            var exception = Assert.Catch<Exception>(testDelegate, message);
+            if (exception != null)
             {
-                Assert.That(businessRuleValidationException.BrokenRule, Is.TypeOf<TException>(), message);
+                Assert.That(exception, Is.TypeOf<TException>(), message);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public void Standard(CreateDraftApplicationOutput output)
         {
             this.InvokedOutputMethod = OutputPortInvokedMethod.Standard;
-            this.Id = output.DraftApplication.Id.Value;
+            this.Id = output.Id;
         }
 
         public void WriteBusinessRuleError(string message)

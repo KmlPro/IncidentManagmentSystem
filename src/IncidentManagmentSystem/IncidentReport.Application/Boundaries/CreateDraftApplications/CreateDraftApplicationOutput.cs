@@ -6,7 +6,7 @@ namespace IncidentReport.Application.Boundaries.CreateDraftApplications
 {
     public class CreateDraftApplicationOutput
     {
-        public DraftApplicationResource DraftApplication { get; }
+        public Guid Id { get; }
 
         public CreateDraftApplicationOutput(DraftApplication draftApplication)
         {
@@ -15,13 +15,7 @@ namespace IncidentReport.Application.Boundaries.CreateDraftApplications
                 throw new ArgumentNullException(nameof(draftApplication));
             }
 
-            this.DraftApplication = new DraftApplicationResource(draftApplication.Id,
-                draftApplication.ContentOfApplication.Title,
-                draftApplication.ContentOfApplication.Description,
-                draftApplication.IncidentType,
-                draftApplication.SuspiciousEmployees,
-                draftApplication.ApplicantId,
-                draftApplication.Attachments.ToList());
+            this.Id = draftApplication.Id.Value;
         }
     }
 }

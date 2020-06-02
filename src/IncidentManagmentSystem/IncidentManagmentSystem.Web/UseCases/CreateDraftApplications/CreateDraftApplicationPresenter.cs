@@ -9,9 +9,7 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
 
         public void Standard(CreateDraftApplicationOutput output)
         {
-            this.ViewModel = new CreatedAtRouteResult(
-                new { id = output.DraftApplication.Id.Value },
-                output.DraftApplication);
+            this.ViewModel = new CreatedAtRouteResult(new { id = output.Id }, new { });
         }
 
         public void WriteBusinessRuleError(string message)

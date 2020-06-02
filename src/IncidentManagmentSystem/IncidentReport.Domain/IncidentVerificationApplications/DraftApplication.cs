@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
-using BuildingBlocks.Domain.SharedRules.FieldShouldBeFilled;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using JetBrains.Annotations;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
@@ -22,13 +22,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public EmployeeId ApplicantId { get; }
 
         public DraftApplication(
-            ContentOfApplication contentOfApplication,
+            [NotNull] ContentOfApplication contentOfApplication,
             IncidentType? incidentType,
-            EmployeeId applicantId, // 12.05.2020 - change to NOT NULL attribute from Jet brains lib
-            SuspiciousEmployees suspiciousEmployees)
+            [NotNull] EmployeeId applicantId,
+            [NotNull] SuspiciousEmployees suspiciousEmployees)
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
-            this.CheckRule(new FieldShouldBeFilledRule(applicantId, nameof(this.ApplicantId))); // 12.05.2020 - reomove unesesary rule
 
             this.Id = new DraftApplicationId(Guid.NewGuid());
             this.ContentOfApplication = contentOfApplication;
