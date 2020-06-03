@@ -8,12 +8,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
     public class ApplicationNumber : ValueObject
     {
-        public string Value { get; }
-
         public ApplicationNumber(DateTime postDate, IncidentType incidentType)
         {
             this.Value = this.Build(postDate, incidentType);
         }
+
+        public string Value { get; }
 
         private string Build(DateTime dateCreated, IncidentType incidentType)
         {

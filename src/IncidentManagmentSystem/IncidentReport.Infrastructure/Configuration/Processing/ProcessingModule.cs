@@ -16,4 +16,3 @@ namespace IncidentReport.Infrastructure.Configuration.Processing
         }
     }
 }
-

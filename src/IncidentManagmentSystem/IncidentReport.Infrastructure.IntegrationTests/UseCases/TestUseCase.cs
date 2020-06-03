@@ -8,6 +8,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests.UseCases
     internal class TestUseCase : IUseCase
     {
         private readonly ICurrentUserContext _currentUserContext;
+
         public TestUseCase(ICurrentUserContext currentUserContext)
         {
             this._currentUserContext = currentUserContext;

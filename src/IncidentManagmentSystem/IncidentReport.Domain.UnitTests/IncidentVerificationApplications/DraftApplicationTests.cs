@@ -15,27 +15,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
     public class DraftApplicationTests : DraftApplicationTestsBase
     {
         [Test]
-        public void AllFieldsAreFilled_CreatedSuccessfully()
-        {
-            var applicationDraft = this.CreateValidApplicationDraft();
-
-            var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreatedDomainEvent>(applicationDraft);
-            Assert.NotNull(draftCreated);
-        }
-
-        [Test]
-        public void AddAttachments_UpdatedSuccessfully()
-        {
-            var applicationDraft = this.CreateValidApplicationDraft();
-
-            applicationDraft.AddAttachments(this.CreateAttachments(2));
-            var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
-
-            Assert.NotNull(attachmentsAddedEvent);
-            Assert.AreEqual(2, applicationDraft.Attachments.Count());
-        }
-
-        [Test]
         public void AddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()
         {
             var applicationDraft = this.CreateValidApplicationDraft();
@@ -56,6 +35,27 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             Assert.AreEqual(2, attachmentsAddedEvent.Attachments.Count());
             Assert.AreEqual(1, attachmentsDeletedEvent.Attachments.Count());
             Assert.AreEqual(1, applicationDraft.Attachments.Count());
+        }
+
+        [Test]
+        public void AddAttachments_UpdatedSuccessfully()
+        {
+            var applicationDraft = this.CreateValidApplicationDraft();
+
+            applicationDraft.AddAttachments(this.CreateAttachments(2));
+            var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
+
+            Assert.NotNull(attachmentsAddedEvent);
+            Assert.AreEqual(2, applicationDraft.Attachments.Count());
+        }
+
+        [Test]
+        public void AllFieldsAreFilled_CreatedSuccessfully()
+        {
+            var applicationDraft = this.CreateValidApplicationDraft();
+
+            var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreatedDomainEvent>(applicationDraft);
+            Assert.NotNull(draftCreated);
         }
 
         [Test]

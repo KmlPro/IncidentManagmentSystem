@@ -14,12 +14,14 @@ namespace IncidentReport.Application.UnitTests.Mocks
         {
             this._uploadedFiles = new List<UploadedFile>();
         }
+
         public IFileStorageService CreateFileStorageService()
         {
             var fileStorageServiceMock = new Mock<IFileStorageService>();
             fileStorageServiceMock.Setup(m => m.UploadFiles(It.IsAny<List<FileData>>()))
-                .Callback(action: (List<FileData> fd) => fd.ForEach(x => this._uploadedFiles.Add(new UploadedFile(x.FileName, Guid.NewGuid()))))
-                    .Returns(Task.FromResult(this._uploadedFiles));
+                .Callback((List<FileData> fd) =>
+                    fd.ForEach(x => this._uploadedFiles.Add(new UploadedFile(x.FileName, Guid.NewGuid()))))
+                .Returns(Task.FromResult(this._uploadedFiles));
 
             return fileStorageServiceMock.Object;
         }

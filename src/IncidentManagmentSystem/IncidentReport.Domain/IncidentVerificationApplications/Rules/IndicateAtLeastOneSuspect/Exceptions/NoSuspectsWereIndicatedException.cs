@@ -5,7 +5,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateA
 {
     internal class NoSuspectsWereIndicatedException : BusinessRuleValidationException
     {
-        private readonly static string _errorMessage = Resources.NoSuspectsWereIndicatedException;
+        private static readonly string _errorMessage = Resources.NoSuspectsWereIndicatedException;
 
         public NoSuspectsWereIndicatedException(IBusinessRule brokenRule) : base(brokenRule, _errorMessage)
         {

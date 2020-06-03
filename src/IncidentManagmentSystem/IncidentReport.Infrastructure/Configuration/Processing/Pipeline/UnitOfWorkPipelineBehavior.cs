@@ -6,14 +6,18 @@ using MediatR;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Pipeline
 {
-    public class UnitOfWorkPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IUseCase
+    public class UnitOfWorkPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IUseCase
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public UnitOfWorkPipelineBehavior(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             using (var scope = this._unitOfWork.BeginTransaction())
             {

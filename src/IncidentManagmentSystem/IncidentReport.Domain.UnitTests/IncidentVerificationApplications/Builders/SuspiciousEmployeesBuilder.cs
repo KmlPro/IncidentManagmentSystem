@@ -12,13 +12,14 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         {
             this._suspiciousEmployees = new List<EmployeeId>();
         }
+
         public SuspiciousEmployeesBuilder SetEmployees(IEnumerable<EmployeeId> suspiciousEmployees)
         {
             this._suspiciousEmployees = suspiciousEmployees;
             return this;
         }
 
-        public List<EmployeeId>  Build()
+        public List<EmployeeId> Build()
         {
             return this._suspiciousEmployees.ToList();
         }

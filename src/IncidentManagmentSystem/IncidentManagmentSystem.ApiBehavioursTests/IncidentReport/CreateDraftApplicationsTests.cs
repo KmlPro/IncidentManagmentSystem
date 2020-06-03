@@ -15,6 +15,35 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
     {
         private const string _path = "api/DraftApplication";
 
+        private MultipartFormDataContent CreateMultipartFormDataContent()
+        {
+            var title = FakeData.AlphaNumeric(10);
+            var description = FakeData.AlphaNumeric(99);
+            var incidentType = IncidentType.AdverseEffectForTheCompany;
+            var suspiciousEmployees = new List<Guid> {Guid.NewGuid()};
+
+            var formData = new MultipartFormDataContent
+            {
+                {new StringContent(title), nameof(CreateDraftApplicationRequest.Title)},
+                {new StringContent(description), nameof(CreateDraftApplicationRequest.Description)},
+                {new StringContent(incidentType.ToString()), nameof(CreateDraftApplicationRequest.IncidentType)},
+                {
+                    new StringContent(string.Join(", ", suspiciousEmployees)),
+                    nameof(CreateDraftApplicationRequest.SuspiciousEmployees)
+                }
+            };
+
+            return formData;
+        }
+
+        private void AddAttachments(MultipartFormDataContent formData, List<string> fileNames)
+        {
+            foreach (var fileName in fileNames)
+            {
+                formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(fileName)), "Attachments", fileName);
+            }
+        }
+
         [Test]
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_ReturnOk()
         {
@@ -30,38 +59,12 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
         public async Task CreateIncidentVerificationApplication_ValidRequestParameters_WithAttachemtns_ReturnOk()
         {
             var requestParameters = this.CreateMultipartFormDataContent();
-            this.AddAttachments(requestParameters, new List<string>() { "test1.txt", "test2.txt" });
+            this.AddAttachments(requestParameters, new List<string> {"test1.txt", "test2.txt"});
 
             var response = await this.TestClient.PostAsync(_path, requestParameters);
 
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(response.Headers.Location);
-        }
-
-        private MultipartFormDataContent CreateMultipartFormDataContent()
-        {
-            var title = FakeData.AlphaNumeric(10);
-            var description = FakeData.AlphaNumeric(99);
-            var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-
-            var formData = new MultipartFormDataContent
-            {
-                { new StringContent(title), nameof(CreateDraftApplicationRequest.Title) },
-                { new StringContent(description), nameof(CreateDraftApplicationRequest.Description) },
-                { new StringContent(incidentType.ToString()), nameof(CreateDraftApplicationRequest.IncidentType) },
-                { new StringContent(string.Join(", ", suspiciousEmployees)), nameof(CreateDraftApplicationRequest.SuspiciousEmployees) }
-            };
-
-            return formData;
-        }
-
-        private void AddAttachments(MultipartFormDataContent formData, List<string> fileNames)
-        {
-            foreach (var fileName in fileNames)
-            {
-                formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(fileName)), "Attachments", fileName);
-            }
         }
     }
 }

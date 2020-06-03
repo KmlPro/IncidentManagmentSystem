@@ -29,7 +29,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
                 .SetContentOfApplication(x => x.SetTitle(FakeData.Alpha(10)).SetDescription(FakeData.Alpha(20)))
                 .SetIncidentType(IncidentType.AdverseEffectForTheCompany)
                 .SetApplicantId(new EmployeeId(Guid.NewGuid()))
-                .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }));
+                .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> {new EmployeeId(Guid.NewGuid())}));
 
             var applicationDraft = draftApplicationBuilder.Build();
 

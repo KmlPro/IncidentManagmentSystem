@@ -8,10 +8,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.Applicant
 {
     public class ApplicantCannotBeSuspectRule : IBusinessRule
     {
-        private readonly List<EmployeeId> _suspiciousEmployees;
         private readonly EmployeeId _applicantId;
+        private readonly List<EmployeeId> _suspiciousEmployees;
 
-        public ApplicantCannotBeSuspectRule(List<EmployeeId>  suspiciousEmployees, EmployeeId applicantId)
+        public ApplicantCannotBeSuspectRule(List<EmployeeId> suspiciousEmployees, EmployeeId applicantId)
         {
             this._suspiciousEmployees = suspiciousEmployees;
             this._applicantId = applicantId;

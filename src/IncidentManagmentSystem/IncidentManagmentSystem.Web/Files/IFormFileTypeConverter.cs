@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using AutoMapper;
@@ -12,7 +11,7 @@ namespace IncidentManagmentSystem.Web.Files
         public List<FileData> Convert(List<IFormFile> source, List<FileData> destination, ResolutionContext context)
         {
             var fileDataList = new List<FileData>();
-            if(source != null)
+            if (source != null)
             {
                 foreach (var file in source)
                 {
@@ -22,7 +21,7 @@ namespace IncidentManagmentSystem.Web.Files
                         fileDataList.Add(new FileData(file.FileName, memoryStream.ToArray()));
                     }
                 }
-            }       
+            }
 
             return fileDataList;
         }

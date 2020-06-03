@@ -3,4 +3,9 @@
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:BuildingBlocks.Domain.Abstract.WithCheckRule.CheckRule(BuildingBlocks.Domain.Interfaces.IBusinessRule)")]
+using System.Diagnostics.CodeAnalysis;
+
+[assembly:
+    SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member",
+        Target =
+            "~M:BuildingBlocks.Domain.Abstract.WithCheckRule.CheckRule(BuildingBlocks.Domain.Interfaces.IBusinessRule)")]

@@ -6,10 +6,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 {
     public class Attachment : Entity
     {
-        public AttachmentId Id { get; }
-        public FileInfo FileInfo { get; }
-        public StorageId StorageId { get; }
-
         public Attachment(FileInfo fileInfo, StorageId storageId)
         {
             this.Id = new AttachmentId(Guid.NewGuid());
@@ -19,7 +15,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 
         private Attachment()
         {
-
         }
+
+        public AttachmentId Id { get; }
+        public FileInfo FileInfo { get; }
+        public StorageId StorageId { get; }
     }
 }

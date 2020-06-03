@@ -34,11 +34,15 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
                 this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
 
-        public DraftApplicationId Id { get; private set; }
+        private DraftApplication()
+        {
+        }
+
+        public DraftApplicationId Id { get; }
         public ContentOfApplication ContentOfApplication { get; private set; }
         public IncidentType? IncidentType { get; private set; }
         public List<SuspiciousEmployee> SuspiciousEmployees { get; private set; }
-        public List<Attachment> Attachments { get; private set; }
+        public List<Attachment> Attachments { get; }
         public EmployeeId ApplicantId { get; }
 
         public void Update(
@@ -52,7 +56,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
                 contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
             this.IncidentType = incidentType;
             //kbytner 03.06.2020 - think about updates, how to handle that ?
-            this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();;
+            this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
+            ;
 
             this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication,
                 this.IncidentType, this.SuspiciousEmployees));
@@ -70,10 +75,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.Attachments.RemoveAll(x => attachmentsToRemove.Contains(x));
 
             this.AddDomainEvent(new DraftApplicationAttachmentsDeleted(this.Id, attachmentsToRemove));
-        }
-
-        private DraftApplication()
-        {
         }
     }
 }

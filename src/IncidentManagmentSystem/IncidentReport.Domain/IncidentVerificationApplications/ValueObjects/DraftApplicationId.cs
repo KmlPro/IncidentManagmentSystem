@@ -7,8 +7,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
     {
         private DraftApplicationId()
         {
-
         }
+
         public DraftApplicationId(Guid value) : base(value)
         {
         }

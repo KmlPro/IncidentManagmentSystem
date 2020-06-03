@@ -8,7 +8,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateA
 {
     public class IndicateAtLeastOneSuspectRule : IBusinessRule
     {
-        private List<EmployeeId> _suspiciousEmployees;
+        private readonly List<EmployeeId> _suspiciousEmployees;
 
         public IndicateAtLeastOneSuspectRule(List<EmployeeId> suspiciousEmployees)
         {

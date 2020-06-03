@@ -9,15 +9,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
     public class PostedApplicationDomainEvent : DomainEvent
     {
-        public PostedApplicationId Id { get; }
-        public ApplicationNumber ApplicationNumber { get; }
-        public ContentOfApplication ContentOfApplication { get; }
-        public IncidentType IncidentType { get; }
-        public DateTime PostDate { get; }
-        public EmployeeId ApplicantId { get; }
-        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
-        public List<Attachment> Attachments { get; }
-
         public PostedApplicationDomainEvent(
             PostedApplicationId id,
             ApplicationNumber applicationNumber,
@@ -37,5 +28,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
             this.Attachments = attachments;
             this.PostDate = postDate;
         }
+
+        public PostedApplicationId Id { get; }
+        public ApplicationNumber ApplicationNumber { get; }
+        public ContentOfApplication ContentOfApplication { get; }
+        public IncidentType IncidentType { get; }
+        public DateTime PostDate { get; }
+        public EmployeeId ApplicantId { get; }
+        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
+        public List<Attachment> Attachments { get; }
     }
 }

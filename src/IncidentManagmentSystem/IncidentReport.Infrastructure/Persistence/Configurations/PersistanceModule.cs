@@ -10,11 +10,13 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
     internal class PersistanceModule : Module
     {
         private readonly DbContextOptionsBuilder _dbContextOptions;
+
         public PersistanceModule(Action<DbContextOptionsBuilder> optionsAction)
         {
             this._dbContextOptions = new DbContextOptionsBuilder();
             optionsAction(this._dbContextOptions);
         }
+
         protected override void Load(ContainerBuilder builder)
         {
             builder

@@ -22,13 +22,16 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
             //Arrange
             var command = this.CreateUseCaseWithRequiredFields();
             var outputPort = new CreateDraftApplicationUseCaseOutputPort();
-            var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService, outputPort);
+            var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
+                this.IFileStorageService, outputPort);
 
             //Act
-            var useCaseOutput = (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
+            var useCaseOutput =
+                (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
 
             //Assert
-            var isDraftApplicationAddedToContext = this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
+            var isDraftApplicationAddedToContext =
+                this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
 
             Assert.IsTrue(isDraftApplicationAddedToContext);
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
@@ -38,15 +41,18 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public async Task AllFieldsAreFilled_WithAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this.CreateUseCaseWithRequiredFields(new List<string>() { "testFile.pdf" });
+            var command = this.CreateUseCaseWithRequiredFields(new List<string> {"testFile.pdf"});
             var outputPort = new CreateDraftApplicationUseCaseOutputPort();
-            var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext, this.IFileStorageService, outputPort);
+            var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
+                this.IFileStorageService, outputPort);
 
             //Act
-            var useCaseOutput = (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
+            var useCaseOutput =
+                (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
 
             //Assert
-            var isDraftApplicationAddedToContext = this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
+            var isDraftApplicationAddedToContext =
+                this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
 
             Assert.IsTrue(isDraftApplicationAddedToContext);
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
@@ -55,13 +61,15 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         [Test]
         public void AttachmentsWithUnallowedExtension_DraftNotCreated()
         {
-            AssertApplicationLayerException<UnallowedFileExtensionException>(() => this.CreateUseCaseWithRequiredFields(new List<string>() { "testFile.exe" }));
+            AssertApplicationLayerException<UnallowedFileExtensionException>(() =>
+                this.CreateUseCaseWithRequiredFields(new List<string> {"testFile.exe"}));
         }
 
         [Test]
         public void AttachmentsWithoutExtension_DraftNotCreated()
         {
-            AssertApplicationLayerException<FileExtensionNotRecognizedException>(() => this.CreateUseCaseWithRequiredFields(new List<string>() { "testFile" }));
+            AssertApplicationLayerException<FileExtensionNotRecognizedException>(() =>
+                this.CreateUseCaseWithRequiredFields(new List<string> {"testFile"}));
         }
 
         private CreateDraftApplicationInput CreateUseCaseWithRequiredFields(List<string> fileNames = null)
@@ -69,15 +77,16 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-            var attachments = fileNames?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
+            var suspiciousEmployees = new List<Guid> {Guid.NewGuid()};
+            var attachments = fileNames
+                ?.Select(x => new FileData(x, new byte[] {0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20})).ToList();
 
             return new CreateDraftApplicationInput(
-                  title,
-                  description,
-                  incidentType,
-                  suspiciousEmployees,
-                  attachments);
+                title,
+                description,
+                incidentType,
+                suspiciousEmployees,
+                attachments);
         }
     }
 }

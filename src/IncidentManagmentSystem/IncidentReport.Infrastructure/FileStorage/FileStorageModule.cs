@@ -3,7 +3,7 @@ using IncidentReport.Application.Files;
 
 namespace IncidentReport.Infrastructure.FileStorage
 {
-    internal class FileStorageModule : Autofac.Module
+    internal class FileStorageModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

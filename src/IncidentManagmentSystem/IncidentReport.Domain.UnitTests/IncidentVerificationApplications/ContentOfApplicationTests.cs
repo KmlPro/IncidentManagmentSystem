@@ -8,17 +8,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
     [TestFixture]
     public class ContentOfApplicationTests : TestBase
     {
-        [Test]
-        public void AllFieldsAreValid_CreatedSuccessfully()
-        {
-            var contentOfApplicationBuilder = new ContentOfApplicationBuilder()
-                .SetTitle(FakeData.Alpha(11))
-                .SetDescription(FakeData.Alpha(100));
-
-            var contentOfApplication = contentOfApplicationBuilder.Build();
-            Assert.NotNull(contentOfApplication);
-        }
-
         [TestCase(1)]
         [TestCase(101)]
         public void TitleRuleViolated_NotCreated(int titleLength)
@@ -45,6 +34,17 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             {
                 var contentOfApplication = contentOfApplicationBuilder.Build();
             });
+        }
+
+        [Test]
+        public void AllFieldsAreValid_CreatedSuccessfully()
+        {
+            var contentOfApplicationBuilder = new ContentOfApplicationBuilder()
+                .SetTitle(FakeData.Alpha(11))
+                .SetDescription(FakeData.Alpha(100));
+
+            var contentOfApplication = contentOfApplicationBuilder.Build();
+            Assert.NotNull(contentOfApplication);
         }
     }
 }

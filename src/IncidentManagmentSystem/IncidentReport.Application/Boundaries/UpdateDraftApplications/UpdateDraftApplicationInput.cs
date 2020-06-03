@@ -8,14 +8,6 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
 {
     public class UpdateDraftApplicationInput : IUseCaseInput<IOutputPort>
     {
-        public Guid DraftApplicationId { get; set; }
-        public string Title { get; }
-        public string Description { get; }
-        public IncidentType? IncidentType { get; }
-        public IEnumerable<Guid> SuspiciousEmployees { get; }
-        public List<FileData> AddedAttachments { get; }
-        public List<Guid> DeletedAttachments { get; }
-
         public UpdateDraftApplicationInput(Guid draftApplicationId,
             string title,
             string description,
@@ -32,5 +24,13 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
             this.AddedAttachments = addedAttachments;
             this.DeletedAttachments = deletedAttachments;
         }
+
+        public Guid DraftApplicationId { get; set; }
+        public string Title { get; }
+        public string Description { get; }
+        public IncidentType? IncidentType { get; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; }
+        public List<FileData> AddedAttachments { get; }
+        public List<Guid> DeletedAttachments { get; }
     }
 }

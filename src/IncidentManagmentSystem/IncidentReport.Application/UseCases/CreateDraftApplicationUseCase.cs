@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -17,9 +16,9 @@ namespace IncidentReport.Application.UseCases
 {
     public class CreateDraftApplicationUseCase : IUseCase
     {
-        private readonly IIncidentReportDbContext _incidentReportContext;
-        private readonly IFileStorageService _fileStorageService;
         private readonly ICurrentUserContext _applicantContext;
+        private readonly IFileStorageService _fileStorageService;
+        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IOutputPort _outputPort;
 
         public CreateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,

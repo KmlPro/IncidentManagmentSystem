@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-
 namespace IncidentReport.Application.Boundaries.PublicDomainDto
 {
     //kbytner 03.06.2020 - to do after implementing IReadonlyDbContext
@@ -31,9 +25,5 @@ namespace IncidentReport.Application.Boundaries.PublicDomainDto
         //<summary>
         //kbytner 08.04.2020 - temporarty ctor, remove after testing
         //</summary>
-        public DraftApplicationDto()
-        {
-
-        }
     }
 }

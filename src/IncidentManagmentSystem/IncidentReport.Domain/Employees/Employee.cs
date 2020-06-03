@@ -14,8 +14,8 @@ namespace IncidentReport.Domain.Employees
             this.Surname = surname ?? throw new ArgumentNullException(nameof(surname));
         }
 
-        public EmployeeId Id { get; private set; }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
+        public EmployeeId Id { get; }
+        public string Name { get; }
+        public string Surname { get; }
     }
 }

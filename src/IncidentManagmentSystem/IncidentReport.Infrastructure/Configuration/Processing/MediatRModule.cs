@@ -2,13 +2,15 @@ using System.Reflection;
 using Autofac;
 using IncidentReport.Infrastructure.Configuration.Processing.Pipeline;
 using MediatR;
+using Module = Autofac.Module;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing
 {
     // sample configuration https://github.com/jbogard/MediatR/blob/master/samples/MediatR.Examples.Autofac/Program.cs
-    internal class MediatRModule : Autofac.Module
+    internal class MediatRModule : Module
     {
         private readonly Assembly _assemblyWithMediatRComponentsImplementation;
+
         public MediatRModule(Assembly assemblyWithMediatRComponentsImplementation)
         {
             this._assemblyWithMediatRComponentsImplementation = assemblyWithMediatRComponentsImplementation;
@@ -20,10 +22,7 @@ namespace IncidentReport.Infrastructure.Configuration.Processing
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            var mediatrOpenTypes = new[]
-            {
-                typeof(IRequestHandler<,>),
-            };
+            var mediatrOpenTypes = new[] {typeof(IRequestHandler<,>)};
 
             foreach (var mediatrOpenType in mediatrOpenTypes)
             {

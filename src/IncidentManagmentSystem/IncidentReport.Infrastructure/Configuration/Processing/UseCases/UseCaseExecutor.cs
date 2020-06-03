@@ -8,7 +8,8 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.UseCases
 {
     internal class UseCaseExecutor
     {
-        internal async static Task<TUseCaseOutput> Execute<TUseCaseOutput>(IUseCaseInput<TUseCaseOutput> useCase) where TUseCaseOutput : IUseCaseOutput
+        internal static async Task<TUseCaseOutput> Execute<TUseCaseOutput>(IUseCaseInput<TUseCaseOutput> useCase)
+            where TUseCaseOutput : IUseCaseOutput
         {
             using (var scope = CompositionRoot.BeginLifetimeScope())
             {

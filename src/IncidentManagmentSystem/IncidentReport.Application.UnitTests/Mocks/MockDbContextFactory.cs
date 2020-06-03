@@ -16,8 +16,6 @@ namespace IncidentReport.Application.UnitTests.Mocks
 {
     internal class MockDbContextFactory
     {
-        public IIncidentReportDbContext IncidentReportDbContext { get; set; }
-
         private readonly List<DraftApplication> _draftIncidentVerificationApplication;
 
         public MockDbContextFactory()
@@ -26,13 +24,16 @@ namespace IncidentReport.Application.UnitTests.Mocks
             this.IncidentReportDbContext = this.CreateDbContext();
         }
 
+        public IIncidentReportDbContext IncidentReportDbContext { get; set; }
+
         public IIncidentReportDbContext CreateDbContext()
         {
             var incidentReportDbContext = new Mock<IIncidentReportDbContext>();
 
             var draftIncidentVerificationApplication = this.GetMockDbSet(this._draftIncidentVerificationApplication);
 
-            incidentReportDbContext.Setup(x => x.DraftApplications).Returns(draftIncidentVerificationApplication.Object);
+            incidentReportDbContext.Setup(x => x.DraftApplications)
+                .Returns(draftIncidentVerificationApplication.Object);
 
             return incidentReportDbContext.Object;
         }
@@ -44,7 +45,8 @@ namespace IncidentReport.Application.UnitTests.Mocks
             mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(entities.AsQueryable().Expression);
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(entities.AsQueryable().ElementType);
             mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(entities.AsQueryable().GetEnumerator());
-            mockSet.Setup(m => m.AddAsync(It.IsAny<T>(), It.IsAny<CancellationToken>())).Callback(action: (T model, CancellationToken token) => entities.Add(model));
+            mockSet.Setup(m => m.AddAsync(It.IsAny<T>(), It.IsAny<CancellationToken>()))
+                .Callback((T model, CancellationToken token) => entities.Add(model));
             return mockSet;
         }
     }

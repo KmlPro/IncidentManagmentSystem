@@ -15,8 +15,8 @@ namespace IncidentReport.Application.UseCases
     //kbytner 19.03.2020 - implementation not completed -- to do add and remove suspicious employee
     public class UpdateDraftApplicationUseCase : IUseCase
     {
-        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
+        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IOutputPort _outputPort;
 
         public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
@@ -32,7 +32,7 @@ namespace IncidentReport.Application.UseCases
         {
             var draftIncidentVerificationApplication =
                 await this._incidentReportContext.DraftApplications.FirstAsync(x =>
-                    x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken: cancellationToken);
+                    x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken);
 
             this.UpdateApplicationData(draftIncidentVerificationApplication, input);
 

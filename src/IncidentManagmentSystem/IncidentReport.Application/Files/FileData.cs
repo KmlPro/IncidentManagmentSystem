@@ -8,8 +8,13 @@ namespace IncidentReport.Application.Files
 {
     public class FileData
     {
-        public string FileName { get; }
-        public byte[] Content { get; }
+        private readonly IEnumerable<string> _allowedDocumentExtensions = new List<string> {"doc", "docx", "odt"};
+
+        private readonly IEnumerable<string> _allowedExcelExtensions = new List<string> {"xls", "xlsx"};
+
+        private readonly IEnumerable<string> _allowedImagesExtensions = new List<string> {"jpeg", "png", "jpg"};
+
+        private readonly IEnumerable<string> _allowedOtherExtensions = new List<string> {"pdf", "xlsx", "txt"};
 
         public FileData(string fileName, byte[] content)
         {
@@ -19,6 +24,9 @@ namespace IncidentReport.Application.Files
             this.Content = content;
         }
 
+        public string FileName { get; }
+        public byte[] Content { get; }
+
         private void CheckExtensions(string fileName)
         {
             var extension = Path.GetExtension(fileName).Replace(".", "", StringComparison.Ordinal);
@@ -27,40 +35,14 @@ namespace IncidentReport.Application.Files
             {
                 throw new FileExtensionNotRecognizedException();
             }
-            else if (!(this._allowedImagesExtensions.Any(x => x == extension) ||
-                this._allowedExcelExtensions.Any(x => x == extension) ||
-                this._allowedDocumentExtensions.Any(x => x == extension) ||
-                this._allowedOtherExtensions.Any(x => x == extension)))
+
+            if (!(this._allowedImagesExtensions.Any(x => x == extension) ||
+                  this._allowedExcelExtensions.Any(x => x == extension) ||
+                  this._allowedDocumentExtensions.Any(x => x == extension) ||
+                  this._allowedOtherExtensions.Any(x => x == extension)))
             {
                 throw new UnallowedFileExtensionException();
             }
         }
-
-        private readonly IEnumerable<string> _allowedImagesExtensions = new List<string>
-        {
-          "jpeg",
-          "png",
-          "jpg",
-        };
-
-        private readonly IEnumerable<string> _allowedExcelExtensions = new List<string>
-        {
-          "xls",
-          "xlsx",
-        };
-
-        private readonly IEnumerable<string> _allowedDocumentExtensions = new List<string>
-        {
-          "doc",
-          "docx",
-          "odt"
-        };
-
-        private readonly IEnumerable<string> _allowedOtherExtensions = new List<string>
-        {
-          "pdf",
-          "xlsx",
-          "txt"
-        };
     }
 }

@@ -10,7 +10,6 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using JetBrains.Annotations;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
@@ -43,17 +42,17 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
                 this.Attachments, this.PostDate));
         }
 
-        public PostedApplicationId Id { get; private set; }
+        private PostedApplication()
+        {
+        }
+
+        public PostedApplicationId Id { get; }
         public ApplicationNumber ApplicationNumber { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }
-        public List<SuspiciousEmployee> SuspiciousEmployees { get; private set; }
-        public List<Attachment> Attachments { get; private set; }
-
-        private PostedApplication()
-        {
-        }
+        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
+        public List<Attachment> Attachments { get; }
     }
 }

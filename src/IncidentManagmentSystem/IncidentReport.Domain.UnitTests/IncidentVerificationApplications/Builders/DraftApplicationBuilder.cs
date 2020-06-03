@@ -10,15 +10,15 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
 {
     public class DraftApplicationBuilder
     {
-        private ContentOfApplication _contentOfApplication;
-        private IncidentType? _incidentType;
         private EmployeeId _applicantId;
-        private List<EmployeeId> _suspiciousEmployees;
         private IEnumerable<Attachment> _attachments;
+        private Func<AttachmentBuilder, AttachmentBuilder>[] _attachmentsDelegate;
+        private ContentOfApplication _contentOfApplication;
 
         private Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> _contentOfApplicationDelegate;
+        private IncidentType? _incidentType;
+        private List<EmployeeId> _suspiciousEmployees;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
-        private Func<AttachmentBuilder, AttachmentBuilder>[] _attachmentsDelegate;
 
         public DraftApplicationBuilder SetIncidentType(IncidentType incidentType)
         {

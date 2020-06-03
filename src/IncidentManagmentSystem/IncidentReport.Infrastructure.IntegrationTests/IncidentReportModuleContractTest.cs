@@ -12,11 +12,13 @@ namespace IncidentReport.Infrastructure.IntegrationTests
     public class IncidentReportModuleContractTest
     {
         private readonly IContainer _container;
+
         public IncidentReportModuleContractTest()
         {
             var currentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
             var rootContainerBuilder = new ContainerBuilder();
-            var incidentReportStartup = new IncidentReportStartupForTests(typeof(IncidentReportModuleContractTest).Assembly);
+            var incidentReportStartup =
+                new IncidentReportStartupForTests(typeof(IncidentReportModuleContractTest).Assembly);
 
             incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
                 currentUserContext);

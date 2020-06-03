@@ -5,7 +5,8 @@ namespace BuildingBlocks.Application.UnitTests
 {
     public class ApplicationLayerBaseTest
     {
-        public static void AssertApplicationLayerException<TApplicationLayerException>(TestDelegate testDelegate) where TApplicationLayerException : ApplicationLayerException
+        public static void AssertApplicationLayerException<TApplicationLayerException>(TestDelegate testDelegate)
+            where TApplicationLayerException : ApplicationLayerException
         {
             var message = $"Expected {typeof(TApplicationLayerException).Name} exception";
             var applicationLayerException = Assert.Throws<TApplicationLayerException>(testDelegate, message);

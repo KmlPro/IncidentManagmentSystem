@@ -6,13 +6,13 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
 {
     public class DraftApplicationAttachmentsAdded : DomainEvent
     {
-        public DraftApplicationId DraftApplicationId { get; }
-        public List<Attachment> Attachments { get; }
-
         public DraftApplicationAttachmentsAdded(DraftApplicationId draftApplicationId, List<Attachment> attachments)
         {
             this.DraftApplicationId = draftApplicationId;
             this.Attachments = attachments;
         }
+
+        public DraftApplicationId DraftApplicationId { get; }
+        public List<Attachment> Attachments { get; }
     }
 }

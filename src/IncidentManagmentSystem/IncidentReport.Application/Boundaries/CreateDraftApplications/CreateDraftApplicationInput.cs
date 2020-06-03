@@ -8,13 +8,8 @@ namespace IncidentReport.Application.Boundaries.CreateDraftApplications
 {
     public class CreateDraftApplicationInput : IUseCaseInput<IOutputPort>
     {
-        public string Title { get; }
-        public string Description { get; }
-        public IncidentType? IncidentType { get; }
-        public IEnumerable<Guid> SuspiciousEmployees { get; }
-        public List<FileData> Attachments { get; }
-
-        public CreateDraftApplicationInput(string title, string description, IncidentType? incidentType, IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
+        public CreateDraftApplicationInput(string title, string description, IncidentType? incidentType,
+            IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
         {
             this.Title = title;
             this.Description = description;
@@ -22,5 +17,11 @@ namespace IncidentReport.Application.Boundaries.CreateDraftApplications
             this.SuspiciousEmployees = suspiciousEmployees;
             this.Attachments = attachments;
         }
+
+        public string Title { get; }
+        public string Description { get; }
+        public IncidentType? IncidentType { get; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; }
+        public List<FileData> Attachments { get; }
     }
 }

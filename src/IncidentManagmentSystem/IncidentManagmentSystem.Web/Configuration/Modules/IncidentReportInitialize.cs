@@ -15,10 +15,11 @@ namespace IncidentManagmentSystem.Web.Configuration.Modules
 
             incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
                 currentUserContext,
-                (ContainerBuilder moduleContainerBuilder) =>
+                moduleContainerBuilder =>
                 {
                     moduleContainerBuilder.RegisterType<CreateDraftApplicationPresenter>().InstancePerLifetimeScope();
-                    moduleContainerBuilder.Register<IOutputPort>(ctx => ctx.Resolve<CreateDraftApplicationPresenter>()).InstancePerLifetimeScope();
+                    moduleContainerBuilder.Register<IOutputPort>(ctx => ctx.Resolve<CreateDraftApplicationPresenter>())
+                        .InstancePerLifetimeScope();
                 });
 
             incidentReportStartup.RegisterModuleContract(builder);

@@ -37,9 +37,11 @@ namespace BuildingBlocks.Infrastructure
                     yield return this._converters.GetOrAdd((underlyingModelType, typeof(Guid)), _ =>
                     {
                         return new ValueConverterInfo(
-                            modelClrType: modelClrType,
-                            providerClrType: typeof(Guid),
-                            factory: valueConverterInfo => (ValueConverter)Activator.CreateInstance(converterType, valueConverterInfo.MappingHints));
+                            modelClrType,
+                            typeof(Guid),
+                            valueConverterInfo =>
+                                (ValueConverter)Activator.CreateInstance(converterType,
+                                    valueConverterInfo.MappingHints));
                     });
                 }
             }

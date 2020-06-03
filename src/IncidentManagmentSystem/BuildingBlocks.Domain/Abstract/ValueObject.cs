@@ -7,8 +7,13 @@ namespace BuildingBlocks.Domain.Abstract
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {
-        private List<PropertyInfo> _properties;
         private List<FieldInfo> _fields;
+        private List<PropertyInfo> _properties;
+
+        public bool Equals(ValueObject obj)
+        {
+            return this.Equals(obj as object);
+        }
 
         public static bool operator ==(ValueObject obj1, ValueObject obj2)
         {
@@ -18,16 +23,16 @@ namespace BuildingBlocks.Domain.Abstract
                 {
                     return true;
                 }
+
                 return false;
             }
+
             return obj1.Equals(obj2);
         }
 
-        public static bool operator !=(ValueObject obj1, ValueObject obj2) => !(obj1 == obj2);
-
-        public bool Equals(ValueObject obj)
+        public static bool operator !=(ValueObject obj1, ValueObject obj2)
         {
-            return this.Equals(obj as object);
+            return !(obj1 == obj2);
         }
 
         public override bool Equals(object obj)
@@ -38,7 +43,7 @@ namespace BuildingBlocks.Domain.Abstract
             }
 
             return this.GetProperties().All(p => this.PropertiesAreEqual(obj, p))
-                && this.GetFields().All(f => this.FieldsAreEqual(obj, f));
+                   && this.GetFields().All(f => this.FieldsAreEqual(obj, f));
         }
 
         private bool PropertiesAreEqual(object obj, PropertyInfo p)
@@ -68,7 +73,8 @@ namespace BuildingBlocks.Domain.Abstract
         {
             if (this._fields == null)
             {
-                this._fields = this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                this._fields = this.GetType()
+                    .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
                     .Where(p => p.GetCustomAttribute(typeof(ExcludeFromComparisonPropertyAttribute)) == null)
                     .ToList();
             }
@@ -78,7 +84,7 @@ namespace BuildingBlocks.Domain.Abstract
 
         public override int GetHashCode()
         {
-            unchecked   //allow overflow
+            unchecked //allow overflow
             {
                 var hash = 17;
                 foreach (var prop in this.GetProperties())

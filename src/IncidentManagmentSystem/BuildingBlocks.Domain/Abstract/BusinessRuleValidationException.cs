@@ -5,14 +5,14 @@ namespace BuildingBlocks.Domain.Abstract
 {
     public abstract class BusinessRuleValidationException : Exception
     {
-        public IBusinessRule BrokenRule { get; }
-        private string Details { get; }
-
         public BusinessRuleValidationException(IBusinessRule brokenRule, string message) : base(message)
         {
             this.BrokenRule = brokenRule;
             this.Details = message;
         }
+
+        public IBusinessRule BrokenRule { get; }
+        private string Details { get; }
 
         public override string ToString()
         {

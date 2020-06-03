@@ -4,8 +4,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
 {
     public class ContentOfApplicationBuilder
     {
-        private string _title;
         private string _description;
+        private string _title;
 
         public ContentOfApplicationBuilder SetTitle(string title)
         {

@@ -3,4 +3,10 @@
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ContentOfApplication.#ctor(System.String,System.String)")]
+using System.Diagnostics.CodeAnalysis;
+
+[assembly:
+    SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>",
+        Scope = "member",
+        Target =
+            "~M:IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ContentOfApplication.#ctor(System.String,System.String)")]
