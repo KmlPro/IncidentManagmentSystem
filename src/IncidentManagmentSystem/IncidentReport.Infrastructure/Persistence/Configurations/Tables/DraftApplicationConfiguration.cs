@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 {
+    //kbytner 03.06.2020 - to do configuration
     internal class DraftApplicationConfiguration : IEntityTypeConfiguration<DraftApplication>
     {
         public void Configure(EntityTypeBuilder<DraftApplication> builder)
@@ -15,7 +16,6 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
-            builder.Property(nameof(DraftApplication.SuspiciousEmployees)).HasConversion(SuspiciousEmployeesConverter.Convert());
             builder.Property(nameof(DraftApplication.IncidentType)).HasConversion(IncidentTypeConverter.Convert());
 
             builder.OwnsOne(m => m.ContentOfApplication);

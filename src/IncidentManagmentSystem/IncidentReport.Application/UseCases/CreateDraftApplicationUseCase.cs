@@ -45,9 +45,8 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
                 }
 
-
-                //kbytner 12.05.2020 - change to repository, implementation like IOutputPort 
-                await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication, cancellationToken);
+                await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication,
+                    cancellationToken);
 
                 this.BuildOutput(draftIncidentVerificationApplication);
             }
@@ -69,8 +68,9 @@ namespace IncidentReport.Application.UseCases
                 new ContentOfApplication(request.Title, request.Description),
                 request.IncidentType,
                 new EmployeeId(this._applicantContext.UserId),
-                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
-                );
+                new List<EmployeeId>(
+                    request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
+            );
         }
 
         private bool IfAddedAttachmentsExists(CreateDraftApplicationInput request)
@@ -85,7 +85,8 @@ namespace IncidentReport.Application.UseCases
 
         private void AddUploadedFilesAsAttachments(DraftApplication draftApplication, List<UploadedFile> files)
         {
-            var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId))).ToList();
+            var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)))
+                .ToList();
             draftApplication.AddAttachments(attachments);
         }
 

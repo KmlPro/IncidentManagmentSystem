@@ -42,12 +42,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         }
 
         private void CheckTitleLength(string title)
-        {      
+        {
             if (title.Length < this._minTitleLength)
             {
                 throw new ArgumentOutOfRangeException(nameof(title), string.Format(Resources.ApplicationTitleTooShortException, this._minTitleLength));
             }
-            else if (this.Title.Length >= this._maxTitleLength)
+            else if (title.Length >= this._maxTitleLength)
             {
                 throw new ArgumentOutOfRangeException(nameof(title), string.Format(Resources.ApplicationTitleTooLongException, this._maxTitleLength));
             }

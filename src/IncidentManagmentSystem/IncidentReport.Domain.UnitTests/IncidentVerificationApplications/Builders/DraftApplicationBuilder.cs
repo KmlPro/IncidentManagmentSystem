@@ -13,7 +13,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         private ContentOfApplication _contentOfApplication;
         private IncidentType? _incidentType;
         private EmployeeId _applicantId;
-        private SuspiciousEmployees _suspiciousEmployees;
+        private List<EmployeeId> _suspiciousEmployees;
         private IEnumerable<Attachment> _attachments;
 
         private Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> _contentOfApplicationDelegate;
@@ -32,13 +32,15 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return this;
         }
 
-        public DraftApplicationBuilder SetContentOfApplication(Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> contentOfApplicationDelegate)
+        public DraftApplicationBuilder SetContentOfApplication(
+            Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> contentOfApplicationDelegate)
         {
             this._contentOfApplicationDelegate = contentOfApplicationDelegate;
             return this;
         }
 
-        public DraftApplicationBuilder SetSuspiciousEmployees(Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> suspiciousEmployeesDelegate)
+        public DraftApplicationBuilder SetSuspiciousEmployees(
+            Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> suspiciousEmployeesDelegate)
         {
             this._suspiciousEmployeesDelegate = suspiciousEmployeesDelegate;
             return this;
@@ -55,22 +57,29 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();
             this._attachments = this.TryBuildAttachments();
-            return new DraftApplication(this._contentOfApplication, this._incidentType, this._applicantId, this._suspiciousEmployees);
+            return new DraftApplication(this._contentOfApplication, this._incidentType, this._applicantId,
+                this._suspiciousEmployees);
         }
 
         private IEnumerable<Attachment> TryBuildAttachments()
         {
-            return this._attachments != null ? this._attachmentsDelegate.Select(x => x(new AttachmentBuilder()).Build()).ToList() : null;
+            return this._attachments != null
+                ? this._attachmentsDelegate.Select(x => x(new AttachmentBuilder()).Build()).ToList()
+                : null;
         }
 
-        private SuspiciousEmployees TryBuildSuspiciousEmployees()
+        private List<EmployeeId> TryBuildSuspiciousEmployees()
         {
-            return this._suspiciousEmployeesDelegate != null ? this._suspiciousEmployeesDelegate(new SuspiciousEmployeesBuilder()).Build() : null;
+            return this._suspiciousEmployeesDelegate != null
+                ? this._suspiciousEmployeesDelegate(new SuspiciousEmployeesBuilder()).Build()
+                : new List<EmployeeId>();
         }
 
         private ContentOfApplication TryBuildContentOfApplication()
         {
-            return this._contentOfApplicationDelegate != null ? this._contentOfApplicationDelegate(new ContentOfApplicationBuilder()).Build() : null;
+            return this._contentOfApplicationDelegate != null
+                ? this._contentOfApplicationDelegate(new ContentOfApplicationBuilder()).Build()
+                : null;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
@@ -11,9 +12,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType? IncidentType { get; }
         public EmployeeId ApplicantId { get; }
-        public SuspiciousEmployees SuspiciousEmployees { get; }
+        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
 
-        public DraftApplicationCreatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, EmployeeId applicantId, SuspiciousEmployees suspiciousEmployees)
+        public DraftApplicationCreatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication, IncidentType? incidentType, EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees)
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;

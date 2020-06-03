@@ -1,25 +1,25 @@
+using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect.Exceptions;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect
 {
     public class ApplicantCannotBeSuspectRule : IBusinessRule
     {
-        public SuspiciousEmployees SuspiciousEmployees { get; }
-        private EmployeeId ApplicantId { get; }
+        private readonly List<EmployeeId> _suspiciousEmployees;
+        private readonly EmployeeId _applicantId;
 
-        public ApplicantCannotBeSuspectRule(SuspiciousEmployees suspiciousEmployees, EmployeeId applicantId)
+        public ApplicantCannotBeSuspectRule(List<EmployeeId>  suspiciousEmployees, EmployeeId applicantId)
         {
-            this.SuspiciousEmployees = suspiciousEmployees;
-            this.ApplicantId = applicantId;
+            this._suspiciousEmployees = suspiciousEmployees;
+            this._applicantId = applicantId;
         }
 
         public void CheckIsBroken()
         {
-            if (this.SuspiciousEmployees != null && this.SuspiciousEmployees.Employees.Any(x => x == this.ApplicantId))
+            if (this._suspiciousEmployees != null && this._suspiciousEmployees.Any(x => x == this._applicantId))
             {
                 throw new ApplicantCannotBeSuspectRuleException(this);
             }

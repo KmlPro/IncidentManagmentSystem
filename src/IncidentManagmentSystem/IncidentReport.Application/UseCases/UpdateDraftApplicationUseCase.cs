@@ -12,12 +12,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.UseCases
 {
-    //kbytner 19.03.2020 - implementation not completed
+    //kbytner 19.03.2020 - implementation not completed -- to do add and remove suspicious employee
     public class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly IOutputPort _outputPort;
+
         public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort)
@@ -29,7 +30,9 @@ namespace IncidentReport.Application.UseCases
 
         public async Task<IOutputPort> Handle(UpdateDraftApplicationInput input, CancellationToken cancellationToken)
         {
-            var draftIncidentVerificationApplication = await this._incidentReportContext.DraftApplications.FirstAsync(x => x.Id == new DraftApplicationId(input.DraftApplicationId));
+            var draftIncidentVerificationApplication =
+                await this._incidentReportContext.DraftApplications.FirstAsync(x =>
+                    x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken: cancellationToken);
 
             this.UpdateApplicationData(draftIncidentVerificationApplication, input);
 
@@ -52,8 +55,8 @@ namespace IncidentReport.Application.UseCases
             draftApplication.Update(
                 new ContentOfApplication(request.Title, request.Description),
                 request.IncidentType,
-                new SuspiciousEmployees(request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
-                );
+                new List<EmployeeId>(
+                    request.SuspiciousEmployees.Select(x => new EmployeeId(x))));
         }
 
         private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)
@@ -61,9 +64,11 @@ namespace IncidentReport.Application.UseCases
             return request.DeletedAttachments != null && request.AddedAttachments.Any();
         }
 
-        private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication, List<UploadedFile> files)
+        private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication,
+            List<UploadedFile> files)
         {
-            var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId))).ToList();
+            var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)))
+                .ToList();
             draftIncidentVerificationApplication.AddAttachments(attachments);
         }
 
@@ -77,9 +82,11 @@ namespace IncidentReport.Application.UseCases
             return request.DeletedAttachments != null && request.DeletedAttachments.Any();
         }
 
-        private void DeleteAttachments(DraftApplication draftIncidentVerificationApplication, UpdateDraftApplicationInput request)
+        private void DeleteAttachments(DraftApplication draftIncidentVerificationApplication,
+            UpdateDraftApplicationInput request)
         {
-            draftIncidentVerificationApplication.DeleteAttachments(request.DeletedAttachments.Select(x => new StorageId(x)));
+            draftIncidentVerificationApplication.DeleteAttachments(
+                request.DeletedAttachments.Select(x => new StorageId(x)));
         }
     }
 }

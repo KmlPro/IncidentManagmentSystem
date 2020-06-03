@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
 {
@@ -8,15 +8,19 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
     {
         private IEnumerable<EmployeeId> _suspiciousEmployees;
 
+        public SuspiciousEmployeesBuilder()
+        {
+            this._suspiciousEmployees = new List<EmployeeId>();
+        }
         public SuspiciousEmployeesBuilder SetEmployees(IEnumerable<EmployeeId> suspiciousEmployees)
         {
             this._suspiciousEmployees = suspiciousEmployees;
             return this;
         }
 
-        public SuspiciousEmployees Build()
+        public List<EmployeeId>  Build()
         {
-            return new SuspiciousEmployees(this._suspiciousEmployees);
+            return this._suspiciousEmployees.ToList();
         }
     }
 }

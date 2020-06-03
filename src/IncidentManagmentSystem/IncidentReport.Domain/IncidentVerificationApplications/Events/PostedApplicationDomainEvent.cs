@@ -15,7 +15,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }
-        public SuspiciousEmployees SuspiciousEmployees { get; }
+        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
         public List<Attachment> Attachments { get; }
 
         public PostedApplicationDomainEvent(
@@ -24,7 +24,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
-            SuspiciousEmployees suspiciousEmployees,
+            List<SuspiciousEmployee> suspiciousEmployees,
             List<Attachment> attachments,
             DateTime postDate)
         {
