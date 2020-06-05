@@ -14,6 +14,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 {
+    [Category(CategoryTitle.Title)]
     public class CreateDraftApplicationUseCaseTests : BaseTest
     {
         [Test]
@@ -41,7 +42,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public async Task AllFieldsAreFilled_WithAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this.CreateUseCaseWithRequiredFields(new List<string> {"testFile.pdf"});
+            var command = this.CreateUseCaseWithRequiredFields(new List<string> { "testFile.pdf" });
             var outputPort = new CreateDraftApplicationUseCaseOutputPort();
             var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
                 this.IFileStorageService, outputPort);
@@ -62,14 +63,14 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public void AttachmentsWithUnallowedExtension_DraftNotCreated()
         {
             AssertApplicationLayerException<UnallowedFileExtensionException>(() =>
-                this.CreateUseCaseWithRequiredFields(new List<string> {"testFile.exe"}));
+                this.CreateUseCaseWithRequiredFields(new List<string> { "testFile.exe" }));
         }
 
         [Test]
         public void AttachmentsWithoutExtension_DraftNotCreated()
         {
             AssertApplicationLayerException<FileExtensionNotRecognizedException>(() =>
-                this.CreateUseCaseWithRequiredFields(new List<string> {"testFile"}));
+                this.CreateUseCaseWithRequiredFields(new List<string> { "testFile" }));
         }
 
         private CreateDraftApplicationInput CreateUseCaseWithRequiredFields(List<string> fileNames = null)
@@ -77,9 +78,9 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var suspiciousEmployees = new List<Guid> {Guid.NewGuid()};
+            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
             var attachments = fileNames
-                ?.Select(x => new FileData(x, new byte[] {0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20})).ToList();
+                ?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
 
             return new CreateDraftApplicationInput(
                 title,

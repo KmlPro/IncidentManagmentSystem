@@ -11,6 +11,7 @@ using NUnit.Framework;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
+    [Category(IncidentReportCategoryTitle.Title)]
     public class CreateDraftApplicationsTests : BaseTest
     {
         private const string _path = "api/DraftApplication";

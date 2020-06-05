@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
 {
+    [Category(CategoryTitle.Title)]
     public class IncidentReportModuleContractTest
     {
         private readonly IContainer _container;

@@ -11,6 +11,7 @@ using NUnit.Framework;
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 {
     [TestFixture]
+    [Category(CategoryTitle.Title)]
     public class DraftApplicationTests : DraftApplicationTestsBase
     {
         [Test]
