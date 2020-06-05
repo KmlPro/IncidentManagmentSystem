@@ -12,10 +12,10 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
 {
     public class CreateDraftApplicationRequest : IMapTo<CreateDraftApplicationInput>
     {
-        public string Title { get; }
-        public string Description { get; }
-        public IncidentType IncidentType { get; }
-        public IEnumerable<Guid> SuspiciousEmployees { get; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public IncidentType IncidentType { get; set; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; set; }
         public List<IFormFile> Attachments { get; }
 
         public void Mapping(Profile profile)

@@ -47,20 +47,32 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 
         public void Update(
             ContentOfApplication contentOfApplication,
-            IncidentType? incidentType,
-            List<EmployeeId> suspiciousEmployees)
+            IncidentType? incidentType)
         {
-            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, this.ApplicantId));
-
             this.ContentOfApplication =
                 contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
             this.IncidentType = incidentType;
-            //kbytner 03.06.2020 - think about updates, how to handle that ?
-            this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
-            ;
 
             this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication,
                 this.IncidentType, this.SuspiciousEmployees));
+        }
+
+        public void AddSuspiciousEmployees(List<EmployeeId> employeeIds)
+        {
+            this.CheckRule(new ApplicantCannotBeSuspectRule(employeeIds, this.ApplicantId));
+
+            var suspiciousEmployees = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
+            this.SuspiciousEmployees.AddRange(employeeIds.Select(x => new SuspiciousEmployee(x)));
+
+            this.AddDomainEvent(new DraftApplicationSuspiciousEmployeeAdded(this.Id, suspiciousEmployees));
+        }
+
+        public void DeleteSuspiciousEmployees(List<EmployeeId> employeeIds)
+        {
+            var suspiciousEmployee = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
+            this.SuspiciousEmployees.AddRange(employeeIds.Select(x => new SuspiciousEmployee(x)));
+
+            this.AddDomainEvent(new DraftApplicationSuspiciousEmployeeDeleted(this.Id, suspiciousEmployee));
         }
 
         public void AddAttachments(List<Attachment> attachments)

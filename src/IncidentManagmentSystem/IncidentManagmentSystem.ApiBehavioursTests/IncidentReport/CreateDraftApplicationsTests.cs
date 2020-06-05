@@ -20,7 +20,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var suspiciousEmployees = new List<Guid> {Guid.NewGuid()};
+            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
 
             var formData = new MultipartFormDataContent
             {
@@ -45,7 +45,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
         }
 
         [Test]
-        public async Task CreateIncidentVerificationApplication_ValidRequestParameters_ReturnOk()
+        public async Task ValidRequestParameters_ReturnOk()
         {
             var requestParameters = this.CreateMultipartFormDataContent();
 
@@ -56,10 +56,10 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
         }
 
         [Test]
-        public async Task CreateIncidentVerificationApplication_ValidRequestParameters_WithAttachemtns_ReturnOk()
+        public async Task ValidRequestParameters_WithAttachemtns_ReturnOk()
         {
             var requestParameters = this.CreateMultipartFormDataContent();
-            this.AddAttachments(requestParameters, new List<string> {"test1.txt", "test2.txt"});
+            this.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
 
             var response = await this.TestClient.PostAsync(_path, requestParameters);
 

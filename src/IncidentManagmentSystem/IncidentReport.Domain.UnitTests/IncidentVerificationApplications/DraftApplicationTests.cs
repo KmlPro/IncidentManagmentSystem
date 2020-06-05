@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
@@ -22,7 +21,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             var applicationDraftAttachments = this.CreateAttachments(2);
 
             applicationDraft.AddAttachments(applicationDraftAttachments);
-            applicationDraft.DeleteAttachments(new List<StorageId> {applicationDraftAttachments.First().StorageId}
+            applicationDraft.DeleteAttachments(new List<StorageId> { applicationDraftAttachments.First().StorageId }
                 .AsEnumerable());
 
             var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
@@ -76,30 +75,12 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 
             var draftApplicationBuilder = new DraftApplicationBuilder()
                 .SetApplicantId(employeeId)
-                .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> {employeeId}));
+                .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> { employeeId }));
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
             {
                 var applicationDraft = draftApplicationBuilder.Build();
             });
-        }
-
-        [Test]
-        public void ApplicantIsSuspiciousEmployee_NotUpdated()
-        {
-            var employeeId = new EmployeeId(Guid.NewGuid());
-
-            var draftApplicationBuilder = new DraftApplicationBuilder()
-                .SetApplicantId(employeeId)
-                .SetContentOfApplication(x => x.SetTitle(FakeData.Alpha(10)).SetDescription(FakeData.Alpha(20)));
-
-            var draftApplication = draftApplicationBuilder.Build();
-
-            var suspiciousEmployees =
-                new List<EmployeeId> {employeeId};
-
-            AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
-                draftApplication.Update(null, null, suspiciousEmployees));
         }
     }
 }

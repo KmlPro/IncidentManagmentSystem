@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -54,9 +53,7 @@ namespace IncidentReport.Application.UseCases
         {
             draftApplication.Update(
                 new ContentOfApplication(request.Title, request.Description),
-                request.IncidentType,
-                new List<EmployeeId>(
-                    request.SuspiciousEmployees.Select(x => new EmployeeId(x))));
+                request.IncidentType);
         }
 
         private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)

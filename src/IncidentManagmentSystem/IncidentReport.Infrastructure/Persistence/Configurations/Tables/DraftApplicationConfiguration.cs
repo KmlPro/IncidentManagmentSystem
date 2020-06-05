@@ -1,4 +1,5 @@
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.Persistence.Configurations.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -18,8 +19,19 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 
             builder.Property(nameof(DraftApplication.IncidentType)).HasConversion(IncidentTypeConverter.Convert());
 
-            builder.OwnsOne(m => m.ContentOfApplication);
-            builder.OwnsMany(m => m.Attachments);
+            //kbytner 06.06.2020 - think about set withOwner 
+            builder.OwnsOne(m => m.ContentOfApplication, table =>
+            {
+                table.Property(ca => ca.Title).HasMaxLength(100).HasColumnName(nameof(ContentOfApplication.Title));
+                table.Property(ca => ca.Description).HasMaxLength(1000).HasColumnName(nameof(ContentOfApplication.Description));
+            });
+
+            builder.OwnsMany(m => m.Attachments, table =>
+            {
+                table.OwnsOne(m => m.FileInfo, fi => fi.Property(ca => ca.FileName).HasMaxLength(100).HasColumnName(nameof(FileInfo.FileName)));
+            });
+
+            builder.OwnsMany(m => m.SuspiciousEmployees);
         }
     }
 }

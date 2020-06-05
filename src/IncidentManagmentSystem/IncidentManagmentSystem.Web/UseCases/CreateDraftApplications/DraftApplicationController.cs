@@ -22,7 +22,7 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
             this._mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Guid))]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
