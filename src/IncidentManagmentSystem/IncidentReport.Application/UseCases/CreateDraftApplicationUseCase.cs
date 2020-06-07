@@ -36,18 +36,18 @@ namespace IncidentReport.Application.UseCases
         {
             try
             {
-                var draftIncidentVerificationApplication = this.CreateDraft(input);
+                var draftApplication = this.CreateDraft(input);
 
                 if (this.IfAddedAttachmentsExists(input))
                 {
                     var files = await this.UploadFilesToStorage(input);
-                    this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
+                    this.AddUploadedFilesAsAttachments(draftApplication, files);
                 }
 
-                await this._incidentReportContext.DraftApplications.AddAsync(draftIncidentVerificationApplication,
+                await this._incidentReportContext.DraftApplications.AddAsync(draftApplication,
                     cancellationToken);
 
-                this.BuildOutput(draftIncidentVerificationApplication);
+                this.BuildOutput(draftApplication);
             }
             catch (BusinessRuleValidationException ex)
             {

@@ -1,17 +1,21 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BuildingBlocks.Application.Abstract;
+using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IncidentReport.Application.UseCases
 {
-    //kbytner 19.03.2020 - implementation not completed -- to do add and remove suspicious employee
     public class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IFileStorageService _fileStorageService;
@@ -29,24 +33,77 @@ namespace IncidentReport.Application.UseCases
 
         public async Task<IOutputPort> Handle(UpdateDraftApplicationInput input, CancellationToken cancellationToken)
         {
-            var draftIncidentVerificationApplication =
-                await this._incidentReportContext.DraftApplications.FirstAsync(x =>
-                    x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken);
+            try
+            {
+                var draftApplication =
+                 await this._incidentReportContext.DraftApplications.FirstAsync(x =>
+                     x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken);
 
-            this.UpdateApplicationData(draftIncidentVerificationApplication, input);
+                this.UpdateApplicationData(draftApplication, input);
+                await this.UpdateAttachments(draftApplication, input);
+                this.UpdateSuspiciousEmployees(draftApplication, input);
 
+                this.BuildOutput(draftApplication);
+            }
+            catch (BusinessRuleValidationException ex)
+            {
+                this._outputPort.WriteBusinessRuleError(ex.ToString());
+            }
+            catch (ApplicationLayerException ex)
+            {
+                this._outputPort.WriteBusinessRuleError(ex.ToString());
+            }
+
+            return this._outputPort;
+        }
+
+        private void BuildOutput(DraftApplication draftApplication)
+        {
+            var createDraftApplicationOutput = new UpdateDraftApplicationOutput(draftApplication);
+            this._outputPort.Standard(createDraftApplicationOutput);
+        }
+
+        private void UpdateSuspiciousEmployees(DraftApplication draftApplication, UpdateDraftApplicationInput input)
+        {
+            var newSuspiciousEmployees = this.GetNewSuspiciousEmployees(draftApplication, input);
+            if (newSuspiciousEmployees.Any())
+            {
+                draftApplication.AddSuspiciousEmployees(newSuspiciousEmployees);
+            }
+
+            var removedSuspiciousEmployees = this.GetRemovedSuspiciousEmployees(draftApplication, input);
+            if (removedSuspiciousEmployees.Any())
+            {
+                draftApplication.DeleteSuspiciousEmployees(removedSuspiciousEmployees);
+            }
+        }
+
+        private List<EmployeeId> GetRemovedSuspiciousEmployees(DraftApplication draftApplication, UpdateDraftApplicationInput input)
+        {
+            return draftApplication.SuspiciousEmployees.
+                Where(se => !input.SuspiciousEmployees.Contains(se.EmployeeId.Value))
+                .Select(x => x.EmployeeId).ToList();
+        }
+
+        private async Task UpdateAttachments(DraftApplication draftApplication, UpdateDraftApplicationInput input)
+        {
             if (this.IfAddedAttachmentsExists(input))
             {
                 var files = await this.UploadFilesToStorage(input);
-                this.AddUploadedFilesAsAttachments(draftIncidentVerificationApplication, files);
+                this.AddUploadedFilesAsAttachments(draftApplication, files);
             }
 
             if (this.IfDeletedAttachmentExists(input))
             {
-                this.DeleteAttachments(draftIncidentVerificationApplication, input);
+                this.DeleteAttachments(draftApplication, input);
             }
+        }
 
-            return this._outputPort;
+        private List<EmployeeId> GetNewSuspiciousEmployees(DraftApplication draftApplication, UpdateDraftApplicationInput input)
+        {
+            return input.SuspiciousEmployees.
+                Where(se => !draftApplication.SuspiciousEmployees.Select(x => x.EmployeeId.Value).Contains(se))
+                .Select(x => new EmployeeId(x)).ToList();
         }
 
         private void UpdateApplicationData(DraftApplication draftApplication, UpdateDraftApplicationInput request)

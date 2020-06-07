@@ -11,6 +11,10 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
             {
                 throw new ArgumentNullException(nameof(draftApplication));
             }
+
+            this.Id = draftApplication.Id.Value;
         }
+
+        public Guid Id { get; }
     }
 }

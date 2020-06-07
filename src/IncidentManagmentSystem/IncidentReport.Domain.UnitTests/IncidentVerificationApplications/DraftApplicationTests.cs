@@ -50,7 +50,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void AddAttachments_ApplicantIsSuspiciousEmployee_NotUpdated()
+        public void AddSuspiciousEmployees_ApplicantIsSuspiciousEmployee_NotUpdated()
         {
             var applicationDraft = this.CreateValidApplicationDraft();
             var employeeList = new List<EmployeeId> { applicationDraft.ApplicantId };
