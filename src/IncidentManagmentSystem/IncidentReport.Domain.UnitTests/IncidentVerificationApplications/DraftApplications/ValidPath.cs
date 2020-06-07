@@ -1,18 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
 {
     [TestFixture]
     [Category(CategoryTitle.Title)]
-    public class DraftApplicationTests : DraftApplicationTestsBase
+    public class ValidPath : TestFixture
     {
         [Test]
         public void AddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()
@@ -38,7 +34,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void AddAttachments_UpdatedSuccessfully()
+        public void AddAttachments_AddedSuccessfully()
         {
             var applicationDraft = this.CreateValidApplicationDraft();
 
@@ -50,15 +46,20 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
         }
 
         [Test]
-        public void AddSuspiciousEmployees_ApplicantIsSuspiciousEmployee_NotUpdated()
+        public void AddSuspiciousEmployees_AddedSuccessfully()
         {
+            //Arrange
             var applicationDraft = this.CreateValidApplicationDraft();
-            var employeeList = new List<EmployeeId> { applicationDraft.ApplicantId };
+            var initialSuspiciousEmployeesCount = applicationDraft.SuspiciousEmployees.Count();
 
-            AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
-            {
-                applicationDraft.AddSuspiciousEmployees(employeeList);
-            });
+            //Act
+            applicationDraft.AddSuspiciousEmployees(this.CreateNewSuspiciousEmployees());
+
+            //Assert
+            var suspiciousEmployeesAddedEvent = AssertPublishedDomainEvent<DraftApplicationSuspiciousEmployeeAdded>(applicationDraft);
+
+            Assert.NotNull(suspiciousEmployeesAddedEvent);
+            Assert.That(initialSuspiciousEmployeesCount < applicationDraft.SuspiciousEmployees.Count());
         }
 
         [Test]
@@ -68,32 +69,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 
             var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreatedDomainEvent>(applicationDraft);
             Assert.NotNull(draftCreated);
-        }
-
-        [Test]
-        public void ApplicantIdShouldBeFilled_NotCreated()
-        {
-            var draftApplicationBuilder = new DraftApplicationBuilder();
-
-            AssertException<ArgumentNullException>(() =>
-            {
-                var applicationDraft = draftApplicationBuilder.Build();
-            });
-        }
-
-        [Test]
-        public void ApplicantIsSuspiciousEmployee_NotCreated()
-        {
-            var employeeId = new EmployeeId(Guid.NewGuid());
-
-            var draftApplicationBuilder = new DraftApplicationBuilder()
-                .SetApplicantId(employeeId)
-                .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> { employeeId }));
-
-            AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
-            {
-                var applicationDraft = draftApplicationBuilder.Build();
-            });
         }
     }
 }

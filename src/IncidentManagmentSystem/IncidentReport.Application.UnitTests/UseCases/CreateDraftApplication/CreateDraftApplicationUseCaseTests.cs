@@ -21,14 +21,14 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public async Task AllFieldsAreFilled_OnlyWithoutAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this.CreateUseCaseWithRequiredFields();
+            var useCase = this.CreateUseCaseWithRequiredFields();
             var outputPort = new CreateDraftApplicationUseCaseOutputPort();
             var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
                 this.IFileStorageService, outputPort);
 
             //Act
             var useCaseOutput =
-                (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
+                (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
             var isDraftApplicationAddedToContext =
