@@ -13,14 +13,17 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
         [Test]
         public void AddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()
         {
+            //Arrange
             var applicationDraft = this.CreateValidApplicationDraft();
 
             var applicationDraftAttachments = this.CreateAttachments(2);
 
+            //Act
             applicationDraft.AddAttachments(applicationDraftAttachments);
             applicationDraft.DeleteAttachments(new List<StorageId> { applicationDraftAttachments.First().StorageId }
                 .AsEnumerable());
 
+            //Assert
             var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
             var attachmentsDeletedEvent =
                 AssertPublishedDomainEvent<DraftApplicationAttachmentsDeleted>(applicationDraft);
@@ -36,9 +39,13 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
         [Test]
         public void AddAttachments_AddedSuccessfully()
         {
+            //Arrange
             var applicationDraft = this.CreateValidApplicationDraft();
 
+            //Act
             applicationDraft.AddAttachments(this.CreateAttachments(2));
+
+            //Assert
             var attachmentsAddedEvent = AssertPublishedDomainEvent<DraftApplicationAttachmentsAdded>(applicationDraft);
 
             Assert.NotNull(attachmentsAddedEvent);
