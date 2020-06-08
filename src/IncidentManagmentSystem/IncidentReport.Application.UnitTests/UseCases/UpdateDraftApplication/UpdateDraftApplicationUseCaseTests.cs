@@ -1,3 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using BuildingBlocks.Application.UnitTests;
+using IncidentReport.Application.UseCases;
+using IncidentReport.Domain.IncidentVerificationApplications.Enums;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
@@ -5,94 +13,65 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
     [Category(CategoryTitle.Title)]
     public class UpdateDraftApplicationUseCaseTests : BaseTest
     {
-        //[Test]
-        //public async Task AllFieldsAreFilled_WithoutAttachments_SuspiciousEmployeeNotChanged_DraftUpdatedSuccessfully()
-        //{
-        //    //Arrange
-        //    var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-        //    var incidentType = IncidentType.AdverseEffectForTheCompany;
+        private readonly TestFixture _testFixture;
+        public UpdateDraftApplicationUseCaseTests()
+        {
+            this._testFixture = new TestFixture();
+        }
 
-        //    var newDraftApplication = this.AddNewDraftAplicationToContext(suspiciousEmployees, incidentType);
+        [Test]
+        public async Task SuspiciousEmployeeNotChanged_DraftUpdatedSuccessfully()
+        {
+            //Arrange
+            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
+            var newDraftApplication = this._testFixture.CreateNewDraft(suspiciousEmployees, IncidentType.AdverseEffectForTheCompany);
+            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
 
-        //    var useCase = this.CreateUseCaseWithRequiredFields();
-        //    var outputPort = new UpdateDraftApplicationUseCaseOutputPort();
-        //    var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
-        //        this.IFileStorageService, outputPort);
+            var useCase = this._testFixture.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations);
+            var outputPort = new UpdateDraftApplicationUseCaseOutputPort();
+            var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
+                this.IFileStorageService, outputPort);
 
-        //    //Act
-        //    var useCaseOutput =
-        //        (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
+            //Act
+            var useCaseOutput =
+                (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
-        //    //Assert
-        //    var isDraftApplicationAddedToContext =
-        //        this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
+            //Assert
+            var draftApplicationFromContext =
+               await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == useCaseOutput.Id);
 
-        //    Assert.IsTrue(isDraftApplicationAddedToContext);
-        //    Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
-        //}
+            Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
+            Assert.AreEqual(draftApplicationFromContext.ContentOfApplication.Title, useCase.Title);
+            Assert.AreEqual(draftApplicationFromContext.ContentOfApplication.Description, useCase.Description);
+            Assert.AreEqual(draftApplicationFromContext.IncidentType, useCase.IncidentType);
+            Assert.AreEqual(1, draftApplicationFromContext.SuspiciousEmployees.Count);
+        }
 
-        //private DraftApplication AddNewDraftAplicationToContext(List<Guid> suspiciousEmployees, IncidentType incidentType)
-        //{
-        //    var title = FakeData.AlphaNumeric(10);
-        //    var description = FakeData.AlphaNumeric(99);
-        //    var contentOfApplication = new ContentOfApplication(title, description);
+        [Test]
+        public async Task TwoNewSuspiciousEmployeeAdded_OneRemoved_DraftUpdatedSuccessfully()
+        {
+            //Arrange
+            var initialSuspiciousEmployees = new List<Guid> { Guid.NewGuid() };
+            var newDraftApplication = this._testFixture.CreateNewDraft(initialSuspiciousEmployees, IncidentType.AdverseEffectForTheCompany);
+            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
 
-        //    var draftApplication = new DraftApplication()
-        //}
+            var newSuspiciousEmployees = new List<Guid> { Guid.NewGuid(), Guid.NewGuid() };
 
-        //[Test]
-        //public async Task AllFieldsAreFilled_WithAttachments_DraftCreatedSuccessfully()
-        //{
-        //    //Arrange
-        //    var command = this.CreateUseCaseWithRequiredFields(new List<string> { "testFile.pdf" });
-        //    var outputPort = new CreateDraftApplicationUseCaseOutputPort();
-        //    var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
-        //        this.IFileStorageService, outputPort);
+            var useCase = this._testFixture.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, newSuspiciousEmployees, IncidentType.FinancialViolations);
+            var outputPort = new UpdateDraftApplicationUseCaseOutputPort();
+            var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
+                this.IFileStorageService, outputPort);
 
-        //    //Act
-        //    var useCaseOutput =
-        //        (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
+            //Act
+            var useCaseOutput =
+                (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
-        //    //Assert
-        //    var isDraftApplicationAddedToContext =
-        //        this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
+            //Assert
+            var draftApplicationFromContext =
+               await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == useCaseOutput.Id);
 
-        //    Assert.IsTrue(isDraftApplicationAddedToContext);
-        //    Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
-        //}
-
-        //private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(List<string> fileNames = null)
-        //{
-        //    var title = FakeData.AlphaNumeric(10);
-        //    var description = FakeData.AlphaNumeric(99);
-        //    var incidentType = IncidentType.AdverseEffectForTheCompany;
-        //    var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-        //    var attachments = fileNames
-        //        ?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
-
-        //    return new UpdateDraftApplicationInput(
-        //        title,
-        //        description,
-        //        incidentType,
-        //        suspiciousEmployees,
-        //        attachments);
-        //}
-
-        //private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(List<string> fileNames = null)
-        //{
-        //    var title = FakeData.AlphaNumeric(10);
-        //    var description = FakeData.AlphaNumeric(99);
-        //    var incidentType = IncidentType.AdverseEffectForTheCompany;
-        //    var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-        //    var attachments = fileNames
-        //        ?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
-
-        //    return new UpdateDraftApplicationInput(
-        //        title,
-        //        description,
-        //        incidentType,
-        //        suspiciousEmployees,
-        //        attachments);
-        //}
+            Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
+            Assert.AreEqual(2, draftApplicationFromContext.SuspiciousEmployees.Count);
+        }
     }
 }

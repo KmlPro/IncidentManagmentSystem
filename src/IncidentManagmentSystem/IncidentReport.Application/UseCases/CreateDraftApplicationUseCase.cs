@@ -44,7 +44,7 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftApplication, files);
                 }
 
-                await this._incidentReportContext.DraftApplications.AddAsync(draftApplication,
+                await this._incidentReportContext.DraftApplication.AddAsync(draftApplication,
                     cancellationToken);
 
                 this.BuildOutput(draftApplication);

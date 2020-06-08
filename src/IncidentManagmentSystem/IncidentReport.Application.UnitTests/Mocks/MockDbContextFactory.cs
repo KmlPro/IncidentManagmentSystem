@@ -4,6 +4,7 @@ using System.Threading;
 using IncidentReport.Application.Common;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using Microsoft.EntityFrameworkCore;
+using MockQueryable.Moq;
 using Moq;
 
 //<summmary>
@@ -32,7 +33,7 @@ namespace IncidentReport.Application.UnitTests.Mocks
 
             var draftIncidentVerificationApplication = this.GetMockDbSet(this._draftIncidentVerificationApplication);
 
-            incidentReportDbContext.Setup(x => x.DraftApplications)
+            incidentReportDbContext.Setup(x => x.DraftApplication)
                 .Returns(draftIncidentVerificationApplication.Object);
 
             return incidentReportDbContext.Object;
@@ -40,13 +41,10 @@ namespace IncidentReport.Application.UnitTests.Mocks
 
         private Mock<DbSet<T>> GetMockDbSet<T>(ICollection<T> entities) where T : class
         {
-            var mockSet = new Mock<DbSet<T>>();
-            mockSet.As<IQueryable<T>>().Setup(m => m.Provider).Returns(entities.AsQueryable().Provider);
-            mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(entities.AsQueryable().Expression);
-            mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(entities.AsQueryable().ElementType);
-            mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(entities.AsQueryable().GetEnumerator());
+            var mockSet = entities.AsQueryable().BuildMockDbSet();
             mockSet.Setup(m => m.AddAsync(It.IsAny<T>(), It.IsAny<CancellationToken>()))
                 .Callback((T model, CancellationToken token) => entities.Add(model));
+
             return mockSet;
         }
     }

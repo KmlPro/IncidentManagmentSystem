@@ -32,7 +32,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 
             //Assert
             var isDraftApplicationAddedToContext =
-                this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
+                this.IncidentReportDbContext.DraftApplication.Any(x => x.Id.Value == useCaseOutput.Id);
 
             Assert.IsTrue(isDraftApplicationAddedToContext);
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
@@ -53,7 +53,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 
             //Assert
             var isDraftApplicationAddedToContext =
-                this.IncidentReportDbContext.DraftApplications.Any(x => x.Id.Value == useCaseOutput.Id);
+                this.IncidentReportDbContext.DraftApplication.Any(x => x.Id.Value == useCaseOutput.Id);
 
             Assert.IsTrue(isDraftApplicationAddedToContext);
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);

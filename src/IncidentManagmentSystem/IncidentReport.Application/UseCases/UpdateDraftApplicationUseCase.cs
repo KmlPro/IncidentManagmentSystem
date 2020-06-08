@@ -36,7 +36,7 @@ namespace IncidentReport.Application.UseCases
             try
             {
                 var draftApplication =
-                 await this._incidentReportContext.DraftApplications.FirstAsync(x =>
+                 await this._incidentReportContext.DraftApplication.FirstAsync(x =>
                      x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken);
 
                 this.UpdateApplicationData(draftApplication, input);

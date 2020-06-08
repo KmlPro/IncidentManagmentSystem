@@ -16,7 +16,7 @@ namespace IncidentReport.Infrastructure.Persistence
         {
         }
 
-        public DbSet<DraftApplication> DraftApplications { get; set; }
+        public DbSet<DraftApplication> DraftApplication { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
