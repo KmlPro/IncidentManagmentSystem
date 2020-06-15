@@ -70,7 +70,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
         public void DeleteSuspiciousEmployees(List<EmployeeId> employeeIds)
         {
             var suspiciousEmployee = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
-            this.SuspiciousEmployees.AddRange(employeeIds.Select(x => new SuspiciousEmployee(x)));
+            this.SuspiciousEmployees.RemoveAll(x => employeeIds.Contains(x.EmployeeId));
 
             this.AddDomainEvent(new DraftApplicationSuspiciousEmployeeDeleted(this.Id, suspiciousEmployee));
         }

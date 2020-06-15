@@ -66,12 +66,13 @@ namespace IncidentReport.Application.UseCases
         private void UpdateSuspiciousEmployees(DraftApplication draftApplication, UpdateDraftApplicationInput input)
         {
             var newSuspiciousEmployees = this.GetNewSuspiciousEmployees(draftApplication, input);
+            var removedSuspiciousEmployees = this.GetRemovedSuspiciousEmployees(draftApplication, input);
+
             if (newSuspiciousEmployees.Any())
             {
                 draftApplication.AddSuspiciousEmployees(newSuspiciousEmployees);
             }
 
-            var removedSuspiciousEmployees = this.GetRemovedSuspiciousEmployees(draftApplication, input);
             if (removedSuspiciousEmployees.Any())
             {
                 draftApplication.DeleteSuspiciousEmployees(removedSuspiciousEmployees);
