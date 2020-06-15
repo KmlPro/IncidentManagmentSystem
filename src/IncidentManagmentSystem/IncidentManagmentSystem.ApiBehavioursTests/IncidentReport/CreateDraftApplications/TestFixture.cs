@@ -1,22 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentManagmentSystem.Web.UseCases.CreateDraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
-using NUnit.Framework;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
+namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
 {
-    [Category(IncidentReportCategoryTitle.Title)]
-    public class CreateDraftApplicationsTests : BaseTest
+    public class TestFixture
     {
-        private const string _path = "api/DraftApplication";
-
-        private MultipartFormDataContent CreateMultipartFormDataContent()
+        public MultipartFormDataContent CreateMultipartFormDataContent()
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
@@ -37,35 +31,12 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
             return formData;
         }
 
-        private void AddAttachments(MultipartFormDataContent formData, List<string> fileNames)
+        public void AddAttachments(MultipartFormDataContent formData, List<string> fileNames)
         {
             foreach (var fileName in fileNames)
             {
                 formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(fileName)), "Attachments", fileName);
             }
-        }
-
-        [Test]
-        public async Task ValidRequestParameters_ReturnOk()
-        {
-            var requestParameters = this.CreateMultipartFormDataContent();
-
-            var response = await this.TestClient.PostAsync(_path, requestParameters);
-
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-            Assert.NotNull(response.Headers.Location);
-        }
-
-        [Test]
-        public async Task ValidRequestParameters_WithAttachemtns_ReturnOk()
-        {
-            var requestParameters = this.CreateMultipartFormDataContent();
-            this.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
-
-            var response = await this.TestClient.PostAsync(_path, requestParameters);
-
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-            Assert.NotNull(response.Headers.Location);
         }
     }
 }
