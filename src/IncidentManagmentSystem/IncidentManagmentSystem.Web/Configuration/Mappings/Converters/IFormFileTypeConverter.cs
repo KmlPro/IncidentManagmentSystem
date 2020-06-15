@@ -4,7 +4,7 @@ using AutoMapper;
 using IncidentReport.Application.Files;
 using Microsoft.AspNetCore.Http;
 
-namespace IncidentManagmentSystem.Web.Files
+namespace IncidentManagmentSystem.Web.Configuration.Mappings.Converters
 {
     public class IFormFileTypeConverter : ITypeConverter<List<IFormFile>, List<FileData>>
     {

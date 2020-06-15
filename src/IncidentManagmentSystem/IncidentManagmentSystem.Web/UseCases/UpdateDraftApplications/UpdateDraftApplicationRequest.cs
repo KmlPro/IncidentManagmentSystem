@@ -2,17 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using AutoMapper.Configuration.Conventions;
 using IncidentManagmentSystem.Web.Configuration.Mappings;
 using IncidentManagmentSystem.Web.Configuration.Mappings.Converters;
-using IncidentReport.Application.Boundaries.CreateDraftApplications;
+using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
+namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
 {
-    public class CreateDraftApplicationRequest : IMapTo<CreateDraftApplicationInput>
+    public class UpdateDraftApplicationRequest : IMapTo<UpdateDraftApplicationInput>
     {
+        [MapTo(nameof(UpdateDraftApplicationInput.DraftApplicationId))]
+        public Guid Id { get; set; }
+
         [MinLength(10)]
         [MaxLength(100)]
         public string Title { get; set; }
@@ -30,7 +34,7 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
         public void Mapping(Profile profile)
         {
             profile.CreateMap<List<IFormFile>, List<FileData>>().ConvertUsing(new IFormFileTypeConverter());
-            profile.CreateMap<CreateDraftApplicationRequest, CreateDraftApplicationInput>();
+            profile.CreateMap<UpdateDraftApplicationRequest, UpdateDraftApplicationInput>();
         }
     }
 }
