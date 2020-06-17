@@ -5,6 +5,8 @@ using System.Text;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentManagmentSystem.Web.UseCases.CreateDraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Hosting;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
 {
@@ -37,6 +39,14 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftA
             {
                 formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(fileName)), "Attachments", fileName);
             }
+        }
+
+        public HttpClient GetHttpClient()
+        {
+            var hostBuilder = TestWebHostBuilderFactory.Create();
+            var host = hostBuilder.StartAsync().Result;
+
+            return host.GetTestClient();
         }
     }
 }

@@ -1,19 +1,27 @@
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
 {
     [Category(IncidentReportCategoryTitle.Title)]
-    public class CreateDraftApplicationsTests : BaseTest
+    public class CreateDraftApplicationsTests
     {
         private const string _path = "api/DraftApplication";
         private readonly TestFixture _testFixture;
+        protected HttpClient TestClient { get; private set; }
 
         public CreateDraftApplicationsTests()
         {
             this._testFixture = new TestFixture();
+        }
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            this.TestClient = this._testFixture.GetHttpClient();
         }
 
         [Test]

@@ -1,20 +1,14 @@
-using System.Net.Http;
 using Autofac.Extensions.DependencyInjection;
 using IncidentManagmentSystem.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
-using NUnit.Framework;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests
+namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
-    [TestFixture]
-    public class BaseTest
+    public static class TestWebHostBuilderFactory
     {
-        protected HttpClient TestClient { get; private set; }
-
-        [OneTimeSetUp]
-        public void Setup()
+        public static IHostBuilder Create()
         {
             var hostBuilder = new HostBuilder()
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
@@ -24,9 +18,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests
                     webHost.UseStartup<Startup>();
                 });
 
-            var host = hostBuilder.StartAsync().Result;
-
-            this.TestClient = host.GetTestClient();
+            return hostBuilder;
         }
     }
 }

@@ -5,12 +5,31 @@ using System.Text;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentManagmentSystem.Web.UseCases.CreateDraftApplications;
 using IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications;
+using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Infrastructure.ForTests;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Hosting;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftApplications
 {
     public class TestFixture
     {
+        protected DraftApplication DraftApplication { get; set; }
+
+        public TestFixture()
+        {
+            this.DraftApplication = this.GetTestDraftApplicationEntity();
+        }
+
+        private DraftApplication GetTestDraftApplicationEntity()
+        {
+            var draftApplication = new DraftApplication(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, new EmployeeId(Guid.NewGuid()), new List<EmployeeId>() { new EmployeeId(Guid.NewGuid()) });
+            return draftApplication;
+        }
+
         public MultipartFormDataContent CreateMultipartFormDataContent()
         {
             var title = FakeData.AlphaNumeric(10);
@@ -39,6 +58,17 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
             {
                 formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(fileName)), "Attachments", fileName);
             }
+        }
+
+        public HttpClient GetHttpClient()
+        {
+            var hostBuilder = TestWebHostBuilderFactory.Create();
+
+            var host = hostBuilder.StartAsync().Result;
+
+            TestDatabaseInitializer.SeedDataForTest(dbContext => dbContext.DraftApplication.Add(this.DraftApplication));
+
+            return host.GetTestClient();
         }
     }
 }
