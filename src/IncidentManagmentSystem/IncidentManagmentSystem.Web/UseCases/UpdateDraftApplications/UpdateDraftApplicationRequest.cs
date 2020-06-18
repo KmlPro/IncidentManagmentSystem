@@ -15,6 +15,7 @@ namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
     public class UpdateDraftApplicationRequest : IMapTo<UpdateDraftApplicationInput>
     {
         [MapTo(nameof(UpdateDraftApplicationInput.DraftApplicationId))]
+        [Required]
         public Guid Id { get; set; }
 
         [MinLength(10)]
@@ -27,9 +28,11 @@ namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
 
         public IncidentType? IncidentType { get; set; }
 
-        public IEnumerable<Guid> SuspiciousEmployees { get; set; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; }
 
-        public List<IFormFile> Attachments { get; }
+        public List<FileData> AddedAttachments { get; }
+
+        public List<Guid> DeletedAttachments { get; }
 
         public void Mapping(Profile profile)
         {
