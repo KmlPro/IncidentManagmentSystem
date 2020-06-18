@@ -22,25 +22,26 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
         public void Setup()
         {
             this.TestClient = TestClientFactory.GetHttpClient();
-            this._testFixture.SeedDataForTest();
         }
 
-        // kbytner 18.06.2020 - data is in dbContext, time to repair test
         [Test]
         public async Task ValidRequestParameters_NoContent()
         {
-            var requestParameters = this._testFixture.CreateMultipartFormDataContent();
+            var draftApplication = this._testFixture.CreateDraftApplicationInDB();
+
+            var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
             var response = await this.TestClient.PutAsync(_path, requestParameters);
 
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(response.Headers.Location);
         }
 
-        // kbytner 18.06.2020 - data is in dbContext, time to repair test
         [Test]
         public async Task ValidRequestParameters_WithAttachemtns_NoContent()
         {
-            var requestParameters = this._testFixture.CreateMultipartFormDataContent();
+            var draftApplication = this._testFixture.CreateDraftApplicationInDB();
+
+            var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
             this._testFixture.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
 
             var response = await this.TestClient.PutAsync(_path, requestParameters);

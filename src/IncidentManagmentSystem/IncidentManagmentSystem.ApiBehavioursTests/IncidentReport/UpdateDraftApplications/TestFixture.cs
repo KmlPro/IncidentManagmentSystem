@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentManagmentSystem.Web.UseCases.CreateDraftApplications;
 using IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -15,20 +14,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
 {
     public class TestFixture
     {
-        protected DraftApplication DraftApplication { get; set; }
-
-        public TestFixture()
-        {
-            this.DraftApplication = this.GetTestDraftApplicationEntity();
-        }
-
-        private DraftApplication GetTestDraftApplicationEntity()
-        {
-            var draftApplication = new DraftApplication(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, new EmployeeId(Guid.NewGuid()), new List<EmployeeId>() { new EmployeeId(Guid.NewGuid()) });
-            return draftApplication;
-        }
-
-        public MultipartFormDataContent CreateMultipartFormDataContent()
+        public MultipartFormDataContent CreateMultipartFormDataContent(Guid draftApplicationId)
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
@@ -38,12 +24,13 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
 
             var formData = new MultipartFormDataContent
             {
+                {new StringContent(draftApplicationId.ToString()), nameof(UpdateDraftApplicationRequest.Id)},
                 {new StringContent(title), nameof(UpdateDraftApplicationRequest.Title)},
                 {new StringContent(description), nameof(UpdateDraftApplicationRequest.Description)},
                 {new StringContent(incidentType.ToString()), nameof(UpdateDraftApplicationRequest.IncidentType)},
                 {
                     new StringContent(string.Join(", ", suspiciousEmployees)),
-                    nameof(CreateDraftApplicationRequest.SuspiciousEmployees)
+                    nameof(UpdateDraftApplicationRequest.SuspiciousEmployees)
                 }
             };
 
@@ -58,9 +45,17 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
             }
         }
 
-        public void SeedDataForTest()
+        public DraftApplication CreateDraftApplicationInDB()
         {
-            TestDatabaseInitializer.SeedDataForTest(dbContext => dbContext.DraftApplication.Add(this.DraftApplication));
+            var draftApplication = this.CreateTestDraftApplicationEntity();
+            TestDatabaseInitializer.SeedDataForTest(dbContext => dbContext.DraftApplication.Add(draftApplication));
+            return draftApplication;
+        }
+
+        private DraftApplication CreateTestDraftApplicationEntity()
+        {
+            var draftApplication = new DraftApplication(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, new EmployeeId(Guid.NewGuid()), new List<EmployeeId>() { new EmployeeId(Guid.NewGuid()) });
+            return draftApplication;
         }
     }
 }
