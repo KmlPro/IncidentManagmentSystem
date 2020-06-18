@@ -7,11 +7,9 @@ using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
 {
-    [TestFixture]
-    [Category(CategoryTitle.Title)]
+    [Category(CategoryTitle.Title + " DraftApplication")]
     public class RuleCheck : TestFixture
     {
-
         [Test]
         public void AddSuspiciousEmployees_ApplicantIsSuspiciousEmployee_NotUpdated()
         {

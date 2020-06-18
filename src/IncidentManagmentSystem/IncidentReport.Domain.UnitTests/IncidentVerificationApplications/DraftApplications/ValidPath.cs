@@ -6,8 +6,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
 {
-    [TestFixture]
-    [Category(CategoryTitle.Title)]
+    [Category(CategoryTitle.Title + " DraftApplication")]
     public class ValidPath : TestFixture
     {
         [Test]

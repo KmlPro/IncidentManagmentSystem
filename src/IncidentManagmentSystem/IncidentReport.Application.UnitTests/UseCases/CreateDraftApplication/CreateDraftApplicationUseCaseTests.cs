@@ -14,7 +14,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 {
-    [Category(CategoryTitle.Title)]
+    [Category(CategoryTitle.Title + " CreateDraftApplicationUseCase")]
     public class CreateDraftApplicationUseCaseTests : BaseTest
     {
         [Test]

@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 {
-    [Category(CategoryTitle.Title)]
+    [Category(CategoryTitle.Title + " UpdateDraftApplicationUseCase")]
     public class UpdateDraftApplicationUseCaseTests : BaseTest
     {
         private readonly TestFixture _testFixture;

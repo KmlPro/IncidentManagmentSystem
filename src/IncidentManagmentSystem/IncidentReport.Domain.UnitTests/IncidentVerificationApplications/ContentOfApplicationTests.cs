@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
 {
     [TestFixture]
-    [Category(CategoryTitle.Title)]
+    [Category(CategoryTitle.Title + " ContentOfApplication")]
     public class ContentOfApplicationTests : TestBase
     {
         [TestCase(1)]
