@@ -10,8 +10,6 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Hosting;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftApplications
 {
@@ -60,15 +58,9 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
             }
         }
 
-        public HttpClient GetHttpClient()
+        public void SeedDataForTest()
         {
-            var hostBuilder = TestWebHostBuilderFactory.Create();
-
-            var host = hostBuilder.StartAsync().Result;
-
             TestDatabaseInitializer.SeedDataForTest(dbContext => dbContext.DraftApplication.Add(this.DraftApplication));
-
-            return host.GetTestClient();
         }
     }
 }

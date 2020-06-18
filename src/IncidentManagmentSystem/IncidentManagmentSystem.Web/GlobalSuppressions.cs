@@ -30,3 +30,6 @@ using System.Diagnostics.CodeAnalysis;
     SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>",
         Scope = "member",
         Target = "~M:IncidentManagmentSystem.Web.Configuration.Mappings.IMapTo`1.Mapping(AutoMapper.Profile)")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:IncidentManagmentSystem.Web.TestStartup.ConfigureContainer(Autofac.ContainerBuilder)")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:IncidentManagmentSystem.Web.TestStartup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)")]
+[assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>", Scope = "member", Target = "~M:IncidentManagmentSystem.Web.TestStartup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)")]

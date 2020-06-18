@@ -1,4 +1,4 @@
-using IncidentReport.Application.Boundaries.CreateDraftApplications;
+using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
@@ -7,7 +7,7 @@ namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
     {
         public IActionResult ViewModel { get; private set; } = new NoContentResult();
 
-        public void Standard(CreateDraftApplicationOutput output)
+        public void Standard(UpdateDraftApplicationOutput output)
         {
             this.ViewModel = new NoContentResult();
         }

@@ -15,7 +15,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
                 .ConfigureWebHost(webHost =>
                 {
                     webHost.UseTestServer();
-                    webHost.UseStartup<Startup>();
+                    webHost.UseStartup<TestStartup>();
                 });
 
             return hostBuilder;

@@ -21,7 +21,8 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
         [OneTimeSetUp]
         public void Setup()
         {
-            this.TestClient = this._testFixture.GetHttpClient();
+            this.TestClient = TestClientFactory.GetHttpClient();
+            this._testFixture.SeedDataForTest();
         }
 
         // kbytner 18.06.2020 - data is in dbContext, time to repair test

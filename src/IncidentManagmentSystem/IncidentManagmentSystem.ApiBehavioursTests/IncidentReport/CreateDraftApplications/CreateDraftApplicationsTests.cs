@@ -21,7 +21,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftA
         [OneTimeSetUp]
         public void Setup()
         {
-            this.TestClient = this._testFixture.GetHttpClient();
+            this.TestClient = TestClientFactory.GetHttpClient();
         }
 
         [Test]
