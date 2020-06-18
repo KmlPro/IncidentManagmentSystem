@@ -6,12 +6,12 @@ using NUnit.Framework;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
 {
-    [Category(IncidentReportCategoryTitle.Title)]
+    [Category(IncidentReportCategoryTitle.Title + " CreateDraftApplications")]
     public class CreateDraftApplicationsTests
     {
         private const string _path = "api/DraftApplication";
         private readonly TestFixture _testFixture;
-        protected HttpClient TestClient { get; private set; }
+        private HttpClient _testClient;
 
         public CreateDraftApplicationsTests()
         {
@@ -21,7 +21,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftA
         [OneTimeSetUp]
         public void Setup()
         {
-            this.TestClient = TestClientFactory.GetHttpClient();
+            this._testClient = TestClientFactory.GetHttpClient();
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftA
         {
             var requestParameters = this._testFixture.CreateMultipartFormDataContent();
 
-            var response = await this.TestClient.PostAsync(_path, requestParameters);
+            var response = await this._testClient.PostAsync(_path, requestParameters);
 
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(response.Headers.Location);
@@ -41,7 +41,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftA
             var requestParameters = this._testFixture.CreateMultipartFormDataContent();
             this._testFixture.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
 
-            var response = await this.TestClient.PostAsync(_path, requestParameters);
+            var response = await this._testClient.PostAsync(_path, requestParameters);
 
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(response.Headers.Location);

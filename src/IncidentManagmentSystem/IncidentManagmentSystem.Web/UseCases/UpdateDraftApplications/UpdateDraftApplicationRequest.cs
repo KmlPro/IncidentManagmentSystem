@@ -28,11 +28,11 @@ namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
 
         public IncidentType? IncidentType { get; set; }
 
-        public IEnumerable<Guid> SuspiciousEmployees { get; }
+        public IEnumerable<Guid> SuspiciousEmployees { get; set; }
 
-        public List<FileData> AddedAttachments { get; }
+        public List<FileData> AddedAttachments { get; set; }
 
-        public List<Guid> DeletedAttachments { get; }
+        public List<Guid> DeletedAttachments { get; set; }
 
         public void Mapping(Profile profile)
         {
