@@ -3,11 +3,11 @@ using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.ContentOfApplications
 {
     [TestFixture]
     [Category(CategoryTitle.Title + " ContentOfApplication")]
-    public class ContentOfApplicationTests : TestBase
+    public class RuleCheck_ContentOfApplicationTests : TestBase
     {
         [TestCase(1)]
         [TestCase(101)]
@@ -35,17 +35,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications
             {
                 var contentOfApplication = contentOfApplicationBuilder.Build();
             });
-        }
-
-        [Test]
-        public void AllFieldsAreValid_CreatedSuccessfully()
-        {
-            var contentOfApplicationBuilder = new ContentOfApplicationBuilder()
-                .SetTitle(FakeData.Alpha(11))
-                .SetDescription(FakeData.Alpha(100));
-
-            var contentOfApplication = contentOfApplicationBuilder.Build();
-            Assert.NotNull(contentOfApplication);
         }
     }
 }

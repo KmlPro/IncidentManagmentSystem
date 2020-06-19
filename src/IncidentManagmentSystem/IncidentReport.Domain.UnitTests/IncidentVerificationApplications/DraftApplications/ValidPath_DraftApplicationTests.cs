@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
-    public class ValidPath : TestFixture
+    public class ValidPath_DraftApplicationTests : TestFixture
     {
         [Test]
         public void AddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()

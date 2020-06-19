@@ -23,9 +23,8 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         {
             //Arrange
             var useCase = this._testFixture.CreateUseCaseWithRequiredFields();
-            var outputPort = new CreateDraftApplicationUseCaseOutputPort();
             var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
-                this.IFileStorageService, outputPort);
+                this.IFileStorageService, new CreateDraftApplicationUseCaseOutputPort());
 
             //Act
             var useCaseOutput =
@@ -44,9 +43,8 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         {
             //Arrange
             var command = this._testFixture.CreateUseCaseWithRequiredFields(new List<string> { "testFile.pdf" });
-            var outputPort = new CreateDraftApplicationUseCaseOutputPort();
             var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
-                this.IFileStorageService, outputPort);
+                this.IFileStorageService, new CreateDraftApplicationUseCaseOutputPort());
 
             //Act
             var useCaseOutput =
