@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -34,17 +35,16 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
         }
 
-        //[Test]
-        //public async Task ValidRequestParameters_WithAttachemtns_NoContent()
-        //{
-        //    var draftApplication = this._testFixture.CreateDraftApplicationInDB();
-        //    var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
-        //    this._testFixture.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
+        [Test]
+        public async Task ValidRequestParameters_TwoAttachemntsAdded_NoContent()
+        {
+            var draftApplication = this._testFixture.CreateDraftApplicationInDB();
+            var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
+            this._testFixture.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
 
-        //    var response = await this._testClient.PutAsync(_path, requestParameters);
+            var response = await this._testClient.PutAsync(_path, requestParameters);
 
-        //    Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-        //    Assert.NotNull(response.Headers.Location);
-        //}
+            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+        }
     }
 }
