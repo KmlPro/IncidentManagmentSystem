@@ -36,7 +36,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
         }
 
         [Test]
-        public async Task ValidRequestParameters_TwoAttachemntsAdded_NoContent()
+        public async Task ValidRequestParameters_WithAttachemnts_NoContent()
         {
             var draftApplication = this._testFixture.CreateDraftApplicationInDB();
             var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
