@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.UseCases;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
