@@ -116,7 +116,7 @@ namespace IncidentReport.Application.UseCases
 
         private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)
         {
-            return request.DeletedAttachments != null && request.AddedAttachments.Any();
+            return request.AddedAttachments.Any();
         }
 
         private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication,

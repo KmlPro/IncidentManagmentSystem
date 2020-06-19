@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
@@ -35,7 +36,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
         public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<FileData> addedAttachments, List<Guid> deleteAttachments, List<Attachment> initialAttachments)
         {
             var suspiciousEmployees = new List<Guid>() { Guid.NewGuid() };
-            var newDraftApplication = this.CreateNewDraft(null);
+            var newDraftApplication = this.CreateNewDraft(suspiciousEmployees);
             newDraftApplication.AddAttachments(initialAttachments);
             await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
 
@@ -46,6 +47,18 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
         public async Task<DraftApplication> GetDraftFromContext(Guid id)
         {
             return await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == id);
+        }
+
+        public Attachment CreateAttachment()
+        {
+            var fileName = $"{Guid.NewGuid().ToString()}.txt";
+            return new Attachment(new FileInfo(fileName), new StorageId(Guid.NewGuid()));
+        }
+
+        public FileData CreateFileData()
+        {
+            var fileName = $"{Guid.NewGuid().ToString()}.txt";
+            return new FileData(fileName, Encoding.UTF8.GetBytes(fileName));
         }
 
         private DraftApplication CreateNewDraft(List<Guid> suspiciousEmployees)
