@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -12,7 +11,6 @@ using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IncidentReport.Application.UseCases
 {
@@ -43,7 +41,7 @@ namespace IncidentReport.Application.UseCases
                 await this.UpdateAttachments(draftApplication, input);
                 this.UpdateSuspiciousEmployees(draftApplication, input);
 
-                this.BuildOutput(draftApplication);
+                this.BuildOutput();
             }
             catch (BusinessRuleValidationException ex)
             {
@@ -57,10 +55,9 @@ namespace IncidentReport.Application.UseCases
             return this._outputPort;
         }
 
-        private void BuildOutput(DraftApplication draftApplication)
+        private void BuildOutput()
         {
-            var createDraftApplicationOutput = new UpdateDraftApplicationOutput(draftApplication);
-            this._outputPort.Standard(createDraftApplicationOutput);
+            this._outputPort.Standard(new UpdateDraftApplicationOutput());
         }
 
         private void UpdateSuspiciousEmployees(DraftApplication draftApplication, UpdateDraftApplicationInput input)
@@ -116,7 +113,7 @@ namespace IncidentReport.Application.UseCases
 
         private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)
         {
-            return request.AddedAttachments.Any();
+            return request.AddedAttachments != null &&request.AddedAttachments.Any();
         }
 
         private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication,

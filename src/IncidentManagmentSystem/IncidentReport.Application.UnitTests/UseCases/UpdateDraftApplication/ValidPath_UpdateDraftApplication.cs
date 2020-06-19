@@ -36,7 +36,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                 (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
-            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCaseOutput.Id);
+            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCase.DraftApplicationId);
             
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
             Assert.AreEqual(1, draftApplicationFromContext.SuspiciousEmployees.Count);
@@ -59,7 +59,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                 (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
-            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCaseOutput.Id);
+            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCase.DraftApplicationId);
 
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
             Assert.AreEqual(2, draftApplicationFromContext.SuspiciousEmployees.Count);
@@ -82,7 +82,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                 (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
-            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCaseOutput.Id);
+            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCase.DraftApplicationId);
 
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
             Assert.AreEqual(3, draftApplicationFromContext.Attachments.Count);
