@@ -1,27 +1,28 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
-using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Application.Boundaries.CreateDraftApplications;
-using IncidentReport.Application.Files;
-using IncidentReport.Application.Files.Exceptions;
 using IncidentReport.Application.UseCases;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 {
     [Category(CategoryTitle.Title + " CreateDraftApplicationUseCase")]
-    public class CreateDraftApplicationUseCaseTests : BaseTest
+    public class ValidPath_CreateDraftApplicationTests : BaseTest
     {
+        private readonly TestFixture _testFixture;
+
+        public ValidPath_CreateDraftApplicationTests()
+        {
+            this._testFixture = new TestFixture();
+        }
+
         [Test]
         public async Task AllFieldsAreFilled_OnlyWithoutAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var useCase = this.CreateUseCaseWithRequiredFields();
+            var useCase = this._testFixture.CreateUseCaseWithRequiredFields();
             var outputPort = new CreateDraftApplicationUseCaseOutputPort();
             var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
                 this.IFileStorageService, outputPort);
@@ -42,7 +43,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public async Task AllFieldsAreFilled_WithAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this.CreateUseCaseWithRequiredFields(new List<string> { "testFile.pdf" });
+            var command = this._testFixture.CreateUseCaseWithRequiredFields(new List<string> { "testFile.pdf" });
             var outputPort = new CreateDraftApplicationUseCaseOutputPort();
             var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
                 this.IFileStorageService, outputPort);
@@ -57,37 +58,6 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 
             Assert.IsTrue(isDraftApplicationAddedToContext);
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
-        }
-
-        [Test]
-        public void AttachmentsWithUnallowedExtension_DraftNotCreated()
-        {
-            AssertApplicationLayerException<UnallowedFileExtensionException>(() =>
-                this.CreateUseCaseWithRequiredFields(new List<string> { "testFile.exe" }));
-        }
-
-        [Test]
-        public void AttachmentsWithoutExtension_DraftNotCreated()
-        {
-            AssertApplicationLayerException<FileExtensionNotRecognizedException>(() =>
-                this.CreateUseCaseWithRequiredFields(new List<string> { "testFile" }));
-        }
-
-        private CreateDraftApplicationInput CreateUseCaseWithRequiredFields(List<string> fileNames = null)
-        {
-            var title = FakeData.AlphaNumeric(10);
-            var description = FakeData.AlphaNumeric(99);
-            var incidentType = IncidentType.AdverseEffectForTheCompany;
-            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-            var attachments = fileNames
-                ?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
-
-            return new CreateDraftApplicationInput(
-                title,
-                description,
-                incidentType,
-                suspiciousEmployees,
-                attachments);
         }
     }
 }

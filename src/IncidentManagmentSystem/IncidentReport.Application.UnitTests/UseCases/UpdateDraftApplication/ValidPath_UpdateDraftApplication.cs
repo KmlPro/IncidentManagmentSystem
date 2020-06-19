@@ -4,33 +4,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.UseCases;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 {
     [Category(CategoryTitle.Title + " UpdateDraftApplicationUseCase")]
-    public class UpdateDraftApplicationUseCaseTests : BaseTest
+    public class ValidPath_UpdateDraftApplication : BaseTest
     {
         private readonly TestFixture _testFixture;
-        public UpdateDraftApplicationUseCaseTests()
+        public ValidPath_UpdateDraftApplication()
         {
-            this._testFixture = new TestFixture();
+            this._testFixture = new TestFixture(this.IncidentReportDbContext);
         }
 
         [Test]
         public async Task SuspiciousEmployeeNotChanged_DraftUpdatedSuccessfully()
         {
             //Arrange
-            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-            var newDraftApplication = this._testFixture.CreateNewDraft(suspiciousEmployees, IncidentType.AdverseEffectForTheCompany);
-            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
+            var initialSuspiciousEmployees = new List<Guid> { Guid.NewGuid() };
+            var suspiciousEmployees = initialSuspiciousEmployees;
 
-            var useCase = this._testFixture.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations);
-            var outputPort = new UpdateDraftApplicationUseCaseOutputPort();
+            var useCase = await this._testFixture.PrepareUseCaseWithTestData(suspiciousEmployees, initialSuspiciousEmployees);
             var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
-                this.IFileStorageService, outputPort);
+                this.IFileStorageService, new UpdateDraftApplicationUseCaseOutputPort());
 
             //Act
             var useCaseOutput =
@@ -41,9 +38,6 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == useCaseOutput.Id);
 
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
-            Assert.AreEqual(draftApplicationFromContext.ContentOfApplication.Title, useCase.Title);
-            Assert.AreEqual(draftApplicationFromContext.ContentOfApplication.Description, useCase.Description);
-            Assert.AreEqual(draftApplicationFromContext.IncidentType, useCase.IncidentType);
             Assert.AreEqual(1, draftApplicationFromContext.SuspiciousEmployees.Count);
         }
 
@@ -52,15 +46,12 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
         {
             //Arrange
             var initialSuspiciousEmployees = new List<Guid> { Guid.NewGuid() };
-            var newDraftApplication = this._testFixture.CreateNewDraft(initialSuspiciousEmployees, IncidentType.AdverseEffectForTheCompany);
-            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
-
             var newSuspiciousEmployees = new List<Guid> { Guid.NewGuid(), Guid.NewGuid() };
 
-            var useCase = this._testFixture.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, newSuspiciousEmployees, IncidentType.FinancialViolations);
-            var outputPort = new UpdateDraftApplicationUseCaseOutputPort();
+            var useCase =
+               await this._testFixture.PrepareUseCaseWithTestData(newSuspiciousEmployees, initialSuspiciousEmployees);
             var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
-                this.IFileStorageService, outputPort);
+                this.IFileStorageService, new UpdateDraftApplicationUseCaseOutputPort());
 
             //Act
             var useCaseOutput =
