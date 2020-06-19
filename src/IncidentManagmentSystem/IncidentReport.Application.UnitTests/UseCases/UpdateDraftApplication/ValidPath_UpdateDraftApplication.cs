@@ -34,9 +34,8 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                 (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
-            var draftApplicationFromContext =
-               await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == useCaseOutput.Id);
-
+            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCaseOutput.Id);
+            
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
             Assert.AreEqual(1, draftApplicationFromContext.SuspiciousEmployees.Count);
         }
@@ -58,8 +57,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                 (UpdateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
-            var draftApplicationFromContext =
-               await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == useCaseOutput.Id);
+            var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCaseOutput.Id);
 
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
             Assert.AreEqual(2, draftApplicationFromContext.SuspiciousEmployees.Count);

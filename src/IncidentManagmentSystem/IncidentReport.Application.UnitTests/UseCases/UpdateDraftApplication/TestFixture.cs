@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Common;
+using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 {
@@ -23,16 +25,33 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 
         public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<Guid> suspiciousEmployees, List<Guid> initialSuspiciousEmployees)
         {
-            var newDraftApplication = this.CreateNewDraft(initialSuspiciousEmployees, IncidentType.AdverseEffectForTheCompany);
+            var newDraftApplication = this.CreateNewDraft(initialSuspiciousEmployees);
             await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
 
-            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations);
+            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations, null,null);
             return useCase;
         }
 
-        private DraftApplication CreateNewDraft(List<Guid> suspiciousEmployees, IncidentType incidentType)
+        public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<FileData> addedAttachments, List<Guid> deleteAttachments, List<Attachment> initialAttachments)
+        {
+            var suspiciousEmployees = new List<Guid>() { Guid.NewGuid() };
+            var newDraftApplication = this.CreateNewDraft(null);
+            newDraftApplication.AddAttachments(initialAttachments);
+            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
+
+            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations, addedAttachments, deleteAttachments);
+            return useCase;
+        }
+
+        public async Task<DraftApplication> GetDraftFromContext(Guid id)
+        {
+            return await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == id);
+        }
+
+        private DraftApplication CreateNewDraft(List<Guid> suspiciousEmployees)
         {
             var title = FakeData.AlphaNumeric(10);
+            var incidentType = IncidentType.AdverseEffectForTheCompany;
             var description = FakeData.AlphaNumeric(99);
             var contentOfApplication = new ContentOfApplication(title, description);
             var applicantId = new EmployeeId(Guid.NewGuid());
@@ -43,7 +62,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
             return draftApplication;
         }
 
-        private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(Guid draftApplicationId, List<Guid> suspiciousEmployees, IncidentType incidentType)
+        private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(Guid draftApplicationId, List<Guid> suspiciousEmployees, IncidentType incidentType, List<FileData> addedAttachments, List<Guid> deleteAttachments)
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
@@ -54,8 +73,8 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
                 description,
                 incidentType,
                 suspiciousEmployees,
-                null,
-                null);
+                addedAttachments,
+                deleteAttachments);
         }
     }
 }
