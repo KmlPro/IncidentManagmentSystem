@@ -48,7 +48,6 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
         }
 
-        //kbytner 21.06.2020 - think about check list of attachments from endpoint
         [Test]
         public async Task ExistsOneAttachment_AddTwoAttachments_DeleteOne_NoContent()
         {
