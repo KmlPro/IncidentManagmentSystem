@@ -4,10 +4,10 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Constructor
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
-    public class ValidPath_DraftApplicationTests : TestFixture
+    public class ValidPath_Constructor_DraftApplicationTests : TestFixture
     {
         [Test]
         public void AddAttachments_ThenDeleteAttachments_UpdatedSuccessfully()

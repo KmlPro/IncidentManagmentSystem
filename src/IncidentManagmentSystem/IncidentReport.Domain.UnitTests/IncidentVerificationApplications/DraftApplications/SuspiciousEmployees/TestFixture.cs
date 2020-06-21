@@ -4,25 +4,12 @@ using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Enums;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.SuspiciousEmployees
 {
-    public class TestFixture : TestBase
+    public class TestFixture
     {
-        public List<Attachment> CreateAttachments(int numberOfAttachments)
-        {
-            var attachments = new List<Attachment>();
-
-            for (var i = 0; i < numberOfAttachments; i++)
-            {
-                attachments.Add(new Attachment(new FileInfo("testFile.pdf"), new StorageId(Guid.NewGuid())));
-            }
-
-            return attachments;
-        }
-
         public DraftApplication CreateValidApplicationDraft()
         {
             var draftApplicationBuilder = new DraftApplicationBuilder()

@@ -5,7 +5,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCann
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Constructor
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
     public class RuleCheck_DraftApplicationTests : TestFixture
