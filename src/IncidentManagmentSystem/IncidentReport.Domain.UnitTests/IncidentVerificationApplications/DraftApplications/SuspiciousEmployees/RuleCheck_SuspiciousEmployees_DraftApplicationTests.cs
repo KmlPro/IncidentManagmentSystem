@@ -9,16 +9,10 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
     [Category(CategoryTitle.Title + " DraftApplication")]
     public class RuleCheck_SuspiciousEmployees_DraftApplicationTests : TestBase
     {
-        private readonly TestFixture _testFixture;
-        public RuleCheck_SuspiciousEmployees_DraftApplicationTests()
-        {
-            this._testFixture = new TestFixture();
-        }
-
         [Test]
         public void AddSuspiciousEmployees_ApplicantIsSuspiciousEmployee_NotUpdated()
         {
-            var applicationDraft = this._testFixture.CreateValidApplicationDraft();
+            var applicationDraft = DraftApplicationFactory.CreateValid();
             var employeeList = new List<EmployeeId> { applicationDraft.ApplicantId };
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>

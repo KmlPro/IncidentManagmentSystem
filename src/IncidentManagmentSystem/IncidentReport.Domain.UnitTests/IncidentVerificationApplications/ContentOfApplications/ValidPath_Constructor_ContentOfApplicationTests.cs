@@ -6,7 +6,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Conte
 {
     [TestFixture]
     [Category(CategoryTitle.Title + " ContentOfApplication")]
-    public class ValidPath_ContentOfApplicationTests : TestBase
+    public class ValidPath_Constructor_ContentOfApplicationTests : TestBase
     {
         [Test]
         public void AllFieldsAreValid_CreatedSuccessfully()

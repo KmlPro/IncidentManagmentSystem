@@ -13,11 +13,12 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
         {
             this._testFixture = new TestFixture();
         }
+
         [Test]
         public void AddSuspiciousEmployees_AddedSuccessfully()
         {
             //Arrange
-            var applicationDraft = this._testFixture.CreateValidApplicationDraft();
+            var applicationDraft = DraftApplicationFactory.CreateValid();
             var initialSuspiciousEmployeesCount = applicationDraft.SuspiciousEmployees.Count();
 
             //Act

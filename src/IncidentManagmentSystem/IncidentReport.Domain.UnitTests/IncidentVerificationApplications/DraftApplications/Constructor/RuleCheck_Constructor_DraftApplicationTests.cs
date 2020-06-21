@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
@@ -8,31 +9,8 @@ using NUnit.Framework;
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Constructor
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
-    public class RuleCheck_DraftApplicationTests : TestFixture
+    public class RuleCheck_DraftApplicationTests : TestBase
     {
-        [Test]
-        public void AddSuspiciousEmployees_ApplicantIsSuspiciousEmployee_NotUpdated()
-        {
-            var applicationDraft = this.CreateValidApplicationDraft();
-            var employeeList = new List<EmployeeId> { applicationDraft.ApplicantId };
-
-            AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
-            {
-                applicationDraft.AddSuspiciousEmployees(employeeList);
-            });
-        }
-
-        [Test]
-        public void ApplicantIdShouldBeFilled_NotCreated()
-        {
-            var draftApplicationBuilder = new DraftApplicationBuilder();
-
-            AssertException<ArgumentNullException>(() =>
-            {
-                var applicationDraft = draftApplicationBuilder.Build();
-            });
-        }
-
         [Test]
         public void ApplicantIsSuspiciousEmployee_NotCreated()
         {

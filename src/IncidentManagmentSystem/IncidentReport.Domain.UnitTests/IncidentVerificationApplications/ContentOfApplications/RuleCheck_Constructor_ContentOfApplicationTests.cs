@@ -7,7 +7,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Conte
 {
     [TestFixture]
     [Category(CategoryTitle.Title + " ContentOfApplication")]
-    public class RuleCheck_ContentOfApplicationTests : TestBase
+    public class RuleCheck_Constructor_ContentOfApplicationTests : TestBase
     {
         [TestCase(1)]
         [TestCase(101)]
