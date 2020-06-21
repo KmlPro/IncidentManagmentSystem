@@ -45,11 +45,29 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
             }
         }
 
-        public DraftApplication CreateDraftApplicationInDB()
+        public void AddDeletedAttachments(MultipartFormDataContent formData, List<Guid> attachmentIds)
+        {
+            formData.Add(new StringContent(string.Join(", ", attachmentIds)), nameof(UpdateDraftApplicationRequest.DeletedAttachments));
+        }
+
+        public DraftApplication CreateDraftApplicationInDB(bool withAttachments = false)
         {
             var draftApplication = this.CreateTestDraftApplicationEntity();
+            if (withAttachments)
+            {
+                this.AddAttachment(draftApplication);
+            }
+
             TestDatabaseInitializer.SeedDataForTest(dbContext => dbContext.DraftApplication.Add(draftApplication));
             return draftApplication;
+        }
+
+        private void AddAttachment(DraftApplication draftApplication)
+        {
+            draftApplication.AddAttachments(new List<Attachment>()
+            {
+                new Attachment(new FileInfo("testFile.pdf"), new StorageId(Guid.NewGuid()))
+            });
         }
 
         private DraftApplication CreateTestDraftApplicationEntity()

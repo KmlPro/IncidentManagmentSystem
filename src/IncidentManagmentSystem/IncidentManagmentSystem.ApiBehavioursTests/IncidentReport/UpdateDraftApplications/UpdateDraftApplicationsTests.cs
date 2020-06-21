@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -36,10 +37,24 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
         }
 
         [Test]
-        public async Task ValidRequestParameters_WithAttachemnts_NoContent()
+        public async Task WithAttachemnts_NoContent()
         {
             var draftApplication = this._testFixture.CreateDraftApplicationInDB();
             var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
+            this._testFixture.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
+
+            var response = await this._testClient.PutAsync(_path, requestParameters);
+
+            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+        }
+
+        //kbytner 21.06.2020 - think about check list of attachments from endpoint
+        [Test]
+        public async Task ExistsOneAttachment_AddTwoAttachments_DeleteOne_NoContent()
+        {
+            var draftApplication = this._testFixture.CreateDraftApplicationInDB(true);
+            var requestParameters = this._testFixture.CreateMultipartFormDataContent(draftApplication.Id.Value);
+            this._testFixture.AddDeletedAttachments(requestParameters, draftApplication.Attachments.Select(x => x.Id.Value).ToList());
             this._testFixture.AddAttachments(requestParameters, new List<string> { "test1.txt", "test2.txt" });
 
             var response = await this._testClient.PutAsync(_path, requestParameters);
