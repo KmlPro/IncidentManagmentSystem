@@ -12,9 +12,9 @@ namespace IncidentReport.Infrastructure.Persistence.EnumDescriptions.IncidentTyp
 
             modelBuilder.Entity<EnumDescription>().HasData(new List<EnumDescription>()
             {
-                new EnumDescription(enumType, IncidentType.AdverseEffectForTheCompany.ToString(), "Adverse Effect For TheCompany"),
-                new EnumDescription(enumType, IncidentType.FinancialViolations.ToString(), "Financial Violations"),
-                new EnumDescription(enumType, IncidentType.SuspectedCrime.ToString(), "Suspected Crime")
+                new EnumDescription(1,enumType, IncidentType.AdverseEffectForTheCompany.ToString(), "Adverse Effect For TheCompany"),
+                new EnumDescription(2,enumType, IncidentType.FinancialViolations.ToString(), "Financial Violations"),
+                new EnumDescription(3,enumType, IncidentType.SuspectedCrime.ToString(), "Suspected Crime")
             });
         }
     }

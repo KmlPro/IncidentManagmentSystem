@@ -7,8 +7,9 @@ namespace IncidentReport.Infrastructure.Persistence.EnumDescriptions
         public string Value { get; }
         public string Description { get; }
 
-        public EnumDescription(string type, string value, string description)
+        public EnumDescription(long id, string type, string value, string description)
         {
+            this.Id = id;
             this.Type = type;
             this.Value = value;
             this.Description = description;
