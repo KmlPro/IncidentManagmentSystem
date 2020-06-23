@@ -16,7 +16,7 @@ namespace IncidentReport.Application.UnitTests
             this.IFileStorageService = new MockFileStorageServiceFactory().CreateFileStorageService();
         }
 
-        protected IWriteIncidentReportDbContext IncidentReportDbContext { get; set; }
+        protected IIncidentReportDbContext IncidentReportDbContext { get; set; }
         protected ICurrentUserContext CurrentUserContext { get; set; }
         protected IFileStorageService IFileStorageService { get; set; }
     }

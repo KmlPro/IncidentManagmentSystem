@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IncidentReport.Infrastructure.Persistence
 {
     //kbytner 28.01.2020 -- should think how implement users... now implemented only for employees layer test purposes
-    public class IncidentReportDbContext : DbContext, IWriteIncidentReportDbContext
+    public class IncidentReportDbContext : DbContext, IIncidentReportDbContext
     {
         //  public DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
 

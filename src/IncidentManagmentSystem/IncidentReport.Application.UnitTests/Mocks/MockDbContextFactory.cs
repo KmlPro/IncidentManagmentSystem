@@ -25,11 +25,11 @@ namespace IncidentReport.Application.UnitTests.Mocks
             this.IncidentReportDbContext = this.CreateDbContext();
         }
 
-        public IWriteIncidentReportDbContext IncidentReportDbContext { get; set; }
+        public IIncidentReportDbContext IncidentReportDbContext { get; set; }
 
-        public IWriteIncidentReportDbContext CreateDbContext()
+        public IIncidentReportDbContext CreateDbContext()
         {
-            var incidentReportDbContext = new Mock<IWriteIncidentReportDbContext>();
+            var incidentReportDbContext = new Mock<IIncidentReportDbContext>();
 
             var draftIncidentVerificationApplication = this.GetMockDbSet(this._draftIncidentVerificationApplication);
 

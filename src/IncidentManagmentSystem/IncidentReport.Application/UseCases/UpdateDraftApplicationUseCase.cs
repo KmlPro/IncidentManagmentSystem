@@ -17,10 +17,10 @@ namespace IncidentReport.Application.UseCases
     public class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IFileStorageService _fileStorageService;
-        private readonly IWriteIncidentReportDbContext _incidentReportContext;
+        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IOutputPort _outputPort;
 
-        public UpdateDraftApplicationUseCase(IWriteIncidentReportDbContext incidentReportContext,
+        public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort)
         {

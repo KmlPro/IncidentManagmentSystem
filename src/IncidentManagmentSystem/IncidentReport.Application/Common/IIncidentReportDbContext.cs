@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.Common
 {
-    public interface IWriteIncidentReportDbContext
+    public interface IIncidentReportDbContext
     {
         DbSet<DraftApplication> DraftApplication { get; }
 
