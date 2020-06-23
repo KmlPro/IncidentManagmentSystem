@@ -1,9 +1,10 @@
 using System;
 using Autofac;
 using BuildingBlocks.Application;
+using IncidentManagmentSystem.Web.Configuration.Modules.IncidentReports;
 using Microsoft.EntityFrameworkCore;
 
-namespace IncidentManagmentSystem.Web.Configuration.Modules.IncidentReports
+namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
     public static class TestIncidentReportInitialize
     {

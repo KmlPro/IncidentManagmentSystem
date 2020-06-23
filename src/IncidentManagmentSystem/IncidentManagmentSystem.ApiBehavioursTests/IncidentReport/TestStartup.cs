@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IncidentManagmentSystem.Web
+namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
 {
     public class TestStartup
     {
