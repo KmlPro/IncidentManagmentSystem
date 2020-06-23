@@ -65,7 +65,7 @@ namespace IncidentReport.Application.UseCases
         {
             return new DraftApplication(
                 new ContentOfApplication(request.Title, request.Description),
-                request.IncidentType,
+                new IncidentType(request.IncidentType),
                 new EmployeeId(this._applicantContext.UserId),
                 new List<EmployeeId>(
                     request.SuspiciousEmployees.Select(x => new EmployeeId(x)))

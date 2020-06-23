@@ -7,7 +7,6 @@ using IncidentManagmentSystem.Web.Configuration.Mappings;
 using IncidentManagmentSystem.Web.Configuration.Mappings.Converters;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
@@ -26,11 +25,11 @@ namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
         [MaxLength(1000)]
         public string Description { get; set; }
 
-        public IncidentType? IncidentType { get; set; }
+        public string IncidentType { get; set; }
 
         public IEnumerable<Guid> SuspiciousEmployees { get; set; }
 
-        public List<FileData> AddedAttachments { get; set; }
+        public List<IFormFile> AddedAttachments { get; set; }
 
         public List<Guid> DeletedAttachments { get; set; }
 

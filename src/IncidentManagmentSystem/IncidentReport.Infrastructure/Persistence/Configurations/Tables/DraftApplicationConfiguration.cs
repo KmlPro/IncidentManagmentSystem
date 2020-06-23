@@ -1,6 +1,5 @@
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Infrastructure.Persistence.Configurations.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,8 +16,10 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
-            builder.Property(nameof(DraftApplication.IncidentType)).HasConversion(IncidentTypeConverter.Convert());
-
+            builder.OwnsOne(m => m.IncidentType, table =>
+            {
+                table.Property(inc => inc.Value).HasMaxLength(100);
+            });
             //kbytner 06.06.2020 - think about set withOwner 
             builder.OwnsOne(m => m.ContentOfApplication, table =>
             {

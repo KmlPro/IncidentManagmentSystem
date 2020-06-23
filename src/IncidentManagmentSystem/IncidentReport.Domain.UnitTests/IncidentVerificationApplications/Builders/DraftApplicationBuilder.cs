@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
@@ -16,7 +15,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         private ContentOfApplication _contentOfApplication;
 
         private Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> _contentOfApplicationDelegate;
-        private IncidentType? _incidentType;
+        private IncidentType _incidentType;
         private List<EmployeeId> _suspiciousEmployees;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
 

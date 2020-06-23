@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Text;
 using BuildingBlocks.Domain.Abstract;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
@@ -10,6 +9,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
     {
         public ApplicationNumber(DateTime postDate, IncidentType incidentType)
         {
+            if (incidentType == null)
+            {
+                throw new ArgumentNullException(nameof(incidentType));
+            }
+
             this.Value = this.Build(postDate, incidentType);
         }
 

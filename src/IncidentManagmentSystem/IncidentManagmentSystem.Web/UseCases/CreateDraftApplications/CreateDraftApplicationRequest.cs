@@ -6,7 +6,6 @@ using IncidentManagmentSystem.Web.Configuration.Mappings;
 using IncidentManagmentSystem.Web.Configuration.Mappings.Converters;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
@@ -21,7 +20,7 @@ namespace IncidentManagmentSystem.Web.UseCases.CreateDraftApplications
         [MaxLength(1000)]
         public string Description { get; set; }
 
-        public IncidentType? IncidentType { get; set; }
+        public string IncidentType { get; set; }
 
         public IEnumerable<Guid> SuspiciousEmployees { get; set; }
 

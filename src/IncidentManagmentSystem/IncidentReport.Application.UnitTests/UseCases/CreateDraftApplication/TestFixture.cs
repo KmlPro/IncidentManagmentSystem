@@ -4,7 +4,7 @@ using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
 {
@@ -14,7 +14,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
-            var incidentType = IncidentType.AdverseEffectForTheCompany;
+            var incidentType = IncidentType.AdverseEffectForTheCompany.Value;
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
             var attachments = fileNames
                 ?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();

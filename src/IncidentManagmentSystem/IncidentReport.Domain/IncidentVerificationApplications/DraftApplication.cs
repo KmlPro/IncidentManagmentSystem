@@ -4,7 +4,6 @@ using System.Linq;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -15,7 +14,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
     {
         public DraftApplication(
             ContentOfApplication contentOfApplication,
-            IncidentType? incidentType,
+            IncidentType incidentType,
             EmployeeId applicantId,
             List<EmployeeId> suspiciousEmployees)
         {
@@ -40,14 +39,14 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 
         public DraftApplicationId Id { get; }
         public ContentOfApplication ContentOfApplication { get; private set; }
-        public IncidentType? IncidentType { get; private set; }
+        public IncidentType IncidentType { get; private set; }
         public List<SuspiciousEmployee> SuspiciousEmployees { get; private set; }
         public List<Attachment> Attachments { get; }
         public EmployeeId ApplicantId { get; }
 
         public void Update(
             ContentOfApplication contentOfApplication,
-            IncidentType? incidentType)
+            IncidentType incidentType)
         {
             this.ContentOfApplication =
                 contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));

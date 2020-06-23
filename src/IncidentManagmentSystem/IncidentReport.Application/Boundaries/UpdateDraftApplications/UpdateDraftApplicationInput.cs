@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using BuildingBlocks.Application.UseCases;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 
 namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
 {
@@ -11,7 +10,7 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
         public UpdateDraftApplicationInput(Guid draftApplicationId,
             string title,
             string description,
-            IncidentType? incidentType,
+            string incidentType,
             IEnumerable<Guid> suspiciousEmployees,
             List<FileData> addedAttachments,
             List<Guid> deletedAttachments)
@@ -28,7 +27,7 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
         public Guid DraftApplicationId { get; set; }
         public string Title { get; }
         public string Description { get; }
-        public IncidentType? IncidentType { get; }
+        public string IncidentType { get; }
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<FileData> AddedAttachments { get; }
         public List<Guid> DeletedAttachments { get; }

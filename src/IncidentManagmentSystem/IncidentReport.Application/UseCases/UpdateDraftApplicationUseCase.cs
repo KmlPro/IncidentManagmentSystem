@@ -108,7 +108,7 @@ namespace IncidentReport.Application.UseCases
         {
             draftApplication.Update(
                 new ContentOfApplication(request.Title, request.Description),
-                request.IncidentType);
+                new IncidentType(request.IncidentType));
         }
 
         private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)

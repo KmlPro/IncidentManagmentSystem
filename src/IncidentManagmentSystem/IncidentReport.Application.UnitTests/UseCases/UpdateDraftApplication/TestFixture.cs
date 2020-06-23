@@ -9,7 +9,6 @@ using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Enums;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +28,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
             var newDraftApplication = this.CreateNewDraft(initialSuspiciousEmployees);
             await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
 
-            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations, null,null);
+            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, null, null);
             return useCase;
         }
 
@@ -40,7 +39,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
             newDraftApplication.AddAttachments(initialAttachments);
             await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
 
-            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations, addedAttachments, deleteAttachments);
+            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, addedAttachments, deleteAttachments);
             return useCase;
         }
 
@@ -75,7 +74,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
             return draftApplication;
         }
 
-        private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(Guid draftApplicationId, List<Guid> suspiciousEmployees, IncidentType incidentType, List<FileData> addedAttachments, List<Guid> deleteAttachments)
+        private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(Guid draftApplicationId, List<Guid> suspiciousEmployees, string incidentType, List<FileData> addedAttachments, List<Guid> deleteAttachments)
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
