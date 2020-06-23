@@ -27,7 +27,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 
                     return new IncidentReportDbContext(this._dbContextOptions.Options);
                 })
-                .As<IIncidentReportDbContext>()
+                .As<IWriteIncidentReportDbContext>()
                 .As<DbContext>()
                 .InstancePerLifetimeScope();
         }

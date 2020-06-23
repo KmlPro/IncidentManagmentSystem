@@ -17,9 +17,9 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 {
     public class TestFixture
     {
-        private IIncidentReportDbContext IncidentReportDbContext { get; }
+        private IWriteIncidentReportDbContext IncidentReportDbContext { get; }
 
-        public TestFixture(IIncidentReportDbContext incidentReportDbContext)
+        public TestFixture(IWriteIncidentReportDbContext incidentReportDbContext)
         {
             this.IncidentReportDbContext = incidentReportDbContext;
         }

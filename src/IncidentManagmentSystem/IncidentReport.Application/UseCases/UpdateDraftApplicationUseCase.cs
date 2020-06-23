@@ -17,10 +17,10 @@ namespace IncidentReport.Application.UseCases
     public class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IFileStorageService _fileStorageService;
-        private readonly IIncidentReportDbContext _incidentReportContext;
+        private readonly IWriteIncidentReportDbContext _incidentReportContext;
         private readonly IOutputPort _outputPort;
 
-        public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
+        public UpdateDraftApplicationUseCase(IWriteIncidentReportDbContext incidentReportContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort)
         {
@@ -113,7 +113,7 @@ namespace IncidentReport.Application.UseCases
 
         private bool IfAddedAttachmentsExists(UpdateDraftApplicationInput request)
         {
-            return request.AddedAttachments != null &&request.AddedAttachments.Any();
+            return request.AddedAttachments != null && request.AddedAttachments.Any();
         }
 
         private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication,
