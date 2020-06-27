@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
     <ProjectReference Include="..\IncidentReport.Domain\IncidentReport.Domain.csproj" />
   </ItemGroup>

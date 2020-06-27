@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Application.Common;
+using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Infrastructure.Persistence.Configurations.Tables;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ namespace IncidentReport.Infrastructure.Persistence
         }
 
         public DbSet<DraftApplication> DraftApplication { get; set; }
+
+        public DbSet<Employee> Employee { get; set; }
+
+        public DbSet<Attachment> Attachment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
