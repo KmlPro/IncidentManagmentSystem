@@ -1,33 +1,17 @@
 using System.Linq;
-using IncidentReport.Infrastructure.Persistence;
 using IncidentReport.PublicDomain.DraftApplications;
 
 namespace IncidentReport.PublicDomain
 {
     public class ReadIncidentReportDbContext : IReadIncidentReportContext
     {
-        private IncidentReportDbContext _incidentReportDbContext { get; set; }
+        private GetDraftApplicationDtoQuery _getDraftApplicationDto { get; set; }
 
-        public ReadIncidentReportDbContext(IncidentReportDbContext incidentReportDbContext)
+        public ReadIncidentReportDbContext(GetDraftApplicationDtoQuery getDraftApplicationDto)
         {
-            this._incidentReportDbContext = incidentReportDbContext;
+            this._getDraftApplicationDto = getDraftApplicationDto;
         }
 
-        public IQueryable<DraftApplicationDto> DraftApplications
-        {
-            get
-            {
-                var query = from draftApplication in this._incidentReportDbContext.DraftApplication
-                            join application in this._incidentReportDbContext.Employee on draftApplication.ApplicantId equals application.Id
-                            from suspiciousEmployees in draftApplication.SuspiciousEmployees
-                            join suspiciousEmployee in this._incidentReportDbContext.Employee on suspiciousEmployees.EmployeeId equals suspiciousEmployee.Id
-                            select new DraftApplicationDto
-                            {
-
-                            };
-
-                return query;
-            }
-        }
+        public IQueryable<DraftApplicationDto> DraftApplications => this._getDraftApplicationDto.Get();
     }
 }

@@ -6,11 +6,11 @@ using IncidentReport.PublicDomain.Employees;
 
 namespace IncidentReport.PublicDomain.DraftApplications
 {
-    public class GetDraftApplicationDto
+    public class GetDraftApplicationQuery
     {
         private IncidentReportDbContext _incidentReportDbContext { get; set; }
 
-        public GetDraftApplicationDto(IncidentReportDbContext incidentReportDbContext)
+        public GetDraftApplicationQuery(IncidentReportDbContext incidentReportDbContext)
         {
             this._incidentReportDbContext = incidentReportDbContext;
         }
