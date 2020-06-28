@@ -1,6 +1,6 @@
 using System;
 
-namespace IncidentReport.PublicDomain.Employees
+namespace IncidentReport.Infrastructure.PublicDomain.Employees
 {
     public class EmployeeDto
     {

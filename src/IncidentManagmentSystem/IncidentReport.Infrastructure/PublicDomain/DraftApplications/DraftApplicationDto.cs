@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using IncidentReport.PublicDomain.Employees;
 
-namespace IncidentReport.PublicDomain.DraftApplications
+namespace IncidentReport.Infrastructure.PublicDomain.DraftApplications
 {
     public class DraftApplicationDto
     {

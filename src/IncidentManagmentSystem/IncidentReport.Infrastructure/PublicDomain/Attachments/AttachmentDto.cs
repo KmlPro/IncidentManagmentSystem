@@ -1,6 +1,6 @@
 using System;
 
-namespace IncidentReport.PublicDomain
+namespace IncidentReport.Infrastructure.PublicDomain.Attachments
 {
     public class AttachmentDto
     {

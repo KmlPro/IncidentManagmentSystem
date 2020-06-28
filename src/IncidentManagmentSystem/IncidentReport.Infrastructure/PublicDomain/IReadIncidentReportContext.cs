@@ -1,7 +1,7 @@
 using System.Linq;
-using IncidentReport.PublicDomain.DraftApplications;
+using IncidentReport.Infrastructure.PublicDomain.DraftApplications;
 
-namespace IncidentReport.PublicDomain
+namespace IncidentReport.Infrastructure.PublicDomain
 {
     public interface IReadIncidentReportContext
     {

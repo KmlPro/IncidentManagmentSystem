@@ -4,9 +4,9 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Infrastructure.Persistence;
 using IncidentReport.PublicDomain.Employees;
 
-namespace IncidentReport.PublicDomain.DraftApplications
+namespace IncidentReport.Infrastructure.PublicDomain.DraftApplications
 {
-    public class GetDraftApplicationQuery
+    public class GetDraftApplicationQuery : IQuery
     {
         private IncidentReportDbContext _incidentReportDbContext { get; set; }
 
@@ -28,7 +28,6 @@ namespace IncidentReport.PublicDomain.DraftApplications
                             Attachments = draftApplication.Attachments.Select(at => new AttachmentDto(at.Id.Value, at.FileInfo.FileName, at.StorageId.Value)),
                             SuspiciousEmployees = this.GetSuspiciousEmployees(draftApplication)
                         };
-
 
             return query;
         }
