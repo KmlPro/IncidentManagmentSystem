@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Infrastructure.Persistence;
-using IncidentReport.PublicDomain.Employees;
+using IncidentReport.Infrastructure.PublicDomain.Attachments;
+using IncidentReport.Infrastructure.PublicDomain.Employees;
 
 namespace IncidentReport.Infrastructure.PublicDomain.DraftApplications
 {

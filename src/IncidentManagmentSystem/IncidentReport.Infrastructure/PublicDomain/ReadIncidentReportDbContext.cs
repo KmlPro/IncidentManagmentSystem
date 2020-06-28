@@ -3,7 +3,8 @@ using IncidentReport.Infrastructure.PublicDomain.DraftApplications;
 
 namespace IncidentReport.Infrastructure.PublicDomain
 {
-    public class ReadIncidentReportDbContext : IReadIncidentReportContext
+    //29.06.2020 - think about moving to persistance
+    public class ReadIncidentReportDbContext : IReadIncidentReportDbContext
     {
         private GetDraftApplicationQuery _getDraftApplicationDto { get; set; }
 

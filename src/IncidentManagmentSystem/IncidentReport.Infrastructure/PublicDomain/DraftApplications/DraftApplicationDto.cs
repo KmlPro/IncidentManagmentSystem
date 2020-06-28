@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using IncidentReport.PublicDomain.Employees;
+using IncidentReport.Infrastructure.PublicDomain.Attachments;
+using IncidentReport.Infrastructure.PublicDomain.Employees;
 
 namespace IncidentReport.Infrastructure.PublicDomain.DraftApplications
 {
-    public class DraftApplicationDto
+    public class DraftApplicationDto : IDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

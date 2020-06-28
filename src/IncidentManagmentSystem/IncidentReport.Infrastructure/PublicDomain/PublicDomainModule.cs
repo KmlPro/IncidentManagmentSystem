@@ -9,6 +9,10 @@ namespace IncidentReport.Infrastructure.PublicDomain
             builder.RegisterAssemblyTypes(this.ThisAssembly)
                 .Where(x => x.IsAssignableTo<IQuery>())
                 .AsSelf();
+
+            builder.RegisterType<ReadIncidentReportDbContext>()
+               .As<IReadIncidentReportDbContext>()
+               .InstancePerLifetimeScope();
         }
     }
 }

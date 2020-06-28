@@ -2,7 +2,7 @@ using System;
 
 namespace IncidentReport.Infrastructure.PublicDomain.Attachments
 {
-    public class AttachmentDto
+    public class AttachmentDto : IDto
     {
         public Guid Id { get; }
         public string FileName { get; }

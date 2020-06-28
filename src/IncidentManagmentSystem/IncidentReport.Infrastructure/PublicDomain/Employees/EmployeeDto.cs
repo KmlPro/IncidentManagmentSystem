@@ -2,7 +2,7 @@ using System;
 
 namespace IncidentReport.Infrastructure.PublicDomain.Employees
 {
-    public class EmployeeDto
+    public class EmployeeDto : IDto
     {
         public Guid Id { get; }
         public string Name { get; }
