@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using IncidentReport.PublicDomain.Employees;
 
 namespace IncidentReport.PublicDomain.DraftApplications
 {
@@ -9,8 +10,8 @@ namespace IncidentReport.PublicDomain.DraftApplications
         public string Title { get; set; }
         public string Description { get; set; }
         public string IncidentType { get; set; }
-        public List<Guid> SuspiciousEmployees { get; set; }
-        public Guid ApplicantId { get; set; }
-        public List<AttachmentDto> Attachments { get; set; }
+        public IEnumerable<EmployeeDto> SuspiciousEmployees { get; set; }
+        public EmployeeDto Applicant { get; set; }
+        public IEnumerable<AttachmentDto> Attachments { get; set; }
     }
 }

@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
-    <ProjectReference Include="..\IncidentReport.Domain\IncidentReport.Domain.csproj" />
+    <ProjectReference Include="..\IncidentReport.Infrastructure\IncidentReport.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

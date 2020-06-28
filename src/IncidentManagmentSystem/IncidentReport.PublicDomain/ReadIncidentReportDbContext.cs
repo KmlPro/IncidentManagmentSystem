@@ -4,11 +4,11 @@ using IncidentReport.PublicDomain.DraftApplications;
 
 namespace IncidentReport.PublicDomain
 {
-    public class ReadIncidentReportContext : IReadIncidentReportContext
+    public class ReadIncidentReportDbContext : IReadIncidentReportContext
     {
         private IncidentReportDbContext _incidentReportDbContext { get; set; }
 
-        public ReadIncidentReportContext(IncidentReportDbContext incidentReportDbContext)
+        public ReadIncidentReportDbContext(IncidentReportDbContext incidentReportDbContext)
         {
             this._incidentReportDbContext = incidentReportDbContext;
         }
