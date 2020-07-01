@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,4 +23,8 @@
     <ProjectReference Include="..\IncidentReport.Infrastructure\IncidentReport.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JustForTests\" />
+    <Folder Include="Configuration\Odata\" />
+  </ItemGroup>
 </Project>

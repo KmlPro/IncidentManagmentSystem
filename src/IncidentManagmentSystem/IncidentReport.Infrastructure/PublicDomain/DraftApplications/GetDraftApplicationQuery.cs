@@ -15,6 +15,7 @@ namespace IncidentReport.Infrastructure.PublicDomain.DraftApplications
         {
             this._incidentReportDbContext = incidentReportDbContext;
         }
+
         public IQueryable<DraftApplicationDto> Get()
         {
             var query = from draftApplication in this._incidentReportDbContext.DraftApplication

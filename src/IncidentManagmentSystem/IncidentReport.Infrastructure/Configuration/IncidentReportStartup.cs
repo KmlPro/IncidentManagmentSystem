@@ -8,6 +8,7 @@ using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Persistence.Configurations;
+using IncidentReport.Infrastructure.PublicDomain;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Configuration
@@ -54,6 +55,7 @@ namespace IncidentReport.Infrastructure.Configuration
             this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             this._containerBuilder.RegisterModule(new ProcessingModule());
             this._containerBuilder.RegisterModule(new FileStorageModule());
+            this._containerBuilder.RegisterModule(new PublicDomainModule());
 
             this._containerBuilder.RegisterInstance(currentUserContext);
 

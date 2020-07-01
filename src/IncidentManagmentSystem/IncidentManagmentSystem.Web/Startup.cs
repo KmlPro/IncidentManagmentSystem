@@ -3,7 +3,9 @@ using Autofac;
 using AutoMapper;
 using IncidentManagmentSystem.Web.Configuration.Middlewares;
 using IncidentManagmentSystem.Web.Configuration.Modules.IncidentReports;
+using IncidentManagmentSystem.Web.Configuration.Odata;
 using IncidentManagmentSystem.Web.Users;
+using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +19,10 @@ namespace IncidentManagmentSystem.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddControllers();
+            services.AddControllers(mvcOptions =>
+                mvcOptions.EnableEndpointRouting = false);
+
+            services.AddOData();
 
             services.AddHttpContextAccessor();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -42,9 +47,15 @@ namespace IncidentManagmentSystem.Web
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            app.UseMvc(routeBuilder =>
+            {
+                routeBuilder.Select().Filter();
+                routeBuilder.MapODataServiceRoute("odata", "odata", EdmModelFactory.Create());
+            });
+
+            //app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
