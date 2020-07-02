@@ -1,17 +1,21 @@
+using System.Linq;
+using System.Reflection;
 using Autofac;
+using IncidentReport.Infrastructure.Contract;
 
 namespace IncidentReport.Infrastructure.PublicDomain
 {
-    internal class PublicDomainModule : Module
+    internal class PublicDomainModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(this.ThisAssembly)
-                .Where(x => x.IsAssignableTo<IQuery>())
-                .AsSelf();
+                .Where(t => t.GetTypeInfo().ImplementedInterfaces.Any(
+i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>)))
+                .AsSelf().InstancePerLifetimeScope();
 
-            builder.RegisterType<ReadIncidentReportDbContext>()
-               .As<IReadIncidentReportDbContext>()
+            builder.RegisterType<IncidentReportReadContext>()
+               .As<IIncidentReportReadContext>()
                .InstancePerLifetimeScope();
         }
     }

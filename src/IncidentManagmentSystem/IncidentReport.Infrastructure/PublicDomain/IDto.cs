@@ -1,6 +1,6 @@
 namespace IncidentReport.Infrastructure.PublicDomain
 {
-    interface IDto
+    public interface IDto
     {
     }
 }

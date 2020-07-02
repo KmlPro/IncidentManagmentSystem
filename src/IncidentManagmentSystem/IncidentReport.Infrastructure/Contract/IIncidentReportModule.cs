@@ -8,7 +8,5 @@ namespace IncidentReport.Infrastructure.Contract
     {
         Task<TIUseCaseOutput> ExecuteUseCase<TIUseCaseOutput>(IUseCaseInput<TIUseCaseOutput> useCases)
             where TIUseCaseOutput : IUseCaseOutput;
-
-        IReadIncidentReportDbContext ReadContext { get; }
     }
 }

@@ -11,18 +11,18 @@ namespace IncidentManagmentSystem.Web.GetResources
     [ApiController]
     public class DraftApplicationController : ControllerBase
     {
-        private readonly IIncidentReportModule _incidentReportModule;
+        private readonly IIncidentReportReadContext _readContext;
 
-        public DraftApplicationController(IIncidentReportModule incidentReportModule)
+        public DraftApplicationController(IIncidentReportReadContext readContext)
         {
-            this._incidentReportModule = incidentReportModule;
+            this._readContext = readContext;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
         public IActionResult Get(Guid id)
         {
-            return this.Ok(this._incidentReportModule.ReadContext.DraftApplications.Where(x => x.Id == id));
+            return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
         }
     }
 }
