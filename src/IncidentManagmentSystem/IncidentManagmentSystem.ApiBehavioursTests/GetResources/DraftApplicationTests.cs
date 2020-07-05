@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources
 {
+    [Category(IncidentReportCategoryTitle.Title + " GetDraftApplications")]
     public class DraftApplicationTests
     {
         private const string _path = "api/DraftApplication";

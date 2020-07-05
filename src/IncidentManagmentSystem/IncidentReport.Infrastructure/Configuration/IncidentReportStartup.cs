@@ -47,9 +47,7 @@ namespace IncidentReport.Infrastructure.Configuration
                 .As<IIncidentReportModule>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<IncidentReportReadContext>()
-                .As<IIncidentReportReadContext>()
-                .InstancePerLifetimeScope();
+            builder.RegisterModule(new PublicDomainModule());
         }
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,

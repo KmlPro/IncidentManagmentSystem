@@ -1,6 +1,6 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Autofac;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.PublicDomain.DraftApplications;
 
@@ -8,17 +8,25 @@ namespace IncidentReport.Infrastructure.PublicDomain
 {
     internal class IncidentReportReadContext : IIncidentReportReadContext
     {
-        public IQueryable<DraftApplicationDto> DraftApplications => this.GetQuerylable<DraftApplicationDto, GetDraftApplicationQuery>();
+        private readonly IEnumerable<IQuery<IDto>> _queries;
 
-        private IQueryable<TDto> GetQuerylable<TDto, TQuery>() where TDto: IDto
-                                                               where TQuery: IQuery<TDto>
+        public IncidentReportReadContext(IEnumerable<IQuery<IDto>> queries)
         {
-            using (var scope = CompositionRoot.BeginLifetimeScope())
-            {
-                var query = scope.Resolve<TQuery>();
+            this._queries = queries;
+        }
 
-                return query.Get();
+        public IQueryable<DraftApplicationDto> DraftApplications =>
+            this.GetQuerylable<DraftApplicationDto>();
+
+        private IQueryable<TDto> GetQuerylable<TDto>() where TDto : IDto
+        {
+            //kbytner 5.07.2020 - create decidated exception
+            if (!(this._queries.First(x => x.GetType() == typeof(IQuery<TDto>)) is IQuery<TDto> query))
+            {
+                throw new ArgumentNullException(nameof(query));
             }
-        }           
+
+            return query.Get();
+        }
     }
 }
