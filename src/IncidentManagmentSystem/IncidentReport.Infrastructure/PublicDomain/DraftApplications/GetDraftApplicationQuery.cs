@@ -7,7 +7,7 @@ using IncidentReport.Infrastructure.PublicDomain.Employees;
 
 namespace IncidentReport.Infrastructure.PublicDomain.DraftApplications
 {
-    public class GetDraftApplicationQuery : IQuery<DraftApplicationDto>
+    internal class GetDraftApplicationQuery : IQuery<DraftApplicationDto>
     {
         private readonly IncidentReportDbContext _incidentReportDbContext;
 
