@@ -36,12 +36,6 @@ namespace IncidentReport.Infrastructure.PublicDomain
                 };
             });
 
-            // builder.RegisterGeneric(typeof(IQuery<>))
-            //     .As(typeof(IQuery<>))
-            //     .InstancePerLifetimeScope();
-
-            //      builder.RegisterType<GetDraftApplicationQuery>().AsSelf();
-
             builder.RegisterModule(new PersistanceModule(this._dbContextOptionsBuilderAction));
         }
     }
