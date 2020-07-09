@@ -29,6 +29,7 @@ namespace IncidentManagmentSystem.Web.Configuration.Modules.IncidentReports
                 });
 
             incidentReportStartup.RegisterModuleContract(builder);
+            incidentReportStartup.RegisterReadContextContract(builder, dbContextOptionsBuilderAction);
         }
     }
 }

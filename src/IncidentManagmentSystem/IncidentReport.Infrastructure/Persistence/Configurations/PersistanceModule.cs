@@ -29,6 +29,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
                 })
                 .As<IIncidentReportDbContext>()
                 .As<DbContext>()
+                .As<IncidentReportDbContext>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
         }

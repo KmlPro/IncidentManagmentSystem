@@ -46,8 +46,11 @@ namespace IncidentReport.Infrastructure.Configuration
             builder.RegisterType<IncidentReportModule>()
                 .As<IIncidentReportModule>()
                 .InstancePerLifetimeScope();
+        }
 
-            builder.RegisterModule(new PublicDomainModule());
+        public void RegisterReadContextContract(ContainerBuilder builder,Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        {
+            builder.RegisterModule(new PublicDomainModule(dbContextOptionsBuilderAction));
         }
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
@@ -57,7 +60,6 @@ namespace IncidentReport.Infrastructure.Configuration
             this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             this._containerBuilder.RegisterModule(new ProcessingModule());
             this._containerBuilder.RegisterModule(new FileStorageModule());
-            this._containerBuilder.RegisterModule(new PublicDomainModule());
 
             this._containerBuilder.RegisterInstance(currentUserContext);
 

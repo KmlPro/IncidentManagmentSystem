@@ -1,27 +1,48 @@
-using System.Linq;
-using System.Reflection;
+using System;
 using Autofac;
 using IncidentReport.Infrastructure.Contract;
-using IncidentReport.Infrastructure.Persistence;
+using IncidentReport.Infrastructure.Persistence.Configurations;
+using IncidentReport.Infrastructure.PublicDomain.DraftApplications;
+using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.PublicDomain
 {
     internal class PublicDomainModule : Autofac.Module
     {
+        private readonly Action<DbContextOptionsBuilder> _dbContextOptionsBuilderAction;
+
+        public PublicDomainModule(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        {
+            this._dbContextOptionsBuilderAction = dbContextOptionsBuilderAction;
+        }
+
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(this.ThisAssembly)
-                .Where(t => t.GetTypeInfo().ImplementedInterfaces.Any(
-                    i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>)))
-                .AsSelf().InstancePerLifetimeScope();
-
-            builder.RegisterType<IncidentReportDbContext>()
-                .AsSelf()
-                .InstancePerLifetimeScope();
-
             builder.RegisterType<IncidentReportReadContext>()
                 .As<IIncidentReportReadContext>()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(this.ThisAssembly)
+                .Where(x => x.IsAssignableTo<IQuery>())
+                .AsImplementedInterfaces();
+
+            builder.Register<Func<Type, IQuery>>(x=>
+            {
+                var ctx = x.Resolve<IComponentContext>();
+                return t =>
+                {
+                    var queryType = typeof(IQuery<>).MakeGenericType(t);
+                    return (IQuery)ctx.Resolve(queryType);
+                };
+            });
+
+            // builder.RegisterGeneric(typeof(IQuery<>))
+            //     .As(typeof(IQuery<>))
+            //     .InstancePerLifetimeScope();
+
+            //      builder.RegisterType<GetDraftApplicationQuery>().AsSelf();
+
+            builder.RegisterModule(new PersistanceModule(this._dbContextOptionsBuilderAction));
         }
     }
 }
