@@ -6,6 +6,7 @@ using BuildingBlocks.Domain.UnitTests;
 using IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 

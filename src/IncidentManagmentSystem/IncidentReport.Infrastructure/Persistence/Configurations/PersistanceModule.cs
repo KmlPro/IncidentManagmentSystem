@@ -27,7 +27,6 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 
                     return new IncidentReportDbContext(this._dbContextOptions.Options);
                 })
-                .As<IIncidentReportDbContext>()
                 .As<DbContext>()
                 .As<IncidentReportDbContext>()
                 .AsSelf()

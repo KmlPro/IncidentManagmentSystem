@@ -37,7 +37,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 
             //Assert
             var draftApplicationFromContext = await this._testFixture.GetDraftFromContext(useCase.DraftApplicationId);
-            
+
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
             Assert.AreEqual(1, draftApplicationFromContext.SuspiciousEmployees.Count);
         }

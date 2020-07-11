@@ -1,15 +1,12 @@
-using System.Threading;
-using System.Threading.Tasks;
-using IncidentReport.Application.Common;
-using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Infrastructure.Persistence.Configurations.Tables;
+using IncidentReport.Infrastructure.Persistence.DbEntities.Attachments;
+using IncidentReport.Infrastructure.Persistence.DbEntities.DraftApplications;
+using IncidentReport.Infrastructure.Persistence.DbEntities.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Persistence
 {
     //kbytner 28.01.2020 -- should think how implement users... now implemented only for employees layer test purposes
-    public class IncidentReportDbContext : DbContext, IIncidentReportDbContext
+    public class IncidentReportDbContext : DbContext
     {
         //  public DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
 
@@ -17,22 +14,16 @@ namespace IncidentReport.Infrastructure.Persistence
         {
         }
 
-        public DbSet<DraftApplication> DraftApplication { get; set; }
+        public DbSet<DraftApplicationDbModel> DraftApplication { get; set; }
 
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<EmployeeDbModel> Employee { get; set; }
 
-        public DbSet<Attachment> Attachment { get; set; }
+        public DbSet<AttachmentDbModel> Attachment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new DraftApplicationConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-        }
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
-            CancellationToken cancellationToken = default)
-        {
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

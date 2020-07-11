@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using IncidentReport.Application.Common;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using Microsoft.EntityFrameworkCore;
 using MockQueryable.Moq;
 using Moq;

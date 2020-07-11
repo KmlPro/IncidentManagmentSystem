@@ -5,26 +5,25 @@ using System.Threading.Tasks;
 using BuildingBlocks.Application.Abstract;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
-using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.UseCases
 {
     public class UpdateDraftApplicationUseCase : IUseCase
     {
         private readonly IFileStorageService _fileStorageService;
-        private readonly IIncidentReportDbContext _incidentReportContext;
+        private readonly IDraftApplicationRepository _draftApplicationRepository;
         private readonly IOutputPort _outputPort;
 
-        public UpdateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
+        public UpdateDraftApplicationUseCase(IDraftApplicationRepository draftApplicationRepository,
             IFileStorageService fileStorageService,
             IOutputPort outputPort)
         {
-            this._incidentReportContext = incidentReportContext;
+            this._draftApplicationRepository = draftApplicationRepository;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
         }
@@ -34,8 +33,8 @@ namespace IncidentReport.Application.UseCases
             try
             {
                 var draftApplication =
-                 await this._incidentReportContext.DraftApplication.FirstAsync(x =>
-                     x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken);
+                    await this._draftApplicationRepository.GetById(new DraftApplicationId(input.DraftApplicationId),
+                        cancellationToken);
 
                 this.UpdateApplicationData(draftApplication, input);
                 await this.UpdateAttachments(draftApplication, input);

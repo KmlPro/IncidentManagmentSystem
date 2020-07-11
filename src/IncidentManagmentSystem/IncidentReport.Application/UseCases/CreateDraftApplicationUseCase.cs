@@ -10,6 +10,7 @@ using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.UseCases
@@ -18,15 +19,15 @@ namespace IncidentReport.Application.UseCases
     {
         private readonly ICurrentUserContext _applicantContext;
         private readonly IFileStorageService _fileStorageService;
-        private readonly IIncidentReportDbContext _incidentReportContext;
+        private readonly IDraftApplicationRepository _draftApplicationRepository;
         private readonly IOutputPort _outputPort;
 
-        public CreateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
+        public CreateDraftApplicationUseCase(IDraftApplicationRepository draftApplicationRepository,
             ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort)
         {
-            this._incidentReportContext = incidentReportContext;
+            this._draftApplicationRepository = draftApplicationRepository;
             this._applicantContext = userContext;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
@@ -44,7 +45,7 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftApplication, files);
                 }
 
-                await this._incidentReportContext.DraftApplication.AddAsync(draftApplication,
+                await this._draftApplicationRepository.Add(draftApplication,
                     cancellationToken);
 
                 this.BuildOutput(draftApplication);

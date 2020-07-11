@@ -8,7 +8,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications
+namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplications
 {
     public class DraftApplication : Entity, IAggregateRoot
     {
