@@ -20,19 +20,23 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             {
                 table.Property(inc => inc.Value).HasMaxLength(100);
             });
-            //kbytner 06.06.2020 - think about set withOwner 
+            //kbytner 06.06.2020 - think about set withOwner
             builder.OwnsOne(m => m.ContentOfApplication, table =>
             {
                 table.Property(ca => ca.Title).HasMaxLength(100).HasColumnName(nameof(ContentOfApplication.Title));
-                table.Property(ca => ca.Description).HasMaxLength(1000).HasColumnName(nameof(ContentOfApplication.Description));
+                table.Property(ca => ca.Description).HasMaxLength(1000)
+                    .HasColumnName(nameof(ContentOfApplication.Description));
             });
 
             builder.OwnsMany(m => m.Attachments, table =>
             {
-                table.OwnsOne(m => m.FileInfo, fi => fi.Property(ca => ca.FileName).HasMaxLength(100).HasColumnName(nameof(FileInfo.FileName)));
+                table.ToTable(nameof(Attachment), SchemaName.IncidentReport);
+                table.OwnsOne(m => m.FileInfo,
+                    fi => fi.Property(ca => ca.FileName).HasMaxLength(100).HasColumnName(nameof(FileInfo.FileName)));
             });
 
-            builder.OwnsMany(m => m.SuspiciousEmployees);
+            builder.OwnsMany(m => m.SuspiciousEmployees, table =>
+                table.ToTable(nameof(SuspiciousEmployee), SchemaName.IncidentReport));
         }
     }
 }

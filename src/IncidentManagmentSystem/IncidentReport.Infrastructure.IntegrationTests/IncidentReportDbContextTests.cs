@@ -3,6 +3,7 @@ using BuildingBlocks.Infrastructure;
 using IncidentReport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
@@ -19,6 +20,18 @@ namespace IncidentReport.Infrastructure.IntegrationTests
 
             var context = new IncidentReportDbContext(options);
 
+            context.Database.EnsureCreated();
+        }
+
+        [Test] public void CreateDbSchema_SqlServerDatabase_CreatedSucessfuly()
+        {
+            var options = new DbContextOptionsBuilder<IncidentReportDbContext>()
+                .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
+                .UseSqlServer("Server=localhost;Database=IncidentReportDb;User Id=sa;Password=<YourStrong@Passw0rd>;").Options;
+
+            var context = new IncidentReportDbContext(options);
+
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
     }
