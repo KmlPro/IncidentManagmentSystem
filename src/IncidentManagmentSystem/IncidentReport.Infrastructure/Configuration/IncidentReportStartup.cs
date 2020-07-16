@@ -9,6 +9,7 @@ using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Persistence.Configurations;
 using IncidentReport.Infrastructure.ReadContext;
+using IncidentReport.ReadModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Configuration
@@ -50,7 +51,7 @@ namespace IncidentReport.Infrastructure.Configuration
 
         public void RegisterReadContextContract(ContainerBuilder builder,Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
         {
-            builder.RegisterModule(new PublicDomainModule(dbContextOptionsBuilderAction));
+            builder.RegisterModule(new ReadContextModule(dbContextOptionsBuilderAction));
         }
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,

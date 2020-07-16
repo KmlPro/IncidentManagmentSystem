@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
+    <ProjectReference Include="..\IncidentReport.ReadModels\IncidentReport.ReadModels.csproj" />
   </ItemGroup>
 
 </Project>
