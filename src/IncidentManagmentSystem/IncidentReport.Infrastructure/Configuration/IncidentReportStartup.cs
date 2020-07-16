@@ -8,7 +8,7 @@ using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Persistence.Configurations;
-using IncidentReport.Infrastructure.PublicDomain;
+using IncidentReport.Infrastructure.ReadContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Configuration

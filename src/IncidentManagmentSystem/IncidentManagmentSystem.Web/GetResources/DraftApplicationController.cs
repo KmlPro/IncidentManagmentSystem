@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
 using IncidentReport.Infrastructure.Contract;
-using IncidentReport.Infrastructure.PublicDomain.DraftApplications;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.GetResources
@@ -18,11 +14,11 @@ namespace IncidentManagmentSystem.Web.GetResources
             this._readContext = readContext;
         }
 
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
-        public IActionResult Get(Guid id)
-        {
-            return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
-        }
+        // [HttpGet]
+        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
+        // public IActionResult Get(Guid id)
+        // {
+        //     return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
+        // }
     }
 }

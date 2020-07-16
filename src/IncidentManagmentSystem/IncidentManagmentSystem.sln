@@ -46,6 +46,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentManagmentSystem.Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeDataGenerator", "FakeDataGenerator\FakeDataGenerator.csproj", "{66EC442D-0396-4544-AB94-E650CF703B31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentReport.ReadModels", "IncidentReport.ReadModels\IncidentReport.ReadModels.csproj", "{110F64E2-35D9-4C97-8F17-A35BBCF646AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,10 @@ Global
 		{66EC442D-0396-4544-AB94-E650CF703B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66EC442D-0396-4544-AB94-E650CF703B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66EC442D-0396-4544-AB94-E650CF703B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110F64E2-35D9-4C97-8F17-A35BBCF646AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110F64E2-35D9-4C97-8F17-A35BBCF646AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110F64E2-35D9-4C97-8F17-A35BBCF646AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110F64E2-35D9-4C97-8F17-A35BBCF646AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 		{7AEB9462-176A-47C4-82A6-F1AE740244C6} = {CB8A59E9-6C82-4422-9D9F-4CDE005A0F72}
 		{52D24F2E-D5CC-4575-8992-BF0EBD14E1F2} = {4FDFCF54-6EA2-4692-A9A2-11255D21CBA8}
 		{66EC442D-0396-4544-AB94-E650CF703B31} = {CB8A59E9-6C82-4422-9D9F-4CDE005A0F72}
+		{110F64E2-35D9-4C97-8F17-A35BBCF646AC} = {92A4FEAA-F6A8-48F4-A9EC-FF0E33B0779F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C503B14-4A01-42A9-84E1-FD4226BAA443}

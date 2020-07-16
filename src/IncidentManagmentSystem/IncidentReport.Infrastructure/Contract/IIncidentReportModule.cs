@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UseCases;
-using IncidentReport.Infrastructure.PublicDomain;
 
 namespace IncidentReport.Infrastructure.Contract
 {
