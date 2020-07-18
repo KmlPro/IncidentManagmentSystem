@@ -14,22 +14,22 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         [Test]
         public void EnsureDatabaseCreated_CreatedSucessfuly()
         {
-            var options = new DbContextOptionsBuilder<IncidentReportDbContext>()
+            var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
                 .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
 
-            var context = new IncidentReportDbContext(options);
+            var context = new IncidentReportWriteDbContext(options);
 
             context.Database.EnsureCreated();
         }
 
         [Test] public void CreateDbSchema_SqlServerDatabase_CreatedSucessfuly()
         {
-            var options = new DbContextOptionsBuilder<IncidentReportDbContext>()
+            var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
                 .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
                 .UseSqlServer("Server=localhost;Database=IncidentReportDb;User Id=sa;Password=<YourStrong@Passw0rd>;").Options;
 
-            var context = new IncidentReportDbContext(options);
+            var context = new IncidentReportWriteDbContext(options);
 
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();

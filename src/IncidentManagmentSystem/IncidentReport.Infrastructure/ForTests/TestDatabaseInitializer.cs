@@ -13,7 +13,7 @@ namespace IncidentReport.Infrastructure.ForTests
         {
             using (var scope = CompositionRoot.BeginLifetimeScope())
             {
-                var dbContext = scope.Resolve<DbContext>() as IncidentReportDbContext;
+                var dbContext = scope.Resolve<DbContext>() as IncidentReportWriteDbContext;
 
                 seed?.Invoke(dbContext);
 

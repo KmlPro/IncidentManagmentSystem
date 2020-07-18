@@ -25,11 +25,11 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
                     this._dbContextOptions
                         .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
 
-                    return new IncidentReportDbContext(this._dbContextOptions.Options);
+                    return new IncidentReportWriteDbContext(this._dbContextOptions.Options);
                 })
                 .As<IIncidentReportDbContext>()
                 .As<DbContext>()
-                .As<IncidentReportDbContext>()
+                .As<IncidentReportWriteDbContext>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
         }

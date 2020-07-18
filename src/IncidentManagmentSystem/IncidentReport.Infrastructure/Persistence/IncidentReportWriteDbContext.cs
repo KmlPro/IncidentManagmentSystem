@@ -8,20 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Persistence
 {
-    //kbytner 28.01.2020 -- should think how implement users... now implemented only for employees layer test purposes
-    public class IncidentReportDbContext : DbContext, IIncidentReportDbContext
+    public class IncidentReportWriteDbContext : DbContext, IIncidentReportDbContext
     {
         //  public DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
 
-        public IncidentReportDbContext(DbContextOptions options) : base(options)
+        public IncidentReportWriteDbContext(DbContextOptions options) : base(options)
         {
         }
 
         public DbSet<DraftApplication> DraftApplication { get; set; }
-
-        public DbSet<Employee> Employee { get; set; }
-
-        public DbSet<Attachment> Attachment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

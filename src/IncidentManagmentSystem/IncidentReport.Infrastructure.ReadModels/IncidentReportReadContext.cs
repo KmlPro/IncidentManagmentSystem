@@ -1,4 +1,5 @@
 using System.Linq;
+using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Models;
 
 namespace IncidentReport.ReadModels

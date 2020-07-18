@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.0.0" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
     <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
-    <ProjectReference Include="..\IncidentReport.ReadModels\IncidentReport.ReadModels.csproj" />
+    <ProjectReference Include="..\IncidentReport.Infrastructure.ReadModels\IncidentReport.Infrastructure.ReadModels.csproj" />
   </ItemGroup>
 
 </Project>

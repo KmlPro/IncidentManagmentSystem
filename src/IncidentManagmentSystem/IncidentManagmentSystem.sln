@@ -46,7 +46,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentManagmentSystem.Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeDataGenerator", "FakeDataGenerator\FakeDataGenerator.csproj", "{66EC442D-0396-4544-AB94-E650CF703B31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentReport.ReadModels", "IncidentReport.ReadModels\IncidentReport.ReadModels.csproj", "{110F64E2-35D9-4C97-8F17-A35BBCF646AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentReport.Infrastructure.ReadModels", "IncidentReport.Infrastructure.ReadModels\IncidentReport.Infrastructure.ReadModels.csproj", "{110F64E2-35D9-4C97-8F17-A35BBCF646AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
