@@ -9,6 +9,7 @@ using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Persistence.Configurations;
 using IncidentReport.ReadModels;
+using IncidentReport.ReadModels.DIConfiguration;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Configuration

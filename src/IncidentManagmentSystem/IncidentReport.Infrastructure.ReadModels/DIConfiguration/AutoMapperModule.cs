@@ -6,7 +6,7 @@ using Autofac;
 using AutoMapper;
 using IncidentReport.ReadModels.AutoMapperConfiguration;
 
-namespace IncidentReport.ReadModels
+namespace IncidentReport.ReadModels.DIConfiguration
 {
     public class AutoMapperModule : Autofac.Module
     {

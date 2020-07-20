@@ -1,11 +1,10 @@
 using System;
 using Autofac;
-using AutoMapper.Contrib.Autofac.DependencyInjection;
 using IncidentReport.ReadModels.AutoMapperConfiguration;
 using IncidentReport.ReadModels.Contract;
 using Microsoft.EntityFrameworkCore;
 
-namespace IncidentReport.ReadModels
+namespace IncidentReport.ReadModels.DIConfiguration
 {
     public class ReadContextModule : Autofac.Module
     {
