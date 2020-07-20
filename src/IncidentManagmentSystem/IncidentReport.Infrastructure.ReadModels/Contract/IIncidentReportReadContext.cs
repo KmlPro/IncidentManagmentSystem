@@ -1,10 +1,10 @@
 using System.Linq;
-using IncidentReport.ReadModels.Models;
+using IncidentReport.ReadModels.Dtos.DraftApplications;
 
 namespace IncidentReport.ReadModels.Contract
 {
     public interface IIncidentReportReadContext
     {
-        IQueryable<DraftApplication> DraftApplications { get; }
+        IQueryable<DraftApplicationDto> DraftApplications { get; }
     }
 }

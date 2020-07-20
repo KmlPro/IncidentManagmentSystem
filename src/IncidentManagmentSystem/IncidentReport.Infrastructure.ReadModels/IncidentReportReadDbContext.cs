@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using IncidentReport.ReadModels.Models;
+using IncidentReport.ReadModels.DbEntities;
 
 namespace IncidentReport.ReadModels
 {

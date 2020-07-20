@@ -1,5 +1,6 @@
 using System;
 using Autofac;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
 using IncidentReport.ReadModels.Contract;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,8 @@ namespace IncidentReport.ReadModels
             builder.RegisterType<IncidentReportReadContext>()
                 .As<IIncidentReportReadContext>()
                 .InstancePerLifetimeScope();
+
+            builder.AddAutoMapper(typeof(IncidentReportReadContext).Assembly);
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 
-namespace IncidentReport.ReadModels.Models
+namespace IncidentReport.ReadModels.Dtos.Employees
 {
-    public partial class Employee
+    public class EmployeeDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

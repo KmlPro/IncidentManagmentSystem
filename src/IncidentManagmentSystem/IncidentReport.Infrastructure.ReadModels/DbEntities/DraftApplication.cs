@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IncidentReport.ReadModels.Models
+namespace IncidentReport.ReadModels.DbEntities
 {
     public partial class DraftApplication
     {

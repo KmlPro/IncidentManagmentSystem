@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Infrastructure.Contract;
 using IncidentReport.ReadModels.Contract;
+using IncidentReport.ReadModels.Dtos.DraftApplications;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +21,15 @@ namespace IncidentManagmentSystem.Web.GetResources
         }
 
         [HttpGet]
-        // [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<DraftApplicationDto>))]
+        public IActionResult Get()
+        {
+            return this.Ok(this._readContext.DraftApplications);
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
         public IActionResult Get(Guid id)
         {
             return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
