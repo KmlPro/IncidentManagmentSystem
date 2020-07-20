@@ -31,7 +31,7 @@ namespace IncidentManagmentSystem.Web.JustForTests
             TestIncidentReportInitialize.Init(builder, currentUserContext);
         }
 
-        public void Configure([CanBeNull] IApplicationBuilder app, [CanBeNull] IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
