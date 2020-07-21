@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using IncidentManagmentSystem.ApiBehavioursTests.GetResources.DraftApplications;
 using IncidentManagmentSystem.ApiBehavioursTests.IncidentReport;
 using NUnit.Framework;
 
@@ -12,9 +13,11 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources
     {
         private const string _path = "api/DraftApplication";
         private HttpClient _testClient;
+        private TestFixture _testFixture;
 
         public DraftApplicationTests()
         {
+            this._testFixture = new TestFixture();
         }
 
         [OneTimeSetUp]
@@ -26,9 +29,12 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources
         [Test]
         public async Task Get_Return200()
         {
+            this._testFixture.CreateDraftApplicationInDB();
             var response = await this._testClient.GetAsync(_path);
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            var responseContent = response.Content.ReadAsStringAsync().Result;
+
         }
     }
 }

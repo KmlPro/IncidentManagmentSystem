@@ -6,9 +6,9 @@ namespace IncidentReport.Domain.Employees
 {
     public class Employee : Entity
     {
-        public Employee(EmployeeId id, string name, string surname)
+        public Employee(string name, string surname)
         {
-            this.Id = id ?? throw new ArgumentNullException(nameof(id));
+            this.Id = new EmployeeId(Guid.NewGuid());
             this.Name = name ?? throw new ArgumentNullException(nameof(name));
             this.Surname = surname ?? throw new ArgumentNullException(nameof(surname));
         }
