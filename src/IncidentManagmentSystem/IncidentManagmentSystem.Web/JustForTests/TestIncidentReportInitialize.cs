@@ -1,11 +1,9 @@
-using System;
 using System.Data.Common;
 using Autofac;
 using BuildingBlocks.Application;
 using IncidentManagmentSystem.Web.Configuration.Modules.IncidentReports;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace IncidentManagmentSystem.Web.JustForTests
 {
@@ -13,18 +11,18 @@ namespace IncidentManagmentSystem.Web.JustForTests
     {
         public static void Init(ContainerBuilder builder, ICurrentUserContext currentUserContext)
         {
+            var connection = CreateInMemoryDatabaseConnection();
+
             ModuleInitializer.Init(builder, currentUserContext, options =>
             {
-                options.UseSqlite(CreateInMemoryDatabase());
+                options.UseSqlite(connection);
             });
         }
 
-        private static DbConnection CreateInMemoryDatabase()
+        private static DbConnection CreateInMemoryDatabaseConnection()
         {
             var connection = new SqliteConnection("Filename=:memory:");
-
             connection.Open();
-
             return connection;
         }
     }

@@ -34,11 +34,11 @@ namespace IncidentReport.ReadModels
         {
             modelBuilder.Entity<Attachment>(entity =>
             {
-                entity.HasKey(e => new { e.DraftApplicationId, e.Id1 });
-
                 entity.ToTable("Attachment", "IncidentReport");
 
-                entity.Property(e => e.Id1).ValueGeneratedOnAdd();
+                entity.HasIndex(e => e.DraftApplicationId);
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.FileName).HasMaxLength(100);
 

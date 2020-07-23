@@ -19,7 +19,12 @@ namespace IncidentReport.Infrastructure.ForTests
                         "Can't resolve IncidentReportWriteDbContext from Module DI");
                 }
 
-                dbContext.Database.EnsureCreated();
+                if (!dbContext.Database.EnsureCreated())
+                {
+                    throw new TestDatabaseInitializerException(
+                        "Can't create DB schema for test database");
+                };
+
                 seed?.Invoke(dbContext);
 
                 dbContext.SaveChanges();

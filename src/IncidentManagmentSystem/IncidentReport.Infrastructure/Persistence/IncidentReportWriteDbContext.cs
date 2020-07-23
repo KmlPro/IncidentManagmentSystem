@@ -23,6 +23,7 @@ namespace IncidentReport.Infrastructure.Persistence
         {
             modelBuilder.ApplyConfiguration(new DraftApplicationConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new AttachmentConfiguration());
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

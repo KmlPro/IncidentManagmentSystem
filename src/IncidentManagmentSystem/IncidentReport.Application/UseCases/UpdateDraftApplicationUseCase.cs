@@ -116,12 +116,12 @@ namespace IncidentReport.Application.UseCases
             return request.AddedAttachments != null && request.AddedAttachments.Any();
         }
 
-        private void AddUploadedFilesAsAttachments(DraftApplication draftIncidentVerificationApplication,
+        private void AddUploadedFilesAsAttachments(DraftApplication draftApplication,
             List<UploadedFile> files)
         {
             var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)))
                 .ToList();
-            draftIncidentVerificationApplication.AddAttachments(attachments);
+            draftApplication.AddAttachments(attachments);
         }
 
         private Task<List<UploadedFile>> UploadFilesToStorage(UpdateDraftApplicationInput request)
@@ -134,10 +134,10 @@ namespace IncidentReport.Application.UseCases
             return request.DeletedAttachments != null && request.DeletedAttachments.Any();
         }
 
-        private void DeleteAttachments(DraftApplication draftIncidentVerificationApplication,
+        private void DeleteAttachments(DraftApplication draftApplication,
             UpdateDraftApplicationInput request)
         {
-            draftIncidentVerificationApplication.DeleteAttachments(
+            draftApplication.DeleteAttachments(
                 request.DeletedAttachments.Select(x => new StorageId(x)));
         }
     }

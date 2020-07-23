@@ -24,6 +24,7 @@ namespace IncidentManagmentSystem.Web.GetResources
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<DraftApplicationDto>))]
         public IActionResult Get()
         {
+            // 24.07.2020 - kbytner - Not all entities was returned. Need To investigate
             var test = this._readContext.DraftApplications.ToList();
             return this.Ok(this._readContext.DraftApplications);
         }

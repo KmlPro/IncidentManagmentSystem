@@ -5,9 +5,9 @@ namespace IncidentReport.ReadModels.DbEntities
 {
     public partial class Attachment
     {
-        public Guid DraftApplicationId { get; set; }
-        public int Id1 { get; set; }
+        public Guid Id { get; set; }
         public string FileName { get; set; }
+        public Guid? DraftApplicationId { get; set; }
 
         public virtual DraftApplication DraftApplication { get; set; }
     }

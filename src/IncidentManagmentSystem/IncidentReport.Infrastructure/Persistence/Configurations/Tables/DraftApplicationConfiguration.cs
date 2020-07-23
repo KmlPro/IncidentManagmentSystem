@@ -28,12 +28,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
                     .HasColumnName(nameof(ContentOfApplication.Description));
             });
 
-            builder.OwnsMany(m => m.Attachments, table =>
-            {
-                table.ToTable(nameof(Attachment), SchemaName.IncidentReport);
-                table.OwnsOne(m => m.FileInfo,
-                    fi => fi.Property(ca => ca.FileName).HasMaxLength(100).HasColumnName(nameof(FileInfo.FileName)));
-            });
+            builder.HasMany(g => g.Attachments);
 
             builder.OwnsMany(m => m.SuspiciousEmployees, table =>
                 table.ToTable(nameof(SuspiciousEmployee), SchemaName.IncidentReport));
