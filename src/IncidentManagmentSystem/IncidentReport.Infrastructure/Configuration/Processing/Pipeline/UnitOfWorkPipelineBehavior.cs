@@ -22,7 +22,7 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.Pipeline
             using (var scope = this._unitOfWork.BeginTransaction())
             {
                 var response = await next();
-                await this._unitOfWork.CommitAsync();
+                await this._unitOfWork.CommitAsync(cancellationToken);
                 scope.Complete();
                 return response;
             }

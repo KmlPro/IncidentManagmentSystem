@@ -13,8 +13,13 @@ namespace IncidentReport.Infrastructure.ForTests
         {
             using (var scope = CompositionRoot.BeginLifetimeScope())
             {
-                var dbContext = scope.Resolve<DbContext>() as IncidentReportWriteDbContext;
+                if (!(scope.Resolve<DbContext>() is IncidentReportWriteDbContext dbContext))
+                {
+                    throw new TestDatabaseInitializerException(
+                        "Can't resolve IncidentReportWriteDbContext from Module DI");
+                }
 
+                dbContext.Database.EnsureCreated();
                 seed?.Invoke(dbContext);
 
                 dbContext.SaveChanges();

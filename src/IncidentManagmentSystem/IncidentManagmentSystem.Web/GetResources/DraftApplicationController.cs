@@ -24,6 +24,7 @@ namespace IncidentManagmentSystem.Web.GetResources
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<DraftApplicationDto>))]
         public IActionResult Get()
         {
+            var test = this._readContext.DraftApplications.ToList();
             return this.Ok(this._readContext.DraftApplications);
         }
 
