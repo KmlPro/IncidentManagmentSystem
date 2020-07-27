@@ -35,6 +35,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
 
         private DraftApplication()
         {
+            this.Attachments = new List<Attachment>();
+            this.SuspiciousEmployees = new List<SuspiciousEmployee>();
         }
 
         public DraftApplicationId Id { get; }

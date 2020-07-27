@@ -16,6 +16,8 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
+            builder.Property(b => b.ApplicantId).HasMaxLength(30);
+
             builder.OwnsOne(m => m.IncidentType, table =>
             {
                 table.Property(inc => inc.Value).HasMaxLength(100);

@@ -35,7 +35,6 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             // 24.07.2020 - kbytner - Not all entities was returned. Need To investigate
             var responseContent = response.Content.ReadAsStringAsync().Result;
-
         }
     }
 }

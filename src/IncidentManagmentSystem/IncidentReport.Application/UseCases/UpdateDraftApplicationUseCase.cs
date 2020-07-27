@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -34,8 +35,7 @@ namespace IncidentReport.Application.UseCases
             try
             {
                 var draftApplication =
-                 await this._incidentReportContext.DraftApplication.FirstAsync(x =>
-                     x.Id == new DraftApplicationId(input.DraftApplicationId), cancellationToken);
+                    await this.GetDraftApplication(input.DraftApplicationId, cancellationToken);
 
                 this.UpdateApplicationData(draftApplication, input);
                 await this.UpdateAttachments(draftApplication, input);
@@ -53,6 +53,12 @@ namespace IncidentReport.Application.UseCases
             }
 
             return this._outputPort;
+        }
+
+        private async Task<DraftApplication> GetDraftApplication(Guid id,CancellationToken cancellationToken)
+        {
+            return await this._incidentReportContext.DraftApplication.Include(nameof(DraftApplication.Attachments)).FirstAsync(x =>
+                x.Id == new DraftApplicationId(id), cancellationToken);
         }
 
         private void BuildOutput()
