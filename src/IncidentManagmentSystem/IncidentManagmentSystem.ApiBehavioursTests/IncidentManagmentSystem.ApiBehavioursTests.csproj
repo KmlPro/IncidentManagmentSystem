@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FakeDataGenerator\FakeDataGenerator.csproj" />
-    <ProjectReference Include="..\IncidentManagmentSystem.Web\IncidentManagmentSystem.Web.csproj" />
+    <ProjectReference Include="..\IncidentManagementSystem.Web\IncidentManagementSystem.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29521.150
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentManagmentSystem.Web", "IncidentManagmentSystem.Web\IncidentManagmentSystem.Web.csproj", "{EC5B6B8F-08D3-4A9A-A725-99E8A5A5DEA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentManagementSystem.Web", "IncidentManagementSystem.Web\IncidentManagementSystem.Web.csproj", "{EC5B6B8F-08D3-4A9A-A725-99E8A5A5DEA7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{EAF42AA9-B165-4BB0-9957-EA0C754FDD5F}"
 EndProject
