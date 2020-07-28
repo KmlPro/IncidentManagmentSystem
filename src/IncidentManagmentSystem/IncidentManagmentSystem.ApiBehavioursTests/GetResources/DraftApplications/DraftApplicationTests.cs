@@ -1,17 +1,15 @@
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using IncidentManagmentSystem.ApiBehavioursTests.GetResources.DraftApplications;
 using IncidentManagmentSystem.ApiBehavioursTests.IncidentReport;
 using NUnit.Framework;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources
+namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources.DraftApplications
 {
     [Category(IncidentReportCategoryTitle.Title + " GetDraftApplications")]
     public class DraftApplicationTests
     {
-        private const string _path = "api/DraftApplication";
+        private const string _path = "api/draft-application";
         private HttpClient _testClient;
         private TestFixture _testFixture;
 

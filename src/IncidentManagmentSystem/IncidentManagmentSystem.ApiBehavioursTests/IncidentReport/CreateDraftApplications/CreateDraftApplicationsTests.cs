@@ -9,7 +9,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftA
     [Category(IncidentReportCategoryTitle.Title + " CreateDraftApplications")]
     public class CreateDraftApplicationsTests
     {
-        private const string _path = "api/DraftApplication";
+        private const string _path = "api/draft-application";
         private readonly TestFixture _testFixture;
         private HttpClient _testClient;
 

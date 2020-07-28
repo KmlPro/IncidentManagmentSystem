@@ -10,7 +10,7 @@ namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftA
     [Category(IncidentReportCategoryTitle.Title + " UpdateDraftApplications")]
     public class UpdateDraftApplicationsTests
     {
-        private const string _path = "api/DraftApplication";
+        private const string _path = "api/draft-application";
         private readonly TestFixture _testFixture;
         private HttpClient _testClient;
 

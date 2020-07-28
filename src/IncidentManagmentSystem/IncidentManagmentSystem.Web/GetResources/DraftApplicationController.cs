@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IncidentReport.Infrastructure.Contract;
+using IncidentManagmentSystem.Web.Configuration;
 using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Dtos.DraftApplications;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.GetResources
 {
-    [Route("api/[controller]")]
+    [Route(Routes.DraftApplication)]
     [ApiController]
     public class DraftApplicationController : ControllerBase
     {

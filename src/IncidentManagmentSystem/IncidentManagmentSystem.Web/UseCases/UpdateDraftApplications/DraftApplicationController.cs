@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagmentSystem.Web.UseCases.UpdateDraftApplications
 {
-    [Route(ConstRoute.StandardRoute)]
+    [Route(Routes.DraftApplication)]
     [ApiController]
     public class DraftApplicationController : ControllerBase
     {
