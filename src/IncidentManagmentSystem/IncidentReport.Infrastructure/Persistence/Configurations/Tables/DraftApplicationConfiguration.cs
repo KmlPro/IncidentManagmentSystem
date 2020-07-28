@@ -34,8 +34,13 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 
             builder.HasMany(g => g.Attachments);
 
-            builder.OwnsMany(m => m.SuspiciousEmployees, table =>
-                table.ToTable(nameof(SuspiciousEmployee), SchemaName.IncidentReport));
+            builder.OwnsMany(m => m.SuspiciousEmployees,
+                table =>
+                {
+                    table.HasOne<Employee>().WithMany().HasForeignKey(nameof(SuspiciousEmployee.EmployeeId));
+
+                    table.ToTable(nameof(SuspiciousEmployee), SchemaName.IncidentReport);
+                });
         }
     }
 }

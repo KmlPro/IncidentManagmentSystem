@@ -10,5 +10,6 @@ namespace IncidentReport.ReadModels.DbEntities
         public Guid? EmployeeId { get; set; }
 
         public virtual DraftApplication DraftApplication { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

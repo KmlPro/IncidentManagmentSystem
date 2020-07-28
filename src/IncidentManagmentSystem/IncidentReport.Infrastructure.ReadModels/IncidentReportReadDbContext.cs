@@ -85,9 +85,15 @@ namespace IncidentReport.ReadModels
 
                 entity.ToTable("SuspiciousEmployee", "IncidentReport");
 
+                entity.HasIndex(e => e.EmployeeId);
+
                 entity.HasOne(d => d.DraftApplication)
                     .WithMany(p => p.SuspiciousEmployee)
                     .HasForeignKey(d => d.DraftApplicationId);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.SuspiciousEmployee)
+                    .HasForeignKey(d => d.EmployeeId);
             });
 
             OnModelCreatingPartial(modelBuilder);

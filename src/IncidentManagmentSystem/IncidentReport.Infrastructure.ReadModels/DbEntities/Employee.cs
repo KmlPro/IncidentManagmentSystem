@@ -8,6 +8,7 @@ namespace IncidentReport.ReadModels.DbEntities
         public Employee()
         {
             DraftApplication = new HashSet<DraftApplication>();
+            SuspiciousEmployee = new HashSet<SuspiciousEmployee>();
         }
 
         public Guid Id { get; set; }
@@ -15,5 +16,6 @@ namespace IncidentReport.ReadModels.DbEntities
         public string Surname { get; set; }
 
         public virtual ICollection<DraftApplication> DraftApplication { get; set; }
+        public virtual ICollection<SuspiciousEmployee> SuspiciousEmployee { get; set; }
     }
 }
