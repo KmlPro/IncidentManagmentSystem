@@ -1,3 +1,4 @@
+using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,13 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             builder.Property(b => b.Id).ValueGeneratedNever();
 
             builder.Property(b => b.ApplicantId).HasMaxLength(30);
+            builder.HasOne<Employee>().WithMany().HasForeignKey(nameof(DraftApplication.ApplicantId));
 
             builder.OwnsOne(m => m.IncidentType, table =>
             {
                 table.Property(inc => inc.Value).HasMaxLength(100);
             });
-            //kbytner 06.06.2020 - think about set withOwner
+
             builder.OwnsOne(m => m.ContentOfApplication, table =>
             {
                 table.Property(ca => ca.Title).HasMaxLength(100).HasColumnName(nameof(ContentOfApplication.Title));
