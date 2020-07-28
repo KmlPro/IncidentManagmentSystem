@@ -51,6 +51,8 @@ namespace IncidentReport.ReadModels
             {
                 entity.ToTable("DraftApplication", "IncidentReport");
 
+                entity.HasIndex(e => e.ApplicantId);
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Description).HasMaxLength(1000);
@@ -60,6 +62,10 @@ namespace IncidentReport.ReadModels
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Title).HasMaxLength(100);
+
+                entity.HasOne(d => d.Applicant)
+                    .WithMany(p => p.DraftApplication)
+                    .HasForeignKey(d => d.ApplicantId);
             });
 
             modelBuilder.Entity<Employee>(entity =>
