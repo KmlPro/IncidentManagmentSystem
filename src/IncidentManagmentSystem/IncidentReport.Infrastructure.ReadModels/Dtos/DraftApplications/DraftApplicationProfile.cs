@@ -1,5 +1,6 @@
 using AutoMapper;
 using IncidentReport.ReadModels.DbEntities;
+using IncidentReport.ReadModels.Dtos.Employees;
 
 namespace IncidentReport.ReadModels.Dtos.DraftApplications
 {
@@ -7,7 +8,12 @@ namespace IncidentReport.ReadModels.Dtos.DraftApplications
     {
         public DraftApplicationProfile()
         {
-            this.CreateMap<DraftApplication, DraftApplicationDto>();
+            this.CreateMap<DraftApplication, DraftApplicationDto>().
+                ForMember(
+                dest => dest.IncidentType,
+                opt => opt.MapFrom(src => src.IncidentTypeValue)
+            );
+
         }
     }
 }
