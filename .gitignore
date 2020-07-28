@@ -251,3 +251,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+src/.DS_Store
+src/IncidentManagmentSystem/.DS_Store
