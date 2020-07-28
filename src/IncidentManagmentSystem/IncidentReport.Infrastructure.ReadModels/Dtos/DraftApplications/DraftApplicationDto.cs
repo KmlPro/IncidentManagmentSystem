@@ -11,8 +11,8 @@ namespace IncidentReport.ReadModels.Dtos.DraftApplications
         public string Title { get; set; }
         public string Description { get; set; }
         public string IncidentType { get; set; }
-        public IEnumerable<EmployeeDto> SuspiciousEmployees { get; set; }
+        public IEnumerable<EmployeeDto> SuspiciousEmployee { get; set; }
         public EmployeeDto Applicant { get; set; }
-        public IEnumerable<AttachmentDto> Attachments { get; set; }
+        public IEnumerable<AttachmentDto> Attachment { get; set; }
     }
 }

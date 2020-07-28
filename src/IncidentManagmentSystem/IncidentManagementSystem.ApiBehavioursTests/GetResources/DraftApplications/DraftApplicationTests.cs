@@ -31,8 +31,6 @@ namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplicat
             var response = await this._testClient.GetAsync(_path);
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            // 24.07.2020 - kbytner - Not all entities was returned. Need To investigate
-            var responseContent = response.Content.ReadAsStringAsync().Result;
         }
     }
 }
