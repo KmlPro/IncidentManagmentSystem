@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.Application.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Infrastructure.IntegrationTests", "IncidentReport.Infrastructure.IntegrationTests\IncidentReport.Infrastructure.IntegrationTests.csproj", "{52D24F2E-D5CC-4575-8992-BF0EBD14E1F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentManagmentSystem.ApiBehavioursTests", "IncidentManagmentSystem.ApiBehavioursTests\IncidentManagmentSystem.ApiBehavioursTests.csproj", "{4AE5BF87-3D15-4E10-B196-B084DB6FE1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentManagementSystem.ApiBehavioursTests", "IncidentManagementSystem.ApiBehavioursTests\IncidentManagementSystem.ApiBehavioursTests.csproj", "{4AE5BF87-3D15-4E10-B196-B084DB6FE1F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeDataGenerator", "FakeDataGenerator\FakeDataGenerator.csproj", "{66EC442D-0396-4544-AB94-E650CF703B31}"
 EndProject

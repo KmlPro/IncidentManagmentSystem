@@ -8,7 +8,7 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources.DraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplications
 {
     public class TestFixture
     {

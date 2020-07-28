@@ -1,4 +1,4 @@
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport
 {
     internal class IncidentReportCategoryTitle
     {

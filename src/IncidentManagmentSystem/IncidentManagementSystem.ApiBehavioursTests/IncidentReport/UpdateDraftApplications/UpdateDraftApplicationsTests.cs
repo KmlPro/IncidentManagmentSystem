@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UpdateDraftApplications
 {
     [Category(IncidentReportCategoryTitle.Title + " UpdateDraftApplications")]
     public class UpdateDraftApplicationsTests

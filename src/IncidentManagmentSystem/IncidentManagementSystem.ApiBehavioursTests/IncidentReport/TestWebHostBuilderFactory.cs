@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport
 {
     public static class TestWebHostBuilderFactory
     {

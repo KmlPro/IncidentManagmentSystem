@@ -2,7 +2,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport
 {
     public static class TestClientFactory
     {

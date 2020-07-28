@@ -9,7 +9,7 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.UpdateDraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UpdateDraftApplications
 {
     public class TestFixture
     {

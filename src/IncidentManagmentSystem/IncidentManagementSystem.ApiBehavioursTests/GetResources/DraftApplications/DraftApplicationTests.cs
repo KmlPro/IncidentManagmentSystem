@@ -1,10 +1,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using IncidentManagmentSystem.ApiBehavioursTests.IncidentReport;
+using IncidentManagementSystem.ApiBehavioursTests.IncidentReport;
 using NUnit.Framework;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.GetResources.DraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplications
 {
     [Category(IncidentReportCategoryTitle.Title + " GetDraftApplications")]
     public class DraftApplicationTests

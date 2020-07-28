@@ -6,7 +6,7 @@ using BuildingBlocks.Domain.UnitTests;
 using IncidentManagementSystem.Web.UseCases.CreateDraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentManagmentSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
 {
     public class TestFixture
     {
