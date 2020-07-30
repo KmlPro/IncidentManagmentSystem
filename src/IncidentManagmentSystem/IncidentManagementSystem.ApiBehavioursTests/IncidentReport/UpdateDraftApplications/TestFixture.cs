@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using BuildingBlocks.Domain.UnitTests;
+using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
 using IncidentManagementSystem.Web.UseCases.UpdateDraftApplications;
+using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -49,15 +51,20 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UpdateDraft
             formData.Add(new StringContent(string.Join(", ", attachmentIds)), nameof(UpdateDraftApplicationRequest.DeletedAttachments));
         }
 
-        public DraftApplication CreateDraftApplicationInDB(bool withAttachments = false)
+        public DraftApplication CreateDraftApplicationInDb(EmployeeId applicant, EmployeeId suspiciousEmployee,bool withAttachments = false)
         {
-            var draftApplication = this.CreateTestDraftApplicationEntity();
+            var draftApplication = this.CreateTestDraftApplicationEntity(applicant, suspiciousEmployee);
+
             if (withAttachments)
             {
                 this.AddAttachment(draftApplication);
             }
 
-            TestDatabaseInitializer.SeedDataForTest(dbContext => dbContext.DraftApplication.Add(draftApplication));
+            TestDatabaseInitializer.SeedDataForTest(dbContext =>
+            {
+                dbContext.DraftApplication.Add(draftApplication);
+            });
+
             return draftApplication;
         }
 
@@ -69,9 +76,9 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UpdateDraft
             });
         }
 
-        private DraftApplication CreateTestDraftApplicationEntity()
+        private DraftApplication CreateTestDraftApplicationEntity(EmployeeId applicantId, EmployeeId suspiciousEmployeeId)
         {
-            var draftApplication = new DraftApplication(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, new EmployeeId(Guid.NewGuid()), new List<EmployeeId>() { new EmployeeId(Guid.NewGuid()) });
+            var draftApplication = new DraftApplication(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, applicantId, new List<EmployeeId> { suspiciousEmployeeId });
             return draftApplication;
         }
     }

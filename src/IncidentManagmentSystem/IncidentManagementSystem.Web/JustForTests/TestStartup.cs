@@ -24,8 +24,7 @@ namespace IncidentManagementSystem.Web.JustForTests
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            //var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
-            var currentUserContext = new CurrentUserContext(new HttpContextAccessor());
+            var currentUserContext = new TestCurrentUserContext();
 
             TestIncidentReportInitialize.Init(builder, currentUserContext);
         }

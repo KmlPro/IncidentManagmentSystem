@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
+using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -12,27 +13,16 @@ namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplicat
 {
     public class TestFixture
     {
-        public void CreateDraftApplicationInDB()
+        public void CreateDraftApplicationInDB(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
-            var employees = this.CreateEmployees();
-            var draftApplication = this.CreateTestDraftApplicationEntity(employees.First().Id, employees.Last().Id);
+            var draftApplication = this.CreateTestDraftApplicationEntity(applicant, suspiciousEmployee);
             this.AddAttachment(draftApplication);
 
             TestDatabaseInitializer.SeedDataForTest(dbContext =>
                 {
-                    dbContext.Employee.AddRange(employees);
                     dbContext.DraftApplication.Add(draftApplication);
                 }
             );
-        }
-
-        private List<Employee> CreateEmployees()
-        {
-            return new List<Employee>()
-            {
-                new Employee(FakeData.Alpha(12), FakeData.Alpha(100)),
-                new Employee(FakeData.Alpha(20), FakeData.Alpha(50))
-            };
         }
 
         private void AddAttachment(DraftApplication draftApplication)
