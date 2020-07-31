@@ -3,7 +3,7 @@ using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Events
+namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications
 {
     public class DraftApplicationCreatedDomainEvent : DomainEvent
     {

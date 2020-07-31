@@ -6,13 +6,14 @@ using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
+using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.Events.PostedApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
-    //this enitity will change, development is not completed here
     public class PostedApplication : Entity, IAggregateRoot
     {
         public PostedApplication(
@@ -28,17 +29,17 @@ namespace IncidentReport.Domain.IncidentVerificationApplications
             this.ApplicantId = applicantId ?? throw new ArgumentNullException(nameof(applicantId));
             this.ContentOfApplication =
                 contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
+            this.IncidentType = incidentType ?? throw new ArgumentNullException(nameof(incidentType));
 
             this.Id = new PostedApplicationId(Guid.NewGuid());
-            this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
             this.Attachments = attachments;
             this.PostDate = SystemClock.Now;
             this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
 
-            this.AddDomainEvent(new PostedApplicationDomainEvent(this.Id, this.ApplicationNumber,
-                this.ContentOfApplication, this.IncidentType, this.ApplicantId, this.SuspiciousEmployees,
-                this.Attachments, this.PostDate));
+            this.AddDomainEvent(new PostedApplicationCreatedDomainEvent(this.Id, this.ApplicationNumber,
+                this.ContentOfApplication, this.IncidentType, this.PostDate, this.ApplicantId, this.SuspiciousEmployees,
+                this.Attachments));
         }
 
         private PostedApplication()

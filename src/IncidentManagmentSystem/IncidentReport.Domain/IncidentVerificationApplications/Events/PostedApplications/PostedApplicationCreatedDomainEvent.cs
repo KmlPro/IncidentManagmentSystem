@@ -4,28 +4,22 @@ using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Events
+namespace IncidentReport.Domain.IncidentVerificationApplications.Events.PostedApplications
 {
-    public class PostedApplicationDomainEvent : DomainEvent
+    public class PostedApplicationCreatedDomainEvent : DomainEvent
     {
-        public PostedApplicationDomainEvent(
-            PostedApplicationId id,
-            ApplicationNumber applicationNumber,
-            ContentOfApplication contentOfApplication,
-            IncidentType incidentType,
-            EmployeeId applicantId,
-            List<SuspiciousEmployee> suspiciousEmployees,
-            List<Attachment> attachments,
-            DateTime postDate)
+        public PostedApplicationCreatedDomainEvent(PostedApplicationId id, ApplicationNumber applicationNumber,
+            ContentOfApplication contentOfApplication, IncidentType incidentType, DateTime postDate,
+            EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees, List<Attachment> attachments)
         {
             this.Id = id;
+            this.ApplicationNumber = applicationNumber;
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
+            this.PostDate = postDate;
             this.ApplicantId = applicantId;
             this.SuspiciousEmployees = suspiciousEmployees;
-            this.ApplicationNumber = applicationNumber;
             this.Attachments = attachments;
-            this.PostDate = postDate;
         }
 
         public PostedApplicationId Id { get; }

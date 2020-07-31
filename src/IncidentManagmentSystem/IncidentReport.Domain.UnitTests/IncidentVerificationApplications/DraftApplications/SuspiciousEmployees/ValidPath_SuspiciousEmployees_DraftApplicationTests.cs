@@ -1,6 +1,7 @@
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
+using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
 using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.SuspiciousEmployees

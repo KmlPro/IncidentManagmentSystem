@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Events
+namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications
 {
     public class DraftApplicationAttachmentsAdded : DomainEvent
     {
-        public DraftApplicationAttachmentsAdded(DraftApplicationId draftApplicationId, List<Attachment> attachments)
+        public DraftApplicationAttachmentsAdded(DraftApplicationId draftApplicationId, List<Attachment> addedAttachments)
         {
             this.DraftApplicationId = draftApplicationId;
-            this.Attachments = attachments;
+            this.AddedAttachments = addedAttachments;
         }
 
         public DraftApplicationId DraftApplicationId { get; }
-        public List<Attachment> Attachments { get; }
+        public List<Attachment> AddedAttachments { get; }
     }
 }

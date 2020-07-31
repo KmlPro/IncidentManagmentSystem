@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.IncidentVerificationApplications.Events;
+using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 
@@ -37,8 +38,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
             Assert.NotNull(attachmentsAddedEvent);
             Assert.NotNull(attachmentsDeletedEvent);
 
-            Assert.AreEqual(2, attachmentsAddedEvent.Attachments.Count());
-            Assert.AreEqual(1, attachmentsDeletedEvent.Attachments.Count());
+            Assert.AreEqual(2, attachmentsAddedEvent.AddedAttachments.Count());
+            Assert.AreEqual(1, attachmentsDeletedEvent.DeletedAttachments.Count());
             Assert.AreEqual(1, applicationDraft.Attachments.Count());
         }
 
