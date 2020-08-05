@@ -4,11 +4,11 @@ using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Events.PostedApplications
+namespace IncidentReport.Domain.IncidentVerificationApplications.Events.Applications
 {
-    public class PostedApplicationCreatedDomainEvent : DomainEvent
+    public class ApplicationCreatedDomainEvent : DomainEvent
     {
-        public PostedApplicationCreatedDomainEvent(PostedApplicationId id, ApplicationNumber applicationNumber,
+        public ApplicationCreatedDomainEvent(PostedApplicationId id, ApplicationNumber applicationNumber,
             ContentOfApplication contentOfApplication, IncidentType incidentType, DateTime postDate,
             EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees, List<Attachment> attachments)
         {

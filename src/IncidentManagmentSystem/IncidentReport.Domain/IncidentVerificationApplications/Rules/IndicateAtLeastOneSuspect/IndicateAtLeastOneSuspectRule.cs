@@ -17,7 +17,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateA
 
         public void CheckIsBroken()
         {
-            if (this._suspiciousEmployees.Any())
+            if (!this._suspiciousEmployees.Any())
             {
                 throw new NoSuspectsWereIndicatedException(this);
             }

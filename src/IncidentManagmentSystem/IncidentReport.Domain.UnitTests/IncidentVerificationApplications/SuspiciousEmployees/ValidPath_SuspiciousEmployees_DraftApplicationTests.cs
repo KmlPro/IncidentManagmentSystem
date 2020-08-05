@@ -1,10 +1,10 @@
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
+using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.SuspiciousEmployees
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.SuspiciousEmployees
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
     public class ValidPath_SuspiciousEmployees_DraftApplicationTests : TestBase

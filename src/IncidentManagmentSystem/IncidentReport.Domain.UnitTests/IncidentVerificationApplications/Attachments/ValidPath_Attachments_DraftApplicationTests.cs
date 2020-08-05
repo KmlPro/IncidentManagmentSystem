@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.IncidentVerificationApplications.Events;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Attachments
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Attachments
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
     public class ValidPath_Attachments_DraftApplicationTests : TestBase

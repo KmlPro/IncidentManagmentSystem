@@ -1,6 +1,6 @@
 namespace IncidentManagementSystem.Web.Configuration
 {
-    public class Routes
+    public static class Routes
     {
         public const string DraftApplication = "api/draft-application";
     }

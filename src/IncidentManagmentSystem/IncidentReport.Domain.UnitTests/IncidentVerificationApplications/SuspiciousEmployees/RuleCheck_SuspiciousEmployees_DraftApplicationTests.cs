@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
+using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.SuspiciousEmployees
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.SuspiciousEmployees
 {
     [Category(CategoryTitle.Title + " DraftApplication")]
     public class RuleCheck_SuspiciousEmployees_DraftApplicationTests : TestBase

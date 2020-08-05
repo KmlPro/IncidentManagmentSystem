@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using IncidentReport.Domain.Employees.ValueObjects;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.SuspiciousEmployees
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.SuspiciousEmployees
 {
     public class TestFixture
     {
