@@ -84,5 +84,11 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
         {
             this.ApplicationState = applicationState;
         }
+
+        private IncidentApplication()
+        {
+            this.SuspiciousEmployees = new List<SuspiciousEmployee>();
+            this.Attachments = new List<Attachment>();
+        }
     }
 }

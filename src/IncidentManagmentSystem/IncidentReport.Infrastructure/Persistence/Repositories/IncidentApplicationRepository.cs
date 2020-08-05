@@ -42,7 +42,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task Create(CreatedIncidentApplication incidentApplication)
+        public async Task Create(PostedIncidentApplication incidentApplication)
         {
             if (incidentApplication == null)
             {

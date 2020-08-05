@@ -1,18 +1,18 @@
 using System;
-using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
 
 namespace IncidentReport.Application.Boundaries.PostApplicationUseCase
 {
     public class PostApplicationOutput
     {
-        public PostApplicationOutput(DraftApplication draftApplication)
+        public PostApplicationOutput(PostedIncidentApplication postedIncidentApplication)
         {
-            if (draftApplication == null)
+            if (postedIncidentApplication == null)
             {
-                throw new ArgumentNullException(nameof(draftApplication));
+                throw new ArgumentNullException(nameof(postedIncidentApplication));
             }
 
-            this.Id = draftApplication.Id.Value;
+            this.Id = postedIncidentApplication.Id.Value;
         }
 
         public Guid Id { get; }

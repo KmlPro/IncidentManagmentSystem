@@ -7,6 +7,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
     public interface IIncidentApplicationRepository
     {
         Task<PostedIncidentApplication> GetPostedById(ApplicationId applicationId);
-        Task Create(CreatedIncidentApplication incidentApplication);
+        Task Create(PostedIncidentApplication incidentApplication);
     }
 }
