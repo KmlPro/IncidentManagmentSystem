@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.IncidentApplications.States.CreatedApplications
 {
+    [Category(CategoryTitle.Title + " CreatedIncidentApplication")]
     public class CreatedApplicationStateTests : TestBase
     {
         [Test]
