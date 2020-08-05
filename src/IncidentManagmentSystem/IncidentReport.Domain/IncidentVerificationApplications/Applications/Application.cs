@@ -39,6 +39,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Applications
             this.SuspiciousEmployees = application.SuspiciousEmployees;
             this.Attachments = application.Attachments;
             this.PostDate = application.PostDate;
+            this.CopyDomainEvents(application);
         }
 
         private Application(

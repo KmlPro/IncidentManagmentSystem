@@ -7,23 +7,23 @@ using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLea
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.PostedApplications.Constructor
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Applications.Constructor
 {
-    [Category(CategoryTitle.Title + " PostedApplication")]
-    public class RuleCheck_Constructor_PostedApplicationTests : TestBase
+    [Category(CategoryTitle.Title + " Application")]
+    public class RuleCheck_Constructor_ApplicationTests : TestBase
     {
         [Test]
         public void ApplicantIsSuspiciousEmployee_NotCreated()
         {
             var employeeId = new EmployeeId(Guid.NewGuid());
 
-            var draftApplicationBuilder = new PostedApplicationBuilder()
+            var applicationBuilder = new ApplicationBuilder()
                 .SetApplicantId(employeeId)
                 .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> { employeeId }));
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
             {
-                var applicationDraft = draftApplicationBuilder.Build();
+                var applicationDraft = applicationBuilder.Build();
             });
         }
 
@@ -32,13 +32,13 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Poste
         {
             var employeeId = new EmployeeId(Guid.NewGuid());
 
-            var draftApplicationBuilder = new PostedApplicationBuilder()
+            var applicationBuilder = new ApplicationBuilder()
                 .SetApplicantId(employeeId)
                 .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId>()));
 
             AssertBrokenRule<IndicateAtLeastOneSuspectRule>(() =>
             {
-                var applicationDraft = draftApplicationBuilder.Build();
+                var applicationDraft = applicationBuilder.Build();
             });
         }
     }

@@ -9,7 +9,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
 {
-    public class PostedApplicationBuilder
+    public class ApplicationBuilder
     {
         private EmployeeId _applicantId;
         private List<Attachment> _attachments;
@@ -21,47 +21,46 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         private List<EmployeeId> _suspiciousEmployees;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
 
-        public PostedApplicationBuilder SetIncidentType(IncidentType incidentType)
+        public ApplicationBuilder SetIncidentType(IncidentType incidentType)
         {
             this._incidentType = incidentType;
             return this;
         }
 
-        public PostedApplicationBuilder SetApplicantId(EmployeeId employeeId)
+        public ApplicationBuilder SetApplicantId(EmployeeId employeeId)
         {
             this._applicantId = employeeId;
             return this;
         }
 
-        public PostedApplicationBuilder SetContentOfApplication(
+        public ApplicationBuilder SetContentOfApplication(
             Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> contentOfApplicationDelegate)
         {
             this._contentOfApplicationDelegate = contentOfApplicationDelegate;
             return this;
         }
 
-        public PostedApplicationBuilder SetSuspiciousEmployees(
+        public ApplicationBuilder SetSuspiciousEmployees(
             Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> suspiciousEmployeesDelegate)
         {
             this._suspiciousEmployeesDelegate = suspiciousEmployeesDelegate;
             return this;
         }
 
-        public PostedApplicationBuilder SetAttachments(
+        public ApplicationBuilder SetAttachments(
             Func<AttachmentBuilder, AttachmentBuilder>[] attachmentsDelegate)
         {
             this._attachmentsDelegate = attachmentsDelegate;
             return this;
         }
 
-        public PostedApplication Build()
+        public CreatedApplication Build()
         {
             this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();
             this._attachments = this.TryBuildAttachments();
-            var application = Application.Create(this._contentOfApplication, this._incidentType, this._applicantId,
+            return Application.Create(this._contentOfApplication, this._incidentType, this._applicantId,
                 this._suspiciousEmployees, this._attachments);
-            return application.Post();
         }
 
         private List<EmployeeId> TryBuildSuspiciousEmployees()

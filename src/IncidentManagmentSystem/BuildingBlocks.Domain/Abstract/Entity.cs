@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace BuildingBlocks.Domain.Abstract
@@ -11,6 +12,16 @@ namespace BuildingBlocks.Domain.Abstract
         {
             this._domainEvents ??= new List<IDomainEvent>();
             this._domainEvents.Add(domainEvent);
+        }
+
+        protected void CopyDomainEvents(Entity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            this._domainEvents ??= new List<IDomainEvent>();
+            this._domainEvents.AddRange(entity.DomainEvents);
         }
 
         public void ClearDomainEvents()
