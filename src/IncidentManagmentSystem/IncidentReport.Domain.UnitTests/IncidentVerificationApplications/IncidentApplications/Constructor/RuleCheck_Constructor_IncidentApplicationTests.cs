@@ -7,10 +7,10 @@ using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLea
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Applications.Constructor
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.IncidentApplications.Constructor
 {
-    [Category(CategoryTitle.Title + " Application")]
-    public class RuleCheck_Constructor_ApplicationTests : TestBase
+    [Category(CategoryTitle.Title + " IncidentApplication")]
+    public class RuleCheck_Constructor_IncidentApplicationTests : TestBase
     {
         [Test]
         public void ApplicantIsSuspiciousEmployee_NotCreated()

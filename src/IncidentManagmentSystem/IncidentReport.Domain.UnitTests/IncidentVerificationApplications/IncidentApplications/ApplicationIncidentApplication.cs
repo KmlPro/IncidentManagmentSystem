@@ -6,11 +6,11 @@ using IncidentReport.Domain.IncidentVerificationApplications.Applications.States
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Applications
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.IncidentApplications
 {
-    public static class ApplicationFactory
+    public static class ApplicationIncidentApplication
     {
-        public static CreatedApplication CreateInCreatedStateValid()
+        public static CreatedIncidentApplication CreateInCreatedStateValid()
         {
             var applicationBuilder = new ApplicationBuilder()
                 .SetContentOfApplication(x => x.SetTitle(FakeData.Alpha(10)).SetDescription(FakeData.Alpha(20)))

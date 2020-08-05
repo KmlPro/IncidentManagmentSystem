@@ -5,6 +5,7 @@ using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Applications;
 using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
+using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
@@ -54,12 +55,12 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return this;
         }
 
-        public CreatedApplication Build()
+        public CreatedIncidentApplication Build()
         {
             this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();
             this._attachments = this.TryBuildAttachments();
-            return Application.Create(this._contentOfApplication, this._incidentType, this._applicantId,
+            return IncidentApplication.Create(this._contentOfApplication, this._incidentType, this._applicantId,
                 this._suspiciousEmployees, this._attachments);
         }
 

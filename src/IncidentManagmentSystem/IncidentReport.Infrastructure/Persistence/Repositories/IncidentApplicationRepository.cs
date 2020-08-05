@@ -1,25 +1,24 @@
 using System;
 using System.Threading.Tasks;
-using IncidentReport.Domain.IncidentVerificationApplications.Applications;
 using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
+using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using ApplicationId = IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ApplicationId;
-using Application = IncidentReport.Domain.IncidentVerificationApplications.Applications.Application;
 
 namespace IncidentReport.Infrastructure.Persistence.Repositories
 {
-    public class ApplicationRepository : IApplicationRepository
+    public class IncidentApplicationRepository : IIncidentApplicationRepository
     {
         private IncidentReportWriteDbContext _writeContext;
 
-        public ApplicationRepository(IncidentReportWriteDbContext writeContext)
+        public IncidentApplicationRepository(IncidentReportWriteDbContext writeContext)
         {
             this._writeContext = writeContext;
         }
 
-        public async Task<PostedApplication> GetPostedById(ApplicationId applicationId)
+        public async Task<PostedIncidentApplication> GetPostedById(ApplicationId applicationId)
         {
             if (applicationId == null)
             {
@@ -35,7 +34,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
                     throw new AggregateNotFoundInDbException(nameof(Application), applicationId.Value);
                 }
 
-                return (PostedApplication)application;
+                return (PostedIncidentApplication)application;
             }
             catch (Exception ex)
             {
@@ -43,16 +42,16 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task Create(CreatedApplication application)
+        public async Task Create(CreatedIncidentApplication incidentApplication)
         {
-            if (application == null)
+            if (incidentApplication == null)
             {
-                throw new ArgumentNullException(nameof(application));
+                throw new ArgumentNullException(nameof(incidentApplication));
             }
 
             try
             {
-                await this._writeContext.Application.AddAsync(application);
+                await this._writeContext.Application.AddAsync(incidentApplication);
             }
             catch (Exception ex)
             {

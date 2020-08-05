@@ -12,38 +12,38 @@ using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLea
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using ApplicationId = IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ApplicationId;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Applications
+namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications
 {
-    public class Application : Entity, IAggregateRoot
+    public class IncidentApplication : Entity, IAggregateRoot
     {
-        public static CreatedApplication Create(ContentOfApplication contentOfApplication,
+        public static CreatedIncidentApplication Create(ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
             List<EmployeeId> suspiciousEmployees,
             List<Attachment> attachments)
         {
-            var application = new Application(contentOfApplication, incidentType, applicantId, suspiciousEmployees, attachments);
-            return new CreatedApplication(application);
+            var application = new IncidentApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees, attachments);
+            return new CreatedIncidentApplication(application);
         }
 
-        protected Application(Application application)
+        protected IncidentApplication(IncidentApplication incidentApplication)
         {
-            if (application == null)
+            if (incidentApplication == null)
             {
-                throw new ArgumentNullException(nameof(application));
+                throw new ArgumentNullException(nameof(incidentApplication));
             }
 
-            this.Id = application.Id;
-            this.ApplicantId = application.ApplicantId;
-            this.ContentOfApplication = application.ContentOfApplication;
-            this.IncidentType = application.IncidentType;
-            this.SuspiciousEmployees = application.SuspiciousEmployees;
-            this.Attachments = application.Attachments;
-            this.PostDate = application.PostDate;
-            this.CopyDomainEvents(application);
+            this.Id = incidentApplication.Id;
+            this.ApplicantId = incidentApplication.ApplicantId;
+            this.ContentOfApplication = incidentApplication.ContentOfApplication;
+            this.IncidentType = incidentApplication.IncidentType;
+            this.SuspiciousEmployees = incidentApplication.SuspiciousEmployees;
+            this.Attachments = incidentApplication.Attachments;
+            this.PostDate = incidentApplication.PostDate;
+            this.CopyDomainEvents(incidentApplication);
         }
 
-        private Application(
+        private IncidentApplication(
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
