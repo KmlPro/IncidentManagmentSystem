@@ -10,6 +10,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events.Applications
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using ApplicationId = IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ApplicationId;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Applications
 {
@@ -25,7 +26,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Applications
             return new CreatedApplication(application);
         }
 
-        public Application(Application application)
+        protected Application(Application application)
         {
             if (application == null)
             {
@@ -57,7 +58,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Applications
                 contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
             this.IncidentType = incidentType ?? throw new ArgumentNullException(nameof(incidentType));
 
-            this.Id = new PostedApplicationId(Guid.NewGuid());
+            this.Id = new ApplicationId(Guid.NewGuid());
             this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
             this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
             this.ApplicationState = ApplicationStateValue.Created;
@@ -69,7 +70,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Applications
                 this.Attachments));
         }
 
-        public PostedApplicationId Id { get; }
+        public ApplicationId Id { get; }
         public ApplicationNumber ApplicationNumber { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }

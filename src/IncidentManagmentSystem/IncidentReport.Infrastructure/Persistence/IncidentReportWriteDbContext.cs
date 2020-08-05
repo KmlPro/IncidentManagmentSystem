@@ -1,5 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
 using IncidentReport.Application.Common;
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -10,7 +8,7 @@ namespace IncidentReport.Infrastructure.Persistence
 {
     public class IncidentReportWriteDbContext : DbContext, IIncidentReportDbContext
     {
-        //  public DbSet<PostedIncidentVerificationApplication> PostedIncidentVerificationApplication { get; set; }
+        public DbSet<Domain.IncidentVerificationApplications.Applications.Application> Application { get; set; }
 
         public IncidentReportWriteDbContext(DbContextOptions options) : base(options)
         {
@@ -24,12 +22,6 @@ namespace IncidentReport.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new DraftApplicationConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new AttachmentConfiguration());
-        }
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
-            CancellationToken cancellationToken = default)
-        {
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
     }
 }

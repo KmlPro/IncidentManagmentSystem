@@ -2,6 +2,8 @@ using System;
 using Autofac;
 using BuildingBlocks.Infrastructure;
 using IncidentReport.Application.Common;
+using IncidentReport.Domain.IncidentVerificationApplications.Applications;
+using IncidentReport.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -32,6 +34,8 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
                 .As<IncidentReportWriteDbContext>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<ApplicationRepository>().As<IApplicationRepository>();
         }
     }
 }
