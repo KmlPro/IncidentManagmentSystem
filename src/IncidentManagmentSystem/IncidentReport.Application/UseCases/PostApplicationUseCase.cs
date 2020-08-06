@@ -38,6 +38,7 @@ namespace IncidentReport.Application.UseCases
             this._outputPort = outputPort;
         }
 
+        //kbytner 06.08.2020 - add rollback uploaded attachments
         public async Task<IOutputPort> Handle(PostApplicationInput input, CancellationToken cancellationToken)
         {
             try
