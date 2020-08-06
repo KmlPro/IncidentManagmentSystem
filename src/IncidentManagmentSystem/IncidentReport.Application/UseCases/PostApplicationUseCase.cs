@@ -11,25 +11,28 @@ using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.UseCases
 {
-    // kbytner 05.08.2020 - add remove draft if is in input
     public class PostApplicationUseCase : IUseCase
     {
         private readonly ICurrentUserContext _applicantContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly IIncidentApplicationRepository _incidentApplicationRepository;
+        private readonly IDraftApplicationRepository _draftApplicationRepository;
         private readonly IOutputPort _outputPort;
 
         public PostApplicationUseCase(IIncidentApplicationRepository incidentApplicationRepository,
+            IDraftApplicationRepository draftApplicationRepository,
             ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort)
         {
             this._incidentApplicationRepository = incidentApplicationRepository;
+            this._draftApplicationRepository = draftApplicationRepository;
             this._applicantContext = userContext;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
@@ -51,6 +54,12 @@ namespace IncidentReport.Application.UseCases
                 var postedIncidentApplication = incidentApplication.Post();
 
                 await this._incidentApplicationRepository.Create(postedIncidentApplication);
+
+                if (this.CreatedFromDraft(input))
+                {
+                    this._draftApplicationRepository.Delete(new DraftApplicationId(input.DraftApplicationId.Value));
+                }
+
                 this.BuildOutput(postedIncidentApplication);
             }
             catch (BusinessRuleValidationException ex)
@@ -65,6 +74,11 @@ namespace IncidentReport.Application.UseCases
             return this._outputPort;
         }
 
+        private bool CreatedFromDraft(PostApplicationInput input)
+        {
+            return input.DraftApplicationId.HasValue;
+        }
+
         private bool IfAddedAttachmentsExists(PostApplicationInput request)
         {
             return request.Attachments != null && request.Attachments.Any();
@@ -75,12 +89,14 @@ namespace IncidentReport.Application.UseCases
             return this._fileStorageService.UploadFiles(request.Attachments);
         }
 
+        //kbytner 06.08.2020 - should move to factory
         private List<Attachment> CreateAttachments(List<UploadedFile> files)
         {
             return files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)))
                 .ToList();
         }
 
+        //kbytner 06.08.2020 - should move to factory
         private CreatedIncidentApplication CreateApplication(PostApplicationInput request, List<Attachment> attachments)
         {
             return IncidentApplication.Create(

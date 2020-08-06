@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using ApplicationId = IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ApplicationId;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events.Applications
 {
     public class ApplicationPostedDomainEvent : DomainEvent
     {
-        public ApplicationPostedDomainEvent(ApplicationId id, ApplicationNumber applicationNumber,
+        public ApplicationPostedDomainEvent(IncidentApplicationId id, ApplicationNumber applicationNumber,
             ContentOfApplication contentOfApplication, IncidentType incidentType, DateTime postDate,
             EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees, List<Attachment> attachments)
         {
@@ -23,7 +22,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.Applicat
             this.Attachments = attachments;
         }
 
-        public ApplicationId Id { get; }
+        public IncidentApplicationId Id { get; }
         public ApplicationNumber ApplicationNumber { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }

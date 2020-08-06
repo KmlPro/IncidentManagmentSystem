@@ -1,5 +1,6 @@
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.Common

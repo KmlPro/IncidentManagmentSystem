@@ -6,6 +6,7 @@ using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 

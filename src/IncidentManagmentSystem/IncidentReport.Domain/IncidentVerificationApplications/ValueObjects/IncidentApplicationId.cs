@@ -3,9 +3,9 @@ using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
 {
-    public class ApplicationId : TypedIdValue
+    public class IncidentApplicationId : TypedIdValue
     {
-        public ApplicationId(Guid value) : base(value)
+        public IncidentApplicationId(Guid value) : base(value)
         {
         }
     }

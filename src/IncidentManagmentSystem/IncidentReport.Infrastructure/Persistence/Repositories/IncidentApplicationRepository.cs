@@ -5,7 +5,6 @@ using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplication
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using ApplicationId = IncidentReport.Domain.IncidentVerificationApplications.ValueObjects.ApplicationId;
 
 namespace IncidentReport.Infrastructure.Persistence.Repositories
 {
@@ -18,20 +17,20 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             this._writeContext = writeContext;
         }
 
-        public async Task<PostedIncidentApplication> GetPostedById(ApplicationId applicationId)
+        public async Task<PostedIncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId)
         {
-            if (applicationId == null)
+            if (incidentApplicationId == null)
             {
-                throw new ArgumentNullException(nameof(applicationId));
+                throw new ArgumentNullException(nameof(incidentApplicationId));
             }
 
             try
             {
                 var application = await this._writeContext.Application.FirstAsync(x =>
-                    x.Id == applicationId && x.ApplicationState == ApplicationStateValue.Posted);
+                    x.Id == incidentApplicationId && x.ApplicationState == ApplicationStateValue.Posted);
                 if (application == null)
                 {
-                    throw new AggregateNotFoundInDbException(nameof(Application), applicationId.Value);
+                    throw new AggregateNotFoundInDbException(nameof(Application), incidentApplicationId.Value);
                 }
 
                 return (PostedIncidentApplication)application;
