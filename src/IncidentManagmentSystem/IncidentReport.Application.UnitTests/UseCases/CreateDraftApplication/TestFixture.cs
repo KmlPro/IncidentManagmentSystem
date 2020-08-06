@@ -4,6 +4,7 @@ using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.Files;
+using IncidentReport.Application.UnitTests.Factories;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
@@ -17,7 +18,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
             var incidentType = IncidentType.AdverseEffectForTheCompany.Value;
             var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
             var attachments = fileNames
-                ?.Select(x => new FileData(x, new byte[] { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 })).ToList();
+                ?.Select(FileDataFactory.Create).ToList();
 
             return new CreateDraftApplicationInput(
                 title,

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Files;
+using IncidentReport.Application.UnitTests.Factories;
 using IncidentReport.Application.UseCases;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using NUnit.Framework;
@@ -68,8 +69,8 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
         public async Task OneInitialAttachment_TwoAdded_ThreeAttachmentsInDraft()
         {
             //Arrange
-            var initialAttachment = new List<Attachment>{this._testFixture.CreateAttachment()};
-            var addedAttachment = new List<FileData> {this._testFixture.CreateFileData(), this._testFixture.CreateFileData() };
+            var initialAttachment = new List<Attachment>{AttachmentFactory.Create()};
+            var addedAttachment = new List<FileData> {FileDataFactory.Create(), FileDataFactory.Create()};
 
             var useCase =
                 await this._testFixture.PrepareUseCaseWithTestData(addedAttachment, null, initialAttachment);
