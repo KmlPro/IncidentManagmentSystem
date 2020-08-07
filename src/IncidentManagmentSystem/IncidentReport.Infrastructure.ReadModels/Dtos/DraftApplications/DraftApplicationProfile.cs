@@ -10,6 +10,9 @@ namespace IncidentReport.ReadModels.Dtos.DraftApplications
             this.CreateMap<DraftApplication, DraftApplicationDto>().ForMember(
                 dest => dest.IncidentType,
                 opt => opt.MapFrom(src => src.IncidentTypeValue)
+            ).ForMember(
+                dest => dest.SuspiciousEmployee,
+                opt => opt.MapFrom(src => src.DraftApplicationSuspiciousEmployee)
             );
         }
     }
