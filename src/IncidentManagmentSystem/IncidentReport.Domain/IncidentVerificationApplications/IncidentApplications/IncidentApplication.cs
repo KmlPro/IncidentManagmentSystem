@@ -39,6 +39,9 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
             this.SuspiciousEmployees = incidentApplication.SuspiciousEmployees;
             this.Attachments = incidentApplication.Attachments;
             this.PostDate = incidentApplication.PostDate;
+            this.ApplicationState = incidentApplication.ApplicationState;
+            this.ApplicationNumber = incidentApplication.ApplicationNumber;
+
             this.CopyDomainEvents(incidentApplication);
         }
 

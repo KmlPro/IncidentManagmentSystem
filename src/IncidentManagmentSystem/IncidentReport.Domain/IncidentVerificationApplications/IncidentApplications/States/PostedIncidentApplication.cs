@@ -1,7 +1,6 @@
 using IncidentReport.Domain.IncidentVerificationApplications.Events.Applications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 
-namespace IncidentReport.Domain.IncidentVerificationApplications.Applications.States
+namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States
 {
     public class PostedIncidentApplication : IncidentApplication
     {

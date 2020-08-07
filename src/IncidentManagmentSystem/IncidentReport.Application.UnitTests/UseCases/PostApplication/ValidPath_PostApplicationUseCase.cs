@@ -1,24 +1,29 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.UnitTests.Mocks;
 using IncidentReport.Application.UseCases;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
 {
-    //kbytner 06.08.2020- to do, complete tests with implementation
+    [Category(CategoryTitle.Title + " PostApplicationUseCase")]
     public class ValidPath_PostApplicationUseCase : BaseTest
     {
         private TestFixture _testFixture;
-        private IDraftApplicationRepository _draftApplicationRepository;
-        private IIncidentApplicationRepository _incidentApplicationRepository;
+        private MockDraftApplicationRepository _draftApplicationRepository;
+        private MockIncidentApplicationRepository _incidentApplicationRepository;
 
         public ValidPath_PostApplicationUseCase()
         {
             this._testFixture = new TestFixture();
+        }
+
+        [SetUp]
+        public void Init()
+        {
             this._draftApplicationRepository = new MockDraftApplicationRepository();
             this._incidentApplicationRepository = new MockIncidentApplicationRepository();
         }
@@ -26,7 +31,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
         [Test]
         public async Task WithoutDraftApplication_PostedSuccessfully()
         {
-            var useCase = this._testFixture.CreateInputWithoutDraft();
+            var useCase = this._testFixture.CreateInput(null);
             var handler = new PostApplicationUseCase(this._incidentApplicationRepository,
                 this._draftApplicationRepository, this.CurrentUserContext, this.IFileStorageService,
                 new PostApplicationUseCaseOutputPort());
@@ -35,6 +40,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
                 (PostApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
+            Assert.AreEqual(1, this.CountPostedApplications());
         }
 
         [Test]
@@ -43,7 +49,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
             var draftApplication =
                 this._testFixture.PrepareDraftApplication(this._draftApplicationRepository);
 
-            var useCase = this._testFixture.CreateInputWithDraft(draftApplication);
+            var useCase = this._testFixture.CreateInput(draftApplication.Id);
             var handler = new PostApplicationUseCase(this._incidentApplicationRepository,
                 this._draftApplicationRepository, this.CurrentUserContext, this.IFileStorageService,
                 new PostApplicationUseCaseOutputPort());
@@ -52,6 +58,14 @@ namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
                 (PostApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
+            Assert.AreEqual(1, this.CountPostedApplications());
+            Assert.AreEqual(0, this._draftApplicationRepository.DraftApplications.Count);
+        }
+
+        private int CountPostedApplications()
+        {
+            return this._incidentApplicationRepository.IncidentApplications.Count(x =>
+                x.ApplicationState == ApplicationStateValue.Posted);
         }
     }
 }

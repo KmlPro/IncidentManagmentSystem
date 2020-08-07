@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
-using IncidentReport.Application.Files;
 using IncidentReport.Application.UnitTests.Factories;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 

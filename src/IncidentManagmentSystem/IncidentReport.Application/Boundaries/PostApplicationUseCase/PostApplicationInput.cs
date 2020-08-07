@@ -7,7 +7,7 @@ namespace IncidentReport.Application.Boundaries.PostApplicationUseCase
 {
     public class PostApplicationInput : IUseCaseInput<IOutputPort>
     {
-        public PostApplicationInput(Guid draftApplicationId ,string title, string description, string incidentType,
+        public PostApplicationInput(Guid? draftApplicationId ,string title, string description, string incidentType,
             IEnumerable<Guid> suspiciousEmployees, List<FileData> attachments)
         {
             this.DraftApplicationId = draftApplicationId;

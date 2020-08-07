@@ -1,4 +1,5 @@
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Applications.States

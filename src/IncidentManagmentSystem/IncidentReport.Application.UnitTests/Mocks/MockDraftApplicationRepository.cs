@@ -8,28 +8,28 @@ namespace IncidentReport.Application.UnitTests.Mocks
 {
     public class MockDraftApplicationRepository : IDraftApplicationRepository
     {
-        private List<DraftApplication> _draftApplications;
+        public List<DraftApplication> DraftApplications { get; }
 
         public MockDraftApplicationRepository()
         {
-            this._draftApplications = new List<DraftApplication>();
+            this.DraftApplications = new List<DraftApplication>();
         }
 
         public void Delete(DraftApplicationId draftApplicationId)
         {
-            var draftApplication = this._draftApplications.First(x => x.Id == draftApplicationId);
-            this._draftApplications.Remove(draftApplication);
+            var draftApplication = this.DraftApplications.First(x => x.Id == draftApplicationId);
+            this.DraftApplications.Remove(draftApplication);
         }
 
         public Task<DraftApplication> GetById(DraftApplicationId applicationId)
         {
-            var draftApplication = this._draftApplications.FirstOrDefault(x=> x.Id == applicationId);
+            var draftApplication = this.DraftApplications.FirstOrDefault(x=> x.Id == applicationId);
             return Task.FromResult(draftApplication);
         }
 
         public Task Create(DraftApplication draftApplication)
         {
-            this._draftApplications.Add(draftApplication);
+            this.DraftApplications.Add(draftApplication);
             return Task.CompletedTask;
         }
 
