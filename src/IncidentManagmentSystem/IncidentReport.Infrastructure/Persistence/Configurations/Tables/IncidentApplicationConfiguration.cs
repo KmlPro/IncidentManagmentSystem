@@ -1,24 +1,30 @@
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
+using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 {
-    internal class DraftApplicationConfiguration : IEntityTypeConfiguration<DraftApplication>
+    public class IncidentApplicationConfiguration : IEntityTypeConfiguration<IncidentApplication>
     {
-        public void Configure(EntityTypeBuilder<DraftApplication> builder)
+        public void Configure(EntityTypeBuilder<IncidentApplication> builder)
         {
-            builder.ToTable(nameof(DraftApplication), SchemaName.IncidentReport);
+            builder.ToTable(nameof(IncidentApplication), SchemaName.IncidentReport);
             builder.Ignore(x => x.DomainEvents);
 
             builder.HasKey(x => x.Id);
             builder.Property(b => b.Id).ValueGeneratedNever();
 
             builder.Property(b => b.ApplicantId).HasMaxLength(30);
-            builder.HasOne<Employee>().WithMany().HasForeignKey(nameof(DraftApplication.ApplicantId));
+            builder.OwnsOne(b => b.ApplicationState,
+                table =>
+                {
+                    table.Property(appState => appState.Value).HasMaxLength(15);
+                });
+
+            builder.HasOne<Employee>().WithMany().HasForeignKey(nameof(IncidentApplication.ApplicantId));
 
             builder.OwnsOne(m => m.IncidentType, table =>
             {
@@ -38,8 +44,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
                 table =>
                 {
                     table.HasOne<Employee>().WithMany().HasForeignKey(nameof(SuspiciousEmployee.EmployeeId));
-
-                    table.ToTable($"{nameof(DraftApplication)}{nameof(SuspiciousEmployee)}", SchemaName.IncidentReport);
+                    table.ToTable($"{nameof(IncidentApplication)}{nameof(SuspiciousEmployee)}", SchemaName.IncidentReport);
                 });
         }
     }

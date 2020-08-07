@@ -18,8 +18,10 @@ namespace IncidentReport.ReadModels
 
         public virtual DbSet<Attachment> Attachment { get; set; }
         public virtual DbSet<DraftApplication> DraftApplication { get; set; }
+        public virtual DbSet<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployee { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<SuspiciousEmployee> SuspiciousEmployee { get; set; }
+        public virtual DbSet<IncidentApplication> IncidentApplication { get; set; }
+        public virtual DbSet<IncidentApplicationSuspiciousEmployee> IncidentApplicationSuspiciousEmployee { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,6 +40,8 @@ namespace IncidentReport.ReadModels
 
                 entity.HasIndex(e => e.DraftApplicationId);
 
+                entity.HasIndex(e => e.IncidentApplicationId);
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.FileName).HasMaxLength(100);
@@ -45,6 +49,10 @@ namespace IncidentReport.ReadModels
                 entity.HasOne(d => d.DraftApplication)
                     .WithMany(p => p.Attachment)
                     .HasForeignKey(d => d.DraftApplicationId);
+
+                entity.HasOne(d => d.IncidentApplication)
+                    .WithMany(p => p.Attachment)
+                    .HasForeignKey(d => d.IncidentApplicationId);
             });
 
             modelBuilder.Entity<DraftApplication>(entity =>
@@ -68,6 +76,23 @@ namespace IncidentReport.ReadModels
                     .HasForeignKey(d => d.ApplicantId);
             });
 
+            modelBuilder.Entity<DraftApplicationSuspiciousEmployee>(entity =>
+            {
+                entity.HasKey(e => new { e.DraftApplicationId, e.Id });
+
+                entity.ToTable("DraftApplicationSuspiciousEmployee", "IncidentReport");
+
+                entity.HasIndex(e => e.EmployeeId);
+
+                entity.HasOne(d => d.DraftApplication)
+                    .WithMany(p => p.DraftApplicationSuspiciousEmployee)
+                    .HasForeignKey(d => d.DraftApplicationId);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.DraftApplicationSuspiciousEmployee)
+                    .HasForeignKey(d => d.EmployeeId);
+            });
+
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.ToTable("Employee", "IncidentReport");
@@ -79,21 +104,46 @@ namespace IncidentReport.ReadModels
                 entity.Property(e => e.Surname).HasMaxLength(100);
             });
 
-            modelBuilder.Entity<SuspiciousEmployee>(entity =>
+            modelBuilder.Entity<IncidentApplication>(entity =>
             {
-                entity.HasKey(e => new { e.DraftApplicationId, e.Id });
+                entity.ToTable("IncidentApplication", "IncidentReport");
 
-                entity.ToTable("SuspiciousEmployee", "IncidentReport");
+                entity.HasIndex(e => e.ApplicantId);
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.ApplicationStateValue)
+                    .HasColumnName("ApplicationState_Value")
+                    .HasMaxLength(15);
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.Property(e => e.IncidentTypeValue)
+                    .HasColumnName("IncidentType_Value")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Title).HasMaxLength(100);
+
+                entity.HasOne(d => d.Applicant)
+                    .WithMany(p => p.IncidentApplication)
+                    .HasForeignKey(d => d.ApplicantId);
+            });
+
+            modelBuilder.Entity<IncidentApplicationSuspiciousEmployee>(entity =>
+            {
+                entity.HasKey(e => new { e.IncidentApplicationId, e.Id });
+
+                entity.ToTable("IncidentApplicationSuspiciousEmployee", "IncidentReport");
 
                 entity.HasIndex(e => e.EmployeeId);
 
-                entity.HasOne(d => d.DraftApplication)
-                    .WithMany(p => p.SuspiciousEmployee)
-                    .HasForeignKey(d => d.DraftApplicationId);
-
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.SuspiciousEmployee)
+                    .WithMany(p => p.IncidentApplicationSuspiciousEmployee)
                     .HasForeignKey(d => d.EmployeeId);
+
+                entity.HasOne(d => d.IncidentApplication)
+                    .WithMany(p => p.IncidentApplicationSuspiciousEmployee)
+                    .HasForeignKey(d => d.IncidentApplicationId);
             });
 
             OnModelCreatingPartial(modelBuilder);

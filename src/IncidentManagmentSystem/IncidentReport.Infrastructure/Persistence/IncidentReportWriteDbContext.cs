@@ -24,6 +24,7 @@ namespace IncidentReport.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new DraftApplicationConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new AttachmentConfiguration());
+            modelBuilder.ApplyConfiguration(new IncidentApplicationConfiguration());
         }
     }
 }
