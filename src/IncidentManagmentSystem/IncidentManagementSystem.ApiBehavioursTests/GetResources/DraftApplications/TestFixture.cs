@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
+using IncidentManagementSystem.ApiBehavioursTests.DraftApplicationFixtures;
 using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.Employees.ValueObjects;
@@ -14,33 +15,17 @@ namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplicat
 {
     public class TestFixture
     {
-        public void CreateDraftApplicationInDB(EmployeeId applicant, EmployeeId suspiciousEmployee)
+        private DraftApplicationFactory _draftApplicationFactory;
+        private DraftApplicationTestFixture _draftApplicationTestFixture;
+        public TestFixture()
         {
-            var draftApplication = this.CreateTestDraftApplicationEntity(applicant, suspiciousEmployee);
-            this.AddAttachment(draftApplication);
-
-            TestDatabaseInitializer.SeedDataForTest(dbContext =>
-                {
-                    dbContext.DraftApplication.Add(draftApplication);
-                }
-            );
+            this._draftApplicationFactory = new DraftApplicationFactory();
+            this._draftApplicationTestFixture = new DraftApplicationTestFixture();
         }
-
-        private void AddAttachment(DraftApplication draftApplication)
+        public void CreateDraftApplicationInDb(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
-            draftApplication.AddAttachments(new List<Attachment>()
-            {
-                new Attachment(new FileInfo("testFile.pdf"), new StorageId(Guid.NewGuid()))
-            });
-        }
-
-        private DraftApplication CreateTestDraftApplicationEntity(EmployeeId applicant, EmployeeId suspiciousEmployee)
-        {
-            var draftApplication = new DraftApplication(
-                new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)),
-                IncidentType.AdverseEffectForTheCompany, applicant,
-                new List<EmployeeId>() {suspiciousEmployee});
-            return draftApplication;
+            var draftApplication = this._draftApplicationFactory.CreateWithAttachments(applicant, suspiciousEmployee);
+            this._draftApplicationTestFixture.SaveDraftApplicationInDb(draftApplication);
         }
     }
 }

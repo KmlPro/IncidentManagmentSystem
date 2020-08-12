@@ -6,17 +6,18 @@ using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
 using IncidentReport.Domain.Employees.ValueObjects;
 using NUnit.Framework;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.CreateDraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.PostApplications
 {
-    [Category(IncidentReportCategoryTitle.Title + " CreateDraftApplications")]
-    public class CreateDraftApplicationsTests
+    [Category(IncidentReportCategoryTitle.Title + " PostApplications")]
+    public class PostApplicationsTests
     {
-        private const string _path = "api/draft-application";
+        private const string _path = "api/incident-application";
         private readonly TestFixture _testFixture;
         private HttpClient _testClient;
         private EmployeeId _suspiciousEmployee;
+        private EmployeeId _applicant;
 
-        public CreateDraftApplicationsTests()
+        public PostApplicationsTests()
         {
             this._testFixture = new TestFixture();
         }
@@ -25,14 +26,13 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.CreateDraft
         public void Setup()
         {
             this._testClient = TestClientFactory.GetHttpClient();
-            (_,this._suspiciousEmployee) = EmployeesTestFixture.PrepareApplicantAndRandomEmployeeInDb();
+            (this._applicant,this._suspiciousEmployee)= EmployeesTestFixture.PrepareApplicantAndRandomEmployeeInDb();
         }
 
         [Test]
         public async Task ValidRequestContent_Created()
         {
-            var requestContent = this._testFixture.CreateRequestContent(this._suspiciousEmployee.Value);
-
+            var requestContent = this._testFixture.CreateRequestContent(this._suspiciousEmployee.Value, null);
             var response = await this._testClient.PostAsync(_path, requestContent);
 
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
@@ -40,10 +40,10 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.CreateDraft
         }
 
         [Test]
-        public async Task WithAttachments_Created()
+        public async Task WithDraftApplicationId_Created()
         {
-            var requestContent = this._testFixture.CreateRequestContent(this._suspiciousEmployee.Value);
-            this._testFixture.AddAttachments(requestContent, new List<string> { "test1.txt", "test2.txt" });
+            var draftApplicationId = this._testFixture.CreateDraftApplicationInDb(this._applicant, this._suspiciousEmployee);
+            var requestContent = this._testFixture.CreateRequestContent(this._suspiciousEmployee.Value, draftApplicationId);
 
             var response = await this._testClient.PostAsync(_path, requestContent);
 

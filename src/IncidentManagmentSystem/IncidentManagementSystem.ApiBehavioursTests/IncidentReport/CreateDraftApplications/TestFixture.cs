@@ -10,7 +10,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.CreateDraft
 {
     public class TestFixture
     {
-        public MultipartFormDataContent CreateMultipartFormDataContent(Guid suspiciousEmployee)
+        public MultipartFormDataContent CreateRequestContent(Guid suspiciousEmployee)
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);

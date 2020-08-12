@@ -2,6 +2,7 @@ using System;
 using Autofac;
 using BuildingBlocks.Application;
 using IncidentManagementSystem.Web.UseCases.CreateDraftApplications;
+using IncidentManagementSystem.Web.UseCases.PostApplications;
 using IncidentManagementSystem.Web.UseCases.UpdateDraftApplications;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Configuration;
@@ -25,6 +26,10 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
 
                     moduleContainerBuilder.RegisterType<UpdateDraftApplicationPresenter>().InstancePerLifetimeScope();
                     moduleContainerBuilder.Register<IncidentReport.Application.Boundaries.UpdateDraftApplications.IOutputPort>(ctx => ctx.Resolve<UpdateDraftApplicationPresenter>())
+                        .InstancePerLifetimeScope();
+
+                    moduleContainerBuilder.RegisterType<PostApplicationPresenter>().InstancePerLifetimeScope();
+                    moduleContainerBuilder.Register<IncidentReport.Application.Boundaries.PostApplicationUseCase.IOutputPort>(ctx => ctx.Resolve<PostApplicationPresenter>())
                         .InstancePerLifetimeScope();
                 });
 

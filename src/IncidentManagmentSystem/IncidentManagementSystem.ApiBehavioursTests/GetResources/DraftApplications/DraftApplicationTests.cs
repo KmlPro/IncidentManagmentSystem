@@ -32,7 +32,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplicat
         [Test]
         public async Task Get_Return200()
         {
-            this._testFixture.CreateDraftApplicationInDB(this._applicant,this._suspiciousEmployee);
+            this._testFixture.CreateDraftApplicationInDb(this._applicant,this._suspiciousEmployee);
             var response = await this._testClient.GetAsync(_path);
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);

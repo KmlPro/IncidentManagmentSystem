@@ -16,7 +16,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UpdateDraft
 {
     public class TestFixture
     {
-        public MultipartFormDataContent CreateMultipartFormDataContent(Guid draftApplicationId)
+        public MultipartFormDataContent CreateRequestContent(Guid draftApplicationId)
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
