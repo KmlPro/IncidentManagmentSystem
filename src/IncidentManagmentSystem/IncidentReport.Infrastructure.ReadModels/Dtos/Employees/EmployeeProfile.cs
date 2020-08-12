@@ -8,13 +8,21 @@ namespace IncidentReport.ReadModels.Dtos.Employees
         public EmployeeProfile()
         {
             this.CreateMap<Employee, EmployeeDto>();
-            this.CreateMap<SuspiciousEmployee, EmployeeDto>().ForMember(
+            this.CreateMap<DraftApplicationSuspiciousEmployee, EmployeeDto>().ForMember(
                 dest => dest.Id,
                 opt => opt.MapFrom(src => src.Employee.Id)).ForMember(
                 dest => dest.Name,
                 opt => opt.MapFrom(src => src.Employee.Name)).ForMember(
                 dest => dest.Surname,
                 opt => opt.MapFrom(src => src.Employee.Surname));
+            this.CreateMap<IncidentApplicationSuspiciousEmployee, EmployeeDto>().ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => src.Employee.Id)).ForMember(
+                dest => dest.Name,
+                opt => opt.MapFrom(src => src.Employee.Name)).ForMember(
+                dest => dest.Surname,
+                opt => opt.MapFrom(src => src.Employee.Surname));
+
         }
     }
 }
