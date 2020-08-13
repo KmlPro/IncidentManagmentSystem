@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -7,10 +6,9 @@ using BuildingBlocks.Application;
 using BuildingBlocks.Application.Abstract;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
+using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
@@ -20,11 +18,12 @@ namespace IncidentReport.Application.UseCases
 {
     public class PostApplicationUseCase : IUseCase
     {
-        private readonly ICurrentUserContext _applicantContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly IIncidentApplicationRepository _incidentApplicationRepository;
         private readonly IDraftApplicationRepository _draftApplicationRepository;
         private readonly IOutputPort _outputPort;
+        private readonly AttachmentsFactory _attachmentsFactory;
+        private readonly IncidentApplicationFactory _incidentApplicationFactory;
 
         public PostApplicationUseCase(IIncidentApplicationRepository incidentApplicationRepository,
             IDraftApplicationRepository draftApplicationRepository,
@@ -34,9 +33,10 @@ namespace IncidentReport.Application.UseCases
         {
             this._incidentApplicationRepository = incidentApplicationRepository;
             this._draftApplicationRepository = draftApplicationRepository;
-            this._applicantContext = userContext;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
+            this._attachmentsFactory = new AttachmentsFactory();
+            this._incidentApplicationFactory = new IncidentApplicationFactory(userContext);
         }
 
         //kbytner 06.08.2020 - add rollback uploaded attachments
@@ -49,10 +49,10 @@ namespace IncidentReport.Application.UseCases
                 if (this.IfAddedAttachmentsExists(input))
                 {
                     var files = await this.UploadFilesToStorage(input);
-                    attachments = this.CreateAttachments(files);
+                    attachments = this._attachmentsFactory.CreateAttachments(files);
                 }
 
-                var incidentApplication = this.CreateApplication(input, attachments);
+                var incidentApplication = this._incidentApplicationFactory.CreateApplication(input, attachments);
                 var postedIncidentApplication = incidentApplication.Post();
 
                 await this._incidentApplicationRepository.Create(postedIncidentApplication);
@@ -89,25 +89,6 @@ namespace IncidentReport.Application.UseCases
         private Task<List<UploadedFile>> UploadFilesToStorage(PostApplicationInput request)
         {
             return this._fileStorageService.UploadFiles(request.Attachments);
-        }
-
-        //kbytner 06.08.2020 - should move to factory
-        private List<Attachment> CreateAttachments(List<UploadedFile> files)
-        {
-            return files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)))
-                .ToList();
-        }
-
-        //kbytner 06.08.2020 - should move to factory
-        private CreatedIncidentApplication CreateApplication(PostApplicationInput request, List<Attachment> attachments)
-        {
-            return IncidentApplication.Create(
-                new ContentOfApplication(request.Title, request.Description),
-                new IncidentType(request.IncidentType),
-                new EmployeeId(this._applicantContext.UserId),
-                new List<EmployeeId>(
-                    request.SuspiciousEmployees.Select(x => new EmployeeId(x))),
-                attachments);
         }
 
         private void BuildOutput(PostedIncidentApplication postedIncidentApplication)

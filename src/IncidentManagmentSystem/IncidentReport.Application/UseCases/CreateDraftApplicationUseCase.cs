@@ -7,6 +7,7 @@ using BuildingBlocks.Application.Abstract;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.Common;
+using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -17,10 +18,11 @@ namespace IncidentReport.Application.UseCases
 {
     public class CreateDraftApplicationUseCase : IUseCase
     {
-        private readonly ICurrentUserContext _applicantContext;
         private readonly IFileStorageService _fileStorageService;
         private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IOutputPort _outputPort;
+        private readonly AttachmentsFactory _attachmentsFactory;
+        private readonly DraftApplicationFactory _draftApplicationFactory;
 
         public CreateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
             ICurrentUserContext userContext,
@@ -28,16 +30,17 @@ namespace IncidentReport.Application.UseCases
             IOutputPort outputPort)
         {
             this._incidentReportContext = incidentReportContext;
-            this._applicantContext = userContext;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
+            this._attachmentsFactory = new AttachmentsFactory();
+            this._draftApplicationFactory = new DraftApplicationFactory(userContext);
         }
 
         public async Task<IOutputPort> Handle(CreateDraftApplicationInput input, CancellationToken cancellationToken)
         {
             try
             {
-                var draftApplication = this.CreateDraft(input);
+                var draftApplication = this._draftApplicationFactory.Create(input);
 
                 if (this.IfAddedAttachmentsExists(input))
                 {
@@ -62,17 +65,6 @@ namespace IncidentReport.Application.UseCases
             return this._outputPort;
         }
 
-        private DraftApplication CreateDraft(CreateDraftApplicationInput request)
-        {
-            return new DraftApplication(
-                new ContentOfApplication(request.Title, request.Description),
-                new IncidentType(request.IncidentType),
-                new EmployeeId(this._applicantContext.UserId),
-                new List<EmployeeId>(
-                    request.SuspiciousEmployees.Select(x => new EmployeeId(x)))
-            );
-        }
-
         private bool IfAddedAttachmentsExists(CreateDraftApplicationInput request)
         {
             return request.Attachments != null && request.Attachments.Any();
@@ -85,8 +77,7 @@ namespace IncidentReport.Application.UseCases
 
         private void AddUploadedFilesAsAttachments(DraftApplication draftApplication, List<UploadedFile> files)
         {
-            var attachments = files.Select(x => new Attachment(new FileInfo(x.FileName), new StorageId(x.StorageId)))
-                .ToList();
+            var attachments = this._attachmentsFactory.CreateAttachments(files);
             draftApplication.AddAttachments(attachments);
         }
 

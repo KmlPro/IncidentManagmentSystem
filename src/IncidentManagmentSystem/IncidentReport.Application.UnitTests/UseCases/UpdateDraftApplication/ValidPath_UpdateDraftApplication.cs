@@ -6,6 +6,7 @@ using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.UnitTests.Factories;
 using IncidentReport.Application.UseCases;
+using IncidentReport.Application.UseCases.UpdateDraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using NUnit.Framework;
 
