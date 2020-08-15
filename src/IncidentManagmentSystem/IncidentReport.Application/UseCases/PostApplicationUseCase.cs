@@ -55,7 +55,7 @@ namespace IncidentReport.Application.UseCases
                 var incidentApplication = this._incidentApplicationFactory.CreateApplication(input, attachments);
                 var postedIncidentApplication = incidentApplication.Post();
 
-                await this._incidentApplicationRepository.Create(postedIncidentApplication);
+                await this._incidentApplicationRepository.Create(postedIncidentApplication,cancellationToken);
 
                 if (this.CreatedFromDraft(input))
                 {

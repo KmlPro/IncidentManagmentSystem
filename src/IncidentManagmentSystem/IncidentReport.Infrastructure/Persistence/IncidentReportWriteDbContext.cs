@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Persistence
 {
-    public class IncidentReportWriteDbContext : DbContext, IIncidentReportDbContext
+    public class IncidentReportWriteDbContext : DbContext
     {
         public DbSet<IncidentApplication> Application { get; set; }
 

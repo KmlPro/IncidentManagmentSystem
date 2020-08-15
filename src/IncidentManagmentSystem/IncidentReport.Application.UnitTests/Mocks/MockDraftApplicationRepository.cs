@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -21,13 +22,13 @@ namespace IncidentReport.Application.UnitTests.Mocks
             this.DraftApplications.Remove(draftApplication);
         }
 
-        public Task<DraftApplication> GetById(DraftApplicationId applicationId)
+        public Task<DraftApplication> GetById(DraftApplicationId applicationId, CancellationToken cancellationToken)
         {
             var draftApplication = this.DraftApplications.FirstOrDefault(x=> x.Id == applicationId);
             return Task.FromResult(draftApplication);
         }
 
-        public Task Create(DraftApplication draftApplication)
+        public Task Create(DraftApplication draftApplication, CancellationToken cancellationToken)
         {
             this.DraftApplications.Add(draftApplication);
             return Task.CompletedTask;

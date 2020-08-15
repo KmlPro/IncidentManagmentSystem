@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
+using IncidentReport.Application.UnitTests.Mocks;
 using IncidentReport.Application.UseCases;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
@@ -12,10 +15,17 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
     public class ValidPath_CreateDraftApplicationTests : BaseTest
     {
         private readonly TestFixture _testFixture;
+        private MockDraftApplicationRepository _draftApplicationRepository;
 
         public ValidPath_CreateDraftApplicationTests()
         {
             this._testFixture = new TestFixture();
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            this._draftApplicationRepository = new MockDraftApplicationRepository();
         }
 
         [Test]
@@ -23,18 +33,17 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         {
             //Arrange
             var useCase = this._testFixture.CreateUseCaseWithRequiredFields();
-            var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
-                this.IFileStorageService, new CreateDraftApplicationUseCaseOutputPort());
+            var handler = new CreateDraftApplicationUseCase(this.CurrentUserContext,
+                this.IFileStorageService, this._draftApplicationRepository,
+                new CreateDraftApplicationUseCaseOutputPort());
 
             //Act
             var useCaseOutput =
                 (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(useCase, new CancellationToken());
 
             //Assert
-            var isDraftApplicationAddedToContext =
-                this.IncidentReportDbContext.DraftApplication.Any(x => x.Id.Value == useCaseOutput.Id);
 
-            Assert.IsTrue(isDraftApplicationAddedToContext);
+            Assert.IsTrue(this.IsDraftApplicationAdded(useCaseOutput.Id));
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
         }
 
@@ -42,20 +51,23 @@ namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
         public async Task AllFieldsAreFilled_WithAttachments_DraftCreatedSuccessfully()
         {
             //Arrange
-            var command = this._testFixture.CreateUseCaseWithRequiredFields(new List<string> { "testFile.pdf" });
-            var handler = new CreateDraftApplicationUseCase(this.IncidentReportDbContext, this.CurrentUserContext,
-                this.IFileStorageService, new CreateDraftApplicationUseCaseOutputPort());
+            var command = this._testFixture.CreateUseCaseWithRequiredFields(new List<string> {"testFile.pdf"});
+            var handler = new CreateDraftApplicationUseCase(this.CurrentUserContext,
+                this.IFileStorageService, this._draftApplicationRepository,
+                new CreateDraftApplicationUseCaseOutputPort());
 
             //Act
             var useCaseOutput =
                 (CreateDraftApplicationUseCaseOutputPort)await handler.Handle(command, new CancellationToken());
 
             //Assert
-            var isDraftApplicationAddedToContext =
-                this.IncidentReportDbContext.DraftApplication.Any(x => x.Id.Value == useCaseOutput.Id);
-
-            Assert.IsTrue(isDraftApplicationAddedToContext);
+            Assert.IsTrue(this.IsDraftApplicationAdded(useCaseOutput.Id));
             Assert.AreEqual(OutputPortInvokedMethod.Standard, useCaseOutput.InvokedOutputMethod);
+        }
+
+        private bool IsDraftApplicationAdded(Guid draftApplicationId)
+        {
+            return this._draftApplicationRepository.DraftApplications.Any(x => x.Id.Value == draftApplicationId);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.UnitTests.Factories;
+using IncidentReport.Application.UnitTests.Mocks;
 using IncidentReport.Application.UseCases;
 using IncidentReport.Application.UseCases.UpdateDraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications;
@@ -15,10 +16,18 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
     [Category(CategoryTitle.Title + " UpdateDraftApplicationUseCase")]
     public class ValidPath_UpdateDraftApplication : BaseTest
     {
-        private readonly TestFixture _testFixture;
+        private TestFixture _testFixture;
+        private MockDraftApplicationRepository _draftApplicationRepository;
+
         public ValidPath_UpdateDraftApplication()
         {
-            this._testFixture = new TestFixture(this.IncidentReportDbContext);
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            this._draftApplicationRepository = new MockDraftApplicationRepository();
+            this._testFixture = new TestFixture(this._draftApplicationRepository);
         }
 
         [Test]
@@ -29,7 +38,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
             var suspiciousEmployees = initialSuspiciousEmployees;
 
             var useCase = await this._testFixture.PrepareUseCaseWithTestData(suspiciousEmployees, initialSuspiciousEmployees);
-            var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
+            var handler = new UpdateDraftApplicationUseCase(this._draftApplicationRepository,
                 this.IFileStorageService, new UpdateDraftApplicationUseCaseOutputPort());
 
             //Act
@@ -52,7 +61,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 
             var useCase =
                await this._testFixture.PrepareUseCaseWithTestData(newSuspiciousEmployees, initialSuspiciousEmployees);
-            var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
+            var handler = new UpdateDraftApplicationUseCase(this._draftApplicationRepository,
                 this.IFileStorageService, new UpdateDraftApplicationUseCaseOutputPort());
 
             //Act
@@ -75,7 +84,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 
             var useCase =
                 await this._testFixture.PrepareUseCaseWithTestData(addedAttachment, null, initialAttachment);
-            var handler = new UpdateDraftApplicationUseCase(this.IncidentReportDbContext,
+            var handler = new UpdateDraftApplicationUseCase(this._draftApplicationRepository,
                 this.IFileStorageService, new UpdateDraftApplicationUseCaseOutputPort());
 
             //Act

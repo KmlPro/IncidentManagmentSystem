@@ -11,12 +11,10 @@ namespace IncidentReport.Application.UnitTests
     {
         public BaseTest()
         {
-            this.IncidentReportDbContext = new MockDbContextFactory().CreateDbContext();
             this.CurrentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
             this.IFileStorageService = new MockFileStorageServiceFactory().CreateFileStorageService();
         }
 
-        protected IIncidentReportDbContext IncidentReportDbContext { get; set; }
         protected ICurrentUserContext CurrentUserContext { get; set; }
         protected IFileStorageService IFileStorageService { get; set; }
     }

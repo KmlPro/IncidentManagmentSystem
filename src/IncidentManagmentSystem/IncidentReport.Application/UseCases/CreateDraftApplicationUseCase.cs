@@ -19,17 +19,17 @@ namespace IncidentReport.Application.UseCases
     public class CreateDraftApplicationUseCase : IUseCase
     {
         private readonly IFileStorageService _fileStorageService;
-        private readonly IIncidentReportDbContext _incidentReportContext;
         private readonly IOutputPort _outputPort;
+        private readonly IDraftApplicationRepository _draftApplicationRepository;
         private readonly AttachmentsFactory _attachmentsFactory;
         private readonly DraftApplicationFactory _draftApplicationFactory;
 
-        public CreateDraftApplicationUseCase(IIncidentReportDbContext incidentReportContext,
-            ICurrentUserContext userContext,
+        public CreateDraftApplicationUseCase(ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
+            IDraftApplicationRepository draftApplicationRepository,
             IOutputPort outputPort)
         {
-            this._incidentReportContext = incidentReportContext;
+            this._draftApplicationRepository = draftApplicationRepository;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
             this._attachmentsFactory = new AttachmentsFactory();
@@ -48,7 +48,7 @@ namespace IncidentReport.Application.UseCases
                     this.AddUploadedFilesAsAttachments(draftApplication, files);
                 }
 
-                await this._incidentReportContext.DraftApplication.AddAsync(draftApplication,
+                await this._draftApplicationRepository.Create(draftApplication,
                     cancellationToken);
 
                 this.BuildOutput(draftApplication);

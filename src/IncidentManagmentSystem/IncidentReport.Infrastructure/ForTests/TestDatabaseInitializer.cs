@@ -9,7 +9,7 @@ namespace IncidentReport.Infrastructure.ForTests
 {
     public static class TestDatabaseInitializer
     {
-        public static void SeedDataForTest(Action<IIncidentReportDbContext> seed)
+        public static void SeedDataForTest(Action<IncidentReportWriteDbContext> seed)
         {
             using (var scope = CompositionRoot.BeginLifetimeScope())
             {

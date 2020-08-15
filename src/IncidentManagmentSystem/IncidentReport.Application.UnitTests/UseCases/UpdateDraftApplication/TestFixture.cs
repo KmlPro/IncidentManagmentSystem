@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
@@ -18,17 +19,17 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 {
     public class TestFixture
     {
-        private IIncidentReportDbContext IncidentReportDbContext { get; }
+        private IDraftApplicationRepository _draftApplicationRepository { get; }
 
-        public TestFixture(IIncidentReportDbContext incidentReportDbContext)
+        public TestFixture(IDraftApplicationRepository draftApplicationRepository)
         {
-            this.IncidentReportDbContext = incidentReportDbContext;
+            this._draftApplicationRepository = draftApplicationRepository;
         }
 
         public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<Guid> suspiciousEmployees, List<Guid> initialSuspiciousEmployees)
         {
             var newDraftApplication = DraftApplicationFactory.Create(initialSuspiciousEmployees);
-            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
+            await this._draftApplicationRepository.Create(newDraftApplication, new CancellationToken());
 
             var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, null, null);
             return useCase;
@@ -39,7 +40,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
             var suspiciousEmployees = new List<Guid>() { Guid.NewGuid() };
             var newDraftApplication = DraftApplicationFactory.Create(suspiciousEmployees);
             newDraftApplication.AddAttachments(initialAttachments);
-            await this.IncidentReportDbContext.DraftApplication.AddAsync(newDraftApplication);
+            await this._draftApplicationRepository.Create(newDraftApplication, new CancellationToken());
 
             var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, addedAttachments, deleteAttachments);
             return useCase;
@@ -47,7 +48,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 
         public async Task<DraftApplication> GetDraftFromContext(Guid id)
         {
-            return await this.IncidentReportDbContext.DraftApplication.FirstAsync(x => x.Id.Value == id);
+            return await this._draftApplicationRepository.GetById(new DraftApplicationId(id), new CancellationToken());
         }
 
         private UpdateDraftApplicationInput CreateUseCaseWithRequiredFields(Guid draftApplicationId, List<Guid> suspiciousEmployees, string incidentType, List<FileData> addedAttachments, List<Guid> deleteAttachments)

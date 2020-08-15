@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
@@ -18,7 +19,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             this._writeContext = writeContext;
         }
 
-        public async Task<PostedIncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId)
+        public async Task<PostedIncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId, CancellationToken cancellationToken)
         {
             if (incidentApplicationId == null)
             {
@@ -28,7 +29,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 var application = await this._writeContext.Application.FirstAsync(x =>
-                    x.Id == incidentApplicationId && x.ApplicationState == ApplicationStateValue.Posted);
+                    x.Id == incidentApplicationId && x.ApplicationState == ApplicationStateValue.Posted, cancellationToken);
                 if (application == null)
                 {
                     throw new AggregateNotFoundInDbException(nameof(Application), incidentApplicationId.Value);
@@ -42,7 +43,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task Create(PostedIncidentApplication incidentApplication)
+        public async Task Create(PostedIncidentApplication incidentApplication,CancellationToken cancellationToken)
         {
             if (incidentApplication == null)
             {
@@ -51,7 +52,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
 
             try
             {
-                await this._writeContext.Application.AddAsync(incidentApplication);
+                await this._writeContext.Application.AddAsync(incidentApplication,cancellationToken);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Application.UnitTests.Factories;
@@ -14,7 +15,7 @@ namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
         public DraftApplication PrepareDraftApplication(IDraftApplicationRepository draftApplicationRepository)
         {
             var draftApplication = DraftApplicationFactory.Create();
-            draftApplicationRepository.Create(draftApplication);
+            draftApplicationRepository.Create(draftApplication, new CancellationToken());
             return draftApplication;
         }
 

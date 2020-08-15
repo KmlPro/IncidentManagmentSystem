@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -35,7 +36,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task<DraftApplication> GetById(DraftApplicationId draftApplicationId)
+        public async Task<DraftApplication> GetById(DraftApplicationId draftApplicationId, CancellationToken cancellationToken)
         {
             if (draftApplicationId == null)
             {
@@ -44,8 +45,9 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
 
             try
             {
-                var draftApplication = await this._writeContext.DraftApplication.FirstAsync(x =>
-                    x.Id == draftApplicationId);
+                var draftApplication = await this._writeContext.DraftApplication.Include(nameof(DraftApplication.Attachments)).FirstAsync(x =>
+                    x.Id == draftApplicationId,cancellationToken);
+                
                 if (draftApplication == null)
                 {
                     throw new AggregateNotFoundInDbException(nameof(Application), draftApplicationId.Value);
@@ -59,7 +61,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task Create(DraftApplication draftApplication)
+        public async Task Create(DraftApplication draftApplication, CancellationToken cancellationToken)
         {
             if (draftApplication == null)
             {
@@ -68,7 +70,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
 
             try
             {
-                await this._writeContext.DraftApplication.AddAsync(draftApplication);
+                await this._writeContext.DraftApplication.AddAsync(draftApplication,cancellationToken);
             }
             catch (Exception ex)
             {
