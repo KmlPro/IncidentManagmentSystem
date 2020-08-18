@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
+using IncidentManagementSystem.ApiBehavioursTests.TestFixtures.IncidentReports.EmployeesFixtures;
 using IncidentReport.Domain.Employees.ValueObjects;
 using NUnit.Framework;
 

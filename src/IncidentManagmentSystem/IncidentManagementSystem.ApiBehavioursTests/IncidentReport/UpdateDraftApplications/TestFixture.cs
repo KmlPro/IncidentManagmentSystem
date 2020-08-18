@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures;
 using IncidentManagementSystem.Web.UseCases.UpdateDraftApplications;
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.Employees.ValueObjects;

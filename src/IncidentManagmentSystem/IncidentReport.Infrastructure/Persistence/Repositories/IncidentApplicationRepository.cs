@@ -28,7 +28,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
 
             try
             {
-                var application = await this._writeContext.Application.FirstAsync(x =>
+                var application = await this._writeContext.IncidentApplication.FirstAsync(x =>
                     x.Id == incidentApplicationId && x.ApplicationState == ApplicationStateValue.Posted, cancellationToken);
                 if (application == null)
                 {
@@ -52,7 +52,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
 
             try
             {
-                await this._writeContext.Application.AddAsync(incidentApplication,cancellationToken);
+                await this._writeContext.IncidentApplication.AddAsync(incidentApplication,cancellationToken);
             }
             catch (Exception ex)
             {

@@ -2,7 +2,7 @@ using System;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures
+namespace IncidentManagementSystem.ApiBehavioursTests.TestFixtures.IncidentReports.EmployeesFixtures
 {
     public static class RandomEmployeeFactory
     {

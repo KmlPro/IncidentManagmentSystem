@@ -10,13 +10,12 @@ namespace IncidentReport.Infrastructure.Persistence
 {
     public class IncidentReportWriteDbContext : DbContext
     {
-        public DbSet<IncidentApplication> Application { get; set; }
-
         public IncidentReportWriteDbContext(DbContextOptions options) : base(options)
         {
         }
 
         public DbSet<DraftApplication> DraftApplication { get; set; }
+        public DbSet<IncidentApplication> IncidentApplication { get; set; }
         public DbSet<Employee> Employee { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

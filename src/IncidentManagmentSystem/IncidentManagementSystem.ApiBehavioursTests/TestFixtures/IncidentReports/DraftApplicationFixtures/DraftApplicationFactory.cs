@@ -6,7 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.DraftApplicationFixtures
+namespace IncidentManagementSystem.ApiBehavioursTests.TestFixtures.IncidentReports.DraftApplicationFixtures
 {
     public class DraftApplicationFactory
     {
@@ -21,7 +21,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.DraftApplicationFixtures
 
         public DraftApplication CreateWithAttachments(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
-            var draftApplication = Create(applicant, suspiciousEmployee);
+            var draftApplication = this.Create(applicant, suspiciousEmployee);
             this.AddAttachment(draftApplication);
 
             return draftApplication;

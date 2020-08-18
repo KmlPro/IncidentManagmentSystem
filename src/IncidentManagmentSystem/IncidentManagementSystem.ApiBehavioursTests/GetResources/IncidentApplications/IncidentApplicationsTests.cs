@@ -6,18 +6,18 @@ using IncidentManagementSystem.ApiBehavioursTests.TestFixtures.IncidentReports.E
 using IncidentReport.Domain.Employees.ValueObjects;
 using NUnit.Framework;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplications
+namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.IncidentApplications
 {
-    [Category(IncidentReportCategoryTitle.Title + " GetDraftApplications")]
-    public class DraftApplicationTests
+    [Category(IncidentReportCategoryTitle.Title + " GetIncidentApplications")]
+    public class IncidentApplicationsTests
     {
-        private const string _path = "api/draft-application";
+        private const string _path = "api/incident-application";
         private HttpClient _testClient;
         private TestFixture _testFixture;
         private EmployeeId _applicant;
         private EmployeeId _suspiciousEmployee;
 
-        public DraftApplicationTests()
+        public IncidentApplicationsTests()
         {
             this._testFixture = new TestFixture();
         }
@@ -33,7 +33,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.GetResources.DraftApplicat
         [Test]
         public async Task Get_Return200()
         {
-            this._testFixture.CreateDraftApplicationInDb(this._applicant,this._suspiciousEmployee);
+            this._testFixture.CreatePostedIncidentApplicationInDb(this._applicant,this._suspiciousEmployee);
             var response = await this._testClient.GetAsync(_path);
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);

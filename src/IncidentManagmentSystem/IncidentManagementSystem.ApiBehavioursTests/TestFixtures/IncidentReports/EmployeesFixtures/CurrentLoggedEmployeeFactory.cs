@@ -2,7 +2,7 @@ using BuildingBlocks.Domain.UnitTests;
 using IncidentManagementSystem.Web.JustForTests;
 using IncidentReport.Domain.Employees;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.EmployeesFixtures
+namespace IncidentManagementSystem.ApiBehavioursTests.TestFixtures.IncidentReports.EmployeesFixtures
 {
     public static class CurrentLoggedEmployeeFactory
     {
