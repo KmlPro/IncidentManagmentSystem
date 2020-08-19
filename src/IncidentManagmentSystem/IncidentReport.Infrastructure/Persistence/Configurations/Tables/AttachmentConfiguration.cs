@@ -18,6 +18,8 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
                 fi => fi.Property(ca => ca.FileName)
                     .HasMaxLength(100)
                     .HasColumnName(nameof(FileInfo.FileName)));
+
+            builder.Property(x => x.StorageId);
         }
     }
 }

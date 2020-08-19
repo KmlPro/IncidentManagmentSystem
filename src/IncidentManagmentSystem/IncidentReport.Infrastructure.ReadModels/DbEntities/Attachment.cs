@@ -7,6 +7,7 @@ namespace IncidentReport.ReadModels.DbEntities
     {
         public Guid Id { get; set; }
         public string FileName { get; set; }
+        public Guid? StorageId { get; set; }
         public Guid? DraftApplicationId { get; set; }
         public Guid? IncidentApplicationId { get; set; }
 
