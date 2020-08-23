@@ -1,5 +1,5 @@
 using Autofac.Extensions.DependencyInjection;
-using IncidentManagementSystem.Web.JustForTests;
+using IncidentManagementSystem.Web.Configuration.JustForTests;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;

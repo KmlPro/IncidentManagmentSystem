@@ -1,9 +1,9 @@
 using System;
 using Autofac;
 using BuildingBlocks.Application;
-using IncidentManagementSystem.Web.UseCases.CreateDraftApplications;
-using IncidentManagementSystem.Web.UseCases.PostApplications;
-using IncidentManagementSystem.Web.UseCases.UpdateDraftApplications;
+using IncidentManagementSystem.Web.IncidentReports.UseCases.CreateDraftApplications;
+using IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications;
+using IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftApplications;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
