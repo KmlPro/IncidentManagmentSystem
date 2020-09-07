@@ -1,6 +1,7 @@
 using System.IO;
 using System.Reflection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using IncidentManagementSystem.Web.Configuration.Filters;
 using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
@@ -13,12 +14,23 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using Serilog.Extensions.Autofac.DependencyInjection;
 
 namespace IncidentManagementSystem.Web
 {
     public class Startup
     {
+        private IncidentReportInitializer _incidentReportInitializer;
+        private readonly string _logPath;
+        private ILifetimeScope _autofacContainer;
+
+        public Startup()
+        {
+            this._incidentReportInitializer = new IncidentReportInitializer();
+            this._logPath = Path.Combine(typeof(Startup).Assembly.GetName().Name, "Log.log");
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options =>
@@ -38,17 +50,16 @@ namespace IncidentManagementSystem.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var logPath = Path.Combine(typeof(Startup).Assembly.GetName().Name, "Log.log");
-            builder.RegisterSerilog(logPath);
-
-            //var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
-            var currentUserContext = new CurrentUserContext(new HttpContextAccessor());
-
-            IncidentReportInitialize.Init(builder, currentUserContext);
+            builder.RegisterSerilog(this._logPath);
+            this._incidentReportInitializer.RegisterContracts(builder);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            this._autofacContainer = app.ApplicationServices.GetAutofacRoot();
+            var userContext = this.CreateUserContext();
+            var logger = this.GetLogger();
+
             app.UseSwaggerDocumentation();
 
             if (env.IsDevelopment())
@@ -65,7 +76,21 @@ namespace IncidentManagementSystem.Web
                 routeBuilder.MapODataServiceRoute("odata", "odata", EdmModelFactory.Create());
             });
 
-            //app.UseEndpoints(endpoints => endpoints.MapControllers());
+            this._incidentReportInitializer.Init(userContext,logger);
+        }
+
+        private CurrentUserContext CreateUserContext()
+        {
+            var httpContextAccessor = this._autofacContainer.Resolve<IHttpContextAccessor>();
+            var currentUserContext = new CurrentUserContext(httpContextAccessor);
+            return currentUserContext;
+        }
+
+        //kbytner 08.09.2020 -- repair register/get logger from container
+        private ILogger GetLogger()
+        {
+            var logger = this._autofacContainer.Resolve<ILogger>();
+            return logger;
         }
     }
 }

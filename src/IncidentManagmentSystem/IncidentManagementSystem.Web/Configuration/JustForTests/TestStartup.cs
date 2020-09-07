@@ -11,6 +11,13 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class TestStartup
     {
+        private TestIncidentReportInitialize _initializer;
+
+        public TestStartup()
+        {
+            this._initializer = new TestIncidentReportInitialize();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -22,15 +29,16 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var currentUserContext = new TestCurrentUserContext();
-
-            TestIncidentReportInitialize.Init(builder, currentUserContext);
+            this._initializer.RegisterContracts(builder);
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            var currentUserContext = new TestCurrentUserContext();
+            this._initializer.Init(currentUserContext);
         }
     }
 }

@@ -11,17 +11,22 @@ using Serilog;
 
 namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
 {
-    public static class ModuleInitializer
+    public class ModuleInitializer
     {
-        //kbytner 07.09.2020 - split into two initializer (before asp net core interla container builder and after)
-        public static void Init(ContainerBuilder builder, ICurrentUserContext currentUserContext, Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
-        {
-            var incidentReportStartup = new IncidentReportStartup();
-            var logger = new LoggerConfiguration().CreateLogger()
-                .ForContext(LoggingConsts.ModuleParameter, LoggingConsts.IncidentReportModule);
+        private IncidentReportStartup _incidentReportStartup;
 
-            incidentReportStartup.Initialize(dbContextOptionsBuilderAction,
-                currentUserContext,logger,
+        public ModuleInitializer()
+        {
+            this._incidentReportStartup = new IncidentReportStartup();
+        }
+
+        public void Init(ICurrentUserContext currentUserContext, ILogger logger,
+            Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        {
+            var moduleLogger = logger.ForContext(LoggingConsts.ModuleParameter, LoggingConsts.IncidentReportModule);
+
+            this._incidentReportStartup.Initialize(dbContextOptionsBuilderAction,
+                currentUserContext, moduleLogger,
                 moduleContainerBuilder =>
                 {
                     moduleContainerBuilder.RegisterType<CreateDraftApplicationPresenter>().InstancePerLifetimeScope();
@@ -29,16 +34,24 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
                         .InstancePerLifetimeScope();
 
                     moduleContainerBuilder.RegisterType<UpdateDraftApplicationPresenter>().InstancePerLifetimeScope();
-                    moduleContainerBuilder.Register<IncidentReport.Application.Boundaries.UpdateDraftApplications.IOutputPort>(ctx => ctx.Resolve<UpdateDraftApplicationPresenter>())
+                    moduleContainerBuilder
+                        .Register<IncidentReport.Application.Boundaries.UpdateDraftApplications.IOutputPort>(ctx =>
+                            ctx.Resolve<UpdateDraftApplicationPresenter>())
                         .InstancePerLifetimeScope();
 
                     moduleContainerBuilder.RegisterType<PostApplicationPresenter>().InstancePerLifetimeScope();
-                    moduleContainerBuilder.Register<IncidentReport.Application.Boundaries.PostApplicationUseCase.IOutputPort>(ctx => ctx.Resolve<PostApplicationPresenter>())
+                    moduleContainerBuilder
+                        .Register<IncidentReport.Application.Boundaries.PostApplicationUseCase.IOutputPort>(ctx =>
+                            ctx.Resolve<PostApplicationPresenter>())
                         .InstancePerLifetimeScope();
                 });
+        }
 
-            incidentReportStartup.RegisterModuleContract(builder);
-            incidentReportStartup.RegisterReadContextContract(builder, dbContextOptionsBuilderAction);
+        public void RegisterModuleContracts(ContainerBuilder builder,
+            Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        {
+            this._incidentReportStartup.RegisterModuleContract(builder);
+            this._incidentReportStartup.RegisterReadContextContract(builder, dbContextOptionsBuilderAction);
         }
     }
 }
