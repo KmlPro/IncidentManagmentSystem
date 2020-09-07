@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
 {
@@ -11,10 +11,10 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
         private const int MAX_ELAPSED_MILISECONDS = 1000;
 
         private readonly Stopwatch _timer;
-        private readonly ILogger<TRequest> _logger;
+        private readonly ILogger _logger;
 
         public PerformanceBehaviour(
-            ILogger<TRequest> logger)
+            ILogger logger)
         {
             this._timer = new Stopwatch();
 
@@ -37,7 +37,7 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
             }
 
             var requestName = typeof(TRequest).Name;
-            this._logger.LogWarning(
+            this._logger.Warning(
                 $"Long Running UseCase: {requestName} ({elapsedMilliseconds} milliseconds) {request}");
 
             return response;

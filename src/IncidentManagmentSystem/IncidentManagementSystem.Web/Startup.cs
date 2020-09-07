@@ -1,3 +1,4 @@
+using System.IO;
 using System.Reflection;
 using Autofac;
 using AutoMapper;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog.Extensions.Autofac.DependencyInjection;
 
 namespace IncidentManagementSystem.Web
 {
@@ -36,6 +38,9 @@ namespace IncidentManagementSystem.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            var logPath = Path.Combine(typeof(Startup).Assembly.GetName().Name, "Log.log");
+            builder.RegisterSerilog(logPath);
+
             //var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
             var currentUserContext = new CurrentUserContext(new HttpContextAccessor());
 

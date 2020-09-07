@@ -2,15 +2,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
 {
     public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        private readonly ILogger<TRequest> _logger;
+        private readonly ILogger _logger;
 
-        public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
+        public UnhandledExceptionBehaviour(ILogger logger)
         {
             this._logger = logger;
         }
@@ -24,7 +24,7 @@ namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
             catch (Exception ex)
             {
                 var requestName = typeof(TRequest).Name;
-                this._logger.LogError(ex, $"Unhandled Exception for UseCase {requestName}");
+                this._logger.Error(ex, $"Unhandled Exception for UseCase {requestName}");
 
                 throw;
             }

@@ -7,11 +7,13 @@ using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;
+using IncidentReport.Infrastructure.Logging;
 using IncidentReport.Infrastructure.Persistence.Configurations;
-using IncidentReport.ReadModels;
 using IncidentReport.ReadModels.DIConfiguration;
 using Microsoft.EntityFrameworkCore;
+using ILogger = Serilog.ILogger;
 
+//kbytner 07.09.2020 - Startup Class inspired by https://github.com/kgrzybek/modular-monolith-with-ddd/blob/master/src/Modules/Meetings/Infrastructure/Configuration/MeetingsStartup.cs
 namespace IncidentReport.Infrastructure.Configuration
 {
     public class IncidentReportStartup
@@ -28,7 +30,7 @@ namespace IncidentReport.Infrastructure.Configuration
         protected Assembly AssemblyWithMediatRComponentsImplementation { get; set; }
 
         public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
-            ICurrentUserContext currentUserContext, Action<ContainerBuilder> externalInstancesConfiguration)
+            ICurrentUserContext currentUserContext, ILogger logger, Action<ContainerBuilder> externalInstancesConfiguration)
         {
             if (externalInstancesConfiguration == null)
             {
@@ -39,7 +41,8 @@ namespace IncidentReport.Infrastructure.Configuration
 
             this.ConfigureCompositionRoot(
                 dbContextOptionsBuilderAction,
-                currentUserContext);
+                currentUserContext,
+                logger);
         }
 
         public void RegisterModuleContract(ContainerBuilder builder)
@@ -55,8 +58,9 @@ namespace IncidentReport.Infrastructure.Configuration
         }
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
-            ICurrentUserContext currentUserContext)
+            ICurrentUserContext currentUserContext,ILogger logger)
         {
+            this._containerBuilder.RegisterModule(new LoggingModule(logger));
             this._containerBuilder.RegisterModule(new MediatRModule(this.AssemblyWithMediatRComponentsImplementation));
             this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             this._containerBuilder.RegisterModule(new ProcessingModule());

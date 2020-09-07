@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using BuildingBlocks.Application;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IncidentReport.Infrastructure.Configuration
 {
@@ -17,8 +18,10 @@ namespace IncidentReport.Infrastructure.Configuration
         public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
             ICurrentUserContext currentUserContext)
         {
+            var logger = new LoggerConfiguration().CreateLogger();
+            
             this.AssemblyWithMediatRComponentsImplementation = this._assemblyWithMediatRComponentsImplementationForTest;
-            this.Initialize(dbContextOptionsBuilderAction, currentUserContext, container => { });
+            this.Initialize(dbContextOptionsBuilderAction, currentUserContext, logger,container => { });
         }
     }
 }

@@ -7,17 +7,21 @@ using IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftApplicati
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
 {
     public static class ModuleInitializer
     {
+        //kbytner 07.09.2020 - split into two initializer (before asp net core interla container builder and after)
         public static void Init(ContainerBuilder builder, ICurrentUserContext currentUserContext, Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
         {
             var incidentReportStartup = new IncidentReportStartup();
+            var logger = new LoggerConfiguration().CreateLogger()
+                .ForContext(LoggingConsts.ModuleParameter, LoggingConsts.IncidentReportModule);
 
             incidentReportStartup.Initialize(dbContextOptionsBuilderAction,
-                currentUserContext,
+                currentUserContext,logger,
                 moduleContainerBuilder =>
                 {
                     moduleContainerBuilder.RegisterType<CreateDraftApplicationPresenter>().InstancePerLifetimeScope();
