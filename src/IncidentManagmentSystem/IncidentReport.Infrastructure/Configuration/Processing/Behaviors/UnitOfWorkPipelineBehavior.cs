@@ -4,7 +4,7 @@ using BuildingBlocks.Infrastructure;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using MediatR;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing.Pipeline
+namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
 {
     public class UnitOfWorkPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IUseCase

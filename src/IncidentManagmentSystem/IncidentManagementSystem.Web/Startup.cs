@@ -1,6 +1,7 @@
 using System.Reflection;
 using Autofac;
 using AutoMapper;
+using IncidentManagementSystem.Web.Configuration.Filters;
 using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
 using IncidentManagementSystem.Web.Configuration.Odata;
 using IncidentManagementSystem.Web.Users;
@@ -18,7 +19,11 @@ namespace IncidentManagementSystem.Web
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelStateAttribute));
+            });
+
             services.AddControllers(mvcOptions =>
                 mvcOptions.EnableEndpointRouting = false);
 

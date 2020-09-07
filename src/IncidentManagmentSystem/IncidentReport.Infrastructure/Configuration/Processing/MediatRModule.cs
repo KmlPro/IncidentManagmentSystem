@@ -1,6 +1,6 @@
 using System.Reflection;
 using Autofac;
-using IncidentReport.Infrastructure.Configuration.Processing.Pipeline;
+using IncidentReport.Infrastructure.Configuration.Processing.Behaviors;
 using MediatR;
 using Module = Autofac.Module;
 
@@ -32,6 +32,8 @@ namespace IncidentReport.Infrastructure.Configuration.Processing
                     .AsImplementedInterfaces();
             }
 
+            builder.RegisterGeneric(typeof(PerformanceBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
+            builder.RegisterGeneric(typeof(UnhandledExceptionBehaviour<,>)).As(typeof(IPipelineBehavior<,>));
             builder.RegisterGeneric(typeof(UnitOfWorkPipelineBehavior<,>)).As(typeof(IPipelineBehavior<,>));
 
             builder.Register<ServiceFactory>(ctx =>
