@@ -8,7 +8,16 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport
     {
         public static HttpClient GetHttpClient()
         {
-            var hostBuilder = TestWebHostBuilderFactory.Create();
+            var hostBuilder = TestWebHostBuilderFactory.Create(false);
+
+            var host = hostBuilder.StartAsync().Result;
+
+            return host.GetTestClient();
+        }
+
+        public static HttpClient GetHttpClientProductionStartup()
+        {
+            var hostBuilder = TestWebHostBuilderFactory.Create(true);
 
             var host = hostBuilder.StartAsync().Result;
 

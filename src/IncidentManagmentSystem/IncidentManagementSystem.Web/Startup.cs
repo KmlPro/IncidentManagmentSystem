@@ -15,20 +15,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Extensions.Autofac.DependencyInjection;
+using Serilog.Formatting.Compact;
 
 namespace IncidentManagementSystem.Web
 {
     public class Startup
     {
         private IncidentReportInitializer _incidentReportInitializer;
-        private readonly string _logPath;
         private ILifetimeScope _autofacContainer;
 
         public Startup()
         {
             this._incidentReportInitializer = new IncidentReportInitializer();
-            this._logPath = Path.Combine(typeof(Startup).Assembly.GetName().Name, "Log.log");
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -46,11 +44,12 @@ namespace IncidentManagementSystem.Web
             services.AddHttpContextAccessor();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSwaggerDocumentation();
+
+            services.AddHealthChecks();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterSerilog(this._logPath);
             this._incidentReportInitializer.RegisterContracts(builder);
         }
 
@@ -58,7 +57,7 @@ namespace IncidentManagementSystem.Web
         {
             this._autofacContainer = app.ApplicationServices.GetAutofacRoot();
             var userContext = this.CreateUserContext();
-            var logger = this.GetLogger();
+            var logger = this.ConfigureLogger();
 
             app.UseSwaggerDocumentation();
 
@@ -69,6 +68,11 @@ namespace IncidentManagementSystem.Web
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("api/health");
+            });
 
             app.UseMvc(routeBuilder =>
             {
@@ -86,11 +90,15 @@ namespace IncidentManagementSystem.Web
             return currentUserContext;
         }
 
-        //kbytner 08.09.2020 -- repair register/get logger from container
-        private ILogger GetLogger()
+        private ILogger ConfigureLogger()
         {
-            var logger = this._autofacContainer.Resolve<ILogger>();
-            return logger;
+            return new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console(
+                    outputTemplate:
+                    "[{Timestamp:HH:mm:ss} {Level:u3}] [{Module}] [{Context}] {Message:lj}{NewLine}{Exception}")
+                .WriteTo.RollingFile(new CompactJsonFormatter(), "logs/logs")
+                .CreateLogger();
         }
     }
 }
