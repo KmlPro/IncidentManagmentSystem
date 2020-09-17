@@ -6,7 +6,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
 {
     public class DraftApplicationSuspiciousEmployeeDeleted : DomainEvent
     {
-        public DraftApplicationSuspiciousEmployeeDeleted(DraftApplicationId draftApplicationId, List<SuspiciousEmployee> suspiciousEmployee)
+        public DraftApplicationSuspiciousEmployeeDeleted(DraftApplicationId draftApplicationId, List<SuspiciousEmployee> suspiciousEmployee): base(draftApplicationId.Value.ToString())
         {
             this.DraftApplicationId = draftApplicationId;
             this.SuspiciousEmployee = suspiciousEmployee;

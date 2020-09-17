@@ -7,7 +7,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
     public class DraftApplicationUpdatedDomainEvent : DomainEvent
     {
         public DraftApplicationUpdatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication,
-            IncidentType incidentType, List<SuspiciousEmployee> suspiciousEmployees)
+            IncidentType incidentType, List<SuspiciousEmployee> suspiciousEmployees): base(id.Value.ToString())
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;

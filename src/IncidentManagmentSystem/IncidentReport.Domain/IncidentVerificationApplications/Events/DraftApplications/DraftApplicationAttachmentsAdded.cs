@@ -6,7 +6,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
 {
     public class DraftApplicationAttachmentsAdded : DomainEvent
     {
-        public DraftApplicationAttachmentsAdded(DraftApplicationId draftApplicationId, List<Attachment> addedAttachments)
+        public DraftApplicationAttachmentsAdded(DraftApplicationId draftApplicationId, List<Attachment> addedAttachments): base(draftApplicationId.Value.ToString())
         {
             this.DraftApplicationId = draftApplicationId;
             this.AddedAttachments = addedAttachments;

@@ -6,7 +6,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
 {
     public class DraftApplicationAttachmentsDeleted : DomainEvent
     {
-        public DraftApplicationAttachmentsDeleted(DraftApplicationId draftApplicationId, List<Attachment> deletedAttachments)
+        public DraftApplicationAttachmentsDeleted(DraftApplicationId draftApplicationId, List<Attachment> deletedAttachments): base(draftApplicationId.Value.ToString())
         {
             this.DraftApplicationId = draftApplicationId;
             this.DeletedAttachments = deletedAttachments;

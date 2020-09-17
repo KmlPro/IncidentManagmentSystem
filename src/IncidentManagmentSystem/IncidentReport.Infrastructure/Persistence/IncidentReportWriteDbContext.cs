@@ -1,8 +1,7 @@
-using IncidentReport.Application.Common;
 using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Persistence.Configurations.Tables;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +14,7 @@ namespace IncidentReport.Infrastructure.Persistence
         }
 
         public DbSet<DraftApplication> DraftApplication { get; set; }
+        public DbSet<AuditLog> DraftApplicationAuditLogs { get; set; }
         public DbSet<IncidentApplication> IncidentApplication { get; set; }
         public DbSet<Employee> Employee { get; set; }
 

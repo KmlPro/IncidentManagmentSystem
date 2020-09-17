@@ -1,10 +1,9 @@
 using System;
 using Autofac;
 using BuildingBlocks.Infrastructure;
-using IncidentReport.Application.Common;
-using IncidentReport.Domain.IncidentVerificationApplications.Applications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -38,6 +37,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 
             builder.RegisterType<IncidentApplicationRepository>().As<IIncidentApplicationRepository>();
             builder.RegisterType<DraftApplicationRepository>().As<IDraftApplicationRepository>();
+            builder.RegisterType<AuditLogFactory>();
         }
     }
 }

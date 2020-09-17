@@ -10,7 +10,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.Applicat
     {
         public ApplicationCreatedDomainEvent(IncidentApplicationId id, ApplicationNumber applicationNumber,
             ContentOfApplication contentOfApplication, IncidentType incidentType, DateTime postDate,
-            EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees, List<Attachment> attachments)
+            EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees, List<Attachment> attachments): base(id.Value.ToString())
         {
             this.Id = id;
             this.ApplicationNumber = applicationNumber;
