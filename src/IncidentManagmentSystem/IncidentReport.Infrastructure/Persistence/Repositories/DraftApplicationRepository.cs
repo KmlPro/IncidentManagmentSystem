@@ -11,13 +11,13 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
 {
     public class DraftApplicationRepository : IDraftApplicationRepository
     {
-        private IncidentReportWriteDbContext _writeContext;
-        private AuditLogFactory _auditLogFactory;
+        private readonly IncidentReportWriteDbContext _writeContext;
+        private readonly AuditLogService _auditLogService;
 
-        public DraftApplicationRepository(IncidentReportWriteDbContext writeContext, AuditLogFactory auditLogFactory)
+        public DraftApplicationRepository(IncidentReportWriteDbContext writeContext, AuditLogService auditLogService)
         {
             this._writeContext = writeContext;
-            this._auditLogFactory = auditLogFactory;
+            this._auditLogService = auditLogService;
         }
 
         public async void Delete(DraftApplicationId draftApplicationId)
@@ -74,10 +74,10 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 await this._writeContext.DraftApplication.AddAsync(draftApplication,cancellationToken);
-                if (CheckIsEntityHaveDomainEvents.Check(draftApplication))
+                if (CheckIsEntityHasDomainEvents.Check(draftApplication))
                 {
                     await this._writeContext.DraftApplicationAuditLogs.AddRangeAsync(
-                        this._auditLogFactory.CreateFromDomainEvents(draftApplication), cancellationToken);
+                        this._auditLogService.CreateFromDomainEvents(draftApplication), cancellationToken);
                 }
             }
             catch (Exception ex)
@@ -96,10 +96,10 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 this._writeContext.DraftApplication.Update(draftApplication);
-                if (CheckIsEntityHaveDomainEvents.Check(draftApplication))
+                if (CheckIsEntityHasDomainEvents.Check(draftApplication))
                 {
                     this._writeContext.DraftApplicationAuditLogs.AddRange(
-                        this._auditLogFactory.CreateFromDomainEvents(draftApplication));
+                        this._auditLogService.CreateFromDomainEvents(draftApplication));
                 }
             }
             catch (Exception ex)

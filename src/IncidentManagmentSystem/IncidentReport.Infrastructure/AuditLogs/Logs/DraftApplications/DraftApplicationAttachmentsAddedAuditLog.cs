@@ -3,15 +3,13 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplica
 
 namespace IncidentReport.Infrastructure.AuditLogs.Logs.DraftApplications
 {
-    public class DraftApplicationAttachmentsAddedLog : LogTemplate<DraftApplicationAttachmentsAdded>
+    public class DraftApplicationAttachmentsAddedAuditLog : AuditLogFactory<DraftApplicationAttachmentsAdded>
     {
-        public override string LogResource { get; } = LogResources.DraftApplicationAttachmentsAdded;
-
         public override string BuildLog(DraftApplicationAttachmentsAdded @event)
         {
             var fileNames = @event.AddedAttachments.Select(x => x.FileInfo.FileName).ToList();
             var fileNamesJoined = string.Join(", ",fileNames);
-            return string.Format(LogResource, fileNamesJoined);
+            return string.Format(LogResources.DraftApplicationAttachmentsAdded, fileNamesJoined);
         }
     }
 }

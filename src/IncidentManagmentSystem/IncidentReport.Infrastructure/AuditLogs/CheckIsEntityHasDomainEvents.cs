@@ -3,7 +3,7 @@ using BuildingBlocks.Domain.Abstract;
 
 namespace IncidentReport.Infrastructure.AuditLogs
 {
-    public static class CheckIsEntityHaveDomainEvents
+    public static class CheckIsEntityHasDomainEvents
     {
         public static bool Check(Entity entity)
         {

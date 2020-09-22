@@ -3,6 +3,7 @@ using System.Reflection;
 using Autofac;
 using BuildingBlocks.Application;
 using IncidentReport.Application.Common;
+using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
@@ -65,6 +66,7 @@ namespace IncidentReport.Infrastructure.Configuration
             this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             this._containerBuilder.RegisterModule(new ProcessingModule());
             this._containerBuilder.RegisterModule(new FileStorageModule());
+            this._containerBuilder.RegisterModule(new AuditLogModule());
 
             this._containerBuilder.RegisterInstance(currentUserContext);
 

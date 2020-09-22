@@ -5,12 +5,12 @@ namespace BuildingBlocks.Domain.Abstract
 {
     public abstract class Entity : WithCheckRule
     {
-        private List<IDomainEvent> _domainEvents;
-        public IReadOnlyCollection<IDomainEvent> DomainEvents => this._domainEvents?.AsReadOnly();
+        private List<DomainEvent> _domainEvents;
+        public IReadOnlyCollection<DomainEvent> DomainEvents => this._domainEvents?.AsReadOnly();
 
-        protected void AddDomainEvent(IDomainEvent domainEvent)
+        protected void AddDomainEvent(DomainEvent domainEvent)
         {
-            this._domainEvents ??= new List<IDomainEvent>();
+            this._domainEvents ??= new List<DomainEvent>();
             this._domainEvents.Add(domainEvent);
         }
 
@@ -20,7 +20,7 @@ namespace BuildingBlocks.Domain.Abstract
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-            this._domainEvents ??= new List<IDomainEvent>();
+            this._domainEvents ??= new List<DomainEvent>();
             this._domainEvents.AddRange(entity.DomainEvents);
         }
 

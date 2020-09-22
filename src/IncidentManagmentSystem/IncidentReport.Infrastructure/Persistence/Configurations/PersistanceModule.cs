@@ -37,7 +37,6 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 
             builder.RegisterType<IncidentApplicationRepository>().As<IIncidentApplicationRepository>();
             builder.RegisterType<DraftApplicationRepository>().As<IDraftApplicationRepository>();
-            builder.RegisterType<AuditLogFactory>();
         }
     }
 }
