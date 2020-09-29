@@ -21,4 +21,7 @@
   <data name="DraftApplicationAttachmentsAdded" xml:space="preserve">
     <value>Attachments added. File names {0} </value>
   </data>
+  <data name="DraftApplicationCreated" xml:space="preserve">
+    <value>Created draft application with Id {0}</value>
+  </data>
 </root>

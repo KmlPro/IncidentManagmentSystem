@@ -5,7 +5,7 @@ namespace IncidentReport.Infrastructure.AuditLogs.Logs
 {
     public abstract class AuditLogFactory<TEvent>: IAuditLogFactory where TEvent : DomainEvent
     {
-        public string EventType => nameof(TEvent);
+        public string EventType => typeof(TEvent).ToString();
 
         public abstract string BuildLog(TEvent @event);
 

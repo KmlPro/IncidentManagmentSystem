@@ -50,5 +50,11 @@ namespace IncidentReport.Infrastructure.AuditLogs {
                 return ResourceManager.GetString("DraftApplicationAttachmentsAdded", resourceCulture);
             }
         }
+        
+        internal static string DraftApplicationCreated {
+            get {
+                return ResourceManager.GetString("DraftApplicationCreated", resourceCulture);
+            }
+        }
     }
 }

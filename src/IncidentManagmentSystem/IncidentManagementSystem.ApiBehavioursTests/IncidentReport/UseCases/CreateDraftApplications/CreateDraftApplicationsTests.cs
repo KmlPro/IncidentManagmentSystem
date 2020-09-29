@@ -40,6 +40,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Cr
             Assert.NotNull(response.Headers.Location);
         }
 
+        //kbytner 27.09.2020 - Attachments not Added! maybe i should think about more precision tests? to do
         [Test]
         public async Task WithAttachments_Created()
         {

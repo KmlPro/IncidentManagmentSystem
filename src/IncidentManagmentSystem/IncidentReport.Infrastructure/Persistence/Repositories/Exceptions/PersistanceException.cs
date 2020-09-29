@@ -7,7 +7,6 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories.Exceptions
     {
         public PersistanceException(Exception exception): base(null, exception)
         {
-            throw new NotImplementedException();
         }
     }
 }

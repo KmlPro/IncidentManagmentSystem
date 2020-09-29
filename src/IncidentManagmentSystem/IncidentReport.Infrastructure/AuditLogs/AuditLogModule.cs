@@ -17,9 +17,10 @@ namespace IncidentReport.Infrastructure.AuditLogs
             foreach (var logType in logTemplates)
             {
                 var logInstance = (IAuditLogFactory)FormatterServices.GetUninitializedObject(logType);
+                var eventType = logInstance.EventType;
 
                 builder.RegisterType(logType)
-                    .Keyed<IAuditLogFactory>(logInstance.EventType);
+                    .Keyed<IAuditLogFactory>(eventType);
             }
 
             builder.RegisterType<AuditLogService>();
