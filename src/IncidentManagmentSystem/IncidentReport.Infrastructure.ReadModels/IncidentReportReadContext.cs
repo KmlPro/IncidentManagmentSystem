@@ -4,6 +4,7 @@ using IncidentReport.ReadModels.AutoMapperConfiguration;
 using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Dtos.DraftApplications;
 using IncidentReport.ReadModels.Dtos.IncidentApplications;
+using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.ReadModels
 {
@@ -13,9 +14,9 @@ namespace IncidentReport.ReadModels
         private readonly IReadModuleIMapper _mapper;
 
         public IQueryable<DraftApplicationDto> DraftApplications => this._incidentReportReadDbContext.DraftApplication
-            .ProjectTo<DraftApplicationDto>(this._mapper.ConfigurationProvider).AsQueryable();
+            .ProjectTo<DraftApplicationDto>(this._mapper.ConfigurationProvider).AsNoTracking();
         public IQueryable<IncidentApplicationDto> IncidentApplications => this._incidentReportReadDbContext.IncidentApplication
-            .ProjectTo<IncidentApplicationDto>(this._mapper.ConfigurationProvider).AsQueryable();
+            .ProjectTo<IncidentApplicationDto>(this._mapper.ConfigurationProvider).AsNoTracking();
 
         public IncidentReportReadContext(IncidentReportReadDbContext incidentReportReadDbContext, IReadModuleIMapper mapper)
         {
