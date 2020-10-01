@@ -36,4 +36,10 @@
   <data name="DraftApplicationSuspiciousEmployeeDeleted" xml:space="preserve">
     <value>Deleted suspicious employees, names {0}</value>
   </data>
+  <data name="ApplicationCreated" xml:space="preserve">
+    <value>Created application with Id {0}</value>
+  </data>
+  <data name="ApplicationPosted" xml:space="preserve">
+    <value>Application Posted</value>
+  </data>
 </root>

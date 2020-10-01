@@ -61,6 +61,24 @@ namespace IncidentReport.Infrastructure.AuditLogs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created application with Id {0}.
+        /// </summary>
+        internal static string ApplicationCreated {
+            get {
+                return ResourceManager.GetString("ApplicationCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Posted.
+        /// </summary>
+        internal static string ApplicationPosted {
+            get {
+                return ResourceManager.GetString("ApplicationPosted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attachments added. File names {0} .
         /// </summary>
         internal static string DraftApplicationAttachmentsAdded {
