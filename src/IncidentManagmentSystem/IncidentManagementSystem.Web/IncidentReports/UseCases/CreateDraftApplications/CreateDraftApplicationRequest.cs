@@ -24,7 +24,7 @@ namespace IncidentManagementSystem.Web.IncidentReports.UseCases.CreateDraftAppli
 
         public IEnumerable<Guid> SuspiciousEmployees { get; set; }
 
-        public List<IFormFile> Attachments { get; }
+        public List<IFormFile> Attachments { get; set; }
 
         public void Mapping(Profile profile)
         {
