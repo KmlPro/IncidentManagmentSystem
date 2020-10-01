@@ -24,4 +24,16 @@
   <data name="DraftApplicationCreated" xml:space="preserve">
     <value>Created draft application with Id {0}</value>
   </data>
+  <data name="DraftApplicationAttachmentsDeleted" xml:space="preserve">
+    <value>Deleted attachments. File names {0}</value>
+  </data>
+  <data name="DraftApplicationUpdated" xml:space="preserve">
+    <value>Draft application data updated</value>
+  </data>
+  <data name="DraftApplicationSuspiciousEmployeeAdded" xml:space="preserve">
+    <value>Added suspicious employees, names {0} </value>
+  </data>
+  <data name="DraftApplicationSuspiciousEmployeeDeleted" xml:space="preserve">
+    <value>Deleted suspicious employees, names {0}</value>
+  </data>
 </root>

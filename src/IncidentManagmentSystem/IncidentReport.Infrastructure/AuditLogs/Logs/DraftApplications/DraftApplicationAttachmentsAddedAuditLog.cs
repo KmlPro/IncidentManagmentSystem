@@ -3,7 +3,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplica
 
 namespace IncidentReport.Infrastructure.AuditLogs.Logs.DraftApplications
 {
-    public class DraftApplicationAttachmentsAddedAuditLog : AuditLogFactory<DraftApplicationAttachmentsAdded>
+    internal class DraftApplicationAttachmentsAddedAuditLog : AuditLogFactory<DraftApplicationAttachmentsAdded>
     {
         public override string BuildLog(DraftApplicationAttachmentsAdded @event)
         {

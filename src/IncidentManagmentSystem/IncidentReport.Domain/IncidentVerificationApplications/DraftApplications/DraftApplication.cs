@@ -55,7 +55,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
             this.IncidentType = incidentType;
 
             this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication,
-                this.IncidentType, this.SuspiciousEmployees));
+                this.IncidentType));
         }
 
         public void AddSuspiciousEmployees(List<EmployeeId> employeeIds)
