@@ -10,17 +10,17 @@ namespace IncidentReport.Infrastructure.AuditLogs
         protected override void Load(ContainerBuilder builder)
         {
             var logTemplates = this.ThisAssembly.GetTypes()
-                .Where(t => t.IsAssignableTo<IAuditLogFactory>())
+                .Where(t => t.IsAssignableTo<IAuditLogTemplate>())
                 .Where(t => !t.IsAbstract && !t.IsInterface)
                 .ToList();
 
             foreach (var logType in logTemplates)
             {
-                var logInstance = (IAuditLogFactory)FormatterServices.GetUninitializedObject(logType);
+                var logInstance = (IAuditLogTemplate)FormatterServices.GetUninitializedObject(logType);
                 var eventType = logInstance.EventType;
 
                 builder.RegisterType(logType)
-                    .Keyed<IAuditLogFactory>(eventType);
+                    .Keyed<IAuditLogTemplate>(eventType);
             }
 
             builder.RegisterType<AuditLogService>();

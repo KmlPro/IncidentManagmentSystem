@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.AuditLogs;
+using IncidentReport.Infrastructure.Persistence.NotDomainEntities;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             this._auditLogService = auditLogService;
         }
 
+        //kbytner 03.10.2020 - to do remove logs!
         public async void Delete(DraftApplicationId draftApplicationId)
         {
             if (draftApplicationId == null)
@@ -76,8 +78,8 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
                 await this._writeContext.DraftApplication.AddAsync(draftApplication,cancellationToken);
                 if (CheckIsEntityHasDomainEvents.Check(draftApplication))
                 {
-                    await this._writeContext.DraftApplicationAuditLogs.AddRangeAsync(
-                        this._auditLogService.CreateFromDomainEvents(draftApplication), cancellationToken);
+                    await this._writeContext.DraftApplicationAuditLog.AddRangeAsync(
+                        this._auditLogService.CreateFromDomainEvents<DraftApplicationAuditLog>(draftApplication), cancellationToken);
                 }
             }
             catch (Exception ex)
@@ -98,8 +100,8 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
                 this._writeContext.DraftApplication.Update(draftApplication);
                 if (CheckIsEntityHasDomainEvents.Check(draftApplication))
                 {
-                    this._writeContext.DraftApplicationAuditLogs.AddRange(
-                        this._auditLogService.CreateFromDomainEvents(draftApplication));
+                    this._writeContext.DraftApplicationAuditLog.AddRange(
+                        this._auditLogService.CreateFromDomainEvents<DraftApplicationAuditLog>(draftApplication));
                 }
             }
             catch (Exception ex)

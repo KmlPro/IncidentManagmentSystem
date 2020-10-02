@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Infrastructure.AuditLogs;
+using IncidentReport.Infrastructure.Persistence.NotDomainEntities;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +14,12 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
     public class IncidentApplicationRepository : IIncidentApplicationRepository
     {
         private IncidentReportWriteDbContext _writeContext;
+        private readonly AuditLogService _auditLogService;
 
-        public IncidentApplicationRepository(IncidentReportWriteDbContext writeContext)
+        public IncidentApplicationRepository(IncidentReportWriteDbContext writeContext, AuditLogService auditLogService)
         {
             this._writeContext = writeContext;
+            this._auditLogService = auditLogService;
         }
 
         public async Task<PostedIncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId, CancellationToken cancellationToken)
@@ -52,6 +56,11 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 await this._writeContext.IncidentApplication.AddAsync(incidentApplication,cancellationToken);
+                if (CheckIsEntityHasDomainEvents.Check(incidentApplication))
+                {
+                    await this._writeContext.ApplicationAuditLog.AddRangeAsync(
+                        this._auditLogService.CreateFromDomainEvents<ApplicationAuditLog>(incidentApplication), cancellationToken);
+                }
             }
             catch (Exception ex)
             {

@@ -2,7 +2,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplica
 
 namespace IncidentReport.Infrastructure.AuditLogs.Logs.DraftApplications
 {
-    internal class DraftApplicationCreatedAuditLog: AuditLogFactory<DraftApplicationCreatedDomainEvent>
+    internal class DraftApplicationCreatedAuditLog: AuditLogTemplate<DraftApplicationCreatedDomainEvent>
     {
         public override string BuildLog(DraftApplicationCreatedDomainEvent @event)
         {

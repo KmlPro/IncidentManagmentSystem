@@ -7,7 +7,7 @@ using IncidentReport.Infrastructure.Persistence;
 
 namespace IncidentReport.Infrastructure.AuditLogs.Logs.DraftApplications
 {
-    internal class DraftApplicationSuspiciousEmployeeDeletedAuditLog : AuditLogFactory<DraftApplicationSuspiciousEmployeeDeleted>
+    internal class DraftApplicationSuspiciousEmployeeDeletedAuditLog : AuditLogTemplate<DraftApplicationSuspiciousEmployeeDeleted>
     {
         private readonly IncidentReportWriteDbContext _dbContext;
 

@@ -12,26 +12,40 @@ namespace IncidentReport.Infrastructure.AuditLogs
 {
     public class AuditLogService
     {
-        private readonly IIndex<string, IAuditLogFactory> _logFactories;
+        private readonly IIndex<string, IAuditLogTemplate> _logFactories;
         private readonly ILogger _logger;
 
-        public AuditLogService(IIndex<string, IAuditLogFactory> logFactories,ILogger logger)
+        public AuditLogService(IIndex<string, IAuditLogTemplate> logFactories, ILogger logger)
         {
             this._logFactories = logFactories;
             this._logger = logger;
         }
 
-        public List<AuditLog> CreateFromDomainEvents(Entity entity)
+        public List<TAuditLog> CreateFromDomainEvents<TAuditLog>(Entity entity) where TAuditLog : AuditLog, new()
         {
-            var auditLogs = new List<AuditLog>();
+            var auditLogs = new List<TAuditLog>();
             foreach (var domainEvent in entity.DomainEvents)
             {
-                var eventData = JsonConvert.SerializeObject(domainEvent, new JsonSerializerSettings()
-                    { ContractResolver = new IgnorePropertiesResolver(new[] { nameof(domainEvent.Type), nameof(domainEvent.OccurredOn) }) });
+                var eventData = JsonConvert.SerializeObject(domainEvent,
+                    new JsonSerializerSettings()
+                    {
+                        ContractResolver = new IgnorePropertiesResolver(new[]
+                        {
+                            nameof(domainEvent.Type), nameof(domainEvent.OccurredOn)
+                        })
+                    });
 
                 var eventType = domainEvent.GetType().ToString();
-                var description = this.GetDescription(domainEvent,eventType);
-                auditLogs.Add(new AuditLog(domainEvent.OccurredOn, domainEvent.Type, eventData, domainEvent.EntityId, description));
+                var description = this.GetDescription(domainEvent, eventType);
+                var auditLog = new TAuditLog()
+                {
+                    OccurredOn = domainEvent.OccurredOn,
+                    Type = domainEvent.Type,
+                    Data = eventData,
+                    EntityId = domainEvent.EntityId,
+                    Description = description
+                };
+                auditLogs.Add(auditLog);
             }
 
             return auditLogs;
