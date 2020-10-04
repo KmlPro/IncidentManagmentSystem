@@ -16,8 +16,10 @@ namespace IncidentReport.ReadModels
         {
         }
 
+        public virtual DbSet<ApplicationAuditLog> ApplicationAuditLog { get; set; }
         public virtual DbSet<Attachment> Attachment { get; set; }
         public virtual DbSet<DraftApplication> DraftApplication { get; set; }
+        public virtual DbSet<DraftApplicationAuditLog> DraftApplicationAuditLog { get; set; }
         public virtual DbSet<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployee { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<IncidentApplication> IncidentApplication { get; set; }
@@ -34,6 +36,11 @@ namespace IncidentReport.ReadModels
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ApplicationAuditLog>(entity =>
+            {
+                entity.ToTable("ApplicationAuditLog", "IncidentReport");
+            });
+
             modelBuilder.Entity<Attachment>(entity =>
             {
                 entity.ToTable("Attachment", "IncidentReport");
@@ -74,6 +81,11 @@ namespace IncidentReport.ReadModels
                 entity.HasOne(d => d.Applicant)
                     .WithMany(p => p.DraftApplication)
                     .HasForeignKey(d => d.ApplicantId);
+            });
+
+            modelBuilder.Entity<DraftApplicationAuditLog>(entity =>
+            {
+                entity.ToTable("DraftApplicationAuditLog", "IncidentReport");
             });
 
             modelBuilder.Entity<DraftApplicationSuspiciousEmployee>(entity =>
