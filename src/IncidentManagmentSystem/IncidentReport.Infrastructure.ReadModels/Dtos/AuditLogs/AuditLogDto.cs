@@ -2,7 +2,7 @@ using System;
 
 namespace IncidentReport.ReadModels.Dtos.AuditLogs
 {
-    public abstract class AuditLogDto
+    public class AuditLogDto
     {
         public string Id { get; set; }
         public DateTime OccurredOn { get; set; }
