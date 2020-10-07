@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FakeDataGenerator\FakeDataGenerator.csproj" />
     <ProjectReference Include="..\IncidentReport.Infrastructure\IncidentReport.Infrastructure.csproj" />
   </ItemGroup>
 

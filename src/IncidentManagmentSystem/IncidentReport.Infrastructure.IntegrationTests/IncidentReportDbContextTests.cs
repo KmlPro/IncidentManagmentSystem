@@ -5,7 +5,6 @@ using IncidentReport.Infrastructure.Persistence;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
@@ -25,7 +24,8 @@ namespace IncidentReport.Infrastructure.IntegrationTests
             context.Database.EnsureCreated();
         }
 
-        [Test] public void CreateDbSchema_SqlServerDatabase_CreatedSuccessfully()
+        [Test]
+        public void CreateDbSchema_SqlServerDatabase_CreatedSuccessfully()
         {
             var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
                 .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
@@ -37,7 +37,8 @@ namespace IncidentReport.Infrastructure.IntegrationTests
             context.Database.EnsureCreated();
         }
 
-        [Test] public void CreateDbSchema_SqlLiteDatabase_CreatedSuccessfully()
+        [Test]
+        public void CreateDbSchema_SqlLiteDatabase_CreatedSuccessfully()
         {
             var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
                 .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()

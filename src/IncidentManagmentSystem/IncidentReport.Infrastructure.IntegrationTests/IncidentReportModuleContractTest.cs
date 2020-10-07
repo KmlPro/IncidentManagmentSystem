@@ -1,10 +1,7 @@
 using System.Threading.Tasks;
 using Autofac;
-using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Contract;
-using IncidentReport.Infrastructure.IntegrationTests.Common.Mocks;
 using IncidentReport.Infrastructure.IntegrationTests.UseCases;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
