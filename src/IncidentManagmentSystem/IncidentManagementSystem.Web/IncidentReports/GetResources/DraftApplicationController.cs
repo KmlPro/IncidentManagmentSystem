@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IncidentManagementSystem.Web.Configuration;
 using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Dtos.AuditLogs;
 using IncidentReport.ReadModels.Dtos.DraftApplications;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagementSystem.Web.IncidentReports.GetResources
 {
-    [Route(IncidentReportRoutes.DraftApplication)]
     [ApiController]
-    public class DraftApplicationController : ControllerBase
+    [Route(IncidentReportRoutes.DraftApplication)]
+    public class DraftApplicationController : ODataController
     {
         private readonly IIncidentReportReadContext _readContext;
 
@@ -22,22 +23,25 @@ namespace IncidentManagementSystem.Web.IncidentReports.GetResources
         }
 
         [HttpGet]
+        [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<DraftApplicationDto>))]
         public IActionResult Get()
         {
             return this.Ok(this._readContext.DraftApplications);
         }
 
-        [Route("{id}")]
+        [Route("api/incident-report/draft-application/{id}")]
         [HttpGet]
+        [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
         public IActionResult Get(Guid id)
         {
             return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
         }
 
-        [Route("{id}/history")]
+        [Route("api/incident-report/draft-application/{id}/history")]
         [HttpGet]
+        [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AuditLogDto>))]
         public IActionResult GetHistory(Guid id)
         {

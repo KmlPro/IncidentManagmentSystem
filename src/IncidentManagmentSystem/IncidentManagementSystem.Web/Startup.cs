@@ -5,10 +5,11 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using IncidentManagementSystem.Web.Configuration.Filters;
 using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
-using IncidentManagementSystem.Web.Configuration.Odata;
 using IncidentManagementSystem.Web.Users;
 using IncidentManagementSystem.Web.Configuration.Middlewares;
 using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Routing;
+using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,7 +38,7 @@ namespace IncidentManagementSystem.Web
             });
 
             services.AddControllers(mvcOptions =>
-                mvcOptions.EnableEndpointRouting = false);
+                mvcOptions.EnableEndpointRouting = false).AddNewtonsoftJson();
 
             services.AddOData();
 
@@ -72,12 +73,9 @@ namespace IncidentManagementSystem.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks("api/health");
-            });
-
-            app.UseMvc(routeBuilder =>
-            {
-                routeBuilder.Select().Filter();
-                routeBuilder.MapODataServiceRoute("odata", "odata", EdmModelFactory.Create());
+                endpoints.MapControllers();
+                endpoints.EnableDependencyInjection();
+                endpoints.Select().Filter().OrderBy().Count().MaxTop(10);
             });
 
             this._incidentReportInitializer.Init(userContext,logger);

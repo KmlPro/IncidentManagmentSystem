@@ -39,5 +39,16 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.GetResource
             Assert.True(IsResponseContentNotEmpty.Check(response));
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
+
+        [Test]
+        public async Task TestOdataSelect_Get_Return200()
+        {
+            var pathWithSelect = _path + "?$select=Title";
+            this._testFixture.CreateDraftApplicationInDb(this._applicant, this._suspiciousEmployee);
+            var response = await this._testClient.GetAsync(pathWithSelect);
+
+            Assert.True(IsResponseContentNotEmpty.Check(response));
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
     }
 }
