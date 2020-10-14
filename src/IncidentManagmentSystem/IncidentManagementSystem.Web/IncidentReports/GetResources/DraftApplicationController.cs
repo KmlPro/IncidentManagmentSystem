@@ -5,6 +5,7 @@ using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Dtos.AuditLogs;
 using IncidentReport.ReadModels.Dtos.DraftApplications;
 using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +31,7 @@ namespace IncidentManagementSystem.Web.IncidentReports.GetResources
             return this.Ok(this._readContext.DraftApplications);
         }
 
-        [Route("api/incident-report/draft-application/{id}")]
-        [HttpGet]
+        [HttpGet("{id}")]
         [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
         public IActionResult Get(Guid id)
@@ -39,8 +39,7 @@ namespace IncidentManagementSystem.Web.IncidentReports.GetResources
             return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
         }
 
-        [Route("api/incident-report/draft-application/{id}/history")]
-        [HttpGet]
+        [HttpGet("{id}/history")]
         [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AuditLogDto>))]
         public IActionResult GetHistory(Guid id)

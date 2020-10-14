@@ -1,3 +1,4 @@
+using System;
 using IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.IncidentApplications;
 using IncidentReport.Domain.Employees.ValueObjects;
 
@@ -13,10 +14,11 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.GetResource
             this._incidentApplicationTestFixture = new IncidentApplicationTestFixture();
         }
 
-        public void CreatePostedIncidentApplicationInDb(EmployeeId applicant, EmployeeId suspiciousEmployee)
+        public Guid CreatePostedIncidentApplicationInDb(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
             var draftApplication = this._incidentApplicationFactory.CreatePostedWithAttachments(applicant, suspiciousEmployee);
             this._incidentApplicationTestFixture.SaveIncidentApplicationInDb(draftApplication);
+            return draftApplication.Id.Value;
         }
     }
 }

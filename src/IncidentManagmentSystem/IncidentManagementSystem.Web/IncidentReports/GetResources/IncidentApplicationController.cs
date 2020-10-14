@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IncidentManagementSystem.Web.IncidentReports.GetResources
 {
-    [Route(IncidentReportRoutes.IncidentApplication)]
     [ApiController]
+    [Route(IncidentReportRoutes.IncidentApplication)]
     public class IncidentApplicationController : ControllerBase
     {
         private readonly IIncidentReportReadContext _readContext;
@@ -30,8 +30,7 @@ namespace IncidentManagementSystem.Web.IncidentReports.GetResources
             return this.Ok(this._readContext.IncidentApplications);
         }
 
-        [Route("{id}")]
-        [HttpGet]
+        [HttpGet("{id}")]
         [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DraftApplicationDto))]
         public IActionResult Get(Guid id)
@@ -39,8 +38,7 @@ namespace IncidentManagementSystem.Web.IncidentReports.GetResources
             return this.Ok(this._readContext.IncidentApplications.Where(x => x.Id == id));
         }
 
-        [Route("{id}/history")]
-        [HttpGet]
+        [HttpGet("{id}/history")]
         [EnableQuery]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AuditLogDto>))]
         public IActionResult GetHistory(Guid id)

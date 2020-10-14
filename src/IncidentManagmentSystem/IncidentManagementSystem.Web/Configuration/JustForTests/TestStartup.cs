@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Autofac;
 using AutoMapper;
+using IncidentManagementSystem.Web.Configuration.Filters;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,12 +22,20 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddControllers();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelStateAttribute));
+            });
+
+            services.AddControllers(mvcOptions =>
+                mvcOptions.EnableEndpointRouting = false).AddNewtonsoftJson();
+
             services.AddOData();
 
             services.AddHttpContextAccessor();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddHealthChecks();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -37,7 +46,14 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("api/health");
+                endpoints.MapControllers();
+                endpoints.EnableDependencyInjection();
+                endpoints.Select().Filter().OrderBy().Count().MaxTop(10);
+            });
 
             var currentUserContext = new TestCurrentUserContext();
             this._initializer.Init(currentUserContext);
