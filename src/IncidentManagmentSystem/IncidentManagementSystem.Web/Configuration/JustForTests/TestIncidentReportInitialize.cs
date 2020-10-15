@@ -5,6 +5,7 @@ using BuildingBlocks.Application;
 using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace IncidentManagementSystem.Web.Configuration.JustForTests
@@ -13,6 +14,8 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
     {
         private ModuleInitializer _initializer;
         private DbConnection _dbConnection;
+        private static readonly ILoggerFactory _myLoggerFactory
+            = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         public TestIncidentReportInitialize()
         {
@@ -42,7 +45,11 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
 
         private Action<DbContextOptionsBuilder> ConfigurePersistance()
         {
-            return options => options.UseSqlite(this._dbConnection);;
+            return options =>
+            {
+                options.UseSqlite(this._dbConnection);
+                options.UseLoggerFactory(_myLoggerFactory);
+            };
         }
     }
 }
