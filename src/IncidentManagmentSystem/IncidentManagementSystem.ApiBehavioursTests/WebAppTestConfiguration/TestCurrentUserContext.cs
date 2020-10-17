@@ -1,7 +1,7 @@
 using System;
 using BuildingBlocks.Application;
 
-namespace IncidentManagementSystem.Web.Configuration.JustForTests
+namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
 {
     public class TestCurrentUserContext : ICurrentUserContext
     {

@@ -1,11 +1,10 @@
 using Autofac.Extensions.DependencyInjection;
 using IncidentManagementSystem.Web;
-using IncidentManagementSystem.Web.Configuration.JustForTests;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport
+namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
 {
     public static class TestWebHostBuilderFactory
     {

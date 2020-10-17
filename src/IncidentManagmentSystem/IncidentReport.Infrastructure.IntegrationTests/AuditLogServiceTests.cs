@@ -12,6 +12,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
 {
+    [Category(CategoryTitle.Title + " AuditLogService")]
     public class AuditLogServiceTests
     {
         public AuditLogServiceTests()

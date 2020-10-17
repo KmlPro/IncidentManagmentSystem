@@ -2,13 +2,14 @@ using System;
 using System.Data.Common;
 using Autofac;
 using BuildingBlocks.Application;
+using IncidentManagementSystem.Web.Configuration;
 using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace IncidentManagementSystem.Web.Configuration.JustForTests
+namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
 {
     public class TestIncidentReportInitialize
     {

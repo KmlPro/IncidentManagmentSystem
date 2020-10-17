@@ -1,13 +1,13 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using Autofac;
 using AutoMapper;
+using IncidentManagementSystem.Web;
 using IncidentManagementSystem.Web.Configuration.Filters;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IncidentManagementSystem.Web.Configuration.JustForTests
+namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
 {
     [SuppressMessage("ReSharper", "CA1822")]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -33,7 +33,7 @@ namespace IncidentManagementSystem.Web.Configuration.JustForTests
             services.AddOData();
 
             services.AddHttpContextAccessor();
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddHealthChecks();
         }

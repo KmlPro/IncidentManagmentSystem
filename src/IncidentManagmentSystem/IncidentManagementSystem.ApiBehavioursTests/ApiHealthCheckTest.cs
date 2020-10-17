@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using IncidentManagementSystem.ApiBehavioursTests.IncidentReport;
 using IncidentManagementSystem.ApiBehavioursTests.TestUtils;
+using IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration;
 using IncidentManagementSystem.Web.IncidentReports;
 using NUnit.Framework;
 

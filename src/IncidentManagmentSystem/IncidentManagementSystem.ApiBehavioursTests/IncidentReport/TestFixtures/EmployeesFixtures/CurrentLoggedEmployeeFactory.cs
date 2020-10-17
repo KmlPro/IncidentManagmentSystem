@@ -1,5 +1,5 @@
 using BuildingBlocks.Domain.UnitTests;
-using IncidentManagementSystem.Web.Configuration.JustForTests;
+using IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration;
 using IncidentReport.Domain.Employees;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.EmployeesFixtures
