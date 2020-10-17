@@ -6,7 +6,6 @@ using IncidentManagementSystem.Web.Configuration;
 using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
@@ -15,8 +14,6 @@ namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
     {
         private ModuleInitializer _initializer;
         private DbConnection _dbConnection;
-        private static readonly ILoggerFactory _myLoggerFactory
-            = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         public TestIncidentReportInitialize()
         {
@@ -26,8 +23,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
 
         public void Init(ICurrentUserContext currentUserContext)
         {
-            var logger = new LoggerConfiguration().CreateLogger()
-                .ForContext(LoggingConsts.ModuleParameter, LoggingConsts.IncidentReportModule);
+            var logger = new LoggerConfiguration().CreateLogger();
 
             this._initializer.Init(currentUserContext, logger,this.ConfigurePersistance());
         }
@@ -49,7 +45,6 @@ namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
             return options =>
             {
                 options.UseSqlite(this._dbConnection);
-                options.UseLoggerFactory(_myLoggerFactory);
             };
         }
     }
