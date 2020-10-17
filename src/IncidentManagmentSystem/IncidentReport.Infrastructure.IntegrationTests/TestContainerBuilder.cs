@@ -1,6 +1,6 @@
 using Autofac;
 using IncidentReport.Infrastructure.Configuration;
-using IncidentReport.Infrastructure.IntegrationTests.Common.Mocks;
+using IncidentReport.Infrastructure.IntegrationTests.Mocks;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.IntegrationTests

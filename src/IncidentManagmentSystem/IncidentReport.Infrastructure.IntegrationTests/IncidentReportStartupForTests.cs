@@ -1,10 +1,11 @@
 using System;
 using System.Reflection;
 using BuildingBlocks.Application;
+using IncidentReport.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace IncidentReport.Infrastructure.Configuration
+namespace IncidentReport.Infrastructure.IntegrationTests
 {
     public class IncidentReportStartupForTests : IncidentReportStartup
     {

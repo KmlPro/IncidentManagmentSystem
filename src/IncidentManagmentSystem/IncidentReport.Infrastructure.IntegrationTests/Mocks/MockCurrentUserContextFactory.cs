@@ -2,7 +2,7 @@ using System;
 using BuildingBlocks.Application;
 using Moq;
 
-namespace IncidentReport.Infrastructure.IntegrationTests.Common.Mocks
+namespace IncidentReport.Infrastructure.IntegrationTests.Mocks
 {
     internal class MockCurrentUserContextFactory
     {
