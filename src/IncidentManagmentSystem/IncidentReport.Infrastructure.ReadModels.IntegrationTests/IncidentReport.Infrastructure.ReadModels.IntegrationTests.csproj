@@ -10,6 +10,7 @@
         <PackageReference Include="Autofac" Version="5.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.9" />
         <PackageReference Include="nunit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
@@ -17,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\FakeDataGenerator\FakeDataGenerator.csproj" />
       <ProjectReference Include="..\IncidentReport.Infrastructure.ReadModels\IncidentReport.Infrastructure.ReadModels.csproj" />
     </ItemGroup>
 
