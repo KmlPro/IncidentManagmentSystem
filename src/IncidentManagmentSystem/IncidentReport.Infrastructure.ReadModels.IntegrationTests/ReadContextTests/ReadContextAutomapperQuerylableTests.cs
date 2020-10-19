@@ -18,14 +18,14 @@ namespace IncidentReport.Infrastructure.ReadModels.IntegrationTests.ReadContextT
         }
 
         [Test]
-        public void MapDraftApplicationEntity_To_MapDraftApplicationDto_MapEntireEntity_MappedSuccessfully()
+        public void MapDraftApplicationEntity_To_MapDraftApplicationDto_MapEntireEntity_TakeOne_MappedSuccessfully()
         {
             using (var container = this._testContainer.BeginLifetimeScope())
             {
                 this._testFixture.AddDraftApplicationWithEmployeesInDatabase(container);
                 var readContext = container.Resolve<IIncidentReportReadContext>();
-                var data = readContext.DraftApplications.ToList();
-                Assert.True(data.Count >= 1);
+                var data = readContext.DraftApplications.Take(1).ToList();
+                Assert.True(data.Count == 1);
             }
         }
 
