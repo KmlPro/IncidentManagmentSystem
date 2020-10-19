@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using AutoMapper;
+using IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration.Modules.IncidentReport;
 using IncidentManagementSystem.Web;
 using IncidentManagementSystem.Web.Configuration.Filters;
 using Microsoft.AspNet.OData.Extensions;

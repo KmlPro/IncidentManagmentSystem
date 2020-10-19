@@ -2,21 +2,20 @@ using System;
 using System.Data.Common;
 using Autofac;
 using BuildingBlocks.Application;
-using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration
+namespace IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration.Modules.IncidentReport
 {
     public class TestIncidentReportInitialize
     {
-        private ModuleInitializer _initializer;
+        private TestIncidentReportModuleInitializer _initializer;
         private DbConnection _dbConnection;
 
         public TestIncidentReportInitialize()
         {
-            this._initializer = new ModuleInitializer();
+            this._initializer = new TestIncidentReportModuleInitializer();
             this._dbConnection = CreateInMemoryDatabaseConnection();
         }
 

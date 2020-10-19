@@ -13,11 +13,11 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
 {
     public class ModuleInitializer
     {
-        private IncidentReportStartup _incidentReportStartup;
+        protected IncidentReportStartup IncidentReportStartup { get; set; }
 
         public ModuleInitializer()
         {
-            this._incidentReportStartup = new IncidentReportStartup();
+            this.IncidentReportStartup = new IncidentReportStartup();
         }
 
         public void Init(ICurrentUserContext currentUserContext, ILogger logger,
@@ -25,7 +25,7 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
         {
             var moduleLogger = logger.ForContext(LoggingConsts.ModuleParameter, LoggingConsts.IncidentReportModule);
 
-            this._incidentReportStartup.Initialize(dbContextOptionsBuilderAction,
+            this.IncidentReportStartup.Initialize(dbContextOptionsBuilderAction,
                 currentUserContext, moduleLogger,
                 moduleContainerBuilder =>
                 {
@@ -50,8 +50,8 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
         public void RegisterModuleContracts(ContainerBuilder builder,
             Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
         {
-            this._incidentReportStartup.RegisterModuleContract(builder);
-            this._incidentReportStartup.RegisterReadContextContract(builder, dbContextOptionsBuilderAction);
+            this.IncidentReportStartup.RegisterModuleContract(builder);
+            this.IncidentReportStartup.RegisterReadContextContract(builder, dbContextOptionsBuilderAction);
         }
     }
 }

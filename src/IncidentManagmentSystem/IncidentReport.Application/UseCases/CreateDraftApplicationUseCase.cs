@@ -6,13 +6,9 @@ using BuildingBlocks.Application;
 using BuildingBlocks.Application.Abstract;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
-using IncidentReport.Application.Common;
 using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.UseCases
 {

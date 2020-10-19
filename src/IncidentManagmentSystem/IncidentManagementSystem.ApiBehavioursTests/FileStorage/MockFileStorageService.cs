@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using IncidentReport.Application.Files;
 
-namespace IncidentReport.Infrastructure.FileStorage
+namespace IncidentManagementSystem.ApiBehavioursTests.FileStorage
 {
-    // kbytner 15.02.2020 -- currently mock implementation
-    public class FileStorageService : IFileStorageService
+    public class MockFileStorageService : IFileStorageService
     {
         public Task DeleteFiles(List<Guid> storageIds)
         {

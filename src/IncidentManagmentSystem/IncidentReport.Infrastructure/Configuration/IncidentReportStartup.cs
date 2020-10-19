@@ -61,18 +61,23 @@ namespace IncidentReport.Infrastructure.Configuration
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
             ICurrentUserContext currentUserContext,ILogger logger)
         {
-            this._containerBuilder.RegisterModule(new LoggingModule(logger));
-            this._containerBuilder.RegisterModule(new MediatRModule(this.AssemblyWithMediatRComponentsImplementation));
-            this._containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
-            this._containerBuilder.RegisterModule(new ProcessingModule());
-            this._containerBuilder.RegisterModule(new FileStorageModule());
-            this._containerBuilder.RegisterModule(new AuditLogModule());
-
-            this._containerBuilder.RegisterInstance(currentUserContext);
+            this.RegisterTypesInContainer(this._containerBuilder,dbContextOptionsBuilderAction, currentUserContext, logger);
 
             var container = this._containerBuilder.Build();
 
             CompositionRoot.SetContainer(container);
+        }
+
+        protected virtual void RegisterTypesInContainer(ContainerBuilder containerBuilder, Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction, ICurrentUserContext currentUserContext,
+            ILogger logger)
+        {
+            containerBuilder.RegisterModule(new LoggingModule(logger));
+            containerBuilder.RegisterModule(new MediatRModule(this.AssemblyWithMediatRComponentsImplementation));
+            containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
+            containerBuilder.RegisterModule(new ProcessingModule());
+            containerBuilder.RegisterModule(new FileStorageModule());
+            containerBuilder.RegisterModule(new AuditLogModule());
+            containerBuilder.RegisterInstance(currentUserContext);
         }
     }
 }
