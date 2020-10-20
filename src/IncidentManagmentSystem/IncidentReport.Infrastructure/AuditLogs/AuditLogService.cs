@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Autofac.Core.Registration;
 using Autofac.Features.Indexed;
+using BuildingBlocks.Application;
 using BuildingBlocks.Domain.Abstract;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Infrastructure.AuditLogs.Logs;
 using IncidentReport.Infrastructure.Configuration.JsonConvertContractResolvers;
 using Newtonsoft.Json;
@@ -14,11 +16,13 @@ namespace IncidentReport.Infrastructure.AuditLogs
     {
         private readonly IIndex<string, IAuditLogTemplate> _logFactories;
         private readonly ILogger _logger;
+        private readonly ICurrentUserContext _currentUserContext;
 
-        public AuditLogService(IIndex<string, IAuditLogTemplate> logFactories, ILogger logger)
+        public AuditLogService(IIndex<string, IAuditLogTemplate> logFactories, ILogger logger,ICurrentUserContext currentUserContext)
         {
             this._logFactories = logFactories;
             this._logger = logger;
+            this._currentUserContext = currentUserContext;
         }
 
         public List<TAuditLog> CreateFromDomainEvents<TAuditLog>(Entity entity) where TAuditLog : AuditLog, new()
@@ -43,7 +47,8 @@ namespace IncidentReport.Infrastructure.AuditLogs
                     Type = domainEvent.Type,
                     Data = eventData,
                     EntityId = domainEvent.EntityId,
-                    Description = description
+                    Description = description,
+                    UserId = new EmployeeId(this._currentUserContext.UserId)
                 };
                 auditLogs.Add(auditLog);
             }
@@ -51,7 +56,7 @@ namespace IncidentReport.Infrastructure.AuditLogs
             return auditLogs;
         }
 
-        //kbytner 27.09.2020 - should think about catch this exception. Maybe its important thing and should throw exception?
+        //kbytner 27.09.2020 - should think about catch this exception. Maybe its important and should throw exception?
         private string GetDescription(DomainEvent domainEvent, string eventType)
         {
             try
