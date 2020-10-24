@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using IncidentReport.ReadModels.DbEntities;
@@ -86,6 +86,12 @@ namespace IncidentReport.ReadModels
             modelBuilder.Entity<DraftApplicationAuditLog>(entity =>
             {
                 entity.ToTable("DraftApplicationAuditLog", "IncidentReport");
+
+                entity.HasIndex(e => e.UserId);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.DraftApplicationAuditLog)
+                    .HasForeignKey(d => d.UserId);
             });
 
             modelBuilder.Entity<DraftApplicationSuspiciousEmployee>(entity =>
