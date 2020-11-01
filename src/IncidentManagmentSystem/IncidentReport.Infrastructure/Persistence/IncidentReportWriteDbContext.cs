@@ -1,7 +1,6 @@
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Persistence.Configurations.Tables;
 using IncidentReport.Infrastructure.Persistence.NotDomainEntities;
 using Microsoft.EntityFrameworkCore;

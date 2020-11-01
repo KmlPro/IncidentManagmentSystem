@@ -1,5 +1,4 @@
 using System;
-using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 
 namespace IncidentReport.Application.Boundaries.CreateDraftApplications

@@ -10,6 +10,7 @@ using IncidentReport.Infrastructure.Contract;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Logging;
 using IncidentReport.Infrastructure.Persistence.Configurations;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
 using IncidentReport.ReadModels.DIConfiguration;
 using Microsoft.EntityFrameworkCore;
 using ILogger = Serilog.ILogger;
@@ -20,17 +21,19 @@ namespace IncidentReport.Infrastructure.Configuration
     public class IncidentReportStartup
     {
         private readonly ContainerBuilder _containerBuilder;
+        private readonly DatabaseContextOptionsFactory _databaseConfigurationFactory;
 
         public IncidentReportStartup()
         {
             this.AssemblyWithMediatRComponentsImplementation =
                 typeof(IncidentReportApplicationAssembly).GetTypeInfo().Assembly;
             this._containerBuilder = new ContainerBuilder();
+            this._databaseConfigurationFactory = new DatabaseContextOptionsFactory();
         }
 
         protected Assembly AssemblyWithMediatRComponentsImplementation { get; set; }
 
-        public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
+        public void Initialize(DbConfiguration databaseConfiguration,
             ICurrentUserContext currentUserContext, ILogger logger, Action<ContainerBuilder> externalInstancesConfiguration)
         {
             if (externalInstancesConfiguration == null)
@@ -40,8 +43,10 @@ namespace IncidentReport.Infrastructure.Configuration
 
             externalInstancesConfiguration(this._containerBuilder);
 
+            var dbConfiguration = this._databaseConfigurationFactory.Create(databaseConfiguration);
+
             this.ConfigureCompositionRoot(
-                dbContextOptionsBuilderAction,
+                dbConfiguration,
                 currentUserContext,
                 logger);
         }
@@ -53,9 +58,11 @@ namespace IncidentReport.Infrastructure.Configuration
                 .InstancePerLifetimeScope();
         }
 
-        public void RegisterReadContextContract(ContainerBuilder builder,Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        public void RegisterReadContextContract(ContainerBuilder builder, DbConfiguration databaseConfiguration)
         {
-            builder.RegisterModule(new ReadContextModule(dbContextOptionsBuilderAction));
+            var dbConfiguration = this._databaseConfigurationFactory.Create(databaseConfiguration);
+
+            builder.RegisterModule(new ReadContextModule(dbConfiguration));
         }
 
         private void ConfigureCompositionRoot(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IncidentManagementSystem.Web.Configuration;
 using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Dtos.AuditLogs;
 using IncidentReport.ReadModels.Dtos.DraftApplications;

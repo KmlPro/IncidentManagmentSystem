@@ -1,8 +1,7 @@
-using System;
 using System.Reflection;
 using BuildingBlocks.Application;
 using IncidentReport.Infrastructure.Configuration;
-using Microsoft.EntityFrameworkCore;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
 using Serilog;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
@@ -10,19 +9,20 @@ namespace IncidentReport.Infrastructure.IntegrationTests
     public class IncidentReportStartupForTests : IncidentReportStartup
     {
         private readonly Assembly _assemblyWithMediatRComponentsImplementationForTest;
+        private readonly DbConfiguration _databaseConfiguration;
 
         public IncidentReportStartupForTests(Assembly assemblyWithCommandsImplementation)
         {
             this._assemblyWithMediatRComponentsImplementationForTest = assemblyWithCommandsImplementation;
+            this._databaseConfiguration = new DbConfiguration(InMemoryDatabaseProvider.Sqlite);
         }
 
-        public void Initialize(Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction,
-            ICurrentUserContext currentUserContext)
+        public void Initialize(ICurrentUserContext currentUserContext)
         {
             var logger = new LoggerConfiguration().CreateLogger();
-            
+
             this.AssemblyWithMediatRComponentsImplementation = this._assemblyWithMediatRComponentsImplementationForTest;
-            this.Initialize(dbContextOptionsBuilderAction, currentUserContext, logger,container => { });
+            this.Initialize(this._databaseConfiguration, currentUserContext, logger,container => { });
         }
     }
 }

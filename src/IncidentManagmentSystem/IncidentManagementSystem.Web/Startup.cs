@@ -1,4 +1,3 @@
-using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -8,8 +7,6 @@ using IncidentManagementSystem.Web.Configuration.Modules.IncidentReports;
 using IncidentManagementSystem.Web.Users;
 using IncidentManagementSystem.Web.Configuration.Middlewares;
 using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNet.OData.Routing;
-using Microsoft.AspNet.OData.Routing.Conventions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

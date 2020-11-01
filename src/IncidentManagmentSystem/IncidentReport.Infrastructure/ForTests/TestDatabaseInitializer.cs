@@ -1,6 +1,5 @@
 using System;
 using Autofac;
-using IncidentReport.Application.Common;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

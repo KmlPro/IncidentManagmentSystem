@@ -1,4 +1,3 @@
-using System;
 using Autofac;
 using BuildingBlocks.Application;
 using IncidentManagementSystem.Web.IncidentReports.UseCases.CreateDraftApplications;
@@ -6,7 +5,7 @@ using IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications;
 using IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftApplications;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Configuration;
-using Microsoft.EntityFrameworkCore;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
 using Serilog;
 
 namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
@@ -14,18 +13,18 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
     public class ModuleInitializer
     {
         protected IncidentReportStartup IncidentReportStartup { get; set; }
-
+        protected DbConfiguration DatabaseConfiguration { get; set; }
         public ModuleInitializer()
         {
             this.IncidentReportStartup = new IncidentReportStartup();
+            this.DatabaseConfiguration = new DbConfiguration(InMemoryDatabaseProvider.Sqlite);
         }
 
-        public void Init(ICurrentUserContext currentUserContext, ILogger logger,
-            Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        public void Init(ICurrentUserContext currentUserContext, ILogger logger)
         {
             var moduleLogger = logger.ForContext(LoggingConsts.ModuleParameter, LoggingConsts.IncidentReportModule);
 
-            this.IncidentReportStartup.Initialize(dbContextOptionsBuilderAction,
+            this.IncidentReportStartup.Initialize(this.DatabaseConfiguration,
                 currentUserContext, moduleLogger,
                 moduleContainerBuilder =>
                 {
@@ -47,11 +46,10 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
                 });
         }
 
-        public void RegisterModuleContracts(ContainerBuilder builder,
-            Action<DbContextOptionsBuilder> dbContextOptionsBuilderAction)
+        public void RegisterModuleContracts(ContainerBuilder builder)
         {
             this.IncidentReportStartup.RegisterModuleContract(builder);
-            this.IncidentReportStartup.RegisterReadContextContract(builder, dbContextOptionsBuilderAction);
+            this.IncidentReportStartup.RegisterReadContextContract(builder, DatabaseConfiguration);
         }
     }
 }

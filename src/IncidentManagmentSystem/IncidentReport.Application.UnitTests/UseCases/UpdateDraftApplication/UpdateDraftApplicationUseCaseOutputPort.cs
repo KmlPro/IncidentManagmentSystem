@@ -1,4 +1,3 @@
-using System;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 

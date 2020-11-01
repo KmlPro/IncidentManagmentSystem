@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.UnitTests.Mocks;
 using IncidentReport.Application.UseCases;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication

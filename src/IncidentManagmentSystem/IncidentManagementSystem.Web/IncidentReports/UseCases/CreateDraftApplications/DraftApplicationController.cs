@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using IncidentManagementSystem.Web.Configuration;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Contract;
 using Microsoft.AspNetCore.Http;

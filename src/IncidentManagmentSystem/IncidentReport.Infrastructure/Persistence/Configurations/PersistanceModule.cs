@@ -3,7 +3,6 @@ using Autofac;
 using BuildingBlocks.Infrastructure;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

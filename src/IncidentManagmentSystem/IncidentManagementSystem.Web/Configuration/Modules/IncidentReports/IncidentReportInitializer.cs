@@ -9,22 +9,20 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
     public class IncidentReportInitializer
     {
         private ModuleInitializer _initializer;
-        private Action<DbContextOptionsBuilder> _dbContextOptionsBuilderAction;
 
         public IncidentReportInitializer()
         {
             this._initializer = new ModuleInitializer();
-            this._dbContextOptionsBuilderAction = this.ConfigurePersistance();
         }
 
         public void Init(ICurrentUserContext currentUserContext, ILogger logger)
         {
-            this._initializer.Init(currentUserContext, logger,options => options.UseInMemoryDatabase("IncidentReport"));
+            this._initializer.Init(currentUserContext, logger);
         }
 
         public void RegisterContracts(ContainerBuilder builder)
         {
-            this._initializer.RegisterModuleContracts(builder, this._dbContextOptionsBuilderAction);
+            this._initializer.RegisterModuleContracts(builder);
         }
 
         private Action<DbContextOptionsBuilder> ConfigurePersistance()

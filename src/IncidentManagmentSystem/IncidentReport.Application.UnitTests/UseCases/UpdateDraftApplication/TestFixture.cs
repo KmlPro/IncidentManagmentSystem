@@ -1,19 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
-using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.UnitTests.Factories;
-using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
 {

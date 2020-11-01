@@ -1,7 +1,5 @@
 using Autofac;
-using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.IntegrationTests.Mocks;
-using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.IntegrationTests
 {
@@ -14,8 +12,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests
             var incidentReportStartup =
                 new IncidentReportStartupForTests(typeof(IncidentReportModuleContractTest).Assembly);
 
-            incidentReportStartup.Initialize(options => options.UseInMemoryDatabase("IncidentReport"),
-                currentUserContext);
+            incidentReportStartup.Initialize(currentUserContext);
 
             incidentReportStartup.RegisterModuleContract(rootContainerBuilder);
 

@@ -5,8 +5,6 @@ using IncidentReport.ReadModels.Contract;
 using IncidentReport.ReadModels.Dtos.AuditLogs;
 using IncidentReport.ReadModels.Dtos.DraftApplications;
 using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Query;
-using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

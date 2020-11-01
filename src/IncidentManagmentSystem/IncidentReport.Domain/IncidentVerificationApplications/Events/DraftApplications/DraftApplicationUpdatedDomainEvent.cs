@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 

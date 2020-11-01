@@ -1,9 +1,7 @@
 using BuildingBlocks.Application;
 using BuildingBlocks.Application.UnitTests;
-using IncidentReport.Application.Common;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.UnitTests.Mocks;
-using NUnit.Framework;
 
 namespace IncidentReport.Application.UnitTests
 {
