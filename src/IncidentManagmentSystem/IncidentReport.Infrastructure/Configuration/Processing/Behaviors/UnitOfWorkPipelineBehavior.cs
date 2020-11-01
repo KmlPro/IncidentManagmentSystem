@@ -1,13 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Infrastructure;
-using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using MediatR;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
 {
     public class UnitOfWorkPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IUseCase
     {
         private readonly IUnitOfWork _unitOfWork;
 

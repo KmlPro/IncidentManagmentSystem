@@ -6,6 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplication
 using IncidentReport.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Serilog;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations
 {
@@ -29,8 +30,6 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 
                     return new IncidentReportWriteDbContext(this._dbContextOptions.Options);
                 })
-                .As<DbContext>()
-                .As<IncidentReportWriteDbContext>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
 

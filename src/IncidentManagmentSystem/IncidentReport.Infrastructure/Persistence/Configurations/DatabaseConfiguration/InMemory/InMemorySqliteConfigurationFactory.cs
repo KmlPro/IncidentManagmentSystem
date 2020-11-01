@@ -1,5 +1,6 @@
 using System;
 using System.Data.Common;
+using EntityFramework.Exceptions.Sqlite;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,13 +20,15 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfi
             return options =>
             {
                 options.UseSqlite(this._dbConnection);
+                options.UseExceptionProcessor();
+                options.ConfigureWarnings(x =>x.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.AmbientTransactionWarning));
             };
         }
 
         private static DbConnection CreateInMemoryDatabaseConnection()
         {
             var connection = new SqliteConnection("Filename=:memory:");
-            connection.Open();
+            connection.OpenAsync().GetAwaiter().GetResult();
             return connection;
         }
     }

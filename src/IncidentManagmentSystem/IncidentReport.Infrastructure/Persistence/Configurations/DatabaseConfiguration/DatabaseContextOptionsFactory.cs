@@ -1,5 +1,6 @@
 using System;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.InMemory;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.RealConfiguration;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration

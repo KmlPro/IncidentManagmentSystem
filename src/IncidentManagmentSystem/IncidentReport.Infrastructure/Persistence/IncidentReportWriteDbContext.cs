@@ -1,9 +1,14 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using EntityFramework.Exceptions.Common;
 using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Infrastructure.Persistence.Configurations.Tables;
 using IncidentReport.Infrastructure.Persistence.NotDomainEntities;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IncidentReport.Infrastructure.Persistence
 {
@@ -11,6 +16,7 @@ namespace IncidentReport.Infrastructure.Persistence
     {
         public IncidentReportWriteDbContext(DbContextOptions options) : base(options)
         {
+
         }
 
         public DbSet<DraftApplication> DraftApplication { get; set; }

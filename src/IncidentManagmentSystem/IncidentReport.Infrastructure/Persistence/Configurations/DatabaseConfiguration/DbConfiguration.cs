@@ -1,3 +1,6 @@
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.InMemory;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.RealConfiguration;
+
 namespace IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration
 {
     public class DbConfiguration

@@ -6,6 +6,7 @@ using IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftApplicati
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.InMemory;
 using Serilog;
 
 namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports

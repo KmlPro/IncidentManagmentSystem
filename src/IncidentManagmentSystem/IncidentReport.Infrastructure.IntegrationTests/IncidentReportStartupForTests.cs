@@ -2,6 +2,7 @@ using System.Reflection;
 using BuildingBlocks.Application;
 using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
+using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.InMemory;
 using Serilog;
 
 namespace IncidentReport.Infrastructure.IntegrationTests

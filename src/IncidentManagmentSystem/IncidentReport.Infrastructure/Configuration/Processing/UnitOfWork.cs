@@ -2,15 +2,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using BuildingBlocks.Infrastructure;
+using IncidentReport.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _context;
+        private readonly IncidentReportWriteDbContext _context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(IncidentReportWriteDbContext context)
         {
             this._context = context;
         }
