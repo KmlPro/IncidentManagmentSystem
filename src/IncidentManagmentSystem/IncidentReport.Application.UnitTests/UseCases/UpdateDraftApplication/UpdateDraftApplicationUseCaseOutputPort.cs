@@ -16,5 +16,10 @@ namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
         {
             this.InvokedOutputMethod = OutputPortInvokedMethod.WriteBusinessRuleError;
         }
+
+        public void ResourceNotFound()
+        {
+            this.InvokedOutputMethod = OutputPortInvokedMethod.ResourceNotFound;
+        }
     }
 }

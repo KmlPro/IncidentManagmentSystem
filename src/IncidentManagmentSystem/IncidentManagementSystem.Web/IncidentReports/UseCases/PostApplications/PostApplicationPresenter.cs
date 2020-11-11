@@ -16,5 +16,10 @@ namespace IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications
         {
             this.ViewModel = new CreatedAtRouteResult(new {id = output.Id}, new { });
         }
+
+        public void ResourceNotFound()
+        {
+            this.ViewModel = new BadRequestResult();
+        }
     }
 }

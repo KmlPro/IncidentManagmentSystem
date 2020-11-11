@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using BuildingBlocks.Application.Abstract;
+using BuildingBlocks.Application.Exceptions;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Files;
@@ -44,9 +44,9 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
             {
                 this._outputPort.WriteBusinessRuleError(ex.ToString());
             }
-            catch (ApplicationLayerException ex)
+            catch (ResourceNotFoundException)
             {
-                this._outputPort.WriteBusinessRuleError(ex.ToString());
+                this._outputPort.ResourceNotFound();
             }
 
             return this._outputPort;

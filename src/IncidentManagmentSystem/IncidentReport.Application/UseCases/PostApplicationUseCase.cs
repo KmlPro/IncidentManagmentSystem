@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application;
-using BuildingBlocks.Application.Abstract;
+using BuildingBlocks.Application.Exceptions;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Application.Factories;
@@ -68,9 +68,9 @@ namespace IncidentReport.Application.UseCases
             {
                 this._outputPort.WriteBusinessRuleError(ex.ToString());
             }
-            catch (ApplicationLayerException ex)
+            catch (ResourceNotFoundException)
             {
-                this._outputPort.WriteBusinessRuleError(ex.ToString());
+                this._outputPort.ResourceNotFound();
             }
 
             return this._outputPort;

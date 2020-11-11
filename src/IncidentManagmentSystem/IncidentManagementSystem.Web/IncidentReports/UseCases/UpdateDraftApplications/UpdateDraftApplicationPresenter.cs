@@ -16,5 +16,10 @@ namespace IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftAppli
         {
             this.ViewModel = new UnprocessableEntityObjectResult(message);
         }
+
+        public void ResourceNotFound()
+        {
+            this.ViewModel = new BadRequestResult();
+        }
     }
 }

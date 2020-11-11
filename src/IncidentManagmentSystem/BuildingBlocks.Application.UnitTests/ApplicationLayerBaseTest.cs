@@ -1,4 +1,4 @@
-using BuildingBlocks.Application.Abstract;
+using BuildingBlocks.Application.Exceptions;
 using NUnit.Framework;
 
 namespace BuildingBlocks.Application.UnitTests

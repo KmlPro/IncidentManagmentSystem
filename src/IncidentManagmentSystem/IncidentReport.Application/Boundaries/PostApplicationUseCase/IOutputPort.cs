@@ -4,7 +4,7 @@ using BuildingBlocks.Application.UseCases;
 namespace IncidentReport.Application.Boundaries.PostApplicationUseCase
 {
     public interface IOutputPort
-        : IOutputPortStandard<PostApplicationOutput>, IOutputPortBusinessError, IUseCaseOutput
+        : IOutputPortStandard<PostApplicationOutput>, IOutputPortBusinessError, IUseCaseOutput, IOutputPortResourceNotFound
     {
     }
 }

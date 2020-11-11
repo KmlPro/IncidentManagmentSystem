@@ -1,6 +1,6 @@
 using System;
 
-namespace BuildingBlocks.Application.Abstract
+namespace BuildingBlocks.Application.Exceptions
 {
     public class ApplicationLayerException : Exception
     {

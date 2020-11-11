@@ -1,4 +1,4 @@
-using BuildingBlocks.Application.Abstract;
+using BuildingBlocks.Application.Exceptions;
 
 namespace IncidentReport.Application.Files.Exceptions
 {

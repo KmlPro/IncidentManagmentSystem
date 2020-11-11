@@ -14,13 +14,13 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Up
 {
     public class TestFixture
     {
-        public MultipartFormDataContent CreateRequestContent(Guid draftApplicationId)
+        public MultipartFormDataContent CreateRequestContent(Guid draftApplicationId, Guid suspicousEmployees)
         {
             var title = FakeData.AlphaNumeric(10);
             var description = FakeData.AlphaNumeric(99);
             var incidentType = IncidentType.AdverseEffectForTheCompany;
 
-            var suspiciousEmployees = new List<Guid> { Guid.NewGuid() };
+            var suspiciousEmployees = new List<Guid> { suspicousEmployees };
 
             var formData = new MultipartFormDataContent
             {
