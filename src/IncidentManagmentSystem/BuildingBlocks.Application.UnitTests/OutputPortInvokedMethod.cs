@@ -4,6 +4,6 @@ namespace BuildingBlocks.Application.UnitTests
     {
         Standard,
         WriteBusinessRuleError,
-        ResourceNotFound,
+        WriteInvalidInput,
     }
 }

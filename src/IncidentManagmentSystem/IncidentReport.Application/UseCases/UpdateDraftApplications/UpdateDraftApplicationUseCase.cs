@@ -1,7 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using BuildingBlocks.Application.Exceptions;
+using BuildingBlocks.Application.ValidationErrors;
 using BuildingBlocks.Domain.Abstract;
+using FluentValidation;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
@@ -44,11 +45,10 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
             {
                 this._outputPort.WriteBusinessRuleError(ex.ToString());
             }
-            catch (ResourceNotFoundException)
+            catch (ValidationException ex)
             {
-                this._outputPort.ResourceNotFound();
+                this._outputPort.WriteInvalidInput(ex.MapToInvaliInputErrors());
             }
-
             return this._outputPort;
         }
 

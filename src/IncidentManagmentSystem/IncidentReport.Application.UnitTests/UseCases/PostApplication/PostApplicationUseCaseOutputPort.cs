@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using BuildingBlocks.Application.UnitTests;
+using BuildingBlocks.Application.ValidationErrors;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 
 namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
@@ -17,9 +19,9 @@ namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
             this.InvokedOutputMethod = OutputPortInvokedMethod.WriteBusinessRuleError;
         }
 
-        public void ResourceNotFound()
+        public void WriteInvalidInput(List<InvalidUseCaseInputValidationError> errors)
         {
-            this.InvokedOutputMethod = OutputPortInvokedMethod.ResourceNotFound;
+            this.InvokedOutputMethod = OutputPortInvokedMethod.WriteInvalidInput;
         }
     }
 }

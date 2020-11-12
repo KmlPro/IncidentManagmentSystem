@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using IncidentReport.Application.Files.Exceptions;
 
 namespace IncidentReport.Application.Files
 {
+    //kbytner 12.11.2020 - validation should be moved to FluentValidatior
     public class FileData
     {
         private readonly IEnumerable<string> _allowedDocumentExtensions = new List<string> {"doc", "docx", "odt"};
@@ -31,18 +30,18 @@ namespace IncidentReport.Application.Files
         {
             var extension = Path.GetExtension(fileName).Replace(".", "", StringComparison.Ordinal);
 
-            if (string.IsNullOrEmpty(extension))
-            {
-                throw new FileExtensionNotRecognizedException();
-            }
-
-            if (!(this._allowedImagesExtensions.Any(x => x == extension) ||
-                  this._allowedExcelExtensions.Any(x => x == extension) ||
-                  this._allowedDocumentExtensions.Any(x => x == extension) ||
-                  this._allowedOtherExtensions.Any(x => x == extension)))
-            {
-                throw new UnallowedFileExtensionException();
-            }
+            // if (string.IsNullOrEmpty(extension))
+            // {
+            //     throw new FileExtensionNotRecognizedException();
+            // }
+            //
+            // if (!(this._allowedImagesExtensions.Any(x => x == extension) ||
+            //       this._allowedExcelExtensions.Any(x => x == extension) ||
+            //       this._allowedDocumentExtensions.Any(x => x == extension) ||
+            //       this._allowedOtherExtensions.Any(x => x == extension)))
+            // {
+            //     throw new UnallowedFileExtensionException();
+            // }
         }
     }
 }

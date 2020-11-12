@@ -4,7 +4,7 @@ using BuildingBlocks.Application.UseCases;
 namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
 {
     public interface IOutputPort
-        : IOutputPortStandard<UpdateDraftApplicationOutput>, IOutputPortBusinessError, IUseCaseOutput, IOutputPortResourceNotFound
+        : IOutputPortStandard<UpdateDraftApplicationOutput>, IOutputPortBusinessError, IUseCaseOutput, IOutputPortInvalidInput
     {
     }
 }

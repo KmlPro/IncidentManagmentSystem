@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using BuildingBlocks.Application.ValidationErrors;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +19,8 @@ namespace IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications
             this.ViewModel = new CreatedAtRouteResult(new {id = output.Id}, new { });
         }
 
-        public void ResourceNotFound()
+        //kbytner 12.11.2020 - to do choose http code and map validation errors
+        public void WriteInvalidInput(List<InvalidUseCaseInputValidationError> errors)
         {
             this.ViewModel = new BadRequestResult();
         }
