@@ -15,7 +15,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplication
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UseCases
+namespace IncidentReport.Application.UseCases.PostApplications
 {
     public class PostApplicationUseCase : IUseCase
     {

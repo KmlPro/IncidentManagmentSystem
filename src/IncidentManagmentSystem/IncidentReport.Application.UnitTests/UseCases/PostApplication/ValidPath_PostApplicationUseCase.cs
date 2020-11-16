@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.UnitTests.Mocks;
 using IncidentReport.Application.UseCases;
+using IncidentReport.Application.UseCases.PostApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 

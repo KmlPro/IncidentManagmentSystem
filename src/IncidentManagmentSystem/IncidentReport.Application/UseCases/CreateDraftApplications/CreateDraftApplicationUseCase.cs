@@ -4,39 +4,44 @@ using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application;
 using BuildingBlocks.Application.ValidationErrors;
-using FluentValidation;
 using BuildingBlocks.Domain.Abstract;
+using FluentValidation;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 
-namespace IncidentReport.Application.UseCases
+namespace IncidentReport.Application.UseCases.CreateDraftApplications
 {
     public class CreateDraftApplicationUseCase : IUseCase
     {
         private readonly IFileStorageService _fileStorageService;
         private readonly IOutputPort _outputPort;
         private readonly IDraftApplicationRepository _draftApplicationRepository;
+        private readonly CreateDraftApplicationUseCaseValidator _validator;
         private readonly AttachmentsFactory _attachmentsFactory;
         private readonly DraftApplicationFactory _draftApplicationFactory;
 
         public CreateDraftApplicationUseCase(ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
             IDraftApplicationRepository draftApplicationRepository,
-            IOutputPort outputPort)
+            IOutputPort outputPort,
+            CreateDraftApplicationUseCaseValidator validator)
         {
             this._draftApplicationRepository = draftApplicationRepository;
             this._fileStorageService = fileStorageService;
             this._outputPort = outputPort;
             this._attachmentsFactory = new AttachmentsFactory();
             this._draftApplicationFactory = new DraftApplicationFactory(userContext);
+            this._validator = validator;
         }
 
         public async Task<IOutputPort> Handle(CreateDraftApplicationInput input, CancellationToken cancellationToken)
         {
             try
             {
+                await this._validator.ValidateAndThrowAsync(input, cancellationToken);
+
                 var draftApplication = this._draftApplicationFactory.Create(input);
 
                 if (this.IfAddedAttachmentsExists(input))
