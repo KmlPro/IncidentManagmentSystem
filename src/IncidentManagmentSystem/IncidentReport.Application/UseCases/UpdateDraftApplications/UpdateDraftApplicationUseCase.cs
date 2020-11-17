@@ -16,21 +16,25 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
         private readonly IOutputPort _outputPort;
         private readonly UpdateSuspiciousEmployees _updateSuspiciousEmployees;
         private readonly UpdateAttachments _updateAttachments;
+        private readonly UpdateDraftApplicationUseCaseValidator _validator;
 
         public UpdateDraftApplicationUseCase(IDraftApplicationRepository draftApplicationRepository,
             IFileStorageService fileStorageService,
-            IOutputPort outputPort)
+            IOutputPort outputPort,
+            UpdateDraftApplicationUseCaseValidator validator)
         {
             this._draftApplicationRepository = draftApplicationRepository;
             this._outputPort = outputPort;
             this._updateAttachments = new UpdateAttachments(fileStorageService);
             this._updateSuspiciousEmployees = new UpdateSuspiciousEmployees();
+            this._validator = validator;
         }
 
         public async Task<IOutputPort> Handle(UpdateDraftApplicationInput input, CancellationToken cancellationToken)
         {
             try
             {
+                await this._validator.ValidateAndThrowAsync(input, cancellationToken);
                 var draftApplication =
                     await this._draftApplicationRepository.GetById(new DraftApplicationId(input.DraftApplicationId), cancellationToken);
 

@@ -25,12 +25,14 @@ namespace IncidentReport.Application.UseCases.PostApplications
         private readonly IOutputPort _outputPort;
         private readonly AttachmentsFactory _attachmentsFactory;
         private readonly IncidentApplicationFactory _incidentApplicationFactory;
+        private readonly PostApplicationUseCaseValidator _validator;
 
         public PostApplicationUseCase(IIncidentApplicationRepository incidentApplicationRepository,
             IDraftApplicationRepository draftApplicationRepository,
             ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
-            IOutputPort outputPort)
+            IOutputPort outputPort,
+            PostApplicationUseCaseValidator validator)
         {
             this._incidentApplicationRepository = incidentApplicationRepository;
             this._draftApplicationRepository = draftApplicationRepository;
@@ -38,6 +40,7 @@ namespace IncidentReport.Application.UseCases.PostApplications
             this._outputPort = outputPort;
             this._attachmentsFactory = new AttachmentsFactory();
             this._incidentApplicationFactory = new IncidentApplicationFactory(userContext);
+            this._validator = validator;
         }
 
         //kbytner 06.08.2020 - add rollback uploaded attachments
@@ -45,6 +48,7 @@ namespace IncidentReport.Application.UseCases.PostApplications
         {
             try
             {
+                await this._validator.ValidateAndThrowAsync(input, cancellationToken);
                 var attachments = new List<Attachment>();
 
                 if (this.IfAddedAttachmentsExists(input))

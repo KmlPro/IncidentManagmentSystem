@@ -1,13 +1,13 @@
 using FluentValidation;
-using IncidentReport.Application.Boundaries.CreateDraftApplications;
+using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Common.Validators;
 using IncidentReport.Domain.Employees.ValueObjects;
 
-namespace IncidentReport.Application.UseCases.CreateDraftApplications
+namespace IncidentReport.Application.UseCases.UpdateDraftApplications
 {
-    public class CreateDraftApplicationUseCaseValidator : AbstractValidator<CreateDraftApplicationInput>
+    public class UpdateDraftApplicationUseCaseValidator : AbstractValidator<UpdateDraftApplicationInput>
     {
-        public CreateDraftApplicationUseCaseValidator(IValidator<EmployeeId> employeeValidator,
+        public UpdateDraftApplicationUseCaseValidator(IValidator<EmployeeId> employeeIValidator,
             IValidator<ContentToValidate> contentValidator, IValidator<TitleToValidate> titleValidator,
             IValidator<IncidentTypeToValidate> incidentTypeValidator)
         {
@@ -17,7 +17,7 @@ namespace IncidentReport.Application.UseCases.CreateDraftApplications
             this.RuleFor(input => input.IncidentType).Transform(x => new IncidentTypeToValidate(x))
                 .SetValidator(incidentTypeValidator);
             this.RuleForEach(input => input.SuspiciousEmployees).Transform(x => new EmployeeId(x))
-                .SetValidator(employeeValidator);
+                .SetValidator(employeeIValidator);
         }
     }
 }
