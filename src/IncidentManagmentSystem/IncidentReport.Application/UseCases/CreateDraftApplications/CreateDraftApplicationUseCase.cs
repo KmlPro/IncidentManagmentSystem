@@ -18,7 +18,7 @@ namespace IncidentReport.Application.UseCases.CreateDraftApplications
         private readonly IFileStorageService _fileStorageService;
         private readonly IOutputPort _outputPort;
         private readonly IDraftApplicationRepository _draftApplicationRepository;
-        private readonly CreateDraftApplicationUseCaseValidator _validator;
+        private readonly IValidator<CreateDraftApplicationInput> _validator;
         private readonly AttachmentsFactory _attachmentsFactory;
         private readonly DraftApplicationFactory _draftApplicationFactory;
 
@@ -26,7 +26,7 @@ namespace IncidentReport.Application.UseCases.CreateDraftApplications
             IFileStorageService fileStorageService,
             IDraftApplicationRepository draftApplicationRepository,
             IOutputPort outputPort,
-            CreateDraftApplicationUseCaseValidator validator)
+            IValidator<CreateDraftApplicationInput> validator)
         {
             this._draftApplicationRepository = draftApplicationRepository;
             this._fileStorageService = fileStorageService;

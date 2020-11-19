@@ -25,14 +25,14 @@ namespace IncidentReport.Application.UseCases.PostApplications
         private readonly IOutputPort _outputPort;
         private readonly AttachmentsFactory _attachmentsFactory;
         private readonly IncidentApplicationFactory _incidentApplicationFactory;
-        private readonly PostApplicationUseCaseValidator _validator;
+        private readonly IValidator<PostApplicationInput> _validator;
 
         public PostApplicationUseCase(IIncidentApplicationRepository incidentApplicationRepository,
             IDraftApplicationRepository draftApplicationRepository,
             ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort,
-            PostApplicationUseCaseValidator validator)
+            IValidator<PostApplicationInput> validator)
         {
             this._incidentApplicationRepository = incidentApplicationRepository;
             this._draftApplicationRepository = draftApplicationRepository;

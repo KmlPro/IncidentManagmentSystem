@@ -16,12 +16,12 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
         private readonly IOutputPort _outputPort;
         private readonly UpdateSuspiciousEmployees _updateSuspiciousEmployees;
         private readonly UpdateAttachments _updateAttachments;
-        private readonly UpdateDraftApplicationUseCaseValidator _validator;
+        private readonly IValidator<UpdateDraftApplicationInput> _validator;
 
         public UpdateDraftApplicationUseCase(IDraftApplicationRepository draftApplicationRepository,
             IFileStorageService fileStorageService,
             IOutputPort outputPort,
-            UpdateDraftApplicationUseCaseValidator validator)
+            IValidator<UpdateDraftApplicationInput> validator)
         {
             this._draftApplicationRepository = draftApplicationRepository;
             this._outputPort = outputPort;

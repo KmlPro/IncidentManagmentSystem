@@ -3,6 +3,7 @@ using Autofac;
 using IncidentReport.Infrastructure.Configuration.Processing.Behaviors;
 using MediatR;
 using Module = Autofac.Module;
+using FluentValidation;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing
 {
@@ -22,7 +23,7 @@ namespace IncidentReport.Infrastructure.Configuration.Processing
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            var mediatrOpenTypes = new[] {typeof(IRequestHandler<,>)};
+            var mediatrOpenTypes = new[] {typeof(IRequestHandler<,>), typeof(IValidator<>)};
 
             foreach (var mediatrOpenType in mediatrOpenTypes)
             {

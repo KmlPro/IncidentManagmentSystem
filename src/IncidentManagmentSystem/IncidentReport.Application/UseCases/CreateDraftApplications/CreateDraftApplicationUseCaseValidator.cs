@@ -19,5 +19,10 @@ namespace IncidentReport.Application.UseCases.CreateDraftApplications
             this.RuleForEach(input => input.SuspiciousEmployees).Transform(x => new EmployeeId(x))
                 .SetValidator(employeeValidator);
         }
+
+        public CreateDraftApplicationUseCaseValidator()
+        {
+
+        }
     }
 }
