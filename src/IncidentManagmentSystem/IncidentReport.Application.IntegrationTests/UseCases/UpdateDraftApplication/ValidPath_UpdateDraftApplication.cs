@@ -7,7 +7,6 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
     public class ValidPath_UpdateDraftApplication : BaseTest
     {
         private TestFixture _testFixture;
-        private MockDraftApplicationRepository _draftApplicationRepository;
 
         public ValidPath_UpdateDraftApplication()
         {
@@ -16,8 +15,6 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
         [SetUp]
         public void Init()
         {
-            this._draftApplicationRepository = new MockDraftApplicationRepository();
-            this._testFixture = new TestFixture(this._draftApplicationRepository);
         }
 
         // [Test]

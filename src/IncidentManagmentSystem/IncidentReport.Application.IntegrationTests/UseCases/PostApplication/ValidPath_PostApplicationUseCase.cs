@@ -9,7 +9,6 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
     public class ValidPath_PostApplicationUseCase : BaseTest
     {
         private TestFixture _testFixture;
-        private MockDraftApplicationRepository _draftApplicationRepository;
         private MockIncidentApplicationRepository _incidentApplicationRepository;
 
         public ValidPath_PostApplicationUseCase()
@@ -20,7 +19,6 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
         [SetUp]
         public void Init()
         {
-            this._draftApplicationRepository = new MockDraftApplicationRepository();
             this._incidentApplicationRepository = new MockIncidentApplicationRepository();
         }
 

@@ -50,7 +50,7 @@ namespace IncidentManagementSystem.Web.Configuration.Modules.IncidentReports
         public void RegisterModuleContracts(ContainerBuilder builder)
         {
             this.IncidentReportStartup.RegisterModuleContract(builder);
-            this.IncidentReportStartup.RegisterReadContextContract(builder, DatabaseConfiguration);
+            this.IncidentReportStartup.RegisterReadContextContract(builder, this.DatabaseConfiguration);
         }
     }
 }
