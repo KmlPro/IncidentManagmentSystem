@@ -1,4 +1,4 @@
-namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication
 {
     //kbytner 12.11.2020 - change tests after impl FluentValidators
    // [Category(CategoryTitle.Title + " CreateDraftApplicationUseCase")]

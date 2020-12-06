@@ -6,7 +6,7 @@ using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.Factories
+namespace IncidentReport.Application.IntegrationTests.Factories
 {
     public static class DraftApplicationFactory
     {

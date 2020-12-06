@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
-using IncidentReport.Application.UnitTests.Factories;
+using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
 {
     public class TestFixture
     {

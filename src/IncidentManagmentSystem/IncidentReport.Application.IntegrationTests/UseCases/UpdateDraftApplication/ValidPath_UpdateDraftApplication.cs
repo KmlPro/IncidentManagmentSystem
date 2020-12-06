@@ -1,16 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using BuildingBlocks.Application.UnitTests;
-using IncidentReport.Application.Files;
-using IncidentReport.Application.UnitTests.Factories;
-using IncidentReport.Application.UnitTests.Mocks;
-using IncidentReport.Application.UseCases.UpdateDraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications;
+using IncidentReport.Application.IntegrationTests.Mocks;
 using NUnit.Framework;
 
-namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplication
 {
     [Category(CategoryTitle.Title + " UpdateDraftApplicationUseCase")]
     public class ValidPath_UpdateDraftApplication : BaseTest

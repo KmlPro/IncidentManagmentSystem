@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Files;
-using IncidentReport.Application.UnitTests.Factories;
+using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplication
 {
     public class TestFixture
     {

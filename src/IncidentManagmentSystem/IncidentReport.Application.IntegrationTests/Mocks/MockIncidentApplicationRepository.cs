@@ -6,7 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplication
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.Mocks
+namespace IncidentReport.Application.IntegrationTests.Mocks
 {
     public class MockIncidentApplicationRepository : IIncidentApplicationRepository
     {

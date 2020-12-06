@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
     <PackageReference Include="MockQueryable.Moq" Version="3.1.3" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="nunit" Version="3.12.0" />
@@ -21,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks.Application.UnitTests\BuildingBlocks.Application.UnitTests.csproj" />
     <ProjectReference Include="..\FakeDataGenerator\FakeDataGenerator.csproj" />
-    <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
+    <ProjectReference Include="..\IncidentReport.Infrastructure\IncidentReport.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

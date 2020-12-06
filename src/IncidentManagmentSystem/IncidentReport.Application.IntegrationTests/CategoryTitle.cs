@@ -1,4 +1,4 @@
-namespace IncidentReport.Application.UnitTests
+namespace IncidentReport.Application.IntegrationTests
 {
     internal class CategoryTitle
     {

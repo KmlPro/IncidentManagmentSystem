@@ -3,7 +3,7 @@ using BuildingBlocks.Application.UnitTests;
 using BuildingBlocks.Application.ValidationErrors;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 
-namespace IncidentReport.Application.UnitTests.UseCases.UpdateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplication
 {
     public class UpdateDraftApplicationUseCaseOutputPort : IOutputPort
     {

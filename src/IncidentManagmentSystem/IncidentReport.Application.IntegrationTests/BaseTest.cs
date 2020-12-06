@@ -1,9 +1,9 @@
 using BuildingBlocks.Application;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Files;
-using IncidentReport.Application.UnitTests.Mocks;
+using IncidentReport.Application.IntegrationTests.Mocks;
 
-namespace IncidentReport.Application.UnitTests
+namespace IncidentReport.Application.IntegrationTests
 {
     public class BaseTest : ApplicationLayerBaseTest
     {

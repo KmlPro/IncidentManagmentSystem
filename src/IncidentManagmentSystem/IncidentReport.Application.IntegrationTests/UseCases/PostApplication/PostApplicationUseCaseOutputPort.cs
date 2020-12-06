@@ -1,20 +1,17 @@
-using System;
 using System.Collections.Generic;
 using BuildingBlocks.Application.UnitTests;
 using BuildingBlocks.Application.ValidationErrors;
-using IncidentReport.Application.Boundaries.CreateDraftApplications;
+using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 
-namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
 {
-    public class CreateDraftApplicationUseCaseOutputPort : IOutputPort
+    public class PostApplicationUseCaseOutputPort : IOutputPort
     {
         public OutputPortInvokedMethod InvokedOutputMethod { get; set; }
-        public Guid Id { get; set; }
 
-        public void Standard(CreateDraftApplicationOutput output)
+        public void Standard(PostApplicationOutput output)
         {
             this.InvokedOutputMethod = OutputPortInvokedMethod.Standard;
-            this.Id = output.Id;
         }
 
         public void WriteBusinessRuleError(string message)

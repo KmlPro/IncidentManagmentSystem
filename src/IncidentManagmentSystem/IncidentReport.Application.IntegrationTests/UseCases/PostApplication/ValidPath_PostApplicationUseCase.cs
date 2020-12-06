@@ -1,14 +1,9 @@
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using BuildingBlocks.Application.UnitTests;
-using IncidentReport.Application.UnitTests.Mocks;
-using IncidentReport.Application.UseCases;
-using IncidentReport.Application.UseCases.PostApplications;
+using IncidentReport.Application.IntegrationTests.Mocks;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using NUnit.Framework;
 
-namespace IncidentReport.Application.UnitTests.UseCases.PostApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
 {
     [Category(CategoryTitle.Title + " PostApplicationUseCase")]
     public class ValidPath_PostApplicationUseCase : BaseTest

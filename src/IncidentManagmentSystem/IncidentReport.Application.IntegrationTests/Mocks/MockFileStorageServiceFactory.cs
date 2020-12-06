@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using IncidentReport.Application.Files;
 using Moq;
 
-namespace IncidentReport.Application.UnitTests.Mocks
+namespace IncidentReport.Application.IntegrationTests.Mocks
 {
     internal class MockFileStorageServiceFactory
     {

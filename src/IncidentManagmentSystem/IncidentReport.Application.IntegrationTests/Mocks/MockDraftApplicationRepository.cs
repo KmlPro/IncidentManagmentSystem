@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.Mocks
+namespace IncidentReport.Application.IntegrationTests.Mocks
 {
     public class MockDraftApplicationRepository : IDraftApplicationRepository
     {

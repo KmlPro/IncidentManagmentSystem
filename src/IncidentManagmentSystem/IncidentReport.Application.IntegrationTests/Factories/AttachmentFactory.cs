@@ -2,7 +2,7 @@ using System;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.Factories
+namespace IncidentReport.Application.IntegrationTests.Factories
 {
     public static class AttachmentFactory
     {

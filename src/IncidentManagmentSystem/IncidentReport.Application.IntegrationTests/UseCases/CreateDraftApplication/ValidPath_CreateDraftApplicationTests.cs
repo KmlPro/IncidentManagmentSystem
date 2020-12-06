@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using BuildingBlocks.Application.UnitTests;
-using IncidentReport.Application.UnitTests.Mocks;
-using IncidentReport.Application.UseCases;
-using IncidentReport.Application.UseCases.CreateDraftApplications;
+using IncidentReport.Application.IntegrationTests.Mocks;
 using NUnit.Framework;
 
-namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication
 {
     [Category(CategoryTitle.Title + " CreateDraftApplicationUseCase")]
     public class ValidPath_CreateDraftApplicationTests : BaseTest

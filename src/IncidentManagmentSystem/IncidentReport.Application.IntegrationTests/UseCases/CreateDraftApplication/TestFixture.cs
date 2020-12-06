@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
-using IncidentReport.Application.UnitTests.Factories;
+using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.UnitTests.UseCases.CreateDraftApplication
+namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication
 {
     public class TestFixture
     {

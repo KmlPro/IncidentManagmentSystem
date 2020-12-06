@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Domain.UnitT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CB8A59E9-6C82-4422-9D9F-4CDE005A0F72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Application.UnitTests", "IncidentReport.Application.UnitTests\IncidentReport.Application.UnitTests.csproj", "{3891CBB9-5D96-4706-9405-37BD76EDB6BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Application.IntegrationTests", "IncidentReport.Application.IntegrationTests\IncidentReport.Application.IntegrationTests.csproj", "{3891CBB9-5D96-4706-9405-37BD76EDB6BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Infrastructure", "IncidentReport.Infrastructure\IncidentReport.Infrastructure.csproj", "{B35BA9A8-FDAC-4C1C-8618-30E83FCB7226}"
 EndProject

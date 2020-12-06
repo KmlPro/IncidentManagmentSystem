@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using IncidentReport.Application.Files;
 
-namespace IncidentReport.Application.UnitTests.Factories
+namespace IncidentReport.Application.IntegrationTests.Factories
 {
     public static class FileDataFactory
     {
