@@ -1,7 +1,7 @@
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Infrastructure.ForTests;
 
-namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication.Fixtures
+namespace IncidentReport.Application.IntegrationTests.TestFixtures.DraftApplicationFixtures
 {
     public class DraftApplicationTestFixture
     {

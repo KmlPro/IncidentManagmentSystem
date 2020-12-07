@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BuildingBlocks.Application.UnitTests;
 using BuildingBlocks.Application.ValidationErrors;
@@ -8,10 +9,12 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
     public class PostApplicationUseCaseOutputPort : IOutputPort
     {
         public OutputPortInvokedMethod InvokedOutputMethod { get; set; }
+        public Guid Id { get; private set; }
 
         public void Standard(PostApplicationOutput output)
         {
             this.InvokedOutputMethod = OutputPortInvokedMethod.Standard;
+            this.Id = output.Id;
         }
 
         public void WriteBusinessRuleError(string message)

@@ -1,5 +1,4 @@
 using Autofac;
-using IncidentReport.Application.Common;
 using IncidentReport.Application.IntegrationTests.Mocks;
 using IncidentReport.Infrastructure.Contract;
 

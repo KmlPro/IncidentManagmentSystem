@@ -8,8 +8,9 @@ using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 
-namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication.Fixtures
+namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication
 {
     public class TestFixture
     {
@@ -37,10 +38,17 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplic
                 attachments);
         }
 
-        public async Task<bool> IsDraftApplicationAdded(Guid draftApplicationId)
+        public async Task<bool> IsDraftApplicationAdded(Guid id)
         {
-            var draftApplication = await this._repository.GetById(new DraftApplicationId(draftApplicationId), new CancellationToken());
-            return true;
+            try
+            {
+                var aggregate = await this._repository.GetById(new DraftApplicationId(id), new CancellationToken());
+                return true;
+            }
+            catch (AggregateNotFoundInDbException)
+            {
+                return false;
+            }
         }
     }
 }

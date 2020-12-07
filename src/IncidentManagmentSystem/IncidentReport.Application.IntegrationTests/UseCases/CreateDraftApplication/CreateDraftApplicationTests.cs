@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
-using IncidentReport.Application.IntegrationTests.EmployeesFixtures;
-using IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication.Fixtures;
+using IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixtures;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.Contract;
 using NUnit.Framework;
 

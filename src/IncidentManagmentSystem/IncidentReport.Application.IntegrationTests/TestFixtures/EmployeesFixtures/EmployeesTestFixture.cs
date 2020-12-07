@@ -1,7 +1,7 @@
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
-namespace IncidentReport.Application.IntegrationTests.EmployeesFixtures
+namespace IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixtures
 {
     public static class EmployeesTestFixture
     {

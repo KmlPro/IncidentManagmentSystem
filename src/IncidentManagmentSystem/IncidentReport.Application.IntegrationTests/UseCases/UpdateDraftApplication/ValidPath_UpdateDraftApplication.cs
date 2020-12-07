@@ -1,4 +1,3 @@
-using IncidentReport.Application.IntegrationTests.Mocks;
 using NUnit.Framework;
 
 namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplication

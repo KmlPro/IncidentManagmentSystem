@@ -6,7 +6,7 @@ using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication.Fixtures
+namespace IncidentReport.Application.IntegrationTests.TestFixtures.DraftApplicationFixtures
 {
     public class DraftApplicationFactory
     {

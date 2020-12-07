@@ -21,25 +21,25 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
             this._draftApplicationRepository = draftApplicationRepository;
         }
 
-        public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<Guid> suspiciousEmployees, List<Guid> initialSuspiciousEmployees)
-        {
-            var newDraftApplication = DraftApplicationFactory.Create(initialSuspiciousEmployees);
-            await this._draftApplicationRepository.Create(newDraftApplication, new CancellationToken());
-
-            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, null, null);
-            return useCase;
-        }
-
-        public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<FileData> addedAttachments, List<Guid> deleteAttachments, List<Attachment> initialAttachments)
-        {
-            var suspiciousEmployees = new List<Guid>() { Guid.NewGuid() };
-            var newDraftApplication = DraftApplicationFactory.Create(suspiciousEmployees);
-            newDraftApplication.AddAttachments(initialAttachments);
-            await this._draftApplicationRepository.Create(newDraftApplication, new CancellationToken());
-
-            var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, addedAttachments, deleteAttachments);
-            return useCase;
-        }
+        // public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<Guid> suspiciousEmployees, List<Guid> initialSuspiciousEmployees)
+        // {
+        //     var newDraftApplication = DraftApplicationFactory.Create(initialSuspiciousEmployees);
+        //     await this._draftApplicationRepository.Create(newDraftApplication, new CancellationToken());
+        //
+        //     var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, null, null);
+        //     return useCase;
+        // }
+        //
+        // public async Task<UpdateDraftApplicationInput> PrepareUseCaseWithTestData(List<FileData> addedAttachments, List<Guid> deleteAttachments, List<Attachment> initialAttachments)
+        // {
+        //     var suspiciousEmployees = new List<Guid>() { Guid.NewGuid() };
+        //     var newDraftApplication = DraftApplicationFactory.Create(suspiciousEmployees);
+        //     newDraftApplication.AddAttachments(initialAttachments);
+        //     await this._draftApplicationRepository.Create(newDraftApplication, new CancellationToken());
+        //
+        //     var useCase = this.CreateUseCaseWithRequiredFields(newDraftApplication.Id.Value, suspiciousEmployees, IncidentType.FinancialViolations.Value, addedAttachments, deleteAttachments);
+        //     return useCase;
+        // }
 
         public async Task<DraftApplication> GetDraftFromContext(Guid id)
         {
