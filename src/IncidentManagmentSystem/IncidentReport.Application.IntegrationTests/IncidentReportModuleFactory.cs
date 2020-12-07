@@ -9,7 +9,7 @@ namespace IncidentReport.Application.IntegrationTests
     {
         public static IIncidentReportModule SetupAndBuild()
         {
-            var currentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
+            var currentUserContext = new TestCurrentUserContext();
             var rootContainerBuilder = new ContainerBuilder();
             var incidentReportStartup =
                 new IncidentReportStartupForTests();

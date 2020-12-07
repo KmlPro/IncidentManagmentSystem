@@ -9,7 +9,7 @@ namespace IncidentReport.Application.IntegrationTests
     {
         public BaseTest()
         {
-            this.CurrentUserContext = new MockCurrentUserContextFactory().CreateUserContext();
+            this.CurrentUserContext = new TestCurrentUserContext();
             this.IFileStorageService = new MockFileStorageServiceFactory().CreateFileStorageService();
         }
 
