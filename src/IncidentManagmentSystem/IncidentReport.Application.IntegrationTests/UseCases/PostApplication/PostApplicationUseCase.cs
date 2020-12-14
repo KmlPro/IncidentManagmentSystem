@@ -27,7 +27,7 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
             (this._applicant,this._suspiciousEmployee) = EmployeesTestFixture.PrepareApplicantAndRandomEmployeeInDb();
         }
 
-        //kbytner 08.12.2020 - need to repair No backing field could be found for property 'IncidentApplicationId' of entity type 
+        //kbytner 08.12.2020 - need to repair No backing field could be found for property 'IncidentApplicationId' of entity type
         [Test]
         public async Task WithoutDraftApplication_PostedSuccessfully()
         {
