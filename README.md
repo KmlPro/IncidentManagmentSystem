@@ -35,11 +35,11 @@ System zostanie podzielony na kilka modułów:
 
 - <b>Wstępna weryfikacja wniosku</b> – wstępna analiza wniosku przez Młodszego Weryfikatora oraz przekazanie wniosku do Weryfikatorów
 
-![](../master/docs/weryfikacja incydentu.PNG)
+![](../master/docs/wstepna_weryfikacja.PNG)
 
 - <b>Weryfikacja incydentu</b> – obsługa wniosku przez Weryfikatorów
 
-![](../master/docs/weryfikacja incydentu.PNG) 
+![](../master/docs/weryfikacja_incydentu.PNG) 
 
 - <b>Obsługa wyników weryfikacji</b> – akceptacja wyników przez Kierownika oraz przekazanie informacji do działu Kadr
 
