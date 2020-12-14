@@ -1,9 +1,9 @@
 # Modularny monolit na przykładzie Systemu Zarządzania Bezpieczeństwem
 
-System ma za zadanie zautomatyzować istniejący proces zgłaszania i obsługi incydentów bezpieczeństwa w organizacji. 
+Przykład od rozpoznania problemu w organizacji do propozycji rozwiązania systemowego. 
  
 ## Istniejący problem w organizacji:
-![image](https://user-images.githubusercontent.com/15632464/102141472-277a2c00-3e61-11eb-89a8-156ac2c7aa67.png)
+![](../master/docs/istniejacy_problem.PNG)
 
 Obecnie wszystkie zgłoszenia sytuacji nie pożądanych w organizacji zgłaszane są za pomocą wiadomości email. Wszystkie takie zgłoszenia są później wysyłane do kierownika działu bezpieczeństwa, który zapisuje zgłoszenia we własnym arkuszu Excel. Po zapisaniu zgłoszenia decyduje o tym, czy jest to potencjalne zagrożenie, którym zespół bezpieczeństwa ma się zająć czy nie. 
 Po przekazaniu wniosku do zespołu bezpieczeństwa, weryfikatorzy starają się ustalić, czy incydent miał miejsce. W tym celu kontaktują się za pomocą maili z osobami, które mogłyby potwierdzić zajście takiego incydentu. Czasami muszą sprawdzić aktywność osoby podejrzanej w systemach organizacji. 
@@ -31,20 +31,20 @@ System zostanie podzielony na kilka modułów:
 
 - <b>Zgłoszenie incydentu</b> – zgłaszanie wniosków do działu bezpieczeństwa, komunikacja z działem bezpieczeństwa w celu doprecyzowania wniosku
 
-![image](https://user-images.githubusercontent.com/15632464/102141613-61e3c900-3e61-11eb-81ac-1a29ed19b8ee.png)
+![](../master/docs/zgloszenie_incydentu.PNG)
 
 - <b>Wstępna weryfikacja wniosku</b> – wstępna analiza wniosku przez Młodszego Weryfikatora oraz przekazanie wniosku do Weryfikatorów
 
-![image](https://user-images.githubusercontent.com/15632464/102141636-6f00b800-3e61-11eb-9f45-552009e26ec5.png)
+![](../master/docs/wstepna_weryfikacja.PNG)
 
 - <b>Weryfikacja incydentu</b> – obsługa wniosku przez Weryfikatorów
 
-![image](https://user-images.githubusercontent.com/15632464/102141656-79bb4d00-3e61-11eb-8d73-a1ffc82f6718.png)
+![](../master/docs/weryfikacja_incydentu.PNG) 
 
 - <b>Obsługa wyników weryfikacji</b> – akceptacja wyników przez Kierownika oraz przekazanie informacji do działu Kadr
 
-![image](https://user-images.githubusercontent.com/15632464/102141679-85a70f00-3e61-11eb-854c-b71590a8d888.png)
+![](../master/docs/obsluga_weryfikacji.PNG) 
 
 - <b>Analiza logów aktywności użytkownika</b> – weryfikacja aktywności użytkownika w systemach organizacji
 
-![image](https://user-images.githubusercontent.com/15632464/102141712-948dc180-3e61-11eb-9dcf-89685d9eac95.png)
+![](../master/docs/analiza_logow.PNG)  
