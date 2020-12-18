@@ -1,6 +1,7 @@
 using System;
 using Autofac;
 using BuildingBlocks.Infrastructure;
+using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Infrastructure.Persistence.Repositories;
@@ -35,6 +36,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
 
             builder.RegisterType<IncidentApplicationRepository>().As<IIncidentApplicationRepository>();
             builder.RegisterType<DraftApplicationRepository>().As<IDraftApplicationRepository>();
+            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
         }
     }
 }

@@ -22,10 +22,5 @@ namespace IncidentReport.Application.UseCases.CreateDraftApplications
             this.RuleForEach(input => input.Attachments)
                 .SetValidator(fileDataValidator);
         }
-
-        public CreateDraftApplicationUseCaseValidator()
-        {
-
-        }
     }
 }

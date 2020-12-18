@@ -4,6 +4,6 @@ namespace IncidentReport.Domain.Employees
 {
     public interface IEmployeeRepository
     {
-        bool IsExists(EmployeeId draftApplicationId);
+        bool IsExists(EmployeeId employeeId);
     }
 }

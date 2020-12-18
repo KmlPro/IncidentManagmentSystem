@@ -2,10 +2,10 @@ using FluentValidation;
 
 namespace IncidentReport.Application.Common.Validators
 {
-    public class TitleValidator : AbstractValidator<ContentToValidate>
+    public class TitleValidator : AbstractValidator<TitleToValidate>
     {
         public TitleValidator() {
-            this.RuleFor(input => input).Transform(x=> x.Content).MinimumLength(10).MaximumLength(100);
+            this.RuleFor(input => input).Transform(x=> x.Title).MinimumLength(10).MaximumLength(100);
         }
     }
 
