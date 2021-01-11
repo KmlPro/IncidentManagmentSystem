@@ -12,7 +12,6 @@ using IncidentReport.Application.Files;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Application.UseCases.PostApplications
@@ -58,16 +57,15 @@ namespace IncidentReport.Application.UseCases.PostApplications
                 }
 
                 var incidentApplication = this._incidentApplicationFactory.CreateApplication(input, attachments);
-                var postedIncidentApplication = incidentApplication.Post();
 
-                await this._incidentApplicationRepository.Create(postedIncidentApplication,cancellationToken);
+                await this._incidentApplicationRepository.Create(incidentApplication,cancellationToken);
 
                 if (this.CreatedFromDraft(input))
                 {
                     this._draftApplicationRepository.Delete(new DraftApplicationId(input.DraftApplicationId.Value));
                 }
 
-                this.BuildOutput(postedIncidentApplication);
+                this.BuildOutput(incidentApplication);
             }
             catch (BusinessRuleValidationException ex)
             {
@@ -96,9 +94,9 @@ namespace IncidentReport.Application.UseCases.PostApplications
             return this._fileStorageService.UploadFiles(request.Attachments);
         }
 
-        private void BuildOutput(PostedIncidentApplication postedIncidentApplication)
+        private void BuildOutput(IncidentApplication incidentApplication)
         {
-            var postApplicationOutput = new PostApplicationOutput(postedIncidentApplication);
+            var postApplicationOutput = new PostApplicationOutput(incidentApplication.Id.Value);
             this._outputPort.Standard(postApplicationOutput);
         }
     }

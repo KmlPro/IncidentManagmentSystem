@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Transactions;
 using BuildingBlocks.Infrastructure;
 using IncidentReport.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.Configuration.Processing
 {

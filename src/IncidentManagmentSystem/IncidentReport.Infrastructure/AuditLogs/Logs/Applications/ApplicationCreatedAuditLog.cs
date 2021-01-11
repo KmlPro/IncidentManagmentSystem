@@ -6,7 +6,7 @@ namespace IncidentReport.Infrastructure.AuditLogs.Logs.Applications
     {
         public override string BuildLog(ApplicationCreatedDomainEvent @event)
         {
-            return string.Format(LogResources.ApplicationCreated, @event.Id.Value);
+            return string.Format(LogResources.ApplicationCreated, @event.IncidentApplication);
         }
     }
 }

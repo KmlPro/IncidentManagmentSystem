@@ -4,8 +4,8 @@ using System.Linq;
 using BuildingBlocks.Domain;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.Domain.Interfaces;
+using Dawn;
 using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.Applications;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
@@ -15,61 +15,42 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
 {
     public class IncidentApplication : Entity, IAggregateRoot
     {
-        public static CreatedIncidentApplication Create(ContentOfApplication contentOfApplication,
+        public static IncidentApplication Create(ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
             List<EmployeeId> suspiciousEmployees,
             List<Attachment> attachments)
         {
-            var application = new IncidentApplication(contentOfApplication, incidentType, applicantId, suspiciousEmployees, attachments);
-            return new CreatedIncidentApplication(application);
+            var id = IncidentApplicationId.Create();
+            var postDate = SystemClock.Now;
+
+            var application = new IncidentApplication(id,contentOfApplication, incidentType, applicantId, suspiciousEmployees, attachments, postDate);
+            application.AddDomainEvent(new ApplicationCreatedDomainEvent(application));
+
+            return application;
         }
 
-        protected IncidentApplication(IncidentApplication incidentApplication)
-        {
-            if (incidentApplication == null)
-            {
-                throw new ArgumentNullException(nameof(incidentApplication));
-            }
-
-            this.Id = incidentApplication.Id;
-            this.ApplicantId = incidentApplication.ApplicantId;
-            this.ContentOfApplication = incidentApplication.ContentOfApplication;
-            this.IncidentType = incidentApplication.IncidentType;
-            this.SuspiciousEmployees = incidentApplication.SuspiciousEmployees;
-            this.Attachments = incidentApplication.Attachments;
-            this.PostDate = incidentApplication.PostDate;
-            this.ApplicationState = incidentApplication.ApplicationState;
-            this.ApplicationNumber = incidentApplication.ApplicationNumber;
-
-            this.CopyDomainEvents(incidentApplication);
-        }
-
-        private IncidentApplication(
+        private IncidentApplication(IncidentApplicationId incidentApplicationId,
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
             List<EmployeeId> suspiciousEmployees,
-            List<Attachment> attachments)
+            List<Attachment> attachments,
+            DateTime postDate)
         {
+            this.ApplicantId = Guard.Argument(applicantId, nameof(applicantId)).NotNull();
+            this.ContentOfApplication = Guard.Argument(contentOfApplication, nameof(contentOfApplication)).NotNull();
+            this.IncidentType = Guard.Argument(incidentType, nameof(incidentType)).NotNull();
+            this.Id = Guard.Argument(incidentApplicationId, nameof(incidentApplicationId)).NotNull();
+            this.PostDate = Guard.Argument(postDate,nameof(postDate)).NotDefault();
+
             this.CheckRule(new IndicateAtLeastOneSuspectRule(suspiciousEmployees));
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
 
-            this.ApplicantId = applicantId ?? throw new ArgumentNullException(nameof(applicantId));
-            this.ContentOfApplication =
-                contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
-            this.IncidentType = incidentType ?? throw new ArgumentNullException(nameof(incidentType));
-
-            this.Id = new IncidentApplicationId(Guid.NewGuid());
             this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
             this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
             this.ApplicationState = ApplicationStateValue.Created;
             this.Attachments = attachments ?? new List<Attachment>();
-            this.PostDate = SystemClock.Now;
-
-            this.AddDomainEvent(new ApplicationCreatedDomainEvent(this.Id, this.ApplicationNumber,
-                this.ContentOfApplication, this.IncidentType, this.PostDate, this.ApplicantId, this.SuspiciousEmployees,
-                this.Attachments));
         }
 
         public IncidentApplicationId Id { get; }

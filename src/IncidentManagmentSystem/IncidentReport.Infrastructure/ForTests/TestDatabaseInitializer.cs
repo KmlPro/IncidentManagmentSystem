@@ -2,7 +2,6 @@ using System;
 using Autofac;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.ForTests
 {

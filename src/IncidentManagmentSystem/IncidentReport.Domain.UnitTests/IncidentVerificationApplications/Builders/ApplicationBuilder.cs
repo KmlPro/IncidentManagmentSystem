@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
@@ -54,7 +53,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return this;
         }
 
-        public CreatedIncidentApplication Build()
+        public IncidentApplication Build()
         {
             this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();

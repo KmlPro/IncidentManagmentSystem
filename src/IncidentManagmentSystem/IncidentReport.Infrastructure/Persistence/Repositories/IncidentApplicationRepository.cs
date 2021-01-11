@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Persistence.NotDomainEntities;
@@ -22,7 +21,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             this._auditLogService = auditLogService;
         }
 
-        public async Task<PostedIncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId, CancellationToken cancellationToken)
+        public async Task<IncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId, CancellationToken cancellationToken)
         {
             if (incidentApplicationId == null)
             {
@@ -32,13 +31,14 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 var application = await this._writeContext.IncidentApplication.FirstAsync(x =>
-                    x.Id == incidentApplicationId && x.ApplicationState == ApplicationStateValue.Posted, cancellationToken);
+                    x.Id == incidentApplicationId, cancellationToken);
+
                 if (application == null)
                 {
                     throw new AggregateNotFoundInDbException(nameof(Application), incidentApplicationId.Value);
                 }
 
-                return (PostedIncidentApplication)application;
+                return application;
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task Create(PostedIncidentApplication incidentApplication,CancellationToken cancellationToken)
+        public async Task Create(IncidentApplication incidentApplication,CancellationToken cancellationToken)
         {
             if (incidentApplication == null)
             {

@@ -4,11 +4,10 @@ using BuildingBlocks.Application;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Applications.States;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Application.Factories
+namespace IncidentReport.Application.UseCases.PostApplications
 {
     public class IncidentApplicationFactory
     {
@@ -19,7 +18,7 @@ namespace IncidentReport.Application.Factories
             this._applicantContext = userContext;
         }
 
-        public CreatedIncidentApplication CreateApplication(PostApplicationInput request, List<Attachment> attachments)
+        public IncidentApplication CreateApplication(PostApplicationInput request, List<Attachment> attachments)
         {
             return IncidentApplication.Create(
                 new ContentOfApplication(request.Title, request.Description),

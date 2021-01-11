@@ -11,9 +11,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Incid
         public void AllFieldsAreFilled_CreatedSuccessfully()
         {
             var createdApplication = ApplicationIncidentApplication.CreateInCreatedStateValid();
-            var postedApplication = createdApplication.Post();
 
-            var applicationPostedDomainEvent = AssertPublishedDomainEvent<ApplicationPostedDomainEvent>(postedApplication);
+            var applicationPostedDomainEvent = AssertPublishedDomainEvent<ApplicationCreatedDomainEvent>(createdApplication);
             Assert.NotNull(applicationPostedDomainEvent);
         }
     }

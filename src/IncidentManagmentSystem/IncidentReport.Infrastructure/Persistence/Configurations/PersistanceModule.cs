@@ -7,7 +7,6 @@ using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplication
 using IncidentReport.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Serilog;
 
 namespace IncidentReport.Infrastructure.Persistence.Configurations
 {
