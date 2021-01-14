@@ -18,5 +18,16 @@ namespace IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixt
 
             return (applicant.Id, suspiciousEmployee.Id);
         }
+
+        public static EmployeeId CreateRandomEmployeeInDb()
+        {
+            var randomEmployee = RandomEmployeeFactory.Create();
+            TestDatabaseInitializer.SeedDataForTest(dbContext =>
+            {
+                dbContext.Employee.Add(randomEmployee);
+            });
+
+            return randomEmployee.Id;
+        }
     }
 }
