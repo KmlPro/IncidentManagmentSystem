@@ -11,7 +11,6 @@ using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 
 namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
 {

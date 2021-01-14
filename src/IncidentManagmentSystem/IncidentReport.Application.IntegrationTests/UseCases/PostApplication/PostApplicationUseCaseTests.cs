@@ -10,14 +10,14 @@ using NUnit.Framework;
 namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
 {
     [Category(CategoryTitle.Title + " PostApplicationUseCase")]
-    public class PostApplicationUseCase : BaseTest
+    public class PostApplicationUseCaseTests : BaseTest
     {
         private readonly TestFixture _testFixture;
         private readonly IIncidentReportModule _module;
         private EmployeeId _suspiciousEmployee;
         private EmployeeId _applicant;
 
-        public PostApplicationUseCase()
+        public PostApplicationUseCaseTests()
         {
             this._module = IncidentReportModuleFactory.SetupAndBuild();
             var incidentApplicationRepository = InstanceResolver.Resolve<IIncidentApplicationRepository>();
@@ -27,7 +27,6 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
             (this._applicant,this._suspiciousEmployee) = EmployeesTestFixture.PrepareApplicantAndRandomEmployeeInDb();
         }
 
-        //kbytner 08.12.2020 - need to repair No backing field could be found for property 'IncidentApplicationId' of entity type
         [Test]
         public async Task WithoutDraftApplication_PostedSuccessfully()
         {

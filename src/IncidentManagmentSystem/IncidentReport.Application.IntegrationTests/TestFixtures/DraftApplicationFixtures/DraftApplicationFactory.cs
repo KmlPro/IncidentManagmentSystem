@@ -12,16 +12,23 @@ namespace IncidentReport.Application.IntegrationTests.TestFixtures.DraftApplicat
     {
         public DraftApplication Create(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
+            var draftApplication = Create(applicant, new List<EmployeeId>() {suspiciousEmployee});
+            return draftApplication;
+        }
+
+        public DraftApplication Create(EmployeeId applicant, List<EmployeeId> suspiciousEmployee)
+        {
             var draftApplication = new DraftApplication(
                 new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)),
                 IncidentType.AdverseEffectForTheCompany, applicant,
-                new List<EmployeeId>() {suspiciousEmployee});
+                suspiciousEmployee);
+
             return draftApplication;
         }
 
         public DraftApplication CreateWithAttachments(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
-            var draftApplication = this.Create(applicant, suspiciousEmployee);
+            var draftApplication = Create(applicant, suspiciousEmployee);
             this.AddAttachment(draftApplication);
 
             return draftApplication;
