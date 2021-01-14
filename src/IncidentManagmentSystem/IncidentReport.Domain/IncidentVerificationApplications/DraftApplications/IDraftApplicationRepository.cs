@@ -10,5 +10,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
         Task<DraftApplication> GetById(DraftApplicationId applicationId, CancellationToken cancellationToken);
         Task Create(DraftApplication draftApplication, CancellationToken cancellationToken);
         void Update(DraftApplication draftApplication);
+        Task<bool> IsExists(DraftApplicationId draftApplicationId, CancellationToken cancellationToken);
     }
 }

@@ -63,10 +63,9 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
         {
             try
             {
-                var aggregate = await this._incidentApplicationRepository.GetPostedById(new IncidentApplicationId(id), new CancellationToken());
-                return true;
+                return await this._incidentApplicationRepository.IsExists(new IncidentApplicationId(id), new CancellationToken());
             }
-            catch (AggregateNotFoundInDbException)
+            catch (Exception)
             {
                 return false;
             }
@@ -76,10 +75,9 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
         {
             try
             {
-                var aggregate = await this._draftApplicationRepository.GetById(new DraftApplicationId(id), new CancellationToken());
-                return true;
+                return await this._draftApplicationRepository.IsExists(new DraftApplicationId(id), new CancellationToken());
             }
-            catch (AggregateNotFoundInDbException)
+            catch (Exception)
             {
                 return false;
             }

@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Infrastructure.AuditLogs;
-using IncidentReport.Infrastructure.Persistence.NotDomainEntities;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -56,16 +55,21 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 await this._writeContext.IncidentApplication.AddAsync(incidentApplication,cancellationToken);
-                if (CheckIsEntityHasDomainEvents.Check(incidentApplication))
-                {
-                    await this._writeContext.ApplicationAuditLog.AddRangeAsync(
-                        this._auditLogService.CreateFromDomainEvents<ApplicationAuditLog>(incidentApplication), cancellationToken);
-                }
+                // if (CheckIsEntityHasDomainEvents.Check(incidentApplication))
+                // {
+                //     await this._writeContext.ApplicationAuditLog.AddRangeAsync(
+                //         this._auditLogService.CreateFromDomainEvents<ApplicationAuditLog>(incidentApplication), cancellationToken);
+                // }
             }
             catch (Exception ex)
             {
                 throw new PersistanceException(ex);
             }
+        }
+
+        public async Task<bool> IsExists(IncidentApplicationId incidentApplicationId, CancellationToken cancellationToken)
+        {
+            return await this._writeContext.IncidentApplication.AnyAsync(x => x.Id == incidentApplicationId, cancellationToken);
         }
     }
 }

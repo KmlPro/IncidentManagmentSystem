@@ -8,5 +8,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
     {
         Task<IncidentApplication> GetPostedById(IncidentApplicationId incidentApplicationId,CancellationToken cancellationToken);
         Task Create(IncidentApplication incidentApplication, CancellationToken cancellationToken);
+        Task<bool> IsExists(IncidentApplicationId draftApplicationId, CancellationToken cancellationToken);
     }
 }

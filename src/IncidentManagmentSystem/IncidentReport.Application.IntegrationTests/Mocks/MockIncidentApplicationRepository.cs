@@ -27,5 +27,10 @@ namespace IncidentReport.Application.IntegrationTests.Mocks
             this.IncidentApplications.Add(incidentApplication);
             return Task.CompletedTask;
         }
+
+        public Task<bool> IsExists(IncidentApplicationId draftApplicationId, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

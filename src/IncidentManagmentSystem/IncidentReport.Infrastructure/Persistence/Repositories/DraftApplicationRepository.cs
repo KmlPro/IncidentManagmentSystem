@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
@@ -21,7 +22,6 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             this._auditLogService = auditLogService;
         }
 
-        //kbytner 03.10.2020 - to do remove logs!
         public async void Delete(DraftApplicationId draftApplicationId)
         {
             if (draftApplicationId == null)
@@ -76,11 +76,11 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 await this._writeContext.DraftApplication.AddAsync(draftApplication,cancellationToken);
-                if (CheckIsEntityHasDomainEvents.Check(draftApplication))
-                {
-                    await this._writeContext.DraftApplicationAuditLog.AddRangeAsync(
-                        this._auditLogService.CreateFromDomainEvents<DraftApplicationAuditLog>(draftApplication), cancellationToken);
-                }
+                // if (CheckIsEntityHasDomainEvents.Check(draftApplication))
+                // {
+                //     await this._writeContext.DraftApplicationAuditLog.AddRangeAsync(
+                //         this._auditLogService.CreateFromDomainEvents<DraftApplicationAuditLog>(draftApplication), cancellationToken);
+                // }
             }
             catch (Exception ex)
             {
@@ -98,16 +98,21 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
             try
             {
                 this._writeContext.DraftApplication.Update(draftApplication);
-                if (CheckIsEntityHasDomainEvents.Check(draftApplication))
-                {
-                    this._writeContext.DraftApplicationAuditLog.AddRange(
-                        this._auditLogService.CreateFromDomainEvents<DraftApplicationAuditLog>(draftApplication));
-                }
+                // if (CheckIsEntityHasDomainEvents.Check(draftApplication))
+                // {
+                //     this._writeContext.DraftApplicationAuditLog.AddRange(
+                //         this._auditLogService.CreateFromDomainEvents<DraftApplicationAuditLog>(draftApplication));
+                // }
             }
             catch (Exception ex)
             {
                 throw new PersistanceException(ex);
             }
+        }
+
+        public async Task<bool> IsExists(DraftApplicationId draftApplicationId, CancellationToken cancellationToken)
+        {
+            return await this._writeContext.DraftApplication.AnyAsync(x => x.Id == draftApplicationId, cancellationToken);
         }
     }
 }
