@@ -60,7 +60,7 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
         {
             //Arrange
             var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee };
-            var newSuspiciousEmployees = new List<EmployeeId> { EmployeesTestFixture.CreateRandomEmployeeInDb(),EmployeesTestFixture.CreateRandomEmployeeInDb() };
+            var newSuspiciousEmployees = EmployeesTestFixture.CreateRandomEmployeeInDb(2);
 
             var useCase =
                await this._testFixture.PrepareUseCaseWithTestData(this._applicant,newSuspiciousEmployees, initialSuspiciousEmployees);

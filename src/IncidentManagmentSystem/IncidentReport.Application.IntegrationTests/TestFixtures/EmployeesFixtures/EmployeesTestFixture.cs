@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using IncidentReport.Domain.Employees;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
@@ -19,15 +22,20 @@ namespace IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixt
             return (applicant.Id, suspiciousEmployee.Id);
         }
 
-        public static EmployeeId CreateRandomEmployeeInDb()
+        public static List<EmployeeId> CreateRandomEmployeeInDb(int count)
         {
-            var randomEmployee = RandomEmployeeFactory.Create();
+            var employees = new List<Employee>();
+            for (var i = 0; i < count; i++)
+            {
+                employees.Add(RandomEmployeeFactory.Create());
+            }
+
             TestDatabaseInitializer.SeedDataForTest(dbContext =>
             {
-                dbContext.Employee.Add(randomEmployee);
+                dbContext.Employee.AddRange(employees);
             });
 
-            return randomEmployee.Id;
+            return employees.Select(x => x.Id).ToList();
         }
     }
 }

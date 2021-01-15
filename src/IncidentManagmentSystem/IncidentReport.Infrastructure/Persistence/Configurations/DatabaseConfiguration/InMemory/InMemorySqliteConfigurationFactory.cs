@@ -21,6 +21,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfi
             {
                 options.UseSqlite(this._dbConnection);
                 options.UseExceptionProcessor();
+                options.EnableSensitiveDataLogging();
                 options.ConfigureWarnings(x =>x.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.AmbientTransactionWarning));
             };
         }

@@ -8,6 +8,7 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
 {
     public class UpdateSuspiciousEmployees
     {
+        //kbytner 15.01.2021 - move this to domain layer
         public void Handle(DraftApplication draftApplication, UpdateDraftApplicationInput input)
         {
             var newSuspiciousEmployees = this.GetNewSuspiciousEmployees(draftApplication, input);
