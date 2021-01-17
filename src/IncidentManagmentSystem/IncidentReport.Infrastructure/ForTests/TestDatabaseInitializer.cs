@@ -17,6 +17,7 @@ namespace IncidentReport.Infrastructure.ForTests
                 seed?.Invoke(dbContext);
 
                 dbContext.SaveChanges();
+                dbContext.ChangeTracker.Clear();
             }
         }
     }

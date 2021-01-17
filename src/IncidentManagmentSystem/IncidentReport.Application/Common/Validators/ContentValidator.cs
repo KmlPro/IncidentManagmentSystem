@@ -1,6 +1,4 @@
 using FluentValidation;
-using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.Employees.ValueObjects;
 
 namespace IncidentReport.Application.Common.Validators
 {

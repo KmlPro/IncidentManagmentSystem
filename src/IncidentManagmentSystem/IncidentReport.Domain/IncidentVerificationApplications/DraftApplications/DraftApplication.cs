@@ -48,32 +48,20 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
 
         public void Update(
             ContentOfApplication contentOfApplication,
-            IncidentType incidentType)
+            IncidentType incidentType,
+            List<EmployeeId> employeeIds)
         {
+            this.CheckRule(new ApplicantCannotBeSuspectRule(employeeIds, this.ApplicantId));
+
             this.ContentOfApplication =
                 contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
             this.IncidentType = incidentType;
 
-            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication,
-                this.IncidentType));
-        }
-
-        public void AddSuspiciousEmployees(List<EmployeeId> employeeIds)
-        {
-            this.CheckRule(new ApplicantCannotBeSuspectRule(employeeIds, this.ApplicantId));
-
             var suspiciousEmployees = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
-            this.SuspiciousEmployees.AddRange(employeeIds.Select(x => new SuspiciousEmployee(x)));
+            this.SuspiciousEmployees = suspiciousEmployees;
 
-            this.AddDomainEvent(new DraftApplicationSuspiciousEmployeeAdded(this.Id, suspiciousEmployees));
-        }
-
-        public void DeleteSuspiciousEmployees(List<EmployeeId> employeeIds)
-        {
-            var suspiciousEmployee = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
-            this.SuspiciousEmployees.RemoveAll(x => employeeIds.Contains(x.EmployeeId));
-
-            this.AddDomainEvent(new DraftApplicationSuspiciousEmployeeDeleted(this.Id, suspiciousEmployee));
+            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication,
+                this.IncidentType, this.SuspiciousEmployees));
         }
 
         public void AddAttachments(List<Attachment> attachments)

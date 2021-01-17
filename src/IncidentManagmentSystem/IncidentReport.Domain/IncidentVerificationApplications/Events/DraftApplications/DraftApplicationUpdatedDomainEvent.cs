@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BuildingBlocks.Domain.Abstract;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
@@ -6,15 +7,17 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
     public class DraftApplicationUpdatedDomainEvent : DomainEvent
     {
         public DraftApplicationUpdatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication,
-            IncidentType incidentType): base(id.Value.ToString())
+            IncidentType incidentType, List<SuspiciousEmployee> suspiciousEmployees): base(id.Value.ToString())
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;
             this.IncidentType = incidentType;
+            this.SuspiciousEmployees = suspiciousEmployees;
         }
 
-        public DraftApplicationId Id { get; set; }
+        public DraftApplicationId Id { get; }
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
+        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
     }
 }

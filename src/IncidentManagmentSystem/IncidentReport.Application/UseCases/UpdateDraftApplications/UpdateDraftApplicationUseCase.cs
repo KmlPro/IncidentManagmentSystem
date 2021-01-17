@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.ValidationErrors;
@@ -5,6 +7,7 @@ using BuildingBlocks.Domain.Abstract;
 using FluentValidation;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Files;
+using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
@@ -14,7 +17,6 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
     {
         private readonly IDraftApplicationRepository _draftApplicationRepository;
         private readonly IOutputPort _outputPort;
-        private readonly UpdateSuspiciousEmployees _updateSuspiciousEmployees;
         private readonly UpdateAttachments _updateAttachments;
         private readonly IValidator<UpdateDraftApplicationInput> _validator;
 
@@ -26,7 +28,6 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
             this._draftApplicationRepository = draftApplicationRepository;
             this._outputPort = outputPort;
             this._updateAttachments = new UpdateAttachments(fileStorageService);
-            this._updateSuspiciousEmployees = new UpdateSuspiciousEmployees();
             this._validator = validator;
         }
 
@@ -36,11 +37,11 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
             {
                 await this._validator.ValidateAndThrowAsync(input, cancellationToken);
                 var draftApplication =
-                    await this._draftApplicationRepository.GetById(new DraftApplicationId(input.DraftApplicationId), cancellationToken);
+                    await this._draftApplicationRepository.GetById(new DraftApplicationId(input.DraftApplicationId),
+                        cancellationToken);
 
                 this.UpdateApplicationData(draftApplication, input);
                 await this._updateAttachments.Handle(draftApplication, input);
-                this._updateSuspiciousEmployees.Handle(draftApplication, input);
 
                 this._draftApplicationRepository.Update(draftApplication);
                 this.BuildOutput();
@@ -53,6 +54,7 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
             {
                 this._outputPort.WriteInvalidInput(ex.MapToInvaliInputErrors());
             }
+
             return this._outputPort;
         }
 
@@ -63,9 +65,16 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
 
         private void UpdateApplicationData(DraftApplication draftApplication, UpdateDraftApplicationInput request)
         {
+            var employees = this.GetEmployees(request);
             draftApplication.Update(
                 new ContentOfApplication(request.Title, request.Description),
-                new IncidentType(request.IncidentType));
+                new IncidentType(request.IncidentType),
+                employees);
+        }
+
+        private List<EmployeeId> GetEmployees(UpdateDraftApplicationInput input)
+        {
+            return input.SuspiciousEmployees.Select(x => new EmployeeId(x)).ToList();
         }
     }
 }
