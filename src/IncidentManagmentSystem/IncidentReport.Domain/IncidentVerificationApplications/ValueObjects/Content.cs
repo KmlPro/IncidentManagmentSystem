@@ -7,14 +7,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
     {
         public Content(string value)
         {
-            Guard.Argument(value).NotEmpty();
+            Guard.Argument(value).NotEmpty().MinLength(10).MaxLength(100);
             this.Value = value;
         }
 
         public string Value { get; }
-
-        private Content()
-        {
-        }
     }
 }

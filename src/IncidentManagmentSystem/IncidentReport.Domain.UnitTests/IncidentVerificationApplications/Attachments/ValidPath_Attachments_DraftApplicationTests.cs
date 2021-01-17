@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Attachments
 {
-    [Category(CategoryTitle.Title + " DraftApplication")]
+    [Category(CategoryTitle.Title + " DraftApplication With Attachments")]
     public class ValidPath_Attachments_DraftApplicationTests : TestBase
     {
         private readonly TestFixture _testFixture;
