@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.Abstract;
+using Dawn;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
@@ -11,7 +12,23 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
 {
     public class DraftApplication : AggregateRoot
     {
-        public DraftApplication(
+        public static DraftApplication Create(
+            ContentOfApplication contentOfApplication,
+            IncidentType incidentType,
+            EmployeeId applicantId,
+            List<EmployeeId> suspiciousEmployees)
+        {
+            var id = DraftApplicationId.Create();
+            var draftApplication = new DraftApplication(id, contentOfApplication, incidentType, applicantId, suspiciousEmployees);
+
+            draftApplication.AddDomainEvent(new DraftApplicationCreatedDomainEvent(id, contentOfApplication,
+                incidentType, applicantId, suspiciousEmployees));
+
+            return draftApplication;
+        }
+
+        private DraftApplication(
+            DraftApplicationId draftApplicationId,
             ContentOfApplication contentOfApplication,
             IncidentType incidentType,
             EmployeeId applicantId,
@@ -19,17 +36,13 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
 
-            this.ApplicantId = applicantId ?? throw new ArgumentNullException(nameof(applicantId));
-            this.ContentOfApplication =
-                contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
+            this.ApplicantId = Guard.Argument(applicantId, nameof(applicantId)).NotNull();
+            this.ContentOfApplication = Guard.Argument(contentOfApplication, nameof(contentOfApplication)).NotNull();
+            this.Id = Guard.Argument(draftApplicationId, nameof(draftApplicationId)).NotNull();
 
-            this.Id = new DraftApplicationId(Guid.NewGuid());
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
             this.Attachments = new List<Attachment>();
-
-            this.AddDomainEvent(new DraftApplicationCreatedDomainEvent(this.Id, this.ContentOfApplication,
-                this.IncidentType, this.ApplicantId, this.SuspiciousEmployees));
         }
 
         private DraftApplication()

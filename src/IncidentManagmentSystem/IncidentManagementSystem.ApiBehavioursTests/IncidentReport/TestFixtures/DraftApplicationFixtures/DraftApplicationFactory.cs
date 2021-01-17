@@ -12,7 +12,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixture
     {
         public DraftApplication Create(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
-            var draftApplication = new DraftApplication(
+            var draftApplication = DraftApplication.Create(
                 new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)),
                 IncidentType.AdverseEffectForTheCompany, applicant,
                 new List<EmployeeId>() {suspiciousEmployee});

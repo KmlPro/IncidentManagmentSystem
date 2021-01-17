@@ -30,7 +30,7 @@ namespace IncidentReport.Infrastructure.ReadModels.IntegrationTests.ReadContextT
         }
 
         [Test]
-        public void MapDraftApplicationEntity_To_MapDraftApplicationDto_SelectOnlyOneColumn()
+        public void MapDraftApplicationEntity_To_MapDraftApplicationDto_SelectOnlyOneColumn_ColumnValueRetrieveSuccessful()
         {
             using (var container = this._testContainer.BeginLifetimeScope())
             {

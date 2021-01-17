@@ -12,5 +12,10 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.ValueObjects
         public DraftApplicationId(Guid value) : base(value)
         {
         }
+
+        public static DraftApplicationId Create()
+        {
+            return new DraftApplicationId(Guid.NewGuid());
+        }
     }
 }

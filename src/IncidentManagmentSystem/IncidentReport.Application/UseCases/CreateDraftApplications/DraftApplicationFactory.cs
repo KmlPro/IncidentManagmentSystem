@@ -19,7 +19,7 @@ namespace IncidentReport.Application.UseCases.CreateDraftApplications
 
         public DraftApplication Create(CreateDraftApplicationInput request)
         {
-            return new DraftApplication(
+            return DraftApplication.Create(
                 new ContentOfApplication(request.Title, request.Description),
                 new IncidentType(request.IncidentType),
                 new EmployeeId(this._applicantContext.UserId),

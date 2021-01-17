@@ -29,11 +29,11 @@ namespace IncidentReport.Infrastructure.ReadModels.IntegrationTests.ReadContextT
                 {
                     new DraftApplicationSuspiciousEmployee()
                     {
-                        Id = 1, Employee = this.CreateEmployee()
+                       Employee = this.CreateEmployee()
                     },
                     new DraftApplicationSuspiciousEmployee
                     {
-                        Id = 2, Employee = this.CreateEmployee()
+                        Employee = this.CreateEmployee()
                     }
                 }
             });

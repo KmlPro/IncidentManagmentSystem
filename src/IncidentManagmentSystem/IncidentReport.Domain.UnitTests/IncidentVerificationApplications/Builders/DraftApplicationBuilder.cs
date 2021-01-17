@@ -46,7 +46,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         {
             this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();
-            return new DraftApplication(this._contentOfApplication, this._incidentType, this._applicantId,
+            return DraftApplication.Create(this._contentOfApplication, this._incidentType, this._applicantId,
                 this._suspiciousEmployees);
         }
 

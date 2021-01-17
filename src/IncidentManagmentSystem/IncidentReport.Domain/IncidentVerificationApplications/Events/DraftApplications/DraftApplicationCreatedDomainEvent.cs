@@ -8,7 +8,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
     public class DraftApplicationCreatedDomainEvent : DomainEvent
     {
         public DraftApplicationCreatedDomainEvent(DraftApplicationId id, ContentOfApplication contentOfApplication,
-            IncidentType incidentType, EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees): base(id.Value.ToString())
+            IncidentType incidentType, EmployeeId applicantId, List<EmployeeId> suspiciousEmployees): base(id.Value.ToString())
         {
             this.Id = id;
             this.ContentOfApplication = contentOfApplication;
@@ -21,6 +21,6 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApp
         public ContentOfApplication ContentOfApplication { get; }
         public IncidentType IncidentType { get; }
         public EmployeeId ApplicantId { get; }
-        public List<SuspiciousEmployee> SuspiciousEmployees { get; }
+        public List<EmployeeId> SuspiciousEmployees { get; }
     }
 }

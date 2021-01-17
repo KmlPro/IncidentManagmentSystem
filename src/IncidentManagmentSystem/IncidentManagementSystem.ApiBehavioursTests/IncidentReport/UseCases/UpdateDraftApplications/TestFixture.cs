@@ -77,7 +77,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Up
 
         private DraftApplication CreateTestDraftApplicationEntity(EmployeeId applicantId, EmployeeId suspiciousEmployeeId)
         {
-            var draftApplication = new DraftApplication(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, applicantId, new List<EmployeeId> { suspiciousEmployeeId });
+            var draftApplication = DraftApplication.Create(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, applicantId, new List<EmployeeId> { suspiciousEmployeeId });
             return draftApplication;
         }
     }
