@@ -14,13 +14,9 @@ namespace IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications
     {
         public Guid? DraftApplicationId { get; set; }
 
-        [MinLength(10)]
-        [MaxLength(100)]
         public string Title { get; set; }
 
-        [MinLength(10)]
-        [MaxLength(1000)]
-        public string Description { get; set; }
+        public string Content { get; set; }
 
         public string IncidentType { get; set; }
 

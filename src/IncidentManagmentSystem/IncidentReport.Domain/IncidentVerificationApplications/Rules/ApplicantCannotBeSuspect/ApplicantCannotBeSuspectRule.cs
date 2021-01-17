@@ -3,6 +3,7 @@ using System.Linq;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect.Exceptions;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect
 {

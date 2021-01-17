@@ -15,8 +15,8 @@ namespace IncidentReport.ReadModels.DbEntities
 
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string IncidentTypeValue { get; set; }
+        public string Content { get; set; }
+        public string IncidentType { get; set; }
         public Guid? ApplicantId { get; set; }
         public string ApplicationStateValue { get; set; }
 

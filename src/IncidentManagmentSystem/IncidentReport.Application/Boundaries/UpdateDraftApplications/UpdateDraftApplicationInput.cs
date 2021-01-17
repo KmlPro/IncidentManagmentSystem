@@ -9,7 +9,7 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
     {
         public UpdateDraftApplicationInput(Guid draftApplicationId,
             string title,
-            string description,
+            string content,
             string incidentType,
             IEnumerable<Guid> suspiciousEmployees,
             List<FileData> addedAttachments,
@@ -17,7 +17,7 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
         {
             this.DraftApplicationId = draftApplicationId;
             this.Title = title;
-            this.Description = description;
+            this.Content = content;
             this.IncidentType = incidentType;
             this.SuspiciousEmployees = suspiciousEmployees;
             this.AddedAttachments = addedAttachments;
@@ -26,7 +26,7 @@ namespace IncidentReport.Application.Boundaries.UpdateDraftApplications
 
         public Guid DraftApplicationId { get; set; }
         public string Title { get; }
-        public string Description { get; }
+        public string Content { get; }
         public string IncidentType { get; }
         public IEnumerable<Guid> SuspiciousEmployees { get; }
         public List<FileData> AddedAttachments { get; }

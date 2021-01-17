@@ -13,7 +13,8 @@ namespace IncidentReport.Application.IntegrationTests.TestFixtures.IncidentAppli
         public IncidentApplication CreatePostedWithAttachments(EmployeeId applicant, EmployeeId suspiciousEmployee)
         {
             var incidentApplication = IncidentApplication.Create(
-                new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)),
+                new Title(FakeData.Alpha(10)),
+                new Content(FakeData.Alpha(100)),
                 IncidentType.AdverseEffectForTheCompany, applicant,
                 new List<EmployeeId>() {suspiciousEmployee}, this.CreateAttachment());
 

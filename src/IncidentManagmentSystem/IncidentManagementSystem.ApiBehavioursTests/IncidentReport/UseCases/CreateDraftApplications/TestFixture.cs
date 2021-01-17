@@ -20,7 +20,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Cr
             var formData = new MultipartFormDataContent
             {
                 {new StringContent(title), nameof(CreateDraftApplicationRequest.Title)},
-                {new StringContent(description), nameof(CreateDraftApplicationRequest.Description)},
+                {new StringContent(description), nameof(CreateDraftApplicationRequest.Content)},
                 {new StringContent(incidentType.ToString()), nameof(CreateDraftApplicationRequest.IncidentType)},
                 {
                     new StringContent(string.Join(", ", suspiciousEmployees)),

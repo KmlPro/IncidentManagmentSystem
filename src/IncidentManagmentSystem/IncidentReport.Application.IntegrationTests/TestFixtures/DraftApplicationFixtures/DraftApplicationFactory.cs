@@ -19,7 +19,8 @@ namespace IncidentReport.Application.IntegrationTests.TestFixtures.DraftApplicat
         public DraftApplication Create(EmployeeId applicant, List<EmployeeId> suspiciousEmployee)
         {
             var draftApplication = DraftApplication.Create(
-                new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)),
+                new Title(FakeData.Alpha(10)),
+                new Content(FakeData.Alpha(100)),
                 IncidentType.AdverseEffectForTheCompany, applicant,
                 suspiciousEmployee);
 

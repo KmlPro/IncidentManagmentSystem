@@ -9,9 +9,9 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
     public class DraftApplicationBuilder
     {
         private EmployeeId _applicantId;
-        private ContentOfApplication _contentOfApplication;
+        private Content _content;
+        private Title _title;
 
-        private Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> _contentOfApplicationDelegate;
         private IncidentType _incidentType;
         private List<EmployeeId> _suspiciousEmployees;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
@@ -28,10 +28,15 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return this;
         }
 
-        public DraftApplicationBuilder SetContentOfApplication(
-            Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> contentOfApplicationDelegate)
+        public DraftApplicationBuilder SetContent(string content)
         {
-            this._contentOfApplicationDelegate = contentOfApplicationDelegate;
+            this._content = new Content(content);
+            return this;
+        }
+
+        public DraftApplicationBuilder SetTitle(string title)
+        {
+            this._title = new Title(title);
             return this;
         }
 
@@ -44,9 +49,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
 
         public DraftApplication Build()
         {
-            this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();
-            return DraftApplication.Create(this._contentOfApplication, this._incidentType, this._applicantId,
+            return DraftApplication.Create(this._title, this._content, this._incidentType, this._applicantId,
                 this._suspiciousEmployees);
         }
 
@@ -55,11 +59,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return this._suspiciousEmployeesDelegate != null
                 ? this._suspiciousEmployeesDelegate(new SuspiciousEmployeesBuilder()).Build()
                 : new List<EmployeeId>();
-        }
-
-        private ContentOfApplication TryBuildContentOfApplication()
-        {
-            return this._contentOfApplicationDelegate?.Invoke(new ContentOfApplicationBuilder()).Build();
         }
     }
 }

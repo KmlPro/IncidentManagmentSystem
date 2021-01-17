@@ -13,7 +13,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
         public static DraftApplication CreateValid()
         {
             var draftApplicationBuilder = new DraftApplicationBuilder()
-                .SetContentOfApplication(x => x.SetTitle(FakeData.Alpha(10)).SetDescription(FakeData.Alpha(20)))
+                .SetTitle(FakeData.Alpha(10))
+                .SetContent(FakeData.Alpha(100))
                 .SetIncidentType(IncidentType.AdverseEffectForTheCompany)
                 .SetApplicantId(new EmployeeId(Guid.NewGuid()))
                 .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> { new EmployeeId(Guid.NewGuid()) }));

@@ -14,7 +14,8 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
 {
     public class IncidentApplication : AggregateRoot
     {
-        public static IncidentApplication Create(ContentOfApplication contentOfApplication,
+        public static IncidentApplication Create(Title title,
+            Content content,
             IncidentType incidentType,
             EmployeeId applicantId,
             List<EmployeeId> suspiciousEmployees,
@@ -22,50 +23,51 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
         {
             var id = IncidentApplicationId.Create();
             var postDate = SystemClock.Now;
+            var applicationNumber = new ApplicationNumber(postDate, incidentType);
+            var suspiciousEmployeesList = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
 
-            var application = new IncidentApplication(id,contentOfApplication, incidentType, applicantId, suspiciousEmployees, attachments, postDate);
+            var application = new IncidentApplication(id,content, title,incidentType, applicantId, suspiciousEmployeesList, attachments, postDate, applicationNumber);
             application.AddDomainEvent(new ApplicationCreatedDomainEvent(application));
 
             return application;
         }
 
         private IncidentApplication(IncidentApplicationId incidentApplicationId,
-            ContentOfApplication contentOfApplication,
+            Content content,
+            Title title,
             IncidentType incidentType,
             EmployeeId applicantId,
-            List<EmployeeId> suspiciousEmployees,
+            List<SuspiciousEmployee> suspiciousEmployees,
             List<Attachment> attachments,
-            DateTime postDate)
+            DateTime postDate,
+            ApplicationNumber applicationNumber)
         {
             this.ApplicantId = Guard.Argument(applicantId, nameof(applicantId)).NotNull();
-            this.ContentOfApplication = Guard.Argument(contentOfApplication, nameof(contentOfApplication)).NotNull();
+            this.Content = Guard.Argument(content, nameof(content)).NotNull();
+            this.Title = Guard.Argument(title, nameof(title)).NotNull();
             this.IncidentType = Guard.Argument(incidentType, nameof(incidentType)).NotNull();
             this.Id = Guard.Argument(incidentApplicationId, nameof(incidentApplicationId)).NotNull();
             this.PostDate = Guard.Argument(postDate,nameof(postDate)).NotDefault();
 
             this.CheckRule(new IndicateAtLeastOneSuspectRule(suspiciousEmployees));
-            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
+            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees.Select(x=> x.EmployeeId).ToList(), applicantId));
 
-            this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
-            this.ApplicationNumber = new ApplicationNumber(this.PostDate, this.IncidentType);
+            this.SuspiciousEmployees = suspiciousEmployees;
+            this.ApplicationNumber = applicationNumber;
             this.ApplicationState = ApplicationStateValue.Created;
             this.Attachments = attachments ?? new List<Attachment>();
         }
 
+        public Title Title { get; }
         public IncidentApplicationId Id { get; }
         public ApplicationNumber ApplicationNumber { get; }
-        public ContentOfApplication ContentOfApplication { get; }
+        public Content Content { get; }
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }
         public List<SuspiciousEmployee> SuspiciousEmployees { get; }
         public List<Attachment> Attachments { get; }
-        public ApplicationStateValue ApplicationState { get; private set; }
-
-        public void SetState(ApplicationStateValue applicationState)
-        {
-            this.ApplicationState = applicationState;
-        }
+        public ApplicationStateValue ApplicationState { get; }
 
         private IncidentApplication()
         {

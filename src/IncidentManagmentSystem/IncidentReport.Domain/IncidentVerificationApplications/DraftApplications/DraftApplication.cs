@@ -13,35 +13,40 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
     public class DraftApplication : AggregateRoot
     {
         public static DraftApplication Create(
-            ContentOfApplication contentOfApplication,
+            Title tile,
+            Content content,
             IncidentType incidentType,
             EmployeeId applicantId,
             List<EmployeeId> suspiciousEmployees)
         {
             var id = DraftApplicationId.Create();
-            var draftApplication = new DraftApplication(id, contentOfApplication, incidentType, applicantId, suspiciousEmployees);
+            var suspiciousEmployeesList = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
 
-            draftApplication.AddDomainEvent(new DraftApplicationCreatedDomainEvent(id, contentOfApplication,
-                incidentType, applicantId, suspiciousEmployees));
+            var draftApplication = new DraftApplication(id, content, tile, incidentType, applicantId, suspiciousEmployeesList);
+
+            draftApplication.AddDomainEvent(new DraftApplicationCreatedDomainEvent(id, content,
+                incidentType, applicantId, suspiciousEmployeesList));
 
             return draftApplication;
         }
 
         private DraftApplication(
             DraftApplicationId draftApplicationId,
-            ContentOfApplication contentOfApplication,
+            Content content,
+            Title title,
             IncidentType incidentType,
             EmployeeId applicantId,
-            List<EmployeeId> suspiciousEmployees)
+            List<SuspiciousEmployee> suspiciousEmployees)
         {
-            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees, applicantId));
+            this.CheckRule(new ApplicantCannotBeSuspectRule(suspiciousEmployees.Select(x=> x.EmployeeId).ToList(), applicantId));
 
             this.ApplicantId = Guard.Argument(applicantId, nameof(applicantId)).NotNull();
-            this.ContentOfApplication = Guard.Argument(contentOfApplication, nameof(contentOfApplication)).NotNull();
+            this.Content = Guard.Argument(content, nameof(content)).NotNull();
+            this.Title = Guard.Argument(title, nameof(title)).NotNull();
             this.Id = Guard.Argument(draftApplicationId, nameof(draftApplicationId)).NotNull();
 
             this.IncidentType = incidentType;
-            this.SuspiciousEmployees = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
+            this.SuspiciousEmployees = suspiciousEmployees;
             this.Attachments = new List<Attachment>();
         }
 
@@ -52,27 +57,30 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
         }
 
         public DraftApplicationId Id { get; }
-        public ContentOfApplication ContentOfApplication { get; private set; }
+        public Content Content { get; private set; }
+        public Title Title { get; private set; }
         public IncidentType IncidentType { get; private set; }
         public List<SuspiciousEmployee> SuspiciousEmployees { get; private set; }
         public List<Attachment> Attachments { get; }
         public EmployeeId ApplicantId { get; }
 
         public void Update(
-            ContentOfApplication contentOfApplication,
+            Content content,
+            Title title,
             IncidentType incidentType,
             List<EmployeeId> employeeIds)
         {
             this.CheckRule(new ApplicantCannotBeSuspectRule(employeeIds, this.ApplicantId));
 
-            this.ContentOfApplication =
-                contentOfApplication ?? throw new ArgumentNullException(nameof(contentOfApplication));
+            this.Content = Guard.Argument(content,nameof(content)).NotNull();
+            this.Title = Guard.Argument(title,nameof(title)).NotNull();
+
             this.IncidentType = incidentType;
 
             var suspiciousEmployees = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
             this.SuspiciousEmployees = suspiciousEmployees;
 
-            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.ContentOfApplication,
+            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.Content,
                 this.IncidentType, this.SuspiciousEmployees));
         }
 

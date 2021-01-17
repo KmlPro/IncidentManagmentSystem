@@ -35,7 +35,8 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         private DraftApplication Create()
         {
             var draftApplication = DraftApplication.Create(
-                new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)),
+                new Title(FakeData.Alpha(10)),
+                new Content(FakeData.Alpha(12)),
                 IncidentType.AdverseEffectForTheCompany, new EmployeeId(Guid.NewGuid()),
                 new List<EmployeeId>() { new EmployeeId(Guid.NewGuid()) });
             return draftApplication;

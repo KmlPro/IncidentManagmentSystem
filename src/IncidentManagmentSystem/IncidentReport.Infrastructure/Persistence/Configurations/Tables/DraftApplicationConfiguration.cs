@@ -22,14 +22,17 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
 
             builder.OwnsOne(m => m.IncidentType, table =>
             {
-                table.Property(inc => inc.Value).HasMaxLength(100);
+                table.Property(inc => inc.Value).HasMaxLength(100).HasColumnName(nameof(IncidentType));
             });
 
-            builder.OwnsOne(m => m.ContentOfApplication, table =>
+            builder.OwnsOne(m => m.Content, table =>
             {
-                table.Property(ca => ca.Title).HasMaxLength(100).HasColumnName(nameof(ContentOfApplication.Title));
-                table.Property(ca => ca.Description).HasMaxLength(1000)
-                    .HasColumnName(nameof(ContentOfApplication.Description));
+                table.Property(inc => inc.Value).HasMaxLength(1000).HasColumnName(nameof(Content));
+            });
+
+            builder.OwnsOne(m => m.Title, table =>
+            {
+                table.Property(ca => ca.Value).HasMaxLength(100).HasColumnName(nameof(Title));
             });
 
             builder.HasMany(g => g.Attachments);

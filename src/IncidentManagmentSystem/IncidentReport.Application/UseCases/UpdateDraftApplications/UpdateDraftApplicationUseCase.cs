@@ -67,7 +67,8 @@ namespace IncidentReport.Application.UseCases.UpdateDraftApplications
         {
             var employees = this.GetEmployees(request);
             draftApplication.Update(
-                new ContentOfApplication(request.Title, request.Description),
+                new Content(request.Content),
+                new Title(request.Title),
                 new IncidentType(request.IncidentType),
                 employees);
         }

@@ -9,12 +9,12 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.Applicat
     public class ApplicationPostedDomainEvent : DomainEvent
     {
         public ApplicationPostedDomainEvent(IncidentApplicationId id, ApplicationNumber applicationNumber,
-            ContentOfApplication contentOfApplication, IncidentType incidentType, DateTime postDate,
+            Content content, IncidentType incidentType, DateTime postDate,
             EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees, List<Attachment> attachments): base(id.Value.ToString())
         {
             this.Id = id;
             this.ApplicationNumber = applicationNumber;
-            this.ContentOfApplication = contentOfApplication;
+            this.Content = content;
             this.IncidentType = incidentType;
             this.PostDate = postDate;
             this.ApplicantId = applicantId;
@@ -24,7 +24,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.Events.Applicat
 
         public IncidentApplicationId Id { get; }
         public ApplicationNumber ApplicationNumber { get; }
-        public ContentOfApplication ContentOfApplication { get; }
+        public Content Content { get; }
         public IncidentType IncidentType { get; }
         public DateTime PostDate { get; }
         public EmployeeId ApplicantId { get; }

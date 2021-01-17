@@ -17,9 +17,9 @@ namespace IncidentReport.Infrastructure.ReadModels.IntegrationTests.ReadContextT
             readContext.DraftApplications.Add(new DraftApplication
             {
                 Id = Guid.NewGuid(),
-                IncidentTypeValue = "FinancialViolations",
+                IncidentType = "FinancialViolations",
                 Title = FakeData.Alpha(10),
-                Description = FakeData.Alpha(15),
+                Content = FakeData.Alpha(15),
                 Applicant = this.CreateEmployee(),
                 Attachments = new List<Attachment>()
                 {

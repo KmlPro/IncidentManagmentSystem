@@ -12,6 +12,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
         {
             this._writeContext = writeContext;
         }
+
         public bool IsExists(EmployeeId employeeId)
         {
             return this._writeContext.Employee.Any(x => x.Id == employeeId);

@@ -65,11 +65,9 @@ namespace IncidentReport.ReadModels
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Content).HasMaxLength(1000);
 
-                entity.Property(e => e.IncidentTypeValue)
-                    .HasMaxLength(100)
-                    .HasColumnName("IncidentType_Value");
+                entity.Property(e => e.IncidentType).HasMaxLength(100);
 
                 entity.Property(e => e.Title).HasMaxLength(100);
 
@@ -129,11 +127,9 @@ namespace IncidentReport.ReadModels
                     .HasMaxLength(15)
                     .HasColumnName("ApplicationState_Value");
 
-                entity.Property(e => e.Description).HasMaxLength(1000);
+                entity.Property(e => e.Content).HasMaxLength(1000);
 
-                entity.Property(e => e.IncidentTypeValue)
-                    .HasMaxLength(100)
-                    .HasColumnName("IncidentType_Value");
+                entity.Property(e => e.IncidentType).HasMaxLength(100);
 
                 entity.Property(e => e.Title).HasMaxLength(100);
 

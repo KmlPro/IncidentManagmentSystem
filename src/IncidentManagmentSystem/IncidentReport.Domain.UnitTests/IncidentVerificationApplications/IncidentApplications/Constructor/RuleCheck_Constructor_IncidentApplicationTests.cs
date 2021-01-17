@@ -21,7 +21,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Incid
             var applicationBuilder = new ApplicationBuilder()
                 .SetApplicantId(employeeId)
                 .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId> { employeeId }))
-                .SetContentOfApplication(x=> x.SetDescription(FakeData.Alpha(10)).SetTitle(FakeData.Alpha(10)))
+                .SetTitle(FakeData.Alpha(10))
+                .SetContent(FakeData.Alpha(100))
                 .SetIncidentType(IncidentType.AdverseEffectForTheCompany);
 
             AssertBrokenRule<ApplicantCannotBeSuspectRule>(() =>
@@ -38,7 +39,8 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Incid
             var applicationBuilder = new ApplicationBuilder()
                 .SetApplicantId(employeeId)
                 .SetSuspiciousEmployees(x => x.SetEmployees(new List<EmployeeId>()))
-                .SetContentOfApplication(x=> x.SetDescription(FakeData.Alpha(10)).SetTitle(FakeData.Alpha(10)))
+                .SetTitle(FakeData.Alpha(10))
+                .SetContent(FakeData.Alpha(100))
                 .SetIncidentType(IncidentType.AdverseEffectForTheCompany);
 
             AssertBrokenRule<IndicateAtLeastOneSuspectRule>(() =>

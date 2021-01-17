@@ -3,14 +3,15 @@ using System.Linq;
 using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect.Exceptions;
+using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect
 {
     public class IndicateAtLeastOneSuspectRule : IBusinessRule
     {
-        private readonly List<EmployeeId> _suspiciousEmployees;
+        private readonly List<SuspiciousEmployee> _suspiciousEmployees;
 
-        public IndicateAtLeastOneSuspectRule(List<EmployeeId> suspiciousEmployees)
+        public IndicateAtLeastOneSuspectRule(List<SuspiciousEmployee> suspiciousEmployees)
         {
             this._suspiciousEmployees = suspiciousEmployees;
         }

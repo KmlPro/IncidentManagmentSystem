@@ -24,9 +24,9 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Up
 
             var formData = new MultipartFormDataContent
             {
-                {new StringContent(draftApplicationId.ToString()), nameof(UpdateDraftApplicationRequest.Id)},
+                {new StringContent(draftApplicationId.ToString()), nameof(UpdateDraftApplicationRequest.DraftApplicationId)},
                 {new StringContent(title), nameof(UpdateDraftApplicationRequest.Title)},
-                {new StringContent(description), nameof(UpdateDraftApplicationRequest.Description)},
+                {new StringContent(description), nameof(UpdateDraftApplicationRequest.Content)},
                 {new StringContent(incidentType.ToString()), nameof(UpdateDraftApplicationRequest.IncidentType)},
                 {
                     new StringContent(string.Join(", ", suspiciousEmployees)),
@@ -77,7 +77,12 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Up
 
         private DraftApplication CreateTestDraftApplicationEntity(EmployeeId applicantId, EmployeeId suspiciousEmployeeId)
         {
-            var draftApplication = DraftApplication.Create(new ContentOfApplication(FakeData.Alpha(12), FakeData.Alpha(100)), IncidentType.AdverseEffectForTheCompany, applicantId, new List<EmployeeId> { suspiciousEmployeeId });
+            var draftApplication = DraftApplication.Create(
+                new Title(FakeData.Alpha(12)),
+                new Content(FakeData.Alpha(100)),
+                IncidentType.AdverseEffectForTheCompany,
+                applicantId,
+                new List<EmployeeId> { suspiciousEmployeeId });
             return draftApplication;
         }
     }

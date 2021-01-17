@@ -12,10 +12,13 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
     {
         private EmployeeId _applicantId;
         private List<Attachment> _attachments;
-        private Func<AttachmentBuilder, AttachmentBuilder>[] _attachmentsDelegate = new Func<AttachmentBuilder, AttachmentBuilder>[0];
-        private ContentOfApplication _contentOfApplication;
 
-        private Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> _contentOfApplicationDelegate;
+        private Func<AttachmentBuilder, AttachmentBuilder>[] _attachmentsDelegate =
+            new Func<AttachmentBuilder, AttachmentBuilder>[0];
+
+        private Content _content;
+        private Title _title;
+
         private IncidentType _incidentType;
         private List<EmployeeId> _suspiciousEmployees;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
@@ -32,10 +35,15 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
             return this;
         }
 
-        public ApplicationBuilder SetContentOfApplication(
-            Func<ContentOfApplicationBuilder, ContentOfApplicationBuilder> contentOfApplicationDelegate)
+        public ApplicationBuilder SetContent(string content)
         {
-            this._contentOfApplicationDelegate = contentOfApplicationDelegate;
+            this._content = new Content(content);
+            return this;
+        }
+
+        public ApplicationBuilder SetTitle(string title)
+        {
+            this._title = new Title(title);
             return this;
         }
 
@@ -55,10 +63,9 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
 
         public IncidentApplication Build()
         {
-            this._contentOfApplication = this.TryBuildContentOfApplication();
             this._suspiciousEmployees = this.TryBuildSuspiciousEmployees();
             this._attachments = this.TryBuildAttachments();
-            return IncidentApplication.Create(this._contentOfApplication, this._incidentType, this._applicantId,
+            return IncidentApplication.Create(this._title,this._content, this._incidentType, this._applicantId,
                 this._suspiciousEmployees, this._attachments);
         }
 
@@ -72,11 +79,6 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         private List<Attachment> TryBuildAttachments()
         {
             return this._attachmentsDelegate.Select(a => a(new AttachmentBuilder()).Build()).ToList();
-        }
-
-        private ContentOfApplication TryBuildContentOfApplication()
-        {
-            return this._contentOfApplicationDelegate?.Invoke(new ContentOfApplicationBuilder()).Build();
         }
     }
 }

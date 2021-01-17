@@ -9,7 +9,7 @@ namespace IncidentReport.ReadModels.Dtos.IncidentApplications
         {
             this.CreateMap<IncidentApplication, IncidentApplicationDto>().ForMember(
                 dest => dest.IncidentType,
-                opt => opt.MapFrom(src => src.IncidentTypeValue)
+                opt => opt.MapFrom(src => src.IncidentType)
             ).ForMember(
                 dest => dest.SuspiciousEmployee,
                 opt => opt.MapFrom(src => src.IncidentApplicationSuspiciousEmployees)

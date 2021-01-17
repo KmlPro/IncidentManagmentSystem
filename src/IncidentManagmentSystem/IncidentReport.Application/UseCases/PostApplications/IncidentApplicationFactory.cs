@@ -21,7 +21,8 @@ namespace IncidentReport.Application.UseCases.PostApplications
         public IncidentApplication CreateApplication(PostApplicationInput request, List<Attachment> attachments)
         {
             return IncidentApplication.Create(
-                new ContentOfApplication(request.Title, request.Description),
+                new Title(request.Title),
+                new Content(request.Content),
                 new IncidentType(request.IncidentType),
                 new EmployeeId(this._applicantContext.UserId),
                 new List<EmployeeId>(

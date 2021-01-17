@@ -13,17 +13,12 @@ namespace IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftAppli
 {
     public class UpdateDraftApplicationRequest : IMapTo<UpdateDraftApplicationInput>
     {
-        [MapTo(nameof(UpdateDraftApplicationInput.DraftApplicationId))]
         [Required]
-        public Guid Id { get; set; }
+        public Guid DraftApplicationId { get; set; }
 
-        [MinLength(10)]
-        [MaxLength(100)]
         public string Title { get; set; }
 
-        [MinLength(10)]
-        [MaxLength(1000)]
-        public string Description { get; set; }
+        public string Content { get; set; }
 
         public string IncidentType { get; set; }
 

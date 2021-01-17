@@ -39,7 +39,7 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.Po
             var formData = new MultipartFormDataContent
             {
                 {new StringContent(title), nameof(PostApplicationRequest.Title)},
-                {new StringContent(description), nameof(PostApplicationRequest.Description)},
+                {new StringContent(description), nameof(PostApplicationRequest.Content)},
                 {new StringContent(incidentType.ToString()), nameof(PostApplicationRequest.IncidentType)},
                 {
                     new StringContent(string.Join(", ", suspiciousEmployees)),
