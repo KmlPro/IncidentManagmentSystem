@@ -14,16 +14,16 @@ namespace IncidentReport.ReadModels
         private readonly IncidentReportReadDbContext _incidentReportReadDbContext;
         private readonly IReadModuleIMapper _mapper;
 
-        public IQueryable<DraftApplicationDto> DraftApplications => this._incidentReportReadDbContext.DraftApplication
+        public IQueryable<DraftApplicationDto> DraftApplications => this._incidentReportReadDbContext.DraftApplications
             .ProjectTo<DraftApplicationDto>(this._mapper.ConfigurationProvider).AsNoTracking();
 
-        public IQueryable<AuditLogDto> DraftApplicationAuditLogs => this._incidentReportReadDbContext.DraftApplicationAuditLog
+        public IQueryable<AuditLogDto> DraftApplicationAuditLogs => this._incidentReportReadDbContext.DraftApplicationAuditLogs
             .ProjectTo<AuditLogDto>(this._mapper.ConfigurationProvider).AsNoTracking();
 
-        public IQueryable<IncidentApplicationDto> IncidentApplications => this._incidentReportReadDbContext.IncidentApplication
+        public IQueryable<IncidentApplicationDto> IncidentApplications => this._incidentReportReadDbContext.IncidentApplications
             .ProjectTo<IncidentApplicationDto>(this._mapper.ConfigurationProvider).AsNoTracking();
 
-        public IQueryable<AuditLogDto> ApplicationAuditLogs => this._incidentReportReadDbContext.ApplicationAuditLog
+        public IQueryable<AuditLogDto> ApplicationAuditLogs => this._incidentReportReadDbContext.ApplicationAuditLogs
             .ProjectTo<AuditLogDto>(this._mapper.ConfigurationProvider).AsNoTracking();
 
         public IncidentReportReadContext(IncidentReportReadDbContext incidentReportReadDbContext, IReadModuleIMapper mapper)

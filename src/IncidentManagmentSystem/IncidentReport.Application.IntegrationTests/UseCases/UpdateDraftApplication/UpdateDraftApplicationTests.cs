@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixtures;
-using IncidentReport.Application.UseCases.UpdateDraftApplications;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
@@ -22,12 +19,13 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
         private readonly IIncidentReportModule _module;
         private EmployeeId _suspiciousEmployee;
         private EmployeeId _applicant;
+
         public UpdateDraftApplicationTests()
         {
             this._module = IncidentReportModuleFactory.SetupAndBuild();
             var _repository = InstanceResolver.Resolve<IDraftApplicationRepository>();
             this._testFixture = new TestFixture(_repository);
-            (this._applicant,this._suspiciousEmployee) = EmployeesTestFixture.PrepareApplicantAndRandomEmployeeInDb();
+            (this._applicant, this._suspiciousEmployee) = EmployeesTestFixture.PrepareApplicantAndRandomEmployeeInDb();
         }
 
         [SetUp]
@@ -39,10 +37,11 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
         public async Task SuspiciousEmployeeNotChanged_DraftUpdatedSuccessfully()
         {
             //Arrange
-            var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee };
+            var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee};
             var suspiciousEmployees = initialSuspiciousEmployees;
 
-            var useCase = await this._testFixture.PrepareUseCaseWithTestData(this._applicant, suspiciousEmployees, initialSuspiciousEmployees);
+            var useCase = await this._testFixture.PrepareUseCaseWithTestData(this._applicant, suspiciousEmployees,
+                initialSuspiciousEmployees);
 
             //Act
             var useCaseOutput =
@@ -59,11 +58,12 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
         public async Task TwoNewSuspiciousEmployeeAdded_OneRemoved_DraftUpdatedSuccessfully()
         {
             //Arrange
-            var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee };
+            var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee};
             var newSuspiciousEmployees = EmployeesTestFixture.CreateRandomEmployeeInDb(2);
 
             var useCase =
-               await this._testFixture.PrepareUseCaseWithTestData(this._applicant,newSuspiciousEmployees, initialSuspiciousEmployees);
+                await this._testFixture.PrepareUseCaseWithTestData(this._applicant, newSuspiciousEmployees,
+                    initialSuspiciousEmployees);
 
             //Act
             var useCaseOutput =
@@ -80,12 +80,13 @@ namespace IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplic
         public async Task OneInitialAttachment_TwoAdded_ThreeAttachmentsInDraft()
         {
             //Arrange
-            var initialAttachment = new List<Attachment>{AttachmentFactory.Create()};
+            var initialAttachment = new List<Attachment> {AttachmentFactory.Create()};
             var addedAttachment = new List<FileData> {FileDataFactory.Create(), FileDataFactory.Create()};
-            var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee };
+            var initialSuspiciousEmployees = new List<EmployeeId> {this._suspiciousEmployee};
 
             var useCase =
-                await this._testFixture.PrepareUseCaseWithTestData(this._applicant,initialSuspiciousEmployees, addedAttachment, null, initialAttachment);
+                await this._testFixture.PrepareUseCaseWithTestData(this._applicant, initialSuspiciousEmployees,
+                    addedAttachment, null, initialAttachment);
 
             //Act
             var useCaseOutput =

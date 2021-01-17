@@ -14,26 +14,26 @@ namespace IncidentReport.Infrastructure.ReadModels.IntegrationTests.ReadContextT
             var readContext = scope.Resolve<IncidentReportReadDbContext>();
             readContext.Database.EnsureCreated();
 
-            readContext.DraftApplication.Add(new DraftApplication
+            readContext.DraftApplications.Add(new DraftApplication
             {
                 Id = Guid.NewGuid(),
                 IncidentTypeValue = "FinancialViolations",
                 Title = FakeData.Alpha(10),
                 Description = FakeData.Alpha(15),
                 Applicant = this.CreateEmployee(),
-                Attachment = new List<Attachment>()
+                Attachments = new List<Attachment>()
                 {
                     CreateAttachment()
                 },
-                DraftApplicationSuspiciousEmployee = new List<DraftApplicationSuspiciousEmployee>()
+                DraftApplicationSuspiciousEmployees = new List<DraftApplicationSuspiciousEmployee>()
                 {
                     new DraftApplicationSuspiciousEmployee()
                     {
-                        Id = Guid.NewGuid(), Employee = this.CreateEmployee()
+                        Id = 1, Employee = this.CreateEmployee()
                     },
                     new DraftApplicationSuspiciousEmployee
                     {
-                        Id = Guid.NewGuid(), Employee = this.CreateEmployee()
+                        Id = 2, Employee = this.CreateEmployee()
                     }
                 }
             });

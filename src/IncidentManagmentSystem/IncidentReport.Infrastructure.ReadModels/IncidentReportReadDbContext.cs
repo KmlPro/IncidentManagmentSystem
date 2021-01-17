@@ -1,5 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using IncidentReport.ReadModels.DbEntities;
+
+#nullable disable
 
 namespace IncidentReport.ReadModels
 {
@@ -14,26 +18,19 @@ namespace IncidentReport.ReadModels
         {
         }
 
-        public virtual DbSet<ApplicationAuditLog> ApplicationAuditLog { get; set; }
-        public virtual DbSet<Attachment> Attachment { get; set; }
-        public virtual DbSet<DraftApplication> DraftApplication { get; set; }
-        public virtual DbSet<DraftApplicationAuditLog> DraftApplicationAuditLog { get; set; }
-        public virtual DbSet<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployee { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<IncidentApplication> IncidentApplication { get; set; }
-        public virtual DbSet<IncidentApplicationSuspiciousEmployee> IncidentApplicationSuspiciousEmployee { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=IncidentReportDb;User Id=sa;Password=<YourStrong@Passw0rd>;");
-            }
-        }
+        public virtual DbSet<ApplicationAuditLog> ApplicationAuditLogs { get; set; }
+        public virtual DbSet<Attachment> Attachments { get; set; }
+        public virtual DbSet<DraftApplication> DraftApplications { get; set; }
+        public virtual DbSet<DraftApplicationAuditLog> DraftApplicationAuditLogs { get; set; }
+        public virtual DbSet<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployees { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<IncidentApplication> IncidentApplications { get; set; }
+        public virtual DbSet<IncidentApplicationSuspiciousEmployee> IncidentApplicationSuspiciousEmployees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
             modelBuilder.Entity<ApplicationAuditLog>(entity =>
             {
                 entity.ToTable("ApplicationAuditLog", "IncidentReport");
@@ -43,20 +40,20 @@ namespace IncidentReport.ReadModels
             {
                 entity.ToTable("Attachment", "IncidentReport");
 
-                entity.HasIndex(e => e.DraftApplicationId);
+                entity.HasIndex(e => e.DraftApplicationId, "IX_Attachment_DraftApplicationId");
 
-                entity.HasIndex(e => e.IncidentApplicationId);
+                entity.HasIndex(e => e.IncidentApplicationId, "IX_Attachment_IncidentApplicationId");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.FileName).HasMaxLength(100);
 
                 entity.HasOne(d => d.DraftApplication)
-                    .WithMany(p => p.Attachment)
+                    .WithMany(p => p.Attachments)
                     .HasForeignKey(d => d.DraftApplicationId);
 
                 entity.HasOne(d => d.IncidentApplication)
-                    .WithMany(p => p.Attachment)
+                    .WithMany(p => p.Attachments)
                     .HasForeignKey(d => d.IncidentApplicationId);
             });
 
@@ -64,20 +61,20 @@ namespace IncidentReport.ReadModels
             {
                 entity.ToTable("DraftApplication", "IncidentReport");
 
-                entity.HasIndex(e => e.ApplicantId);
+                entity.HasIndex(e => e.ApplicantId, "IX_DraftApplication_ApplicantId");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Description).HasMaxLength(1000);
 
                 entity.Property(e => e.IncidentTypeValue)
-                    .HasColumnName("IncidentType_Value")
-                    .HasMaxLength(100);
+                    .HasMaxLength(100)
+                    .HasColumnName("IncidentType_Value");
 
                 entity.Property(e => e.Title).HasMaxLength(100);
 
                 entity.HasOne(d => d.Applicant)
-                    .WithMany(p => p.DraftApplication)
+                    .WithMany(p => p.DraftApplications)
                     .HasForeignKey(d => d.ApplicantId);
             });
 
@@ -85,27 +82,27 @@ namespace IncidentReport.ReadModels
             {
                 entity.ToTable("DraftApplicationAuditLog", "IncidentReport");
 
-                entity.HasIndex(e => e.UserId);
+                entity.HasIndex(e => e.UserId, "IX_DraftApplicationAuditLog_UserId");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.DraftApplicationAuditLog)
+                    .WithMany(p => p.DraftApplicationAuditLogs)
                     .HasForeignKey(d => d.UserId);
             });
 
             modelBuilder.Entity<DraftApplicationSuspiciousEmployee>(entity =>
             {
-                entity.HasKey(e => new { e.DraftApplicationId, e.Id });
-
                 entity.ToTable("DraftApplicationSuspiciousEmployee", "IncidentReport");
 
-                entity.HasIndex(e => e.EmployeeId);
+                entity.HasIndex(e => e.DraftApplicationId, "IX_DraftApplicationSuspiciousEmployee_DraftApplicationId");
+
+                entity.HasIndex(e => e.EmployeeId, "IX_DraftApplicationSuspiciousEmployee_EmployeeId");
 
                 entity.HasOne(d => d.DraftApplication)
-                    .WithMany(p => p.DraftApplicationSuspiciousEmployee)
+                    .WithMany(p => p.DraftApplicationSuspiciousEmployees)
                     .HasForeignKey(d => d.DraftApplicationId);
 
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.DraftApplicationSuspiciousEmployee)
+                    .WithMany(p => p.DraftApplicationSuspiciousEmployees)
                     .HasForeignKey(d => d.EmployeeId);
             });
 
@@ -124,41 +121,41 @@ namespace IncidentReport.ReadModels
             {
                 entity.ToTable("IncidentApplication", "IncidentReport");
 
-                entity.HasIndex(e => e.ApplicantId);
+                entity.HasIndex(e => e.ApplicantId, "IX_IncidentApplication_ApplicantId");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.ApplicationStateValue)
-                    .HasColumnName("ApplicationState_Value")
-                    .HasMaxLength(15);
+                    .HasMaxLength(15)
+                    .HasColumnName("ApplicationState_Value");
 
                 entity.Property(e => e.Description).HasMaxLength(1000);
 
                 entity.Property(e => e.IncidentTypeValue)
-                    .HasColumnName("IncidentType_Value")
-                    .HasMaxLength(100);
+                    .HasMaxLength(100)
+                    .HasColumnName("IncidentType_Value");
 
                 entity.Property(e => e.Title).HasMaxLength(100);
 
                 entity.HasOne(d => d.Applicant)
-                    .WithMany(p => p.IncidentApplication)
+                    .WithMany(p => p.IncidentApplications)
                     .HasForeignKey(d => d.ApplicantId);
             });
 
             modelBuilder.Entity<IncidentApplicationSuspiciousEmployee>(entity =>
             {
-                entity.HasKey(e => new { e.IncidentApplicationId, e.Id });
-
                 entity.ToTable("IncidentApplicationSuspiciousEmployee", "IncidentReport");
 
-                entity.HasIndex(e => e.EmployeeId);
+                entity.HasIndex(e => e.EmployeeId, "IX_IncidentApplicationSuspiciousEmployee_EmployeeId");
+
+                entity.HasIndex(e => e.IncidentApplicationId, "IX_IncidentApplicationSuspiciousEmployee_IncidentApplicationId");
 
                 entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.IncidentApplicationSuspiciousEmployee)
+                    .WithMany(p => p.IncidentApplicationSuspiciousEmployees)
                     .HasForeignKey(d => d.EmployeeId);
 
                 entity.HasOne(d => d.IncidentApplication)
-                    .WithMany(p => p.IncidentApplicationSuspiciousEmployee)
+                    .WithMany(p => p.IncidentApplicationSuspiciousEmployees)
                     .HasForeignKey(d => d.IncidentApplicationId);
             });
 

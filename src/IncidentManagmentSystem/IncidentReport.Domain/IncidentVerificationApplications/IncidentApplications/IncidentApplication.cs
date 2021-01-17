@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain;
 using BuildingBlocks.Domain.Abstract;
-using BuildingBlocks.Domain.Interfaces;
 using Dawn;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.Applications;
@@ -13,7 +12,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications
 {
-    public class IncidentApplication : Entity, IAggregateRoot
+    public class IncidentApplication : AggregateRoot
     {
         public static IncidentApplication Create(ContentOfApplication contentOfApplication,
             IncidentType incidentType,

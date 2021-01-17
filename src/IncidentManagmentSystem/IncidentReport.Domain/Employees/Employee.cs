@@ -4,7 +4,7 @@ using IncidentReport.Domain.Employees.ValueObjects;
 
 namespace IncidentReport.Domain.Employees
 {
-    public class Employee : Entity
+    public class Employee : AggregateRoot
     {
         public Employee(Guid id, string name, string surname)
         {

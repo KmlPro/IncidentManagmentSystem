@@ -8,7 +8,7 @@ namespace BuildingBlocks.Domain.UnitTests
 {
     public class DomainEventsTestHelper
     {
-        public static List<IDomainEvent> GetAllDomainEvents(Entity aggregate)
+        public static List<IDomainEvent> GetAllDomainEvents(AggregateRoot aggregate)
         {
             var domainEvents = new List<IDomainEvent>();
 
@@ -24,11 +24,11 @@ namespace BuildingBlocks.Domain.UnitTests
 
             foreach (var field in fields)
             {
-                var isEntity = field.FieldType.IsAssignableFrom(typeof(Entity));
+                var isEntity = field.FieldType.IsAssignableFrom(typeof(AggregateRoot));
 
                 if (isEntity)
                 {
-                    var entity = field.GetValue(aggregate) as Entity;
+                    var entity = field.GetValue(aggregate) as AggregateRoot;
                     domainEvents.AddRange(GetAllDomainEvents(entity).ToList());
                 }
 
@@ -38,7 +38,7 @@ namespace BuildingBlocks.Domain.UnitTests
                     {
                         foreach (var en in enumerable)
                         {
-                            if (en is Entity entityItem)
+                            if (en is AggregateRoot entityItem)
                             {
                                 domainEvents.AddRange(GetAllDomainEvents(entityItem));
                             }

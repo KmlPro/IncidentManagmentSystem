@@ -9,7 +9,7 @@ namespace BuildingBlocks.Domain.UnitTests
 {
     public class TestBase
     {
-        public static T AssertPublishedDomainEvent<T>(Entity aggregate) where T : DomainEvent
+        public static T AssertPublishedDomainEvent<T>(AggregateRoot aggregate) where T : DomainEvent
         {
             var domainEvent = DomainEventsTestHelper.GetAllDomainEvents(aggregate).OfType<T>().SingleOrDefault();
 
@@ -21,7 +21,7 @@ namespace BuildingBlocks.Domain.UnitTests
             return domainEvent;
         }
 
-        public static List<T> AssertPublishedDomainEvents<T>(Entity aggregate) where T : DomainEvent
+        public static List<T> AssertPublishedDomainEvents<T>(AggregateRoot aggregate) where T : DomainEvent
         {
             var domainEvents = DomainEventsTestHelper.GetAllDomainEvents(aggregate).OfType<T>().ToList();
 

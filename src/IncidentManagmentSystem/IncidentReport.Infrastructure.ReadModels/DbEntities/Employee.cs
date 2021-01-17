@@ -1,27 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace IncidentReport.ReadModels.DbEntities
 {
     public partial class Employee
     {
         public Employee()
         {
-            DraftApplication = new HashSet<DraftApplication>();
-            DraftApplicationAuditLog = new HashSet<DraftApplicationAuditLog>();
-            DraftApplicationSuspiciousEmployee = new HashSet<DraftApplicationSuspiciousEmployee>();
-            IncidentApplication = new HashSet<IncidentApplication>();
-            IncidentApplicationSuspiciousEmployee = new HashSet<IncidentApplicationSuspiciousEmployee>();
+            DraftApplicationAuditLogs = new HashSet<DraftApplicationAuditLog>();
+            DraftApplicationSuspiciousEmployees = new HashSet<DraftApplicationSuspiciousEmployee>();
+            DraftApplications = new HashSet<DraftApplication>();
+            IncidentApplicationSuspiciousEmployees = new HashSet<IncidentApplicationSuspiciousEmployee>();
+            IncidentApplications = new HashSet<IncidentApplication>();
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public virtual ICollection<DraftApplication> DraftApplication { get; set; }
-        public virtual ICollection<DraftApplicationAuditLog> DraftApplicationAuditLog { get; set; }
-        public virtual ICollection<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployee { get; set; }
-        public virtual ICollection<IncidentApplication> IncidentApplication { get; set; }
-        public virtual ICollection<IncidentApplicationSuspiciousEmployee> IncidentApplicationSuspiciousEmployee { get; set; }
+        public virtual ICollection<DraftApplicationAuditLog> DraftApplicationAuditLogs { get; set; }
+        public virtual ICollection<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployees { get; set; }
+        public virtual ICollection<DraftApplication> DraftApplications { get; set; }
+        public virtual ICollection<IncidentApplicationSuspiciousEmployee> IncidentApplicationSuspiciousEmployees { get; set; }
+        public virtual ICollection<IncidentApplication> IncidentApplications { get; set; }
     }
 }

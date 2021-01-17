@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.Abstract;
-using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
@@ -10,7 +9,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplications
 {
-    public class DraftApplication : Entity, IAggregateRoot
+    public class DraftApplication : AggregateRoot
     {
         public DraftApplication(
             ContentOfApplication contentOfApplication,

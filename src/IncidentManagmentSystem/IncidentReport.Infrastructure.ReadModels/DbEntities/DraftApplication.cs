@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace IncidentReport.ReadModels.DbEntities
 {
     public partial class DraftApplication
     {
         public DraftApplication()
         {
-            Attachment = new HashSet<Attachment>();
-            DraftApplicationSuspiciousEmployee = new HashSet<DraftApplicationSuspiciousEmployee>();
+            Attachments = new HashSet<Attachment>();
+            DraftApplicationSuspiciousEmployees = new HashSet<DraftApplicationSuspiciousEmployee>();
         }
 
         public Guid Id { get; set; }
@@ -18,7 +20,7 @@ namespace IncidentReport.ReadModels.DbEntities
         public Guid? ApplicantId { get; set; }
 
         public virtual Employee Applicant { get; set; }
-        public virtual ICollection<Attachment> Attachment { get; set; }
-        public virtual ICollection<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployee { get; set; }
+        public virtual ICollection<Attachment> Attachments { get; set; }
+        public virtual ICollection<DraftApplicationSuspiciousEmployee> DraftApplicationSuspiciousEmployees { get; set; }
     }
 }

@@ -45,7 +45,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
                 table =>
                 {
                     table.HasOne<Employee>().WithMany().HasForeignKey(nameof(SuspiciousEmployee.EmployeeId));
-                    table.Ignore(x => x.DomainEvents);
+                    table.HasKey("Id");
                     table.ToTable($"{nameof(IncidentApplication)}{nameof(SuspiciousEmployee)}",
                         SchemaName.IncidentReport);
                 });

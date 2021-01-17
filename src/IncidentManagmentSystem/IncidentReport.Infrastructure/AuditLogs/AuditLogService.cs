@@ -24,10 +24,10 @@ namespace IncidentReport.Infrastructure.AuditLogs
             this._currentUserContext = currentUserContext;
         }
 
-        public List<TAuditLog> CreateFromDomainEvents<TAuditLog>(Entity entity) where TAuditLog : AuditLog, new()
+        public List<TAuditLog> CreateFromDomainEvents<TAuditLog>(AggregateRoot aggregateRoot) where TAuditLog : AuditLog, new()
         {
             var auditLogs = new List<TAuditLog>();
-            foreach (var domainEvent in entity.DomainEvents)
+            foreach (var domainEvent in aggregateRoot.DomainEvents)
             {
                 var eventData = JsonConvert.SerializeObject(domainEvent,
                     new JsonSerializerSettings()

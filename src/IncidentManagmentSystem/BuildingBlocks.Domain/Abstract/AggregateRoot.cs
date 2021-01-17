@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BuildingBlocks.Domain.Abstract
 {
-    public abstract class Entity : WithCheckRule
+    public abstract class AggregateRoot : WithCheckRule
     {
         private List<DomainEvent> _domainEvents;
         public IReadOnlyCollection<DomainEvent> DomainEvents => this._domainEvents?.AsReadOnly();
@@ -14,14 +14,14 @@ namespace BuildingBlocks.Domain.Abstract
             this._domainEvents.Add(domainEvent);
         }
 
-        protected void CopyDomainEvents(Entity entity)
+        protected void CopyDomainEvents(AggregateRoot aggregateRoot)
         {
-            if (entity == null)
+            if (aggregateRoot == null)
             {
-                throw new ArgumentNullException(nameof(entity));
+                throw new ArgumentNullException(nameof(aggregateRoot));
             }
             this._domainEvents ??= new List<DomainEvent>();
-            this._domainEvents.AddRange(entity.DomainEvents);
+            this._domainEvents.AddRange(aggregateRoot.DomainEvents);
         }
 
         public void ClearDomainEvents()

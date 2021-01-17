@@ -1,7 +1,10 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Autofac;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace IncidentReport.Infrastructure.ForTests
 {
@@ -17,7 +20,6 @@ namespace IncidentReport.Infrastructure.ForTests
                 seed?.Invoke(dbContext);
 
                 dbContext.SaveChanges();
-                dbContext.ChangeTracker.Clear();
             }
         }
     }

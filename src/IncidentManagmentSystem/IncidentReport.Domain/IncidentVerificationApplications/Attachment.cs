@@ -1,10 +1,10 @@
 using System;
-using BuildingBlocks.Domain.Abstract;
+using BuildingBlocks.Domain.Interfaces;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications
 {
-    public class Attachment : Entity
+    public class Attachment : IEntity
     {
         public Attachment(FileInfo fileInfo, StorageId storageId)
         {

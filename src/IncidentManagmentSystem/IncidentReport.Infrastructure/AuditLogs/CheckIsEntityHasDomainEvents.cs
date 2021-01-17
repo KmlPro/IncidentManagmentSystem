@@ -5,9 +5,9 @@ namespace IncidentReport.Infrastructure.AuditLogs
 {
     public static class CheckIsEntityHasDomainEvents
     {
-        public static bool Check(Entity entity)
+        public static bool Check(AggregateRoot aggregateRoot)
         {
-            return entity != null && entity.DomainEvents.Any();
+            return aggregateRoot != null && aggregateRoot.DomainEvents.Any();
         }
     }
 }

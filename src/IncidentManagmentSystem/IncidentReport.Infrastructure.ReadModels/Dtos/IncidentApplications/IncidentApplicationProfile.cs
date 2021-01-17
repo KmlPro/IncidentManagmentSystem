@@ -12,7 +12,7 @@ namespace IncidentReport.ReadModels.Dtos.IncidentApplications
                 opt => opt.MapFrom(src => src.IncidentTypeValue)
             ).ForMember(
                 dest => dest.SuspiciousEmployee,
-                opt => opt.MapFrom(src => src.IncidentApplicationSuspiciousEmployee)
+                opt => opt.MapFrom(src => src.IncidentApplicationSuspiciousEmployees)
             ).ForMember(
                 dest => dest.ApplicationState,
                 opt => opt.MapFrom(src => src.ApplicationStateValue)

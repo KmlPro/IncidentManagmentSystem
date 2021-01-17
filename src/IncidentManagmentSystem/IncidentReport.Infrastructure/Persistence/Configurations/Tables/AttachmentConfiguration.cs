@@ -10,7 +10,6 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
         public void Configure(EntityTypeBuilder<Attachment> builder)
         {
             builder.ToTable(nameof(Attachment), SchemaName.IncidentReport);
-            builder.Ignore(x => x.DomainEvents);
 
             builder.HasKey(x => x.Id);
             builder.OwnsOne(m => m.FileInfo,

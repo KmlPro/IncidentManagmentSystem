@@ -1,6 +1,6 @@
 namespace BuildingBlocks.Domain.Interfaces
 {
-    public interface IAggregateRoot
+    public interface IEntity
     {
     }
 }
