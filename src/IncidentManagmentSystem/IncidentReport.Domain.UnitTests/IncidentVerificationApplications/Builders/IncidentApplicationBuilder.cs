@@ -8,7 +8,7 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
 {
-    public class ApplicationBuilder
+    public class IncidentApplicationBuilder
     {
         private EmployeeId _applicantId;
         private List<Attachment> _attachments;
@@ -23,38 +23,38 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Build
         private List<EmployeeId> _suspiciousEmployees;
         private Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> _suspiciousEmployeesDelegate;
 
-        public ApplicationBuilder SetIncidentType(IncidentType incidentType)
+        public IncidentApplicationBuilder SetIncidentType(IncidentType incidentType)
         {
             this._incidentType = incidentType;
             return this;
         }
 
-        public ApplicationBuilder SetApplicantId(EmployeeId employeeId)
+        public IncidentApplicationBuilder SetApplicantId(EmployeeId employeeId)
         {
             this._applicantId = employeeId;
             return this;
         }
 
-        public ApplicationBuilder SetContent(string content)
+        public IncidentApplicationBuilder SetContent(string content)
         {
             this._content = new Content(content);
             return this;
         }
 
-        public ApplicationBuilder SetTitle(string title)
+        public IncidentApplicationBuilder SetTitle(string title)
         {
             this._title = new Title(title);
             return this;
         }
 
-        public ApplicationBuilder SetSuspiciousEmployees(
+        public IncidentApplicationBuilder SetSuspiciousEmployees(
             Func<SuspiciousEmployeesBuilder, SuspiciousEmployeesBuilder> suspiciousEmployeesDelegate)
         {
             this._suspiciousEmployeesDelegate = suspiciousEmployeesDelegate;
             return this;
         }
 
-        public ApplicationBuilder SetAttachments(
+        public IncidentApplicationBuilder SetAttachments(
             Func<AttachmentBuilder, AttachmentBuilder>[] attachmentsDelegate)
         {
             this._attachmentsDelegate = attachmentsDelegate;

@@ -3,16 +3,15 @@ using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications;
 using NUnit.Framework;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Attachments
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Attachments
 {
-    [Category(CategoryTitle.Title + " DraftApplication With Attachments")]
-    public class ValidPath_Attachments_DraftApplicationTests : TestBase
+    [Category(CategoryTitle.Title + " Add and Delete Attachments in DraftApplication")]
+    public class AddOrDeleteAttachmentsInDraftApplicationTests : TestBase
     {
         private readonly TestFixture _testFixture;
-        public ValidPath_Attachments_DraftApplicationTests()
+        public AddOrDeleteAttachmentsInDraftApplicationTests()
         {
             this._testFixture = new TestFixture();
         }

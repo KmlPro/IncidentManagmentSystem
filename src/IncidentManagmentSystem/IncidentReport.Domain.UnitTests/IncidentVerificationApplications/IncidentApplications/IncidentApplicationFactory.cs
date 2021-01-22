@@ -8,11 +8,11 @@ using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.IncidentApplications
 {
-    public static class ApplicationIncidentApplication
+    public static class IncidentApplicationFactory
     {
         public static IncidentApplication CreateInCreatedStateValid()
         {
-            var applicationBuilder = new ApplicationBuilder()
+            var applicationBuilder = new IncidentApplicationBuilder()
                 .SetTitle(FakeData.Alpha(10))
                 .SetContent(FakeData.Alpha(100))
                 .SetIncidentType(IncidentType.AdverseEffectForTheCompany)

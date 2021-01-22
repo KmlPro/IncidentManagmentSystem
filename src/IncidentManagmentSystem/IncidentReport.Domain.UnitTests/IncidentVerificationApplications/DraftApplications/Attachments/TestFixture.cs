@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
-namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Attachments
+namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Attachments
 {
     public class TestFixture
     {
