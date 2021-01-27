@@ -1,5 +1,4 @@
 using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using Microsoft.EntityFrameworkCore;
