@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.Events.Applications;
+using IncidentReport.Domain.IncidentVerificationApplications.Events.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -19,7 +19,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Incid
         {
             var createdApplication = IncidentApplicationFactory.CreateInCreatedStateValid();
 
-            var applicationCreatedDomainEvent = AssertPublishedDomainEvent<ApplicationCreatedDomainEvent>(createdApplication);
+            var applicationCreatedDomainEvent = AssertPublishedDomainEvent<IncidentApplicationCreatedDomainEvent>(createdApplication);
             Assert.NotNull(applicationCreatedDomainEvent);
         }
 

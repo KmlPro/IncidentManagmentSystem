@@ -5,7 +5,7 @@ using BuildingBlocks.Domain;
 using BuildingBlocks.Domain.Abstract;
 using Dawn;
 using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.Events.Applications;
+using IncidentReport.Domain.IncidentVerificationApplications.Events.IncidentApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.Rules.IndicateAtLeastOneSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
@@ -27,7 +27,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
             var suspiciousEmployeesList = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
 
             var application = new IncidentApplication(id,content, title,incidentType, applicantId, suspiciousEmployeesList, attachments, postDate, applicationNumber);
-            application.AddDomainEvent(new ApplicationCreatedDomainEvent(application));
+            application.AddDomainEvent(new IncidentApplicationCreatedDomainEvent(application));
 
             return application;
         }

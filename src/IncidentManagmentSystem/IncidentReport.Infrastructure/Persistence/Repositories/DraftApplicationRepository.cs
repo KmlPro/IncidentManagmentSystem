@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using IncidentReport.Infrastructure.AuditLogs;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +12,7 @@ namespace IncidentReport.Infrastructure.Persistence.Repositories
     {
         private readonly IncidentReportWriteDbContext _writeContext;
 
-        public DraftApplicationRepository(IncidentReportWriteDbContext writeContext, AuditLogService auditLogService)
+        public DraftApplicationRepository(IncidentReportWriteDbContext writeContext)
         {
             this._writeContext = writeContext;
         }

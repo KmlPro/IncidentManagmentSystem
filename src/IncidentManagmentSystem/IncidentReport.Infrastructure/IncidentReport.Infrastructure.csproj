@@ -31,19 +31,4 @@
     <ProjectReference Include="..\IncidentReport.Infrastructure.ReadModels\IncidentReport.Infrastructure.ReadModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="AuditLogs\LogResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LogResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="AuditLogs\LogResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>LogResources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
 </Project>
