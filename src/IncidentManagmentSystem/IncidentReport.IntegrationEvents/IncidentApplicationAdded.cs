@@ -1,5 +1,5 @@
 using System;
-using BuildingBlocks.EventBus;
+using BuildingBlocks.IntegrationEvents;
 
 namespace IncidentReport.IntegrationEvents
 {

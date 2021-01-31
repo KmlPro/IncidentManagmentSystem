@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BuildingBlocks.EventBus\BuildingBlocks.EventBus.csproj" />
+      <ProjectReference Include="..\BuildingBlocks.IntegrationEvents\BuildingBlocks.IntegrationEvents.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace BuildingBlocks.EventBus
+namespace BuildingBlocks.IntegrationEvents
 {
     public abstract class IntegrationEvent : INotification
     {

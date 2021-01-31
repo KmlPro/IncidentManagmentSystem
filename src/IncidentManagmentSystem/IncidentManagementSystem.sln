@@ -54,6 +54,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentReport.IntegrationE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.EventBus", "BuildingBlocks.EventBus\BuildingBlocks.EventBus.csproj", "{66588D90-41AA-463A-A73C-7D91D8C6731B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.IntegrationEvents", "BuildingBlocks.IntegrationEvents\BuildingBlocks.IntegrationEvents.csproj", "{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +134,10 @@ Global
 		{66588D90-41AA-463A-A73C-7D91D8C6731B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66588D90-41AA-463A-A73C-7D91D8C6731B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66588D90-41AA-463A-A73C-7D91D8C6731B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{1C579AAF-3035-4467-8B53-517AA028049D} = {4FDFCF54-6EA2-4692-A9A2-11255D21CBA8}
 		{BFCB6909-0CF9-4B76-9D2F-0A96DE171FD0} = {92A4FEAA-F6A8-48F4-A9EC-FF0E33B0779F}
 		{66588D90-41AA-463A-A73C-7D91D8C6731B} = {8DD88969-0521-49BD-95EB-635843A9CBD4}
+		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66} = {8DD88969-0521-49BD-95EB-635843A9CBD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C503B14-4A01-42A9-84E1-FD4226BAA443}
