@@ -3,9 +3,9 @@ using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplication
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events.IncidentApplications
 {
-    public class IncidentApplicationCreatedDomainEvent : DomainEvent
+    public class IncidentApplicationCreated : DomainEvent
     {
-        public IncidentApplicationCreatedDomainEvent(IncidentApplication application) : base(application.Id.Value.ToString())
+        public IncidentApplicationCreated(IncidentApplication application) : base(application.Id.Value.ToString())
         {
             this.IncidentApplication = application;
         }

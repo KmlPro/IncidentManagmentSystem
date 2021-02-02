@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using MediatR;
 
 namespace BuildingBlocks.IntegrationEvents
 {
     public abstract class IntegrationEvent : INotification
     {
-        public Guid Id { get; }
+        public Guid EventId { get; }
 
         public DateTime OccurredOn { get; }
 
-        protected IntegrationEvent(Guid id, DateTime occurredOn)
+        protected IntegrationEvent(DateTime occurredOn)
         {
-            this.Id = id;
+            this.EventId = Guid.NewGuid();
             this.OccurredOn = occurredOn;
         }
     }

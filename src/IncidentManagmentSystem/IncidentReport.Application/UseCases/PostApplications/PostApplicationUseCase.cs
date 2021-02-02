@@ -9,6 +9,7 @@ using FluentValidation;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
+using IncidentReport.Application.Services;
 using IncidentReport.Domain.IncidentVerificationApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
@@ -25,13 +26,14 @@ namespace IncidentReport.Application.UseCases.PostApplications
         private readonly AttachmentsFactory _attachmentsFactory;
         private readonly IncidentApplicationFactory _incidentApplicationFactory;
         private readonly IValidator<PostApplicationInput> _validator;
+        private readonly IEventProcessor _eventProcesor;
 
         public PostApplicationUseCase(IIncidentApplicationRepository incidentApplicationRepository,
             IDraftApplicationRepository draftApplicationRepository,
             ICurrentUserContext userContext,
             IFileStorageService fileStorageService,
             IOutputPort outputPort,
-            IValidator<PostApplicationInput> validator)
+            IValidator<PostApplicationInput> validator, IEventProcessor eventProcesor)
         {
             this._incidentApplicationRepository = incidentApplicationRepository;
             this._draftApplicationRepository = draftApplicationRepository;
@@ -40,6 +42,7 @@ namespace IncidentReport.Application.UseCases.PostApplications
             this._attachmentsFactory = new AttachmentsFactory();
             this._incidentApplicationFactory = new IncidentApplicationFactory(userContext);
             this._validator = validator;
+            this._eventProcesor = eventProcesor;
         }
 
         //kbytner 06.08.2020 - add rollback uploaded attachments
@@ -58,12 +61,14 @@ namespace IncidentReport.Application.UseCases.PostApplications
 
                 var incidentApplication = this._incidentApplicationFactory.CreateApplication(input, attachments);
 
-                await this._incidentApplicationRepository.Create(incidentApplication,cancellationToken);
+                await this._incidentApplicationRepository.Create(incidentApplication, cancellationToken);
 
                 if (this.CreatedFromDraft(input))
                 {
                     this._draftApplicationRepository.Delete(new DraftApplicationId(input.DraftApplicationId.Value));
                 }
+
+                await this._eventProcesor.Process(incidentApplication.DomainEvents, cancellationToken);
 
                 this.BuildOutput(incidentApplication);
             }

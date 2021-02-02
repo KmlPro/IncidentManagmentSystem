@@ -6,6 +6,12 @@
 
     <ItemGroup>
       <PackageReference Include="MediatR" Version="8.0.0" />
+      <PackageReference Include="Serilog" Version="2.10.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
+      <ProjectReference Include="..\BuildingBlocks.IntegrationEvents\BuildingBlocks.IntegrationEvents.csproj" />
     </ItemGroup>
 
 </Project>

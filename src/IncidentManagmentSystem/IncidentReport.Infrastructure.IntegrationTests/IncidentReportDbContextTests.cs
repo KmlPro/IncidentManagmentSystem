@@ -29,7 +29,7 @@ namespace IncidentReport.Infrastructure.IntegrationTests
         {
             var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
                 .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
-                .UseSqlServer("Server=localhost;Database=IncidentReportDb;User Id=sa;Password=<YourStrong@Passw0rd>;").Options;
+                .UseSqlServer("Server=localhost;Database=IncidentReportDb;User EventId=sa;Password=<YourStrong@Passw0rd>;").Options;
 
             var context = new IncidentReportWriteDbContext(options);
 

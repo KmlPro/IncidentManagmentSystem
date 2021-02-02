@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
+    <ProjectReference Include="..\BuildingBlocks.IntegrationEvents\BuildingBlocks.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

@@ -26,9 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BuildingBlocks.EventBus\BuildingBlocks.EventBus.csproj" />
     <ProjectReference Include="..\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\IncidentReport.Application\IncidentReport.Application.csproj" />
     <ProjectReference Include="..\IncidentReport.Infrastructure.ReadModels\IncidentReport.Infrastructure.ReadModels.csproj" />
+    <ProjectReference Include="..\IncidentReport.IntegrationEvents\IncidentReport.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

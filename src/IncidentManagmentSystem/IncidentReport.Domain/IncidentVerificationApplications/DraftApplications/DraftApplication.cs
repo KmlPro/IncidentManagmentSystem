@@ -24,7 +24,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
 
             var draftApplication = new DraftApplication(id, content, tile, incidentType, applicantId, suspiciousEmployeesList);
 
-            draftApplication.AddDomainEvent(new DraftApplicationCreatedDomainEvent(id, content,
+            draftApplication.AddDomainEvent(new DraftApplicationCreated(id, content,
                 incidentType, applicantId, suspiciousEmployeesList));
 
             return draftApplication;
@@ -80,7 +80,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.DraftApplicatio
             var suspiciousEmployees = employeeIds.Select(x => new SuspiciousEmployee(x)).ToList();
             this.SuspiciousEmployees = suspiciousEmployees;
 
-            this.AddDomainEvent(new DraftApplicationUpdatedDomainEvent(this.Id, this.Content,
+            this.AddDomainEvent(new DraftApplicationUpdated(this.Id, this.Content,
                 this.IncidentType, this.SuspiciousEmployees));
         }
 

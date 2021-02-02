@@ -7,7 +7,7 @@ namespace IncidentReport.IntegrationEvents
     {
         public string ApplicationNumber { get; set; }
 
-        public IncidentApplicationAdded(Guid id, DateTime occurredOn, string applicationNumber) : base(id, occurredOn)
+        public IncidentApplicationAdded(DateTime occurredOn, string applicationNumber) : base(occurredOn)
         {
             this.ApplicationNumber = applicationNumber;
         }

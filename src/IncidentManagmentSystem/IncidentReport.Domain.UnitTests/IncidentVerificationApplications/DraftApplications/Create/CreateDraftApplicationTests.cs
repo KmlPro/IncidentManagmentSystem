@@ -17,7 +17,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Draft
         {
             var applicationDraft = DraftApplicationFactory.CreateValid();
 
-            var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreatedDomainEvent>(applicationDraft);
+            var draftCreated = AssertPublishedDomainEvent<DraftApplicationCreated>(applicationDraft);
             Assert.NotNull(draftCreated);
         }
 

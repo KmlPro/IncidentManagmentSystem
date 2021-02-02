@@ -27,7 +27,7 @@ namespace IncidentReport.Domain.IncidentVerificationApplications.IncidentApplica
             var suspiciousEmployeesList = suspiciousEmployees.Select(x => new SuspiciousEmployee(x)).ToList();
 
             var application = new IncidentApplication(id,content, title,incidentType, applicantId, suspiciousEmployeesList, attachments, postDate, applicationNumber);
-            application.AddDomainEvent(new IncidentApplicationCreatedDomainEvent(application));
+            application.AddDomainEvent(new IncidentApplicationCreated(application));
 
             return application;
         }

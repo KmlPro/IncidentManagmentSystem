@@ -2,10 +2,12 @@ using System;
 using System.Reflection;
 using Autofac;
 using BuildingBlocks.Application;
+using BuildingBlocks.Infrastructure.Events;
 using IncidentReport.Application.Common;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
+using IncidentReport.Infrastructure.EventsBus;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Logging;
 using IncidentReport.Infrastructure.Persistence.Configurations;
@@ -33,7 +35,9 @@ namespace IncidentReport.Infrastructure.Configuration
         protected Assembly AssemblyWithMediatRComponentsImplementation { get; set; }
 
         public void Initialize(DbConfiguration databaseConfiguration,
-            ICurrentUserContext currentUserContext, ILogger logger, Action<ContainerBuilder> externalInstancesConfiguration)
+            ICurrentUserContext currentUserContext,
+            ILogger logger,
+            Action<ContainerBuilder> externalInstancesConfiguration)
         {
             if (externalInstancesConfiguration == null)
             {
@@ -82,6 +86,7 @@ namespace IncidentReport.Infrastructure.Configuration
             containerBuilder.RegisterModule(new PersistanceModule(dbContextOptionsBuilderAction));
             containerBuilder.RegisterModule(new ProcessingModule());
             containerBuilder.RegisterModule(new FileStorageModule());
+            containerBuilder.RegisterModule(new EventsBusModule());
             containerBuilder.RegisterInstance(currentUserContext);
         }
     }

@@ -19,7 +19,7 @@ namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Incid
         {
             var createdApplication = IncidentApplicationFactory.CreateInCreatedStateValid();
 
-            var applicationCreatedDomainEvent = AssertPublishedDomainEvent<IncidentApplicationCreatedDomainEvent>(createdApplication);
+            var applicationCreatedDomainEvent = AssertPublishedDomainEvent<IncidentApplicationCreated>(createdApplication);
             Assert.NotNull(applicationCreatedDomainEvent);
         }
 

@@ -5,9 +5,9 @@ using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 
 namespace IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications
 {
-    public class DraftApplicationCreatedDomainEvent : DomainEvent
+    public class DraftApplicationCreated : DomainEvent
     {
-        public DraftApplicationCreatedDomainEvent(DraftApplicationId id, Content content,
+        public DraftApplicationCreated(DraftApplicationId id, Content content,
             IncidentType incidentType, EmployeeId applicantId, List<SuspiciousEmployee> suspiciousEmployees): base(id.Value.ToString())
         {
             this.Id = id;
