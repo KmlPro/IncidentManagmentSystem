@@ -5,7 +5,6 @@ using Dawn;
 using IncidentReport.Domain.Aggregates.DraftApplications.Events;
 using IncidentReport.Domain.Entities.Attachments;
 using IncidentReport.Domain.Entities.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
 using IncidentReport.Domain.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.ValueObjects;
