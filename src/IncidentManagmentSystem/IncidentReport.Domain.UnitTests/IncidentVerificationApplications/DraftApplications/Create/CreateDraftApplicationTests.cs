@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.Rules.ApplicantCannotBeSuspect;
+using IncidentReport.Domain.Aggregates.DraftApplications.Events;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
+using IncidentReport.Domain.Rules.ApplicantCannotBeSuspect;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
 using NUnit.Framework;
 

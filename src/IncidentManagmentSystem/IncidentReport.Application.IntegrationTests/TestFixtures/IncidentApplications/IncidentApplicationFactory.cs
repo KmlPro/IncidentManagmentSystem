@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
-using Attachment = IncidentReport.Domain.IncidentVerificationApplications.Attachment;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
+using Attachment = IncidentReport.Domain.Entities.Attachments.Attachment;
 
 namespace IncidentReport.Application.IntegrationTests.TestFixtures.IncidentApplications
 {

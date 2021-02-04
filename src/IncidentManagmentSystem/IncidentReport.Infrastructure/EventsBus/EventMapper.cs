@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.Abstract;
 using BuildingBlocks.IntegrationEvents;
-using IncidentReport.Domain.IncidentVerificationApplications.Events.IncidentApplications;
+using IncidentReport.Domain.Aggregates.IncidentApplications.Events;
 using IncidentReport.IntegrationEvents;
 
 namespace IncidentReport.Infrastructure.EventsBus

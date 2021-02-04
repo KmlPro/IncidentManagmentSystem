@@ -9,7 +9,7 @@ using FluentValidation;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
 
 namespace IncidentReport.Application.UseCases.CreateDraftApplications
 {

@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using IncidentReport.Application.Boundaries.UpdateDraftApplications;
 using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Application.UseCases.UpdateDraftApplications
 {

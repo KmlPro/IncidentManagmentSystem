@@ -1,5 +1,5 @@
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Entities.Attachments;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
 {

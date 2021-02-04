@@ -1,4 +1,4 @@
-using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.EmployeesFixtures

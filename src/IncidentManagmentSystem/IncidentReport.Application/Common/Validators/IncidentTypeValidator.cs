@@ -1,6 +1,6 @@
 using System;
 using FluentValidation;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Application.Common.Validators
 {

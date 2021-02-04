@@ -4,9 +4,9 @@ using BuildingBlocks.Application.UnitTests;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixtures;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Entities.Attachments;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 using IncidentReport.Infrastructure.Contract;
 using NUnit.Framework;
 

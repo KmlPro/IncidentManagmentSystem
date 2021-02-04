@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentManagementSystem.Web.IncidentReports.UseCases.CreateDraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.CreateDraftApplications
 {

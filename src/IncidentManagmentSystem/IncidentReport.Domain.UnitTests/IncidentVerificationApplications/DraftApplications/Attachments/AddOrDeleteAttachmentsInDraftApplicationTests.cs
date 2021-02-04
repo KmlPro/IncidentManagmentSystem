@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.IncidentVerificationApplications.Events.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.DraftApplications.Events;
+using IncidentReport.Domain.ValueObjects;
 using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications.Attachments

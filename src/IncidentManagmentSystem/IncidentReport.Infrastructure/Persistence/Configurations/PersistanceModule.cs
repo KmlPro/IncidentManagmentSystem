@@ -1,9 +1,9 @@
 using System;
 using Autofac;
 using BuildingBlocks.Infrastructure;
-using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
+using IncidentReport.Domain.Entities.Employees;
 using IncidentReport.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

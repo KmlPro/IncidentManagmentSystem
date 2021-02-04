@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Entities.Attachments;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Application.Factories
 {

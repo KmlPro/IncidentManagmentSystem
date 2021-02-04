@@ -1,6 +1,6 @@
 using System;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 using NUnit.Framework;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Titles

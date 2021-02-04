@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using IncidentManagementSystem.Web.Configuration.Mappings;
 using IncidentManagementSystem.Web.Configuration.Mappings.Converters;

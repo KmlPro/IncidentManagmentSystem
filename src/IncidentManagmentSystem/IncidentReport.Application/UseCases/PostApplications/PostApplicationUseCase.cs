@@ -10,10 +10,11 @@ using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Application.Factories;
 using IncidentReport.Application.Files;
 using IncidentReport.Application.Services;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
+using IncidentReport.Domain.Entities.Attachments;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Application.UseCases.PostApplications
 {

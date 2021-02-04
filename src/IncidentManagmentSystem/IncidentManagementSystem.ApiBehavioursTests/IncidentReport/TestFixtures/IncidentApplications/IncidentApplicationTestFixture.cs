@@ -1,4 +1,4 @@
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
 using IncidentReport.Infrastructure.ForTests;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.IncidentApplications

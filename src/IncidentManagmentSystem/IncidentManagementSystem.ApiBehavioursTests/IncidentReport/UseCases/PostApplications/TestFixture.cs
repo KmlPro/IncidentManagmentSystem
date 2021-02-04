@@ -5,8 +5,8 @@ using System.Text;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.DraftApplicationFixtures;
 using IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.PostApplications
 {

@@ -1,4 +1,4 @@
-using IncidentReport.Domain.Employees;
+using IncidentReport.Domain.Entities.Employees;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

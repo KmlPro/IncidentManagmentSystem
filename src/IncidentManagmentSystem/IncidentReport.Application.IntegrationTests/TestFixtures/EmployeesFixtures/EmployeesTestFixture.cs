@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.Entities.Employees;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
 namespace IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixtures

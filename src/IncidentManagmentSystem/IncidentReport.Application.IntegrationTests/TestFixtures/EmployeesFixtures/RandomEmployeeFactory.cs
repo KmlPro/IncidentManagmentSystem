@@ -1,6 +1,6 @@
 using System;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.Employees;
+using IncidentReport.Domain.Entities.Employees;
 
 namespace IncidentReport.Application.IntegrationTests.TestFixtures.EmployeesFixtures
 {

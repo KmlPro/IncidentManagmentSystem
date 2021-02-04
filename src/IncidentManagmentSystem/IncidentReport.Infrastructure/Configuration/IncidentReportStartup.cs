@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using Autofac;
 using BuildingBlocks.Application;
-using BuildingBlocks.Infrastructure.Events;
 using IncidentReport.Application.Common;
 using IncidentReport.Infrastructure.Configuration.DIContainer;
 using IncidentReport.Infrastructure.Configuration.Processing;

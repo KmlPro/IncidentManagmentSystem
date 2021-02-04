@@ -1,6 +1,6 @@
-using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
+using IncidentReport.Domain.Entities.Employees;
+using IncidentReport.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

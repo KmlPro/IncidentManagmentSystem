@@ -7,10 +7,11 @@ using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Application.IntegrationTests.Factories;
 using IncidentReport.Application.IntegrationTests.TestFixtures.DraftApplicationFixtures;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Application.IntegrationTests.UseCases.PostApplication
 {

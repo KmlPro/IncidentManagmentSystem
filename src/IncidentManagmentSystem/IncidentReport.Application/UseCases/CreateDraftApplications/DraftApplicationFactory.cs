@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BuildingBlocks.Application;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Application.UseCases.CreateDraftApplications
 {

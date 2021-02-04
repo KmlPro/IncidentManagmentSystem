@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using BuildingBlocks.Domain.UnitTests;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 using IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.DraftApplications
 {

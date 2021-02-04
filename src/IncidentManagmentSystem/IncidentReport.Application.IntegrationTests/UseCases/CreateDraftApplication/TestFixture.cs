@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.IntegrationTests.Factories;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
 using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 using IncidentReport.Infrastructure.Persistence.Repositories.Exceptions;
 
 namespace IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication

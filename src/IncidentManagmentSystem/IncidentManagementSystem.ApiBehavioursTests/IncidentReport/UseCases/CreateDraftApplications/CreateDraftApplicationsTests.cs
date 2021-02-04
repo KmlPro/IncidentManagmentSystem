@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.EmployeesFixtures;
 using IncidentManagementSystem.ApiBehavioursTests.WebAppTestConfiguration;
 using IncidentManagementSystem.Web.IncidentReports;
-using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 using NUnit.Framework;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.CreateDraftApplications

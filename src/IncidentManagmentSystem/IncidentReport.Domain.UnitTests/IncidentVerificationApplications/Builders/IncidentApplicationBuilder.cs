@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.IncidentApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.IncidentApplications;
+using IncidentReport.Domain.Entities.Attachments;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 
 namespace IncidentReport.Domain.UnitTests.IncidentVerificationApplications.Builders
 {

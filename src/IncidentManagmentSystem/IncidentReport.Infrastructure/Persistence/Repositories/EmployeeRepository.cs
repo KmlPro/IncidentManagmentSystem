@@ -1,6 +1,6 @@
 using System.Linq;
-using IncidentReport.Domain.Employees;
-using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.Entities.Employees;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 
 namespace IncidentReport.Infrastructure.Persistence.Repositories
 {

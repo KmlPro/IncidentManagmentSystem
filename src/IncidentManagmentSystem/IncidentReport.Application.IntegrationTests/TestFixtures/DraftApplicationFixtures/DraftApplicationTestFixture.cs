@@ -1,4 +1,4 @@
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
+using IncidentReport.Domain.Aggregates.DraftApplications;
 using IncidentReport.Infrastructure.ForTests;
 
 namespace IncidentReport.Application.IntegrationTests.TestFixtures.DraftApplicationFixtures

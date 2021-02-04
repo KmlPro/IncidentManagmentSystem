@@ -4,10 +4,10 @@ using System.Net.Http;
 using System.Text;
 using BuildingBlocks.Domain.UnitTests;
 using IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftApplications;
-using IncidentReport.Domain.Employees.ValueObjects;
-using IncidentReport.Domain.IncidentVerificationApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.DraftApplications;
-using IncidentReport.Domain.IncidentVerificationApplications.ValueObjects;
+using IncidentReport.Domain.Aggregates.DraftApplications;
+using IncidentReport.Domain.Entities.Attachments;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
+using IncidentReport.Domain.ValueObjects;
 using IncidentReport.Infrastructure.ForTests;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.UseCases.UpdateDraftApplications

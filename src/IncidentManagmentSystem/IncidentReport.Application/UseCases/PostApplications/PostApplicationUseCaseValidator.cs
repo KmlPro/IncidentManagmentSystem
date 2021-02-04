@@ -2,7 +2,7 @@ using FluentValidation;
 using IncidentReport.Application.Boundaries.PostApplicationUseCase;
 using IncidentReport.Application.Common.Validators;
 using IncidentReport.Application.Files;
-using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 
 namespace IncidentReport.Application.UseCases.PostApplications
 {

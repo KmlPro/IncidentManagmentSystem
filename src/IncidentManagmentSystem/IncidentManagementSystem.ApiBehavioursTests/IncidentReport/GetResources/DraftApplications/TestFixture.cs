@@ -1,6 +1,6 @@
 using System;
 using IncidentManagementSystem.ApiBehavioursTests.IncidentReport.TestFixtures.DraftApplicationFixtures;
-using IncidentReport.Domain.Employees.ValueObjects;
+using IncidentReport.Domain.Entities.Employees.ValueObjects;
 
 namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.GetResources.DraftApplications
 {

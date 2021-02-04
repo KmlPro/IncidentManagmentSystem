@@ -1,6 +1,4 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using IncidentReport.ReadModels.DbEntities;
 
 #nullable disable
