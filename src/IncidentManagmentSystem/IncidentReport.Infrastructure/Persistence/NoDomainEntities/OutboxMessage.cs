@@ -11,12 +11,14 @@ namespace IncidentReport.Infrastructure.Persistence.NoDomainEntities
         public string Type { get; }
 
         public string Data { get; }
+        public Guid EventId { get; }
 
         public DateTime? ProcessedDate { get; private set; }
 
-        public OutboxMessage(Guid id, DateTime occurredOn, string type, string data)
+        public OutboxMessage(Guid eventId, DateTime occurredOn, string type, string data)
         {
-            this.Id = id;
+            this.Id = Guid.NewGuid();
+            this.EventId = eventId;
             this.OccurredOn = occurredOn;
             this.Type = type;
             this.Data = data;

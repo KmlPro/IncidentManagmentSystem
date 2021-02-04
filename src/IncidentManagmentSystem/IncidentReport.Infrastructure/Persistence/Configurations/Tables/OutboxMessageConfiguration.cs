@@ -14,6 +14,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
             builder.Property(x => x.Type);
             builder.Property(x => x.OccurredOn);
             builder.Property(x => x.Data);
+            builder.Property(x => x.EventId);
             builder.Property(x => x.ProcessedDate);
         }
     }
