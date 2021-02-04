@@ -48,13 +48,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeDataGenerator", "FakeDa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Infrastructure.ReadModels", "IncidentReport.Infrastructure.ReadModels\IncidentReport.Infrastructure.ReadModels.csproj", "{110F64E2-35D9-4C97-8F17-A35BBCF646AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentReport.Infrastructure.ReadModels.IntegrationTests", "IncidentReport.Infrastructure.ReadModels.IntegrationTests\IncidentReport.Infrastructure.ReadModels.IntegrationTests.csproj", "{1C579AAF-3035-4467-8B53-517AA028049D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.Infrastructure.ReadModels.IntegrationTests", "IncidentReport.Infrastructure.ReadModels.IntegrationTests\IncidentReport.Infrastructure.ReadModels.IntegrationTests.csproj", "{1C579AAF-3035-4467-8B53-517AA028049D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentReport.IntegrationEvents", "IncidentReport.IntegrationEvents\IncidentReport.IntegrationEvents.csproj", "{BFCB6909-0CF9-4B76-9D2F-0A96DE171FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IncidentReport.IntegrationEvents", "IncidentReport.IntegrationEvents\IncidentReport.IntegrationEvents.csproj", "{BFCB6909-0CF9-4B76-9D2F-0A96DE171FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.EventBus", "BuildingBlocks.EventBus\BuildingBlocks.EventBus.csproj", "{66588D90-41AA-463A-A73C-7D91D8C6731B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.EventBus", "BuildingBlocks.EventBus\BuildingBlocks.EventBus.csproj", "{66588D90-41AA-463A-A73C-7D91D8C6731B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.IntegrationEvents", "BuildingBlocks.IntegrationEvents\BuildingBlocks.IntegrationEvents.csproj", "{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.IntegrationEvents", "BuildingBlocks.IntegrationEvents\BuildingBlocks.IntegrationEvents.csproj", "{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InitialIncidentVerification", "InitialIncidentVerification", "{ADFFA43C-3333-4C6B-9C10-CACE4AEE85F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitialIncidentVerification.Domain", "InitialIncidentVerification.Domain\InitialIncidentVerification.Domain.csproj", "{48C4ECC0-A659-4AB9-925F-BFBFA1036A6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitialIncidentVerification.Application", "InitialIncidentVerification.Application\InitialIncidentVerification.Application.csproj", "{9A642896-F2B8-4B0A-B365-FE5FD09C86B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitialIncidentVerification.Infrastructure", "InitialIncidentVerification.Infrastructure\InitialIncidentVerification.Infrastructure.csproj", "{9EDBBFBF-2E84-49EF-AF3A-5E689F0B6DBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,6 +146,18 @@ Global
 		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C4ECC0-A659-4AB9-925F-BFBFA1036A6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C4ECC0-A659-4AB9-925F-BFBFA1036A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C4ECC0-A659-4AB9-925F-BFBFA1036A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C4ECC0-A659-4AB9-925F-BFBFA1036A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A642896-F2B8-4B0A-B365-FE5FD09C86B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A642896-F2B8-4B0A-B365-FE5FD09C86B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A642896-F2B8-4B0A-B365-FE5FD09C86B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A642896-F2B8-4B0A-B365-FE5FD09C86B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDBBFBF-2E84-49EF-AF3A-5E689F0B6DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDBBFBF-2E84-49EF-AF3A-5E689F0B6DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDBBFBF-2E84-49EF-AF3A-5E689F0B6DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDBBFBF-2E84-49EF-AF3A-5E689F0B6DBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +184,10 @@ Global
 		{BFCB6909-0CF9-4B76-9D2F-0A96DE171FD0} = {92A4FEAA-F6A8-48F4-A9EC-FF0E33B0779F}
 		{66588D90-41AA-463A-A73C-7D91D8C6731B} = {8DD88969-0521-49BD-95EB-635843A9CBD4}
 		{BEFC8E50-E009-4EF5-9630-61BD10ED9A66} = {8DD88969-0521-49BD-95EB-635843A9CBD4}
+		{ADFFA43C-3333-4C6B-9C10-CACE4AEE85F6} = {EAF42AA9-B165-4BB0-9957-EA0C754FDD5F}
+		{48C4ECC0-A659-4AB9-925F-BFBFA1036A6F} = {ADFFA43C-3333-4C6B-9C10-CACE4AEE85F6}
+		{9A642896-F2B8-4B0A-B365-FE5FD09C86B0} = {ADFFA43C-3333-4C6B-9C10-CACE4AEE85F6}
+		{9EDBBFBF-2E84-49EF-AF3A-5E689F0B6DBE} = {ADFFA43C-3333-4C6B-9C10-CACE4AEE85F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C503B14-4A01-42A9-84E1-FD4226BAA443}
