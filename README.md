@@ -46,3 +46,24 @@ Schematy działania poszczególnych modułów zostały zaprezentowane poniżej w
 ![](../master/docs/obsluga_weryfikacji.PNG) 
 
 ![](../master/docs/analiza_logow.PNG)  
+
+
+## Architektura rozwiązania:
+
+W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierciedlone jako niezależne moduły. Jako, że ilość użytkowników ogranicza się do pracowników firmy, a przewidywana ilość zgłoszeń incydentów od kilku do kilkunastu dziennie, zdecydowano się na wybór architektury Modularny Monolit. 
+
+### C4 - Kontekst (Context)
+
+![](../master/docs/C4Diagrams/Context.bmp)  
+
+### C4 - Kontenery (Containers)
+
+![](../master/docs/C4Diagrams/Container-IMS.bmp)  
+
+### C4 - Komponenty (Components)- IncidentManagmentSystem.Api
+
+![](../master/docs/C4Diagrams/Component-IMS-Api.bmp)  
+
+### C4 - Komponenty (Components)- Silnik bazodanowy
+
+![](../master/docs/C4Diagrams/Component-DB.bmp)  
