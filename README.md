@@ -2,7 +2,8 @@
 
 Przykład od rozpoznania problemu w organizacji do propozycji rozwiązania systemowego. 
 
-Spis treści:
+## Spis treści:
+
 1. [Istniejący problem w organizacji](#companyProblem)
 2. [Rozwiązanie problemu](#problemsolution)
 3. [Architektura rozwiązania](#architecture)
@@ -84,4 +85,9 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 ### 2. Moduł <a name="module"></a>
 
 ![](../master/docs/Module_circles.png)  
+
+1. Zestaw kontrolerów do wykonywania przypadków użycia (Controllers) oraz do pobierania danych (ODataControllers)
+2. Konfiguracja modułu tj. komunikacja z bazą danych, migracje, konfiguracja DI (Infrastructure), Read Modele do kontrolerów OData (ReadModels).
+3. Implementacja przypadków użycia (UseCase), obsługa zdarzeń domenowych (Domain Event Handlers) oraz obsługa zdarzeń integracyjnych (Integration Event Handlers).
+4. Reguły domenowe (Domain Rules), reprezentacje biznesowe (Aggregates, Entities), zdarzenia domenowe (Domain Events), definicja Repozytoriów (Repositories) oraz typy proste opakowane w klasy (Value Objects)
 
