@@ -84,6 +84,7 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 
 ### 2. Moduł <a name="module"></a>
 
+![](../master/docs/modul_code.png) 
 ![](../master/docs/Module_circles.png)  
 
 1. Zestaw kontrolerów do wykonywania przypadków użycia (Controllers) oraz do pobierania danych (ODataControllers)
