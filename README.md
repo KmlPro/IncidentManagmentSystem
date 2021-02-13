@@ -11,6 +11,7 @@ Spis treści:
          1.2 [Kontenery](#C4Containers)         
          1.3 [Komponenty - IncidentManagmentSystem.Api](#C4ComponentsApi)         
          1.4 [Komponenty - Silnik bazodanowy](#C4ComponentsDB)
+    2. [Moduł](#module) 
  
 ## 1. Istniejący problem w organizacji: <a name="companyProblem"></a>
 ![](../master/docs/istniejacy_problem.PNG)
@@ -72,10 +73,15 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 
 ![](../master/docs/C4Diagrams/Container-IMS.bmp)  
 
-#### 1.2 Komponenty - IncidentManagmentSystem.Api <a name="C4ComponentsApi"></a>
+#### 1.3 Komponenty - IncidentManagmentSystem.Api <a name="C4ComponentsApi"></a>
 
 ![](../master/docs/C4Diagrams/Component-IMS-Api.bmp)  
 
-#### 1.2 Komponenty - Silnik bazodanowy <a name="C4ComponentsDB"></a>
+#### 1.4 Komponenty - Silnik bazodanowy <a name="C4ComponentsDB"></a>
 
 ![](../master/docs/C4Diagrams/Component-DB.bmp)  
+
+### 2. Moduł <a name="module"></a>
+
+![](../master/docs/Module_circles.png)  
+
