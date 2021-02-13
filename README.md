@@ -1,8 +1,18 @@
 # Modularny monolit na przykładzie Systemu Zarządzania Bezpieczeństwem
 
 Przykład od rozpoznania problemu w organizacji do propozycji rozwiązania systemowego. 
+
+Spis treści:
+1. [Istniejący problem w organizacji](#companyProblem)
+2. [Rozwiązanie problemu](#problemsolution)
+3. [Architektura rozwiązania](#architecture)
+    1. [Diagramy C4](#C4Diagrams)    
+         1.1 [Kontekst](#C4Context)         
+         1.2 [Kontenery](#C4Containers)         
+         1.3 [Komponenty - IncidentManagmentSystem.Api](#C4ComponentsApi)         
+         1.4 [Komponenty - Silnik bazodanowy](#C4ComponentsDB)
  
-## Istniejący problem w organizacji:
+## 1. Istniejący problem w organizacji: <a name="companyProblem"></a>
 ![](../master/docs/istniejacy_problem.PNG)
 
 Proces obsługi zgłoszeń sytuacji niepożądanych w organizacji odbywa się za pomocą wiadomości email kierowanej do działu bezpieczeństwa. Kierownik działu prowadzi rejestr zgłoszeń w arkuszu Excel oraz decyduje o ocenie zagrożenia i przeprowadzeniu postępowania przez dział. 
@@ -21,7 +31,7 @@ d)	Brak centralnego rejestru prowadzonych postępowań. Arkusz excel jest tylko 
 
 e)	Brak systemu umożliwiającego wprowadzenie w organizacji automatycznych reguł kontrolnych lub prowadzenia wyrywkowej weryfikacji aktywności użytkowników. Każde postępowanie wynika ze zgłoszenia, nie jest inicjowane przez zespół bezpieczeństwa ze względu na samodzielnie pozyskane informacje i prowadzone kontrole. 
 
-## Rozwiązanie problemu: 
+## 2. Rozwiązanie problemu: <a name="problemsolution"></a>
 
 Wdrożenie systemu będącego centralnym rejestrem spraw zgłaszanych i prowadzonych przez dział bezpieczeństwa oraz umożliwiającego szybki podgląd logów aktywności użytkowników we wszystkich systemach w organizacji. 
 
@@ -48,22 +58,24 @@ Schematy działania poszczególnych modułów zostały zaprezentowane poniżej w
 ![](../master/docs/analiza_logow.PNG)  
 
 
-## Architektura rozwiązania:
+## 3.Architektura rozwiązania: <a name="architecture"></a>
 
 W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierciedlone jako niezależne moduły. Jako, że ilość użytkowników ogranicza się do pracowników firmy, a przewidywana ilość zgłoszeń incydentów od kilku do kilkunastu dziennie, zdecydowano się na wybór architektury Modularny Monolit. 
 
-### C4 - Kontekst (Context)
+### 1.Diagramy C4  <a name="C4Diagrams"></a>
+
+#### 1.1 Kontekst <a name="C4Context"></a>
 
 ![](../master/docs/C4Diagrams/Context.bmp)  
 
-### C4 - Kontenery (Containers)
+#### 1.2 Kontenery <a name="C4Containers"></a>
 
 ![](../master/docs/C4Diagrams/Container-IMS.bmp)  
 
-### C4 - Komponenty (Components)- IncidentManagmentSystem.Api
+#### 1.2 Komponenty - IncidentManagmentSystem.Api <a name="C4ComponentsApi"></a>
 
 ![](../master/docs/C4Diagrams/Component-IMS-Api.bmp)  
 
-### C4 - Komponenty (Components)- Silnik bazodanowy
+#### 1.2 Komponenty - Silnik bazodanowy <a name="C4ComponentsDB"></a>
 
 ![](../master/docs/C4Diagrams/Component-DB.bmp)  
