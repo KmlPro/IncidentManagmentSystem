@@ -52,18 +52,20 @@ Schematy działania poszczególnych modułów zostały zaprezentowane poniżej w
 
 W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierciedlone jako niezależne moduły. Jako, że ilość użytkowników ogranicza się do pracowników firmy, a przewidywana ilość zgłoszeń incydentów od kilku do kilkunastu dziennie, zdecydowano się na wybór architektury Modularny Monolit. 
 
-### C4 - Kontekst (Context)
+### Diagramy C4
+
+#### C4 - Kontekst
 
 ![](../master/docs/C4Diagrams/Context.bmp)  
 
-### C4 - Kontenery (Containers)
+#### C4 - Kontenery
 
 ![](../master/docs/C4Diagrams/Container-IMS.bmp)  
 
-### C4 - Komponenty (Components)- IncidentManagmentSystem.Api
+#### C4 - Komponenty - IncidentManagmentSystem.Api
 
 ![](../master/docs/C4Diagrams/Component-IMS-Api.bmp)  
 
-### C4 - Komponenty (Components)- Silnik bazodanowy
+#### C4 - Komponenty - Silnik bazodanowy
 
 ![](../master/docs/C4Diagrams/Component-DB.bmp)  
