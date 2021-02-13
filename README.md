@@ -13,6 +13,7 @@ Przykład od rozpoznania problemu w organizacji do propozycji rozwiązania syste
          1.3 [Komponenty - IncidentManagmentSystem.Api](#C4ComponentsApi)         
          1.4 [Komponenty - Silnik bazodanowy](#C4ComponentsDB)
     2. [Moduł](#module) 
+4. [Roadmap](#roadmap)
  
 ## 1. Istniejący problem w organizacji: <a name="companyProblem"></a>
 ![](../master/docs/istniejacy_problem.PNG)
@@ -92,3 +93,25 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 3. Implementacja przypadków użycia (UseCase), obsługa zdarzeń domenowych (Domain Event Handlers) oraz obsługa zdarzeń integracyjnych (Integration Event Handlers).
 4. Reguły domenowe (Domain Rules), reprezentacje biznesowe (Aggregates, Entities), zdarzenia domenowe (Domain Events), definicja Repozytoriów (Repositories) oraz typy proste opakowane w klasy (Value Objects)
 
+
+### 4. Roadmap <a name="roadmap"></a>
+
+#### ETAP 1:
+| Nazwa | Status |
+|---|---|
+| Event storrming z ekspertem domenowym | Zakończony |
+| Propozycja rozwiązania problemu (podział na Bounded Context) | Zakończony |
+| Koncept architektury | Zakończony |
+| Funkcjonalność tworzenia wniosku, początek modułu (IncidentReport) | Zakończony |
+| Odebranie utworzonego wniosku i przekazanie do wstępnej weryfikacji, początek modułu (InitialIncidentVerification) | W trakcie |
+| Przekazanie wniosku do kierownika | |
+| Przypisanie wnisoku do weryfikatorów | |
+| Przesłanie wniosku do weryfikacji, początek modułu (IncidentVerification) | | 
+| Ustalenie wyników weryfikacji| | 
+| Przekazanie wyników weryfikacji do kierownika, początek modułu (VerificationResult) | | 
+| Akceptacja wyników weryfikacji | | 
+| Odrzucenie wyników weryfikacji | | 
+
+
+#### ETAP 2:
+TO DO
