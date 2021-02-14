@@ -104,20 +104,21 @@ Do ciągłej integracji używane są narzędzia:
 
 Po każdym pushu na branchu master odpalany jest proces CI. 
 
-![](../master/docs/ci.png)  
+#### 4.1 Opis procesu
+![](../master/docs/CI-IMS.png)  
 
-
-#### Opis procesu
 1. Pobranie najnowszej wersji kodu z brancha
-2. Zbudowanie obrazu dockerowego
+2. Budowanie obrazu dockerowego (kroki w Dockerfile)
   - budowanie solucji  
   - wykonanie testów jednostkowych oraz integracyjnych
     
 3. Publikowanie obrazu w Docker Hub
 
 Po każdym wykonaniu pipeline jest możliwość sprawdzenia rezultatu testów. Jeżeli pojawią się błędy w testach, to obraz nie zostanie opublikowany w Docker Hub.
+
 ![](../master/docs/test-results.PNG)  
 
+Kroki w Azure DevOps
 ![](../master/docs/job-steps.PNG)  
 
 ### 5. Roadmap <a name="roadmap"></a>
