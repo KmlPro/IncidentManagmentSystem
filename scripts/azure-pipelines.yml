@@ -1,6 +1,5 @@
 pool:
-  vmImage: ubuntu-default
-  name: Default
+    vmImage: 'ubuntu-latest'
 
 trigger:
   branches:
