@@ -13,7 +13,8 @@ Przykład od rozpoznania problemu w organizacji do propozycji rozwiązania syste
          1.3 [Komponenty - IncidentManagmentSystem.Api](#C4ComponentsApi)         
          1.4 [Komponenty - Silnik bazodanowy](#C4ComponentsDB)
     2. [Moduł](#module) 
-4. [Roadmap](#roadmap)
+4. [Konfiguracja Continuous Integration](#ci)
+5. [Roadmap](#roadmap)
  
 ## 1. Istniejący problem w organizacji: <a name="companyProblem"></a>
 ![](../master/docs/istniejacy_problem.PNG)
@@ -94,9 +95,15 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 4. Reguły domenowe (Domain Rules), reprezentacje biznesowe (Aggregates, Entities), zdarzenia domenowe (Domain Events), definicja Repozytoriów (Repositories) oraz typy proste opakowane w klasy (Value Objects)
 
 
-### 4. Roadmap <a name="roadmap"></a>
+### 4. Konfiguracja Continuous Integration  <a name="ci"></a>
+
+### 5. Roadmap <a name="roadmap"></a>
 
 #### ETAP 1:
+
+
+Funkcjonalności:
+
 | Nazwa | Status |
 |---|---|
 | Event storrming z ekspertem domenowym | Zakończony |
@@ -111,6 +118,14 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 | Przekazanie wyników weryfikacji do kierownika, początek modułu (VerificationResult) | | 
 | Akceptacja wyników weryfikacji | | 
 | Odrzucenie wyników weryfikacji | | 
+
+Zadania techniczne:
+| Nazwa | Status |
+|---|---|
+| Continuous integration - wersja podstawowa | Zakończony |
+| Continuous delivery - wersja podstawowa | |
+| Utrzymywanie schematu bazodanowego za pomocą migracji | |
+| Przetłumaczenie Readme na język angielski  | |
 
 
 #### ETAP 2:
