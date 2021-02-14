@@ -13,7 +13,7 @@ trigger:
 
 variables:
   imageName: 'ims-api'
-  tag: 'latest'
+  tag: $(tags)
 
 steps:
   - task: Docker@2
