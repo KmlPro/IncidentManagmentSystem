@@ -119,6 +119,7 @@ Po każdym wykonaniu pipeline jest możliwość sprawdzenia rezultatu testów. J
 ![](../master/docs/test-results.PNG)  
 
 Kroki w Azure DevOps
+
 ![](../master/docs/job-steps.PNG)  
 
 ### 5. Roadmap <a name="roadmap"></a>
