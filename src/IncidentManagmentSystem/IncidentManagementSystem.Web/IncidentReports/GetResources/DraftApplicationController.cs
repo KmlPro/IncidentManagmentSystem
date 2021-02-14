@@ -36,13 +36,5 @@ namespace IncidentManagementSystem.Web.IncidentReports.GetResources
         {
             return this.Ok(this._readContext.DraftApplications.Where(x => x.Id == id));
         }
-
-        [HttpGet("{id}/history")]
-        [EnableQuery]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<AuditLogDto>))]
-        public IActionResult GetHistory(Guid id)
-        {
-            return this.Ok(this._readContext.DraftApplicationAuditLogs.Where(x => x.EntityId == id.ToString()));
-        }
     }
 }

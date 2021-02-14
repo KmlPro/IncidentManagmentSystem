@@ -40,7 +40,7 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations.Tables
                 table =>
                 {
                     table.HasOne<Employee>().WithMany().HasForeignKey(nameof(SuspiciousEmployee.EmployeeId));
-                    table.HasKey("EventId");
+                    table.HasKey("Id");
                     table.ToTable($"{nameof(DraftApplication)}{nameof(SuspiciousEmployee)}", SchemaName.IncidentReport);
                 });
         }

@@ -33,9 +33,10 @@ namespace IncidentReport.Infrastructure.Persistence.Configurations
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<IncidentApplicationRepository>().As<IIncidentApplicationRepository>();
-            builder.RegisterType<DraftApplicationRepository>().As<IDraftApplicationRepository>();
-            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
+            builder.RegisterType<IncidentApplicationRepository>().As<IIncidentApplicationRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<DraftApplicationRepository>().As<IDraftApplicationRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<OutboxMessageRepository>().InstancePerLifetimeScope();
         }
     }
 }

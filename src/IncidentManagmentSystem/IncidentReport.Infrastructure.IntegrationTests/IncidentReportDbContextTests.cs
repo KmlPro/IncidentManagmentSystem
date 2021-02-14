@@ -24,18 +24,18 @@ namespace IncidentReport.Infrastructure.IntegrationTests
             context.Database.EnsureCreated();
         }
 
-        [Test]
-        public void CreateDbSchema_SqlServerDatabase_CreatedSuccessfully()
-        {
-            var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
-                .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
-                .UseSqlServer("Server=localhost;Database=IncidentReportDb;User EventId=sa;Password=<YourStrong@Passw0rd>;").Options;
+        //[Test]
+        //public void CreateDbSchema_SqlServerDatabase_CreatedSuccessfully()
+        //{
+        //    var options = new DbContextOptionsBuilder<IncidentReportWriteDbContext>()
+        //        .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>()
+        //        .UseSqlServer("Server=localhost;Database=IncidentReportDb;User EventId=sa;Password=<YourStrong@Passw0rd>;").Options;
 
-            var context = new IncidentReportWriteDbContext(options);
+        //    var context = new IncidentReportWriteDbContext(options);
 
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-        }
+        //    context.Database.EnsureDeleted();
+        //    context.Database.EnsureCreated();
+        //}
 
         [Test]
         public void CreateDbSchema_SqlLiteDatabase_CreatedSuccessfully()

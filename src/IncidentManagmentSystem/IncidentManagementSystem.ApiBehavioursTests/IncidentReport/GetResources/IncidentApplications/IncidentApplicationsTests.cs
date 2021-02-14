@@ -50,14 +50,5 @@ namespace IncidentManagementSystem.ApiBehavioursTests.IncidentReport.GetResource
             Assert.True(IsResponseContentNotEmpty.Check(response));
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
-
-        [Test]
-        public async Task History_Return200()
-        {
-            var id = this._testFixture.CreatePostedIncidentApplicationInDb(this._applicant,this._suspiciousEmployee);
-            var response = await this._testClient.GetAsync($"{_path}/{id}/history");
-
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        }
     }
 }
