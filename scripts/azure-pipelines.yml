@@ -3,17 +3,54 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
 pool:
   vmImage: ubuntu-default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+trigger:
+  branches:
+    include:
+      - master  
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+variables:
+  imageName: 'ims-api'
+  tag: 'latest'
+
+steps:
+  - task: Docker@2
+    displayName: Build an image
+    inputs:
+      command: build
+      repository: $(imageName)
+      containerRegistry: 'Docker Hub - KmLPro'
+      Dockerfile: scripts/Dockerfile
+      buildContext: './src'
+      tags: |
+        $(tag)
+  
+  - task: PowerShell@2
+    displayName: 'Copy test results'
+    condition: succeededOrFailed()
+    inputs:
+        targetType: 'inline'
+        script: |
+         $id=docker images --filter "label=test=true" -q | Select-Object -First 1
+         docker create --name testcontainer $id
+         docker cp testcontainer:/testresults ./testresults
+         docker rm testcontainer
+
+  - task: PublishTestResults@2
+    displayName: 'Publish test results'
+    condition: succeededOrFailed()
+    inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/*.trx'
+        searchFolder: '$(System.DefaultWorkingDirectory)/testresults'
+    
+  - task: Docker@2
+    displayName: Push image
+    inputs:
+      command: push
+      containerRegistry: 'Docker Hub - KmLPro'
+      repository: $(imageName)
+      tags: |
+        $(tag)

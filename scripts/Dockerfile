@@ -15,15 +15,20 @@ COPY ["./*/*.csproj", "./"]
 RUN for file in $(ls *.csproj); do mkdir -p ${file%.*}/ && mv $file ${file%.*}/; done
 
 RUN dotnet restore "IncidentManagementSystem.sln"
+COPY . .
 
 RUN dotnet build "IncidentManagementSystem.sln" -c Release -o /app/build
 
 FROM build AS test  
 LABEL test=true  
-RUN dotnet test "IncidentManagementSystem.sln" -c Release --results-directory /testresults --logger "trx;LogFileName=IncidentManagmentSystem_Tests.trx"
+RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=IncidentReport.Application.IntegrationTests.trx" IncidentReport.Application.IntegrationTests/IncidentReport.Application.IntegrationTests.csproj; exit 0  
+RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=IncidentReport.Domain.UnitTests.trx" IncidentReport.Domain.UnitTests/IncidentReport.Domain.UnitTests.csproj; exit 0  
+RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=IncidentReport.Infrastructure.IntegrationTests.trx" IncidentReport.Infrastructure.IntegrationTests/IncidentReport.Infrastructure.IntegrationTests.csproj; exit 0  
+RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=IncidentReport.Infrastructure.ReadModels.IntegrationTests.trx" IncidentReport.Infrastructure.ReadModels.IntegrationTests/IncidentReport.Infrastructure.ReadModels.IntegrationTests.csproj; exit 0  
+RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=IncidentManagementSystem.ApiBehavioursTests.trx" IncidentManagementSystem.ApiBehavioursTests/IncidentManagementSystem.ApiBehavioursTests.csproj; exit 0  
 
 FROM build AS publish
-RUN dotnet publish "IncidentManagmentSystem.Web/IncidentManagmentSystem.Web.csproj" -c Release -o /app/publish
+RUN dotnet publish "IncidentManagementSystem.Web/IncidentManagementSystem.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
