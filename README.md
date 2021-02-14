@@ -96,6 +96,29 @@ W procesie rozpoznawania problemu zdefiniowano granice, które zostaną odzwierc
 
 
 ### 4. Konfiguracja Continuous Integration  <a name="ci"></a>
+Do ciągłej integracji używane są narzędzia:
+
+- GitHub - repozytorium kodu
+- Azure DevOps - konfiguracja kroków CI oraz ich wykonanie
+- Docker Hub - repozytorium obrazów
+
+Po każdym pushu na branchu master odpalany jest proces CI. 
+
+![](../master/docs/ci.png)  
+
+
+#### Opis procesu
+1. Pobranie najnowszej wersji kodu z brancha
+2. Zbudowanie obrazu dockerowego
+  - budowanie solucji  
+  - wykonanie testów jednostkowych oraz integracyjnych
+    
+3. Publikowanie obrazu w Docker Hub
+
+Po każdym wykonaniu pipeline jest możliwość sprawdzenia rezultatu testów. Jeżeli pojawią się błędy w testach, to obraz nie zostanie opublikowany w Docker Hub.
+![](../master/docs/test-results.PNG)  
+
+![](../master/docs/job-steps.PNG)  
 
 ### 5. Roadmap <a name="roadmap"></a>
 
