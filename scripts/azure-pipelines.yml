@@ -7,7 +7,7 @@ trigger:
       - master  
 
 variables:
-  imageName: 'ims-api'
+  imageName: $(IMAGENAME)
   tag: $(tags)
 
 steps:
