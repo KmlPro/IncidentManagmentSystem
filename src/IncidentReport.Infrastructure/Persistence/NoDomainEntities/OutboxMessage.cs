@@ -15,6 +15,8 @@ namespace IncidentReport.Infrastructure.Persistence.NoDomainEntities
 
         public DateTime? ProcessedDate { get; private set; }
 
+        public string Error { get; private set; }
+
         public OutboxMessage(Guid eventId, DateTime occurredOn, string type, string data)
         {
             this.Id = Guid.NewGuid();
