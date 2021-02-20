@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using BuildingBlocks.Infrastructure;
 using BuildingBlocks.IntegrationEvents;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
+using IncidentReport.Infrastructure.DIContainer;
 
 namespace IncidentReport.Infrastructure.EventsBus
 {

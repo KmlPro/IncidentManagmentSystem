@@ -4,6 +4,7 @@ using IncidentManagementSystem.Web.IncidentReports.UseCases.CreateDraftApplicati
 using IncidentManagementSystem.Web.IncidentReports.UseCases.PostApplications;
 using IncidentManagementSystem.Web.IncidentReports.UseCases.UpdateDraftApplications;
 using IncidentReport.Application.Boundaries.CreateDraftApplications;
+using IncidentReport.Infrastructure;
 using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration.InMemory;

@@ -1,6 +1,6 @@
 using Autofac;
 
-namespace IncidentReport.Infrastructure.Configuration.DIContainer
+namespace IncidentReport.Infrastructure.DIContainer
 {
     public static class CompositionRoot
     {

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using Autofac;
 using BuildingBlocks.Application.UseCases;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
+using IncidentReport.Infrastructure.DIContainer;
 using MediatR;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing.UseCases
+namespace IncidentReport.Infrastructure.Processing.UseCases
 {
     internal class UseCaseExecutor
     {

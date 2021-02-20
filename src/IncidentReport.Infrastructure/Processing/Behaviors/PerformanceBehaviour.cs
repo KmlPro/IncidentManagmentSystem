@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Serilog;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
+namespace IncidentReport.Infrastructure.Processing.Behaviors
 {
     public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

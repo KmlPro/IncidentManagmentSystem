@@ -4,6 +4,7 @@ using IncidentReport.Application.Boundaries.CreateDraftApplications;
 using IncidentReport.Application.IntegrationTests.UseCases.CreateDraftApplication;
 using IncidentReport.Application.IntegrationTests.UseCases.PostApplication;
 using IncidentReport.Application.IntegrationTests.UseCases.UpdateDraftApplication;
+using IncidentReport.Infrastructure;
 using IncidentReport.Infrastructure.Configuration;
 using IncidentReport.Infrastructure.Persistence;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;

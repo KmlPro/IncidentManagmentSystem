@@ -3,6 +3,7 @@ using Autofac;
 using BuildingBlocks.Application;
 using IncidentManagementSystem.ApiBehavioursTests.FileStorage;
 using IncidentReport.Application.Files;
+using IncidentReport.Infrastructure;
 using IncidentReport.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using ILogger = Serilog.ILogger;

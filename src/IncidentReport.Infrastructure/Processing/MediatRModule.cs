@@ -1,11 +1,11 @@
 using System.Reflection;
 using Autofac;
-using IncidentReport.Infrastructure.Configuration.Processing.Behaviors;
+using FluentValidation;
+using IncidentReport.Infrastructure.Processing.Behaviors;
 using MediatR;
 using Module = Autofac.Module;
-using FluentValidation;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing
+namespace IncidentReport.Infrastructure.Processing
 {
     // sample configuration https://github.com/jbogard/MediatR/blob/master/samples/MediatR.Examples.Autofac/Program.cs
     internal class MediatRModule : Module

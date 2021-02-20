@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BuildingBlocks.Infrastructure;
 using MediatR;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing.Behaviors
+namespace IncidentReport.Infrastructure.Processing.Behaviors
 {
     public class UnitOfWorkPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

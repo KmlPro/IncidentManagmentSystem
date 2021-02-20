@@ -3,20 +3,20 @@ using System.Reflection;
 using Autofac;
 using BuildingBlocks.Application;
 using IncidentReport.Application.Common;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
-using IncidentReport.Infrastructure.Configuration.Processing;
 using IncidentReport.Infrastructure.Contract;
+using IncidentReport.Infrastructure.DIContainer;
 using IncidentReport.Infrastructure.EventsBus;
 using IncidentReport.Infrastructure.FileStorage;
 using IncidentReport.Infrastructure.Logging;
 using IncidentReport.Infrastructure.Persistence.Configurations;
 using IncidentReport.Infrastructure.Persistence.Configurations.DatabaseConfiguration;
+using IncidentReport.Infrastructure.Processing;
 using IncidentReport.ReadModels.DIConfiguration;
 using Microsoft.EntityFrameworkCore;
 using ILogger = Serilog.ILogger;
 
 //kbytner 07.09.2020 - Startup Class inspired by https://github.com/kgrzybek/modular-monolith-with-ddd/blob/master/src/Modules/Meetings/Infrastructure/Configuration/MeetingsStartup.cs
-namespace IncidentReport.Infrastructure.Configuration
+namespace IncidentReport.Infrastructure
 {
     public class IncidentReportStartup
     {

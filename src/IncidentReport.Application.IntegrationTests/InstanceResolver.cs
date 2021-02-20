@@ -1,5 +1,5 @@
 using Autofac;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
+using IncidentReport.Infrastructure.DIContainer;
 
 namespace IncidentReport.Application.IntegrationTests
 {

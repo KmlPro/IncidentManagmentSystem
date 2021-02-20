@@ -1,7 +1,7 @@
 using Autofac;
 using BuildingBlocks.Infrastructure.Events;
 using BuildingBlocks.IntegrationEvents;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
+using IncidentReport.Infrastructure.DIContainer;
 using Serilog;
 
 namespace IncidentReport.Infrastructure.EventsBus

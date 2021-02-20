@@ -4,7 +4,7 @@ using System.Transactions;
 using BuildingBlocks.Infrastructure;
 using IncidentReport.Infrastructure.Persistence;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing
+namespace IncidentReport.Infrastructure.Processing
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using BuildingBlocks.Application.UseCases;
-using IncidentReport.Infrastructure.Configuration.Processing.UseCases;
 using IncidentReport.Infrastructure.Contract;
+using IncidentReport.Infrastructure.Processing.UseCases;
 
 namespace IncidentReport.Infrastructure
 {

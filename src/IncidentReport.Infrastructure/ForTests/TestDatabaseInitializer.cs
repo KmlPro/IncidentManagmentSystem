@@ -1,6 +1,6 @@
 using System;
 using Autofac;
-using IncidentReport.Infrastructure.Configuration.DIContainer;
+using IncidentReport.Infrastructure.DIContainer;
 using IncidentReport.Infrastructure.Persistence;
 
 namespace IncidentReport.Infrastructure.ForTests

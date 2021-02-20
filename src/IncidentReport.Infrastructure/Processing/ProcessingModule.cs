@@ -1,8 +1,8 @@
 using Autofac;
 using BuildingBlocks.Infrastructure;
-using IncidentReport.Infrastructure.Configuration.Processing.UseCases;
+using IncidentReport.Infrastructure.Processing.UseCases;
 
-namespace IncidentReport.Infrastructure.Configuration.Processing
+namespace IncidentReport.Infrastructure.Processing
 {
     internal class ProcessingModule : Module
     {
